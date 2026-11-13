@@ -1,0 +1,39 @@
+<title>Baghbaan</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Clickable demo of Baghbaan, an all-in-one app for Kashmir's apple growers. All data is sample data.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Mukta:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;600&display=swap">
+<style>
+/*APP_CSS*/
+html, body { height: 100%; }
+body { margin: 0; background: var(--page); color: var(--ink); font-family: var(--f-body); }
+.stage { min-height: 100%; display: flex; align-items: center; justify-content: center; gap: 56px; padding-block: 20px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.guide { width: 340px; max-height: calc(100vh - 40px); overflow-y: auto; display: flex; flex-direction: column; gap: 16px; padding-block: 4px; scrollbar-width: thin; }
+.guide .g-title { font: 800 32px/1 var(--f-display); margin: 0; color: var(--leaf); letter-spacing: -.01em; }
+.guide .lede { font-size: 15px; line-height: 1.5; color: var(--ink-2); margin: 0; max-width: 34ch; }
+.guide .chip { cursor: pointer; }
+.guide .chip.ur { font-family: var(--f-urdu); font-size: 13px; line-height: 1.6; padding-block: 4px; }
+.guide .note { border-top: 1px solid var(--line-2); padding-top: 12px; }
+@media (max-width: 900px) { .guide { display: none; } }
+@media (max-width: 560px) {
+  .stage { display: block; padding: 0; height: 100%; }
+  .device { width: 100%; height: 100%; border-radius: 0; padding: 0; background: none; box-shadow: none; }
+  .device::after { display: none; }
+  .device .screen { border-radius: 0; }
+  .sb { display: none; }
+}
+</style>
+<div class="stage">
+  <div class="device" id="device" aria-live="polite"></div>
+  <aside class="guide" id="guide" aria-label="Demo guide">
+    <div class="row" style="gap:12px"><span id="glogo" style="display:grid"></span><div><h1 class="g-title">Baghbaan</h1><p class="t-small">Demo app for Kashmir's apple growers</p></div></div>
+    <p class="lede">Tap through the phone, or jump to any screen below. Try the Orchard Doctor: <b>Start → Leaves → Yes → Yes</b>.</p>
+    <div><p class="t-label" style="margin-bottom:6px">Language</p><div class="chips"><button class="chip" data-glang="en">English</button><button class="chip ur" data-glang="ur">اردو</button><button class="chip" data-glang="hi">हिन्दी</button><button class="chip ur" data-glang="ks">کٲشُر</button></div></div>
+    <div class="tour stack g14"></div>
+    <p class="t-micro note">Every price, name, rate and headline in this demo is sample data. Spray doses are placeholders until checked against the SKUAST-K schedule.</p>
+  </aside>
+</div>
+<script>
+/*APP_JS*/
+</script>
