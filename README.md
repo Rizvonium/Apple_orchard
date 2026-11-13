@@ -22,3 +22,13 @@ python3 prototype/build.py                 # prototype/index.html + dist/artifac
 python3 docs/pdf-src/build_report.py       # report.html from report.md + research notes (needs `pip install markdown`)
 node docs/pdf-src/render.js all            # both PDFs (needs Playwright + Chromium)
 ```
+
+## Deploy the demo on Vercel
+
+The repo is static; no build step is needed. `vercel.json` serves the clickable demo at `/`, and the PDFs at `/demo.pdf` and `/plan.pdf`.
+
+1. In Vercel, choose **Add New → Project** and import this GitHub repository.
+2. Framework preset: **Other**. Leave the build command and output directory empty.
+3. Deploy. For a branch other than the default, either merge it to `main` first or use the branch's preview URL.
+
+After editing anything in `prototype/src/`, run `python3 prototype/build.py` and commit the rebuilt `prototype/index.html`.
