@@ -2,6 +2,7 @@
 <html lang="en">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>html { box-sizing: border-box; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }</style>
 <title>Baghbaan</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Clickable demo of Baghbaan, an all-in-one app for Kashmir's apple growers. All data is sample data.">
@@ -17,7 +18,9 @@
   --card-2: #F6F9F5;
   --ink: #13231A;
   --ink-2: #4A5C51;
-  --ink-3: #75867B;
+  --ink-3: #5B6B61;
+  --on-apple: #FFFFFF;
+  --map-land: #E4EEDF; --map-line: #C9D8C4; --map-road: #FFFFFF; --map-river: #8EBBDA; --map-text: #4A5C51;
   --line: #DAE4DB;
   --line-2: #C3D1C6;
   --leaf: #1C6A46;      /* primary: orchard leaf */
@@ -47,7 +50,7 @@
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --mist: #0E1511; --card: #16201A; --card-2: #1B271F; --ink: #E3ECE5; --ink-2: #A6B6AB; --ink-3: #7C8D82;
+    --mist: #0E1511; --card: #16201A; --card-2: #1B271F; --ink: #E3ECE5; --ink-2: #A6B6AB; --ink-3: #8A9B90; --on-apple: #2A0A10; --map-land: #1B271F; --map-line: #2C3B31; --map-road: #34463A; --map-river: #2F5A78; --map-text: #A6B6AB;
     --line: #26342B; --line-2: #34463A; --leaf: #5DC28B; --leaf-2: #86D6A9; --on-leaf: #07150E; --leaf-soft: #163024;
     --apple: #F06A7B; --apple-soft: #3A1A20; --chinar: #F2A15C; --chinar-soft: #3A2615; --sky: #80B6E2; --sky-soft: #132839;
     --good: #66C993; --good-soft: #13301F; --warn: #F1B266; --warn-soft: #382811; --risk: #FF8C82; --risk-soft: #3D1714;
@@ -57,7 +60,7 @@
   }
 }
 :root[data-theme="dark"] {
-  --mist: #0E1511; --card: #16201A; --card-2: #1B271F; --ink: #E3ECE5; --ink-2: #A6B6AB; --ink-3: #7C8D82;
+  --mist: #0E1511; --card: #16201A; --card-2: #1B271F; --ink: #E3ECE5; --ink-2: #A6B6AB; --ink-3: #8A9B90; --on-apple: #2A0A10; --map-land: #1B271F; --map-line: #2C3B31; --map-road: #34463A; --map-river: #2F5A78; --map-text: #A6B6AB;
   --line: #26342B; --line-2: #34463A; --leaf: #5DC28B; --leaf-2: #86D6A9; --on-leaf: #07150E; --leaf-soft: #163024;
   --apple: #F06A7B; --apple-soft: #3A1A20; --chinar: #F2A15C; --chinar-soft: #3A2615; --sky: #80B6E2; --sky-soft: #132839;
   --good: #66C993; --good-soft: #13301F; --warn: #F1B266; --warn-soft: #382811; --risk: #FF8C82; --risk-soft: #3D1714;
@@ -90,7 +93,7 @@ input, select, textarea { font: inherit; color: inherit; }
 .iconbtn { width: 40px; height: 40px; border-radius: 20px; display: grid; place-items: center; color: var(--ink); flex: none; position: relative; }
 .iconbtn:hover { background: var(--leaf-soft); }
 .iconbtn .dot { position: absolute; top: 9px; right: 10px; width: 8px; height: 8px; border-radius: 50%; background: var(--apple); box-shadow: 0 0 0 2px var(--mist); }
-.sc { flex: 1; overflow-y: auto; overflow-x: hidden; display: flex; flex-direction: column; gap: 14px; padding-block: 2px 22px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); scrollbar-width: none; }
+.sc { flex: 1; overflow-y: auto; overflow-x: hidden; display: flex; flex-direction: column; gap: 14px; padding-block: 6px 22px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); scrollbar-width: none; }
 .sc::-webkit-scrollbar { display: none; }
 .sc > * { flex-shrink: 0; }
 .tb { flex: none; display: grid; grid-template-columns: repeat(5, 1fr); background: var(--card); border-top: 1px solid var(--line); padding-top: 6px; padding-bottom: max(10px, env(safe-area-inset-bottom, 0px)); padding-left: max(6px, env(safe-area-inset-left, 0px)); padding-right: max(6px, env(safe-area-inset-right, 0px)); }
@@ -140,7 +143,7 @@ input, select, textarea { font: inherit; color: inherit; }
 .chip .ic { width: 16px; height: 16px; }
 .chip.on { background: var(--leaf); border-color: var(--leaf); color: var(--on-leaf); }
 .chips { display: flex; gap: 8px; flex-wrap: wrap; }
-.chips.scroll { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-inline: -16px; padding-inline: 16px; }
+.chips.scroll { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; margin-inline: -16px; padding-inline: 16px; padding-block: 5px; margin-block: -5px; }
 .chips.scroll::-webkit-scrollbar { display: none; }
 
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 18px; border-radius: 14px; font: 700 15.5px/1 var(--f-body); background: var(--leaf); color: var(--on-leaf); }
@@ -192,6 +195,7 @@ input, select, textarea { font: inherit; color: inherit; }
 .stepper { display: inline-flex; align-items: center; border: 1.5px solid var(--line-2); border-radius: 12px; overflow: hidden; background: var(--card); }
 .stepper button { width: 38px; height: 38px; display: grid; place-items: center; color: var(--leaf); }
 .stepper span { min-width: 34px; text-align: center; font-weight: 700; }
+.stepper button:focus-visible { outline-offset: -3px; border-radius: 9px; }
 
 .toggle { width: 46px; height: 28px; border-radius: 14px; background: var(--line-2); position: relative; flex: none; transition: background .2s; }
 .toggle::after { content: ""; position: absolute; top: 3px; left: 3px; width: 22px; height: 22px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.25); transition: transform .2s; }
@@ -225,8 +229,9 @@ input, select, textarea { font: inherit; color: inherit; }
 .ask p { margin: 0; font-size: 14px; opacity: .88; max-width: 20em; }
 .ask .acts { display: flex; gap: 8px; margin-top: 14px; }
 .ask .acts .btn { background: #fff; color: #134F33; min-height: 46px; flex: 1; }
-.ask .acts .btn.sq { flex: none; width: 46px; padding: 0; background: rgba(255,255,255,.16); color: #fff; }
-.ask .motif { position: absolute; right: -18px; top: -14px; opacity: .14; color: #fff; pointer-events: none; }
+.ask .acts .btn.sq { flex: none; width: 46px; padding: 0; background: color-mix(in srgb, var(--on-leaf) 16%, transparent); color: var(--on-leaf); }
+.ask :focus-visible { outline-color: var(--on-leaf); }
+.ask .motif { position: absolute; right: -18px; top: -14px; opacity: .14; color: var(--on-leaf); pointer-events: none; }
 :root[data-theme="dark"] .ask .acts .btn:not(.sq) { color: #07150E; }
 
 /* Answer buttons (yes / no / not sure) */
@@ -335,7 +340,7 @@ input, select, textarea { font: inherit; color: inherit; }
 .scrim { position: absolute; inset: 0; background: var(--scrim); z-index: 40; display: flex; align-items: flex-end; }
 .sheet { background: var(--card); width: 100%; border-radius: 24px 24px 0 0; padding: 10px 16px 22px; display: flex; flex-direction: column; gap: 12px; max-height: 88%; overflow-y: auto; }
 .sheet .grab { width: 40px; height: 5px; border-radius: 3px; background: var(--line-2); align-self: center; margin-bottom: 4px; }
-.toast { position: absolute; left: 16px; right: 16px; bottom: 84px; background: var(--ink); color: var(--card); padding: 12px 14px; border-radius: 14px; font-size: 14px; font-weight: 600; z-index: 50; display: flex; gap: 10px; align-items: center; box-shadow: var(--shadow-2); }
+.toast { position: absolute; left: 16px; right: 16px; bottom: 84px; background: var(--ink); color: var(--card); padding: 12px 14px; border-radius: 14px; font-size: 14px; font-weight: 600; z-index: 39; display: flex; gap: 10px; align-items: center; box-shadow: var(--shadow-2); }
 
 .offline-bar { display: flex; align-items: center; gap: 8px; padding: 8px 16px; background: var(--ink); color: var(--card); font-size: 12.5px; font-weight: 600; flex: none; }
 
@@ -364,7 +369,18 @@ input, select, textarea { font: inherit; color: inherit; }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 
 /* Right-to-left: keep any untranslated Latin text in its own reading order */
-[dir="rtl"] :is(p, h1, h2, li, .tt, .st, .t-micro, .t-small, .t-title, .btn, .chip, .pill, b, td) { unicode-bidi: plaintext; }
+[dir="rtl"] :is(p, h1, h2, li, .tt, .st, .t-micro, .t-small, .t-title, .btn, .chip, .pill, b) { unicode-bidi: plaintext; }
+[dir="rtl"] .ptable :is(td, th) { unicode-bidi: isolate; }
+
+.screen:not(:has(.tb)) .toast { bottom: auto; top: 68px; }
+button.toggle { display: inline-block; cursor: pointer; }
+.toggle[aria-disabled="true"] { opacity: .7; }
+.fluid > svg, .map > svg { width: 100%; height: 100%; }
+.map .land { fill: var(--map-land); } .map .contour { stroke: var(--map-line); } .map .road { stroke: var(--map-road); } .map .river { stroke: var(--map-river); }
+.map .lbl { fill: var(--map-text); } .map .vdot { fill: var(--map-text); }
+.map .rep-risk { fill: var(--risk); stroke: var(--risk); } .map .rep-warn { fill: var(--warn); stroke: var(--warn); } .map .rep-good { fill: var(--good); stroke: var(--good); }
+.map .you { fill: var(--apple); }
+.tour-chip { display: none; align-self: flex-start; border-style: dashed; }
 
 html, body { height: 100%; }
 body { margin: 0; background: var(--page); color: var(--ink); font-family: var(--f-body); }
@@ -375,8 +391,9 @@ body { margin: 0; background: var(--page); color: var(--ink); font-family: var(-
 .guide .chip { cursor: pointer; }
 .guide .chip.ur { font-family: var(--f-urdu); font-size: 13px; line-height: 1.6; padding-block: 4px; }
 .guide .note { border-top: 1px solid var(--line-2); padding-top: 12px; }
-@media (max-width: 900px) { .guide { display: none; } }
-@media (max-width: 560px) {
+@media (max-width: 900px) { .guide { display: none; } .tour-chip { display: inline-flex; } }
+@media (max-width: 560px), (max-height: 500px) and (pointer: coarse) {
+  .guide { display: none; } .tour-chip { display: inline-flex; }
   .stage { display: block; padding: 0; height: 100%; }
   .device { width: 100%; height: 100%; border-radius: 0; padding: 0; background: none; box-shadow: none; }
   .device::after { display: none; }
@@ -385,13 +402,13 @@ body { margin: 0; background: var(--page); color: var(--ink); font-family: var(-
 }
 </style>
 <div class="stage">
-  <div class="device" id="device" aria-live="polite"></div>
+  <div class="device" id="device"></div>
   <aside class="guide" id="guide" aria-label="Demo guide">
     <div class="row" style="gap:12px"><span id="glogo" style="display:grid"></span><div><h1 class="g-title">Baghbaan</h1><p class="t-small">Demo app for Kashmir's apple growers</p></div></div>
     <p class="lede">Tap through the phone, or jump to any screen below. Try the Orchard Doctor: <b>Start → Leaves → Yes → Yes</b>.</p>
     <div><p class="t-label" style="margin-bottom:6px">Language</p><div class="chips"><button class="chip" data-glang="en">English</button><button class="chip ur" data-glang="ur">اردو</button><button class="chip" data-glang="hi">हिन्दी</button><button class="chip ur" data-glang="ks">کٲشُر</button></div></div>
     <div class="tour stack g14"></div>
-    <p class="t-micro note">Every price, name, rate and headline in this demo is sample data. Spray doses are placeholders until checked against the SKUAST-K schedule.</p>
+    <p class="t-micro note">Every price, name, rate and headline in this demo is sample data. Spray doses follow the SKUAST-K 2026 management guide; always read the product label.</p>
   </aside>
 </div>
 <script>
@@ -733,14 +750,14 @@ body { margin: 0; background: var(--page); color: var(--ink); font-family: var(-
 
   /* ---------- area map (pest reports) ---------- */
   function areaMap(w, h, reports) {
-    let s = '<rect width="340" height="230" fill="#E4EEDF"/>';
-    s += '<g fill="none" stroke="#C9D8C4" stroke-width="1">' + [0, 1, 2, 3, 4, 5].map(i => '<path d="M-10 ' + (30 + i * 38) + ' Q80 ' + (10 + i * 38) + ' 170 ' + (36 + i * 38) + ' T350 ' + (24 + i * 38) + '"/>').join('') + '</g>';
-    s += '<path d="M-10 196 Q60 170 120 182 T230 150 T350 120" stroke="#8EBBDA" stroke-width="6" fill="none" stroke-linecap="round"/>';
-    s += '<path d="M40 -10 L70 60 L120 96 L170 120 L230 128 L300 170" stroke="#FFFFFF" stroke-width="3" fill="none"/><path d="M40 -10 L70 60 L120 96 L170 120 L230 128 L300 170" stroke="#B9C7B4" stroke-width="1" fill="none" stroke-dasharray="4 4"/>';
-    [['Wachi', 168, 112], ['Zainapora', 236, 70], ['Shopian', 92, 72], ['Keller', 60, 160], ['Imamsahib', 266, 186]].forEach(([n, x, y]) => { s += '<circle cx="' + x + '" cy="' + y + '" r="3" fill="#4A5C51"/><text x="' + (x + 6) + '" y="' + (y + 4) + '" font-family="Mukta, sans-serif" font-size="11" font-weight="600" fill="#4A5C51">' + n + '</text>'; });
-    (reports || []).forEach(([x, y, rr, col]) => { s += '<circle cx="' + x + '" cy="' + y + '" r="' + rr + '" fill="' + col + '" fill-opacity=".28" stroke="' + col + '" stroke-width="1.5"/>'; });
+    let s = '<rect class="land" width="340" height="230" fill="#E4EEDF"/>';
+    s += '<g class="contour" fill="none" stroke="#C9D8C4" stroke-width="1">' + [0, 1, 2, 3, 4, 5].map(i => '<path d="M-10 ' + (30 + i * 38) + ' Q80 ' + (10 + i * 38) + ' 170 ' + (36 + i * 38) + ' T350 ' + (24 + i * 38) + '"/>').join('') + '</g>';
+    s += '<path class="river" d="M-10 196 Q60 170 120 182 T230 150 T350 120" stroke="#8EBBDA" stroke-width="6" fill="none" stroke-linecap="round"/>';
+    s += '<path class="road" d="M40 -10 L70 60 L120 96 L170 120 L230 128 L300 170" stroke="#FFFFFF" stroke-width="3" fill="none"/><path d="M40 -10 L70 60 L120 96 L170 120 L230 128 L300 170" stroke="#B9C7B4" stroke-width="1" fill="none" stroke-dasharray="4 4"/>';
+    [['Wachi', 168, 112], ['Zainapora', 236, 70], ['Shopian', 92, 72], ['Keller', 60, 160], ['Imamsahib', 266, 186]].forEach(([n, x, y]) => { s += '<circle class="vdot" cx="' + x + '" cy="' + y + '" r="3" fill="#4A5C51"/><text class="lbl" x="' + (x + 6) + '" y="' + (y + 4) + '" font-family="Mukta, sans-serif" font-size="11" font-weight="600" fill="#4A5C51">' + n + '</text>'; });
+    (reports || []).forEach(([x, y, rr, col]) => { const k = col === '#B3261E' ? 'rep-risk' : col === '#A3560C' ? 'rep-warn' : 'rep-good'; s += '<circle class="' + k + '" cx="' + x + '" cy="' + y + '" r="' + rr + '" fill="' + col + '" fill-opacity=".28" stroke="' + col + '" stroke-width="1.5"/>'; });
     s += '<circle cx="168" cy="112" r="26" fill="none" stroke="#1C6A46" stroke-width="1.5" stroke-dasharray="4 3"/>';
-    s += '<g transform="translate(160 88)"><path d="M8 0C3.6 0 0 3.6 0 8c0 6 8 14 8 14s8-8 8-14c0-4.4-3.6-8-8-8Z" fill="#C4283B"/><circle cx="8" cy="8" r="3" fill="#fff"/></g>';
+    s += '<g transform="translate(160 88)"><path class="you" d="M8 0C3.6 0 0 3.6 0 8c0 6 8 14 8 14s8-8 8-14c0-4.4-3.6-8-8-8Z" fill="#C4283B"/><circle cx="8" cy="8" r="3" fill="#fff"/></g>';
     return '<svg width="' + w + '" height="' + h + '" viewBox="0 0 340 230" preserveAspectRatio="xMidYMid slice" aria-hidden="true">' + s + '</svg>';
   }
 
@@ -810,10 +827,10 @@ body { margin: 0; background: var(--page); color: var(--ink); font-family: var(-
   /* prior = how common in mid-May in the higher belt of South Kashmir (prototype values) */
   D.conditions = {
     scab: { name: 'Apple scab', sci: 'Venturia inaequalis', areas: ['leaves', 'fruit'], prior: .30, art: ['leaf', 'scab'], season: 'Apr–Jun, after rain', kind: 'Fungal disease',
-      now: ['Spray a scab fungicide before Wednesday\'s rain. Your last spray was 9 days ago (3 May).', 'Pick a product from the SKUAST-K schedule for the petal-fall stage. Do not repeat Mancozeb (group M3), which you used last time.', 'Cover both sides of the leaves and the young fruit. Spray in the calm morning window (6–11 AM).'],
-      prevent: ['At leaf fall in autumn, spray 5% urea on the leaves or rake and destroy fallen leaves. The fungus survives winter in them.', 'Prune to open the canopy so leaves dry faster after rain.', 'Start protection at green tip next spring; the app will remind you before each rain.'],
+      now: ['Spray a scab fungicide before Wednesday\'s rain: this evening (4–7 PM) is the best window. Your last spray was 9 days ago (3 May).', 'Your orchard is at the fruitlet stage. Pick one product from the SKUAST-K 2026 fruitlet list. Do not repeat Difenoconazole, which you used last time.', 'Cover both sides of the leaves and the young fruit. If heavy rain falls within 12 hours of a spray made without a sticker, spray again.'],
+      prevent: ['In autumn, when half the leaves have turned yellow, spray 3–4% urea on them. The fungus survives winter in fallen leaves.', 'Missed it? Spray 5% urea on the fallen leaves on the orchard floor during dormancy, or rake and destroy them.', 'Prune to open the canopy so leaves dry faster. From green tip, spray before every forecast rain.'],
       also: [['alternaria', 'Spots are small, round and brown with a darker ring'], ['marssonina', 'Dark blotches in July–Aug, leaves turn yellow and drop']],
-      products: ['dodine', 'captan', 'difeno'] },
+      products: ['dodine', 'fluxpyra', 'boscalid'] },
     alternaria: { name: 'Alternaria leaf blotch', sci: 'Alternaria mali', areas: ['leaves'], prior: .05, art: ['leaf', 'alternaria'], season: 'Jun–Aug, warm & humid', kind: 'Fungal disease',
       now: ['Spray a fungicide listed for Alternaria in the SKUAST-K schedule.', 'Check for mites too. Mite-damaged leaves get Alternaria more easily.'], prevent: ['Keep mites under control in June–July.', 'Balanced nutrition; avoid excess nitrogen.'], also: [['scab', 'Velvety olive spots after spring rain'], ['marssonina', 'Large dark blotches, yellowing, early leaf fall']], products: ['trifloxy', 'mancozeb'] },
     marssonina: { name: 'Marssonina blotch (premature leaf fall)', sci: 'Diplocarpon coronariae', areas: ['leaves'], prior: .03, art: ['leaf', 'marssonina'], season: 'Jul–Sep, after wet spells', kind: 'Fungal disease',
@@ -821,29 +838,29 @@ body { margin: 0; background: var(--page); color: var(--ink); font-family: var(-
     mildew: { name: 'Powdery mildew', sci: 'Podosphaera leucotricha', areas: ['leaves', 'flowers'], prior: .12, art: ['leaf', 'mildew'], season: 'Apr–Jun, new shoots', kind: 'Fungal disease',
       now: ['Cut out white, infected shoot tips and remove them from the orchard.', 'Spray a fungicide listed for powdery mildew.'], prevent: ['Remove infected shoots during winter pruning.'], also: [['aphids', 'Curled leaves with sticky liquid']], products: ['difeno'] },
     mites: { name: 'Red spider mite / European red mite', sci: 'Panonychus ulmi, Tetranychus urticae', areas: ['leaves'], prior: .07, art: ['leaf', 'mites'], season: 'Jun–Aug, hot & dry', kind: 'Pest',
-      now: ['Do the 20-leaf check: look under 20 leaves with a hand lens. Spray only if you find mites on most leaves.', 'Use a mite killer (acaricide) from the schedule. Rotate groups.'], prevent: ['Horticultural oil at dormant / green-tip stage kills overwintering eggs.', 'Avoid unnecessary insecticides that kill the mites\' natural enemies.'], also: [['alternaria', 'Brown spots with a ring']], products: ['hexy', 'hmo'] },
+      now: ['Count mites under 20 leaves with a hand lens. Spray only above 4–5 mites per leaf at petal fall, 5 at fruitlet and 10 in fruit development (SKUAST-K 2026).', 'Use one mite killer (acaricide) from the schedule, and a different one next time.'], prevent: ['Horticultural mineral oil at the delayed-dormant stage, before green tip, kills overwintering eggs.', 'Avoid unnecessary insecticides that kill the mites\' natural enemies.'], also: [['alternaria', 'Brown spots with a ring']], products: ['hexy', 'hmo'] },
     aphids: { name: 'Aphids (green / rosy apple aphid)', sci: 'Aphis pomi, Dysaphis plantaginea', areas: ['leaves'], prior: .14, art: ['leaf', 'aphids'], season: 'Apr–Jun', kind: 'Pest',
       now: ['If only a few shoots are affected, cut them off or wash with water.', 'Spray an insecticide listed for aphids only if many shoots are curled. Never spray insecticides during bloom.'], prevent: ['Protect ladybirds and hoverflies; they eat aphids.'], also: [['mildew', 'White powder on shoot tips']], products: ['neem'] },
     caterpillars: { name: 'Leaf-eating caterpillars', sci: 'Gypsy moth, tent caterpillar', areas: ['leaves'], prior: .08, art: ['leaf', 'holes'], season: 'Apr–Jun', kind: 'Pest',
       now: ['Remove and destroy caterpillar nests and egg masses by hand.', 'Spray a listed insecticide if damage is spreading.'], prevent: ['Scrape egg masses off bark in winter.'], also: [], products: ['neem'] },
     zinc: { name: 'Zinc deficiency (little leaf)', sci: 'Nutrient disorder', areas: ['leaves'], prior: .06, art: ['leaf', 'zinc'], season: 'Spring growth', kind: 'Nutrient',
-      now: ['Spray zinc sulphate as per the schedule.', 'Get a soil test to confirm.'], prevent: ['Add well-rotted manure every year.'], also: [], products: ['zinc'] },
+      now: ['Spray zinc sulphate at green tip or pink bud as per the schedule.', 'Get a soil or leaf test to confirm before repeating.'], prevent: ['Add well-rotted manure every year.'], also: [], products: ['zinc'] },
     burn: { name: 'Spray injury (phytotoxicity)', sci: 'Chemical burn', areas: ['leaves', 'fruit'], prior: .05, art: ['leaf', 'burn'], season: 'Any time', kind: 'Spray problem',
       now: ['Do not spray again on these trees for a week.', 'Check the dose and mixing in your spray diary. Too strong a mix or mixing products that do not go together causes burns.'], prevent: ['Use the dose calculator. Spray in cool hours.'], also: [], products: [] },
     bitterpit: { name: 'Bitter pit (calcium shortage)', sci: 'Nutrient disorder', areas: ['fruit'], prior: .05, art: ['fruit', 'bitterpit'], season: 'Pre-harvest & storage', kind: 'Nutrient',
-      now: ['Sort out spotted fruit before storage.', 'Plan calcium sprays during fruit growth next season.'], prevent: ['Avoid heavy pruning and too much nitrogen. Keep crop load even.'], also: [['hail', 'Dents after a storm']], products: ['calcium'] },
+      now: ['Sort out spotted fruit before storage.', 'Next season, give three calcium chloride sprays during fruit development (3–4 g per litre).'], prevent: ['Avoid heavy pruning and too much nitrogen. Keep crop load even.'], also: [['hail', 'Dents after a storm']], products: ['calcium'] },
     sooty: { name: 'Sooty blotch & flyspeck', sci: 'Fungal complex', areas: ['fruit'], prior: .05, art: ['fruit', 'sooty'], season: 'Jul–Oct, wet weather', kind: 'Fungal disease',
       now: ['Marks are on the skin only. Fruit can be cleaned for sale.', 'Keep summer sprays on time.'], prevent: ['Prune for air flow.'], also: [], products: ['captan'] },
     sjs: { name: 'San Jose scale', sci: 'Quadraspidiotus perniciosus', areas: ['fruit', 'bark'], prior: .12, art: ['fruit', 'sjs'], season: 'All year', kind: 'Pest',
-      now: ['Mark affected trees for a dormant-oil spray.', 'Cut out badly crusted branches.'], prevent: ['Horticultural mineral oil at the dormant / silver-tip stage.'], also: [['woolly', 'White cotton masses']], products: ['hmo'] },
+      now: ['Mark affected trees for a dormant-oil spray.', 'Cut out badly crusted branches.'], prevent: ['Horticultural mineral oil (2 L per 100 L) at the delayed-dormant stage, before green tip.'], also: [['woolly', 'White cotton masses']], products: ['hmo'] },
     hail: { name: 'Hail injury', sci: 'Weather damage', areas: ['fruit'], prior: .20, art: ['fruit', 'hail'], season: 'Apr–Jul storms', kind: 'Weather',
-      now: ['Photograph the damage today. Dated photos help with any relief claim.', 'A protective fungicide spray within 24 h helps prevent rot entering the wounds.'], prevent: ['Anti-hail nets. The app warns you before storms.'], also: [], products: ['captan'] },
+      now: ['Photograph the damage today. Dated photos help with any relief claim.', 'Once the weather settles, give a protective fungicide spray, then 0.2% urea three days later to help the trees recover (SKUAST-K hail advisory, May 2026).'], prevent: ['Anti-hail nets. The app warns you before storms.'], also: [], products: ['captan'] },
     crack: { name: 'Fruit cracking', sci: 'Boron shortage or uneven water', areas: ['fruit'], prior: .05, art: ['fruit', 'crack'], season: 'Fruit growth', kind: 'Nutrient',
       now: ['Check boron in your soil test; spray boron as per the schedule.', 'Water evenly in dry spells.'], prevent: ['Mulch around trees to keep moisture even.'], also: [], products: ['boron'] },
     frost: { name: 'Frost injury at bloom', sci: 'Weather damage', areas: ['flowers'], prior: .25, art: ['flowers', 'frost'], season: 'Bloom', kind: 'Weather',
       now: ['Nothing can save flowers with black centres. Do not spray to "cure" them.', 'Count healthy flowers before planning thinning.'], prevent: ['The app sends frost alerts the evening before.'], also: [['pollination', 'Flowers fall without setting fruit']], products: [] },
     pollination: { name: 'Poor pollination', sci: 'Few pollinizers or bees', areas: ['flowers'], prior: .35, art: ['flowers', 'fallen'], season: 'Bloom', kind: 'Orchard management',
-      now: ['Book beehives for next bloom (2–3 per acre is a common rule of thumb).', 'Never spray insecticides during bloom.'], prevent: ['Plant or graft pollinizer varieties (about 1 in 9 trees).'], also: [['frost', 'Black flower centres after a cold night']], products: [] },
+      now: ['Book beehives for next bloom: 3–4 hives per hectare at 5–10% bloom (SKUAST-K 2026).', 'Never spray insecticides during bloom.'], prevent: ['Plant or graft pollinizer varieties (about 1 in 9 trees).'], also: [['frost', 'Black flower centres after a cold night']], products: [] },
     woolly: { name: 'Woolly apple aphid', sci: 'Eriosoma lanigerum', areas: ['bark', 'roots'], prior: .30, art: ['bark', 'woolly'], season: 'All year', kind: 'Pest',
       now: ['Brush off the colonies on cuts and wounds.', 'Use an insecticide listed for woolly aphid if colonies are many; root colonies need a soil treatment.'], prevent: ['Plant on resistant rootstocks (MM106, MM111) in new orchards.'], also: [['sjs', 'Grey crusty bumps on bark']], products: ['neem'] },
     canker: { name: 'Canker (smoky blight, papery bark)', sci: 'Fungal canker', areas: ['bark'], prior: .25, art: ['bark', 'canker'], season: 'All year', kind: 'Fungal disease',
@@ -899,26 +916,34 @@ body { margin: 0; background: var(--page); color: var(--ink); font-family: var(-
   ];
   /* prices are sample prices for the prototype */
   D.products = {
-    dodine: { name: 'Dodine 65% WP', for: 'Scab — protects and stops new infections', group: 'FRAC U12', cat: 'fung', pack: ['pouch', '#2E6FA3', 'DODINE|65% WP'], size: '250 g', price: 495, mrp: 560, rating: 4.4, n: 212, claim: 'Apple scab', stages: ['Green tip', 'Pink bud', 'Petal fall'], dose: 60, doseUnit: 'g', phi: 'See label', brands: [['Brand A', 495], ['Brand B', 520], ['Brand C', 548]] },
-    captan: { name: 'Captan 50% WP', for: 'Scab and fruit rots — protective', group: 'FRAC M4', cat: 'fung', pack: ['pouch', '#C2621A', 'CAPTAN|50% WP'], size: '500 g', price: 345, mrp: 390, rating: 4.2, n: 188, claim: 'Apple scab', stages: ['Petal fall', 'Fruit set'], dose: 300, doseUnit: 'g' },
-    mancozeb: { name: 'Mancozeb 75% WP', for: 'Scab, leaf spots — protective', group: 'FRAC M3', cat: 'fung', pack: ['pouch', '#B8862B', 'MANCOZEB|75% WP'], size: '1 kg', price: 520, mrp: 580, rating: 4.3, n: 341, claim: 'Apple scab', stages: ['Green tip', 'Petal fall', 'Fruit growth'], dose: 300, doseUnit: 'g', lastUsed: true },
-    difeno: { name: 'Difenoconazole 25% EC', for: 'Scab, powdery mildew — stops early infection', group: 'FRAC 3', cat: 'fung', pack: ['bottle', '#7A2E8C', 'DIFENO|25% EC'], size: '250 ml', price: 765, mrp: 840, rating: 4.5, n: 156, claim: 'Scab, powdery mildew', stages: ['Pink bud', 'Petal fall'], dose: 30, doseUnit: 'ml' },
-    trifloxy: { name: 'Trifloxystrobin 25% + Tebuconazole 50% WG', for: 'Scab, Alternaria, leaf fall', group: 'FRAC 11 + 3', cat: 'fung', pack: ['pouch', '#1C6A46', 'TRIFLOXY|+ TEBU WG'], size: '100 g', price: 540, mrp: 610, rating: 4.6, n: 97, claim: 'Scab, Alternaria', stages: ['Fruit growth'], dose: 40, doseUnit: 'g' },
-    hexy: { name: 'Hexythiazox 5.45% EC', for: 'Mites — kills eggs and young mites', group: 'IRAC 10A', cat: 'mite', pack: ['bottle', '#B3261E', 'HEXY|5.45 EC'], size: '250 ml', price: 690, mrp: 760, rating: 4.3, n: 74, claim: 'Red spider mite', stages: ['Fruit growth'], dose: 40, doseUnit: 'ml' },
-    hmo: { name: 'Horticultural mineral oil', for: 'San Jose scale, mite eggs — dormant spray', group: 'Oil', cat: 'oil', pack: ['can', '#C2A23A', 'SPRAY|OIL'], size: '5 L', price: 1150, mrp: 1290, rating: 4.4, n: 263, claim: 'Scale, mite eggs', stages: ['Dormant', 'Green tip'], dose: 2, doseUnit: 'L' },
-    neem: { name: 'Neem oil 1500 ppm', for: 'Aphids, caterpillars — organic', group: 'Organic', cat: 'org', pack: ['bottle', '#4E7A2E', 'NEEM|OIL'], size: '1 L', price: 420, mrp: 470, rating: 4.0, n: 118, claim: 'Soft-bodied insects', stages: ['Any'], dose: 500, doseUnit: 'ml', organic: true },
-    tricho: { name: 'Trichoderma (bio-fungicide)', for: 'Collar & root rot — mix with manure', group: 'Biological', cat: 'org', pack: ['bag', '#6E8E3A', 'TRICHO|1 kg'], size: '1 kg', price: 260, mrp: 300, rating: 4.1, n: 66, claim: 'Soil-borne rots', stages: ['Spring', 'Autumn'], organic: true },
-    urea: { name: 'Urea 46% N (neem coated)', for: 'Nitrogen for growth', group: 'Fertilizer', cat: 'fert', pack: ['bag', '#E8E2D0', 'UREA|45 kg'], size: '45 kg', price: 267, mrp: 267, rating: 4.5, n: 512, claim: 'Govt. fixed MRP', stages: ['Spring'] },
-    dap: { name: 'DAP 18-46-0', for: 'Phosphorus at planting & spring', group: 'Fertilizer', cat: 'fert', pack: ['bag', '#2E6FA3', 'DAP|50 kg'], size: '50 kg', price: 1350, mrp: 1350, rating: 4.4, n: 290, claim: 'Govt. fixed MRP', stages: ['Spring'] },
-    mop: { name: 'MOP — Potash 60%', for: 'Fruit size and colour', group: 'Fertilizer', cat: 'fert', pack: ['bag', '#B3261E', 'MOP|50 kg'], size: '50 kg', price: 1750, mrp: 1800, rating: 4.3, n: 201, claim: 'Potassium', stages: ['Spring'] },
-    boron: { name: 'Boron 20% (disodium octaborate)', for: 'Fruit set, cracking, corky core', group: 'Micro-nutrient', cat: 'micro', pack: ['pouch', '#4A5C51', 'BORON|20%'], size: '1 kg', price: 310, mrp: 350, rating: 4.2, n: 143, claim: 'Boron', stages: ['Pink bud', 'Petal fall'] },
-    zinc: { name: 'Zinc sulphate 21%', for: 'Little leaf, rosette', group: 'Micro-nutrient', cat: 'micro', pack: ['pouch', '#6B7B86', 'ZINC|21%'], size: '1 kg', price: 140, mrp: 160, rating: 4.1, n: 87, claim: 'Zinc', stages: ['Dormant', 'Spring'] },
-    calcium: { name: 'Calcium chloride (spray grade)', for: 'Bitter pit, storage life', group: 'Micro-nutrient', cat: 'micro', pack: ['pouch', '#8A9AA8', 'CALCIUM|CHLORIDE'], size: '1 kg', price: 180, mrp: 210, rating: 4.0, n: 59, claim: 'Calcium', stages: ['Fruit growth'] },
+    /* Doses: SKUAST-K "Integrated Management Guide for Apple Orchards in Kashmir 2026" (per 100 L). Prices, brands and ratings are sample data.
+       amt/unit = pack contents in the dose unit, used to work out how many packs to buy. */
+    dodine: { name: 'Dodine 65% WP', for: 'Scab: protects and stops early infections', group: 'FRAC U12', cat: 'fung', pack: ['pouch', '#2E6FA3', 'DODINE|65% WP'], size: '250 g', amt: 250, price: 495, mrp: 560, rating: 4.4, n: 212, claim: 'Apple scab', stages: ['Pink bud', 'Fruitlet'], dose: 60, doseUnit: 'g', note: 'Do not add a sticker to Dodine.', brands: [['Brand A', 495], ['Brand B', 520], ['Brand C', 548]] },
+    fluxpyra: { name: 'Fluxapyroxad + Pyraclostrobin 500 SC', for: 'Scab and leaf spots: systemic, before rain', group: 'FRAC 7 + 11', cat: 'fung', pack: ['bottle', '#1C6A46', 'FLUXA|+ PYRA SC'], size: '100 ml', amt: 100, price: 610, mrp: 690, rating: 4.6, n: 88, claim: 'Apple scab', stages: ['Fruitlet', 'Fruit development II'], dose: 20, doseUnit: 'ml', phi: 14 },
+    boscalid: { name: 'Pyraclostrobin + Boscalid WG', for: 'Scab and leaf spots: systemic, before rain', group: 'FRAC 11 + 7', cat: 'fung', pack: ['pouch', '#B3561E', 'PYRA|+ BOSCALID'], size: '200 g', amt: 200, price: 760, mrp: 840, rating: 4.4, n: 61, claim: 'Apple scab', stages: ['Fruitlet', 'Fruit development II'], dose: 30, doseUnit: 'g' },
+    difeno: { name: 'Difenoconazole 25% EC', for: 'Scab, powdery mildew: systemic', group: 'FRAC 3', cat: 'fung', pack: ['bottle', '#7A2E8C', 'DIFENO|25% EC'], size: '250 ml', amt: 250, price: 765, mrp: 840, rating: 4.5, n: 156, claim: 'Scab, powdery mildew', stages: ['Petal fall', 'Fruit development II'], dose: 30, doseUnit: 'ml', phi: 15, lastUsed: true },
+    trifloxy: { name: 'Trifloxystrobin + Tebuconazole 75 WG', for: 'Scab, Alternaria, premature leaf fall', group: 'FRAC 11 + 3', cat: 'fung', pack: ['pouch', '#1C6A46', 'TRIFLOXY|+ TEBU WG'], size: '100 g', amt: 100, price: 540, mrp: 610, rating: 4.6, n: 97, claim: 'Scab, Alternaria', stages: ['Petal fall', 'Fruit development'], dose: 40, doseUnit: 'g' },
+    captan: { name: 'Captan 50% WP', for: 'Scab, storage rots: protective', group: 'FRAC M4', cat: 'fung', pack: ['pouch', '#C2621A', 'CAPTAN|50% WP'], size: '500 g', amt: 500, price: 345, mrp: 390, rating: 4.2, n: 188, claim: 'Apple scab', stages: ['Green tip', 'Tight cluster', 'Fruit development I', 'Pre-harvest'], dose: 300, doseUnit: 'g' },
+    mancozeb: { name: 'Mancozeb 75% WP', for: 'Scab, leaf spots, sooty blotch: protective', group: 'FRAC M3', cat: 'fung', pack: ['pouch', '#B8862B', 'MANCOZEB|75% WP'], size: '1 kg', amt: 1000, price: 520, mrp: 580, rating: 4.3, n: 341, claim: 'Apple scab', stages: ['Green tip', 'Tight cluster', 'Fruit development'], dose: 300, doseUnit: 'g', phi: 14 },
+    metpyra: { name: 'Metiram + Pyraclostrobin 60 WG', for: 'Scab at pink bud', group: 'FRAC M3 + 11', cat: 'fung', pack: ['pouch', '#5B6B86', 'METIRAM|+ PYRA WG'], size: '500 g', amt: 500, price: 980, mrp: 1090, rating: 4.3, n: 73, claim: 'Apple scab', stages: ['Pink bud'], dose: 100, doseUnit: 'g' },
+    hexy: { name: 'Hexythiazox 5.45% EC', for: 'Mites: kills eggs and young mites', group: 'IRAC 10A', cat: 'mite', pack: ['bottle', '#B3261E', 'HEXY|5.45 EC'], size: '250 ml', amt: 250, price: 690, mrp: 760, rating: 4.3, n: 74, claim: 'Red spider mite', stages: ['Petal fall', 'Fruitlet', 'Fruit development'], dose: 40, doseUnit: 'ml', phi: 13, note: 'Spray only above 4–5 mites per leaf at petal fall, 5 at fruitlet, 10 later.' },
+    hmo: { name: 'Horticultural mineral oil', for: 'San Jose scale, mite eggs: delayed-dormant spray', group: 'Oil', cat: 'oil', pack: ['can', '#C2A23A', 'SPRAY|OIL'], size: '5 L', amt: 5, price: 1150, mrp: 1290, rating: 4.4, n: 263, claim: 'Scale, mite eggs', stages: ['Delayed dormancy (before green tip)'], dose: 2, doseUnit: 'L', note: 'Never after green tip.' },
+    neem: { name: 'Neem oil 1500 ppm', for: 'Aphids, soft insects: organic option', group: 'Organic', cat: 'org', pack: ['bottle', '#4E7A2E', 'NEEM|OIL'], size: '1 L', amt: 1000, price: 420, mrp: 470, rating: 4.0, n: 118, claim: 'Soft-bodied insects', stages: ['Petal fall', 'Fruit development I'], dose: 300, doseUnit: 'ml', organic: true },
+    tricho: { name: 'Trichoderma (bio-fungicide)', for: 'Collar and root rot: mix with manure', group: 'Biological', cat: 'org', pack: ['bag', '#6E8E3A', 'TRICHO|1 kg'], size: '1 kg', price: 260, mrp: 300, rating: 4.1, n: 66, claim: 'Soil-borne rots', stages: ['Spring', 'Autumn'], organic: true },
+    urea: { name: 'Urea 46% N (neem coated)', for: 'Nitrogen; 3–4% leaf spray at leaf fall against scab', group: 'Fertilizer', cat: 'fert', pack: ['bag', '#E8E2D0', 'UREA|45 kg'], size: '45 kg', price: 267, mrp: 267, rating: 4.5, n: 512, claim: 'Govt. fixed MRP', stages: ['Green tip', 'Fruit development', 'Leaf fall'] },
+    dap: { name: 'DAP 18-46-0', for: 'Phosphorus, applied before bloom', group: 'Fertilizer', cat: 'fert', pack: ['bag', '#2E6FA3', 'DAP|50 kg'], size: '50 kg', price: 1350, mrp: 1350, rating: 4.4, n: 290, claim: 'Govt. fixed MRP', stages: ['Before bloom'] },
+    mop: { name: 'MOP potash 60%', for: 'Fruit size and colour', group: 'Fertilizer', cat: 'fert', pack: ['bag', '#B3261E', 'MOP|50 kg'], size: '50 kg', price: 1750, mrp: 1800, rating: 4.3, n: 201, claim: 'Potassium', stages: ['Before bloom', 'Fruit development I'] },
+    boron: { name: 'Boric acid (boron)', for: 'Fruit set, cracking, corky core', group: 'Micro-nutrient', cat: 'micro', pack: ['pouch', '#4A5C51', 'BORON|SPRAY'], size: '1 kg', amt: 1000, price: 310, mrp: 350, rating: 4.2, n: 143, claim: 'Boron', stages: ['Pink bud', 'Petal fall'], dose: 150, doseUnit: 'g' },
+    zinc: { name: 'Zinc sulphate', for: 'Little leaf, rosette', group: 'Micro-nutrient', cat: 'micro', pack: ['pouch', '#6B7B86', 'ZINC|SULPHATE'], size: '1 kg', amt: 1000, price: 140, mrp: 160, rating: 4.1, n: 87, claim: 'Zinc', stages: ['Green tip / pink bud', 'After harvest'], dose: 100, doseUnit: 'g' },
+    calcium: { name: 'Calcium chloride (spray grade)', for: 'Bitter pit, storage life: three sprays', group: 'Micro-nutrient', cat: 'micro', pack: ['pouch', '#8A9AA8', 'CALCIUM|CHLORIDE'], size: '1 kg', amt: 1000, price: 180, mrp: 210, rating: 4.0, n: 59, claim: 'Calcium', stages: ['Fruit development I–III'], dose: 300, doseUnit: 'g' },
+    ppe: { name: 'Spray safety kit', for: 'Nitrile gloves, mask, goggles, apron', group: 'Safety', cat: 'safety', pack: ['tool', '#1C6A46', 'shield'], size: '1 set', price: 650, mrp: 750, rating: 4.5, n: 140, claim: 'Reusable', stages: ['Every spray'] },
     sprayer: { name: 'HTP power sprayer (petrol)', for: 'For 200 L drum, 2 guns', group: 'Equipment', cat: 'tools', pack: ['tool', '#1C6A46', 'spray'], size: '1 unit', price: 18500, mrp: 21000, rating: 4.3, n: 41, claim: '1-year warranty', stages: ['Any'] },
     pruner: { name: 'Pruning secateurs (forged)', for: 'Clean cuts up to 20 mm', group: 'Tool', cat: 'tools', pack: ['tool', '#4A5C51', 'scissors'], size: '1 unit', price: 690, mrp: 850, rating: 4.5, n: 133, claim: 'Replaceable blade', stages: ['Winter'] },
     carton: { name: 'Universal apple carton', for: 'Standard size, 5-ply', group: 'Packing', cat: 'pack', pack: ['carton'], size: '100 pcs', price: 4200, mrp: 4500, rating: 4.1, n: 64, claim: 'Bulk discounts', stages: ['Harvest'] },
-    m9: { name: 'Feathered plant on M9', for: 'Gala / Fuji / Scarlet Spur — certified nursery', group: 'Sapling', cat: 'plants', pack: ['plant'], size: '1 plant', price: 450, mrp: 520, rating: 4.4, n: 52, claim: 'Virus-tested stock', stages: ['Mar planting'] }
+    m9: { name: 'Feathered plant on M9', for: 'Gala / Fuji / Scarlet Spur, certified nursery', group: 'Sapling', cat: 'plants', pack: ['plant'], size: '1 plant', price: 450, mrp: 520, rating: 4.4, n: 52, claim: 'NHB-accredited nursery', stages: ['Mar planting'] }
   };
+  D.drums = 10; /* 25 kanal ≈ 10 drums of 200 L per full-cover spray (sample) */
+  D.kit = [['dodine', 5], ['ppe', 1]]; /* fruitlet-stage kit before Wednesday's rain */
 
   /* ---------- Learn ---------- */
   D.topics = [
@@ -926,15 +951,15 @@ body { margin: 0; background: var(--page); color: var(--ink); font-family: var(-
     ['Pruning & training', 'scissors', 10], ['Pests & diseases', 'bug', 24], ['Safe spraying', 'shield', 8], ['Water & drip', 'drop', 6],
     ['Bees & pollination', 'bee', 5], ['Harvest & storage', 'box', 9], ['Selling smart', 'chart', 7], ['Schemes & insurance', 'file', 8]
   ];
-  D.calendar = [
-    ['Dec–Feb', 'Dormant', ['Prune; paint big cuts', 'Apply well-rotted manure', 'Scrape canker and egg masses']],
-    ['Mar', 'Silver tip → green tip', ['Horticultural oil for scale & mite eggs', 'First scab protection at green tip', 'Fertilizer as per soil test']],
-    ['Apr', 'Pink bud → bloom', ['Scab spray at pink bud', 'Beehives in the orchard', 'No insecticides during bloom']],
-    ['May', 'Petal fall → fruit set', ['Petal-fall spray', 'Watch for aphids & mildew', 'Plan thinning']],
-    ['Jun', 'Fruitlet', ['Thin fruit clusters', 'Mite checks start', 'Scab & leaf spot cover sprays']],
-    ['Jul–Aug', 'Fruit growth', ['Watch Alternaria & leaf fall', 'Calcium sprays for storage', 'Irrigate in dry spells']],
-    ['Aug–Oct', 'Harvest', ['Pick by maturity, not date', 'Grade and pack', 'Book trucks / CA storage']],
-    ['Nov', 'Leaf fall', ['5% urea on leaves against scab', 'Collect fallen leaves', 'Soil test before manure']]
+  D.calendar = [ /* stages and timings from the SKUAST-K 2026 guide */
+    ['Dec–Feb', 'Dormancy', ['Prune; paint big cuts', 'Missed the autumn urea? Spray 5% urea on fallen leaves', 'Scrape canker and egg masses']],
+    ['Mar', 'Delayed dormancy → green tip', ['Mineral oil 2 L per 100 L, before green tip', 'Manure, 1/3 urea, all DAP, 1/2 MOP', 'Green tip: fungicide only if a full day of rain is forecast']],
+    ['Apr', 'Tight cluster → pink bud → bloom', ['Scab spray at pink bud; boron if needed', '3–4 beehives per hectare at 5–10% bloom', 'No spraying in full bloom']],
+    ['May', 'Petal fall → fruitlet', ['Systemic fungicide before rain', 'Mites: spray only above 4–5 per leaf', 'Thin heavy sets at 10–12 mm fruit']],
+    ['Jun', 'Fruit development I–II', ['Fungicide only if rain is forecast', 'Calcium chloride sprays begin (3–4 g/L)', '2nd fertilizer dose']],
+    ['Jul–Aug', 'Fruit development III–IV', ['Watch Alternaria, leaf fall, sooty blotch', '3rd calcium spray; potash for colour', 'Last 1/3 urea; leaf samples mid-July']],
+    ['Aug–Oct', 'Pre-harvest → harvest', ['Storage spray 15–20 days before picking CA fruit', 'Stop sprays 3–4 weeks before harvest', 'Pick by maturity: colour, starch, firmness']],
+    ['Nov', 'Leaf fall', ['3–4% urea when half the leaves are yellow', 'Soil test before manure', 'Tighten trellis wires; close hail nets']]
   ];
   D.library = [
     ['scab', 'Apple scab', 'Leaves & fruit', 'Apr–Jun', 'risk'], ['alternaria', 'Alternaria leaf blotch', 'Leaves', 'Jun–Aug', 'warn'],
@@ -946,7 +971,7 @@ body { margin: 0; background: var(--page); color: var(--ink); font-family: var(-
 
   /* ---------- Mandi (sample rates, ₹ per kg, Delicious A grade, CA stored) ---------- */
   D.mandis = [
-    ['Sopore', 'Baramulla', 92, 3], ['Shopian', 'Aglar', 90, 2], ['Parimpora', 'Srinagar', 89, 1],
+    ['Sopore', 'Baramulla', 92, 2], ['Shopian', 'Aglar', 90, 2], ['Parimpora', 'Srinagar', 89, 1],
     ['Narwal', 'Jammu', 98, -2], ['Azadpur', 'Delhi', 112, 4], ['Bengaluru', 'Karnataka', 124, 1]
   ];
   D.trend = [84, 85, 84, 86, 85, 87, 86, 86, 88, 87, 86, 88, 89, 88, 90, 89, 88, 89, 90, 91, 90, 89, 90, 91, 92, 91, 90, 91, 92, 92];
@@ -1029,6 +1054,7 @@ body { margin: 0; background: var(--page); color: var(--ink); font-family: var(-
       '<main class="sc' + (o.bodyCls ? ' ' + o.bodyCls : '') + '">' + o.body + '</main>' + (o.footer || '') +
       (o.tab ? tabbar(st, o.tab) : '') + (o.sheet || '') + (st.toast ? '<div class="toast" role="status">' + ic('check', 's18') + st.toast + '</div>' : '') + '</div>';
   }
+  const tog = (st, key, dflt) => (st.toggles && key in st.toggles) ? st.toggles[key] : dflt;
   const stars = (r) => '<span class="stars" aria-label="' + r + ' stars">' + [1, 2, 3, 4, 5].map(i => ic('star', i <= Math.round(r) ? '' : 'faint')).join('') + '</span>';
   const pillFor = (lvl, text) => '<span class="pill ' + lvl + '">' + (lvl === 'risk' ? ic('alert') : lvl === 'good' ? ic('check') : lvl === 'warn' ? ic('alert') : ic('info')) + text + '</span>';
 
@@ -1051,17 +1077,26 @@ body { margin: 0; background: var(--page); color: var(--ink); font-family: var(-
     const ranked = conds.map(c => [c, post[c]]).sort((a, b) => b[1] - a[1]);
     const remaining = qs.filter(q => !(q.id in ans));
     const nAns = Object.keys(ans).length;
+    const informative = Object.values(ans).filter(a => a !== 'unsure').length;
     const H = (d) => -Object.values(d).reduce((s, p) => s + (p > 0 ? p * Math.log2(p) : 0), 0);
-    const done = !remaining.length || nAns >= 6 || (ranked[0][1] >= .9 && nAns >= 2);
+    const done = !remaining.length || nAns >= 6 || (ranked[0][1] >= .9 && informative >= 2);
     let next = null, best = -1;
     if (!done) remaining.forEach(q => {
       const py = conds.reduce((s, c) => s + post[c] * lik(q, c), 0);
+      if (py <= 1e-9 || py >= 1 - 1e-9) return;
       const yes = {}, no = {};
       conds.forEach(c => { yes[c] = post[c] * lik(q, c) / py; no[c] = post[c] * (1 - lik(q, c)) / (1 - py); });
       const gain = H(post) - (py * H(yes) + (1 - py) * H(no));
       if (gain > best + 1e-9) { best = gain; next = q; }
     });
-    return { area, ranked, next, done, nAns, entropy: H(post) };
+    /* answers that point towards the leading cause (used for "Why we think so") */
+    const top = ranked[0][0];
+    const supports = Object.entries(ans).filter(([qid, a]) => {
+      const q = qs.find(x => x.id === qid); if (!q || a === 'unsure') return false;
+      return a === 'yes' ? lik(q, top) > q.dflt : lik(q, top) < q.dflt;
+    }).map(([qid, a]) => [qid, a]);
+    const sure = informative > 0 && ranked[0][1] >= .35;
+    return { area, ranked, next: done ? null : next, done: done || !next, nAns, informative, supports, sure, entropy: H(post) };
   }
   const level = (p) => p >= .75 ? ['Strong match', 'good'] : p >= .35 ? ['Possible', 'warn'] : ['Less likely', 'neutral'];
 
@@ -1076,7 +1111,7 @@ body { margin: 0; background: var(--page); color: var(--ink); font-family: var(-
     '<p class="t-micro" style="text-align:center">Voice guidance is on. Change language any time.</p>' });
 
   S.welcome = (st) => frame(st, { id: 'welcome', appbar: '', body:
-    '<div class="art" style="height:176px;margin-top:10px;border:0">' + A.orchardScene(330, 176) + '</div>' +
+    '<div class="art fluid" style="height:176px;margin-top:10px;border:0">' + A.orchardScene(330, 176) + '</div>' +
     '<h2 class="t-big">Everything for your orchard, in one place</h2>' +
     '<div class="stack g6">' + [['shield', 'Find what is wrong with your trees by answering Yes or No'], ['bag', 'Buy genuine sprays and fertilizer from licensed dealers'], ['chart', 'Mandi rates, highway status and weather for your village'], ['users', 'Book trucks, labour teams and experts']].map(([i, x]) => '<div class="row"><span class="tile-ic sm leaf">' + ic(i, 's18') + '</span><span class="t-body">' + x + '</span></div>').join('') + '</div>' +
     '<div class="stack g6"' + mk(1) + '><button class="btn block" data-go="village">' + ic('phone', 's18') + ' Continue with mobile number</button><button class="btn block ghost" data-go="village">Continue as guest</button></div>' +
@@ -1102,21 +1137,21 @@ body { margin: 0; background: var(--page); color: var(--ink); font-family: var(-
   const HOME = {
     en: { app: 'Baghbaan', place: 'Wachi, Shopian', greet: 'Assalamu Alaikum, Ghulam Nabi', date: 'Tue, 12 May', dateA: 'Thu, 12 Nov',
       quick: ['Spots on leaves', 'Insects & mites', 'Fruit problem', 'Tree drying', 'What to spray now?'], quickA: ['Leaves yellow early', 'Storage rot', 'Fertilizer for winter', 'Pruning help'],
-      alertL: 'Disease alert', high: 'High risk', alertT: 'Scab infection risk on Wednesday', alertB: '14 mm rain expected. Leaves may stay wet about 18 hours at 11–16 °C. Your last spray was 9 days ago.', sprayBtn: 'Spray before Wed noon', why: 'Why?',
-      stageL: 'Crop stage · Wachi', upd: 'Updated today', stage: 'Petal fall → fruit set', next: 'Next spray: <b>fruitlet stage</b>, in about 10 days',
-      mandiL: 'Mandi · Sopore', perkg: '/kg', variety: 'Delicious A (CA)', hwL: 'NH-44 highway', open: 'Open', hw: 'Trucks: Srinagar → Jammu today', swL: 'Spray window', sw: '6 – 11 AM', swS: 'Calm and dry · 21° / 8°', teamL: 'Spray teams', team: '3 free on Thu', teamS: 'within 7 km of you',
+      alertL: 'Disease alert', high: 'High risk', alertT: 'Scab infection risk on Wednesday', alertB: '14 mm rain expected. Leaves may stay wet about 18 hours at 11–16 °C. Your last spray was 9 days ago.', sprayBtn: 'Spray before Wednesday\'s rain', why: 'Why?',
+      stageL: 'Crop stage · Wachi', upd: 'Updated today', stage: 'Fruitlet stage', next: 'Next spray: <b>before Wednesday\'s rain</b>, from the fruitlet list',
+      mandiL: 'Mandi · Sopore', perkg: '/kg', variety: 'Delicious A (CA)', hwL: 'NH-44 highway', open: 'Open', hw: 'Trucks: Srinagar → Jammu today', swL: 'Spray window', sw: '4 – 7 PM', swS: 'Calm and dry · 21° / 8°', teamL: 'Spray teams', team: '3 free this evening', teamS: 'within 7 km of you',
       mqL: 'One quick question', skip: 'Skip', mq: 'Did you see bees in your orchard during bloom?', mqA: ['Many', 'A few', 'None'], mqWhy: 'Why we ask: to warn growers near you about poor fruit set. Only totals are shared.' },
     ur: { app: 'باغبان', place: 'واچی، شوپیاں', greet: 'السلام علیکم، غلام نبی', date: 'منگل، 12 مئی', dateA: 'جمعرات، 12 نومبر',
       quick: ['پتوں پر دھبے', 'کیڑے اور مائٹ', 'پھل کا مسئلہ', 'درخت سوکھ رہا ہے', 'ابھی کیا اسپرے کریں؟'], quickA: ['پتے جلدی پیلے', 'اسٹوریج میں سڑن', 'سردیوں کی کھاد', 'کٹائی میں مدد'],
-      alertL: 'بیماری کا الرٹ', high: 'زیادہ خطرہ', alertT: 'بدھ کو اسکیب لگنے کا خطرہ', alertB: '14 ملی میٹر بارش متوقع ہے۔ 11 سے 16 ڈگری پر پتے تقریباً 18 گھنٹے گیلے رہ سکتے ہیں۔ آپ کا پچھلا اسپرے 9 دن پہلے ہوا تھا۔', sprayBtn: 'بدھ دوپہر سے پہلے اسپرے کریں', why: 'کیوں؟',
-      stageL: 'فصل کا مرحلہ · واچی', upd: 'آج اپ ڈیٹ ہوا', stage: 'پنکھڑیاں جھڑنا، پھر پھل لگنا', next: 'اگلا اسپرے: <b>چھوٹے پھل کا مرحلہ</b>، تقریباً 10 دن میں',
-      mandiL: 'منڈی · سوپور', perkg: 'فی کلو', variety: 'ڈیلیشس اے (سی اے)', hwL: 'شاہراہ NH-44', open: 'کھلی ہے', hw: 'ٹرک آج سرینگر سے جموں', swL: 'اسپرے کا وقت', sw: 'صبح 6 سے 11', swS: 'ہوا کم، موسم خشک', teamL: 'اسپرے ٹیمیں', team: 'جمعرات کو 3 دستیاب', teamS: '7 کلومیٹر کے اندر',
+      alertL: 'بیماری کا الرٹ', high: 'زیادہ خطرہ', alertT: 'بدھ کو اسکیب لگنے کا خطرہ', alertB: '14 ملی میٹر بارش متوقع ہے۔ 11 سے 16 ڈگری پر پتے تقریباً 18 گھنٹے گیلے رہ سکتے ہیں۔ آپ کا پچھلا اسپرے 9 دن پہلے ہوا تھا۔', sprayBtn: 'بدھ کی بارش سے پہلے اسپرے کریں', why: 'کیوں؟',
+      stageL: 'فصل کا مرحلہ · واچی', upd: 'آج اپ ڈیٹ ہوا', stage: 'چھوٹے پھل کا مرحلہ', next: 'اگلا اسپرے: <b>بدھ کی بارش سے پہلے</b>',
+      mandiL: 'منڈی · سوپور', perkg: 'فی کلو', variety: 'ڈیلیشس اے (سی اے)', hwL: 'شاہراہ NH-44', open: 'کھلی ہے', hw: 'ٹرک آج سرینگر سے جموں', swL: 'اسپرے کا وقت', sw: 'شام 4 سے 7', swS: 'ہوا کم، موسم خشک', teamL: 'اسپرے ٹیمیں', team: 'آج شام 3 دستیاب', teamS: '7 کلومیٹر کے اندر',
       mqL: 'ایک چھوٹا سا سوال', skip: 'چھوڑیں', mq: 'کیا پھول کے دنوں میں آپ کے باغ میں شہد کی مکھیاں نظر آئیں؟', mqA: ['بہت', 'کچھ', 'کوئی نہیں'], mqWhy: 'ہم کیوں پوچھتے ہیں: تاکہ آس پاس کے باغبانوں کو کم پھل لگنے سے خبردار کر سکیں۔ صرف کل تعداد شیئر ہوتی ہے۔' },
     hi: { app: 'बाग़बान', place: 'वाची, शोपियां', greet: 'अस्सलामु अलैकुम, ग़ुलाम नबी', date: 'मंगल, 12 मई', dateA: 'गुरु, 12 नवंबर',
       quick: ['पत्तों पर धब्बे', 'कीड़े और माइट', 'फल की समस्या', 'पेड़ सूख रहा है', 'अभी क्या स्प्रे करें?'], quickA: ['पत्ते जल्दी पीले', 'स्टोरेज में सड़न', 'सर्दियों की खाद', 'छंटाई में मदद'],
-      alertL: 'बीमारी अलर्ट', high: 'ज़्यादा ख़तरा', alertT: 'बुधवार को स्कैब का ख़तरा', alertB: '14 मि.मी. बारिश की संभावना। 11–16 °C पर पत्ते लगभग 18 घंटे गीले रह सकते हैं। आपका पिछला स्प्रे 9 दिन पहले हुआ था।', sprayBtn: 'बुधवार दोपहर से पहले स्प्रे करें', why: 'क्यों?',
-      stageL: 'फ़सल की अवस्था · वाची', upd: 'आज अपडेट', stage: 'पंखुड़ी झड़ना → फल बनना', next: 'अगला स्प्रे: <b>छोटे फल की अवस्था</b>, लगभग 10 दिन में',
-      mandiL: 'मंडी · सोपोर', perkg: '/किलो', variety: 'डिलीशियस A (CA)', hwL: 'NH-44 हाईवे', open: 'खुला', hw: 'ट्रक आज श्रीनगर → जम्मू', swL: 'स्प्रे का समय', sw: 'सुबह 6 – 11', swS: 'हवा कम, मौसम सूखा', teamL: 'स्प्रे टीमें', team: 'गुरुवार को 3 ख़ाली', teamS: '7 कि.मी. के अंदर',
+      alertL: 'बीमारी अलर्ट', high: 'ज़्यादा ख़तरा', alertT: 'बुधवार को स्कैब का ख़तरा', alertB: '14 मि.मी. बारिश की संभावना। 11–16 °C पर पत्ते लगभग 18 घंटे गीले रह सकते हैं। आपका पिछला स्प्रे 9 दिन पहले हुआ था।', sprayBtn: 'बुधवार की बारिश से पहले स्प्रे करें', why: 'क्यों?',
+      stageL: 'फ़सल की अवस्था · वाची', upd: 'आज अपडेट', stage: 'छोटे फल की अवस्था', next: 'अगला स्प्रे: <b>बुधवार की बारिश से पहले</b>',
+      mandiL: 'मंडी · सोपोर', perkg: '/किलो', variety: 'डिलीशियस A (CA)', hwL: 'NH-44 हाईवे', open: 'खुला', hw: 'ट्रक आज श्रीनगर → जम्मू', swL: 'स्प्रे का समय', sw: 'शाम 4 – 7', swS: 'हवा कम, मौसम सूखा', teamL: 'स्प्रे टीमें', team: 'आज शाम 3 ख़ाली', teamS: '7 कि.मी. के अंदर',
       mqL: 'एक छोटा सवाल', skip: 'छोड़ें', mq: 'फूल के दिनों में क्या आपके बाग़ में मधुमक्खियाँ दिखीं?', mqA: ['बहुत', 'कुछ', 'एक भी नहीं'], mqWhy: 'हम क्यों पूछते हैं: ताकि आसपास के बाग़बानों को कम फल लगने से सावधान कर सकें। सिर्फ़ कुल गिनती साझा होती है।' }
   };
 
@@ -1131,20 +1166,21 @@ body { margin: 0; background: var(--page); color: var(--ink); font-family: var(-
       '<button class="iconbtn" data-go="news" aria-label="Alerts">' + ic('bell') + '<span class="dot"></span></button>' +
       '<button class="iconbtn" data-go="orchard" aria-label="My orchard" style="background:var(--leaf-soft);color:var(--leaf);font-weight:800;font-size:14px">' + D.user.initials + '</button></header>';
     const alert = autumn
-      ? '<section class="card"' + mk(3) + '><div class="row between"><span class="t-label">This week\'s task</span>' + pillFor('info', 'Leaf fall') + '</div><p class="t-title" style="margin-top:6px">Spray 5% urea on leaves before they drop</p><p class="t-small">It rots the fallen leaves where scab survives winter. Fewer scab spores next spring.</p><div class="row" style="margin-top:10px;gap:8px"><button class="btn sm" data-go="calendar">How to mix</button><button class="btn sm ghost" data-go="shop">Buy urea</button></div></section>'
+      ? '<section class="card"' + mk(3) + '><div class="row between"><span class="t-label">This week\'s task</span>' + pillFor('info', 'Leaf fall') + '</div><p class="t-title" style="margin-top:6px">Spray 3–4% urea when half the leaves are yellow</p><p class="t-small">It speeds up the rotting of fallen leaves, where scab survives winter. Fewer scab spores next spring (SKUAST-K 2026 guide).</p><div class="row" style="margin-top:10px;gap:8px"><button class="btn sm" data-go="calendar">How to mix</button><button class="btn sm ghost" data-go="shop">Buy urea</button></div></section>'
       : '<section class="card"' + mk(3) + '><div class="row between"><span class="t-label"' + (local ? u : '') + '>' + X('alertL') + '</span>' + pillFor('risk', '<span' + (local ? u : '') + '>' + X('high') + '</span>') + '</div><p class="t-title' + (local && rtl(st) ? ' ur' : '') + '" style="margin-top:6px">' + X('alertT') + '</p><p class="t-small' + (local && rtl(st) ? ' ur' : '') + '">' + X('alertB') + '</p><div class="row" style="margin-top:10px;gap:8px"><button class="btn sm" data-go="shop_list"><span' + (local ? u : '') + '>' + X('sprayBtn') + '</span></button><button class="btn sm ghost" data-go="weather"><span' + (local ? u : '') + '>' + X('why') + '</span></button></div></section>';
     const quick = autumn ? E.quickA : X('quick');
-    const body =
+    const QT = autumn ? ['data-area="leaves"', 'data-area="fruit"', 'data-go="calendar"', 'data-go="lesson"'] : ['data-area="leaves"', 'data-area="leaves"', 'data-area="fruit"', 'data-area="roots"', 'data-go="shop_list"'];
+    const body = (st.tourChip ? '<button class="chip tour-chip" data-act="tour">' + ic('grid') + 'Demo tour: jump to any screen</button>' : '') +
       '<p class="t-small"' + mk(1) + '><span' + u + '>' + H.greet + ' · ' + (autumn ? H.dateA : H.date) + '</span></p>' +
       '<section class="ask"' + mk(2) + '><span class="motif">' + A.chinar(150, '#fff') + '</span><h2' + (rtl(st) ? ' class="ur" style="font-size:20px;line-height:1.9"' : '') + '>' + t(st, 'ask') + '</h2><p' + (rtl(st) ? ' class="ur"' : '') + '>' + t(st, 'askSub') + '</p>' +
       '<div class="acts"><button class="btn" data-go="dx_area">' + L(st, 'start') + ic('chevR', 'flip') + '</button><button class="btn sq" data-go="chat" aria-label="Speak">' + ic('mic') + '</button><button class="btn sq" data-go="dx_photo" aria-label="Take a photo">' + ic('camera') + '</button></div>' +
       (st.lang === 'ks' ? '<p style="margin-top:10px;font-size:12.5px;opacity:.9">' + ic('speaker', 's16') + ' Kashmiri voice guidance is on</p>' : '') + '</section>' +
-      '<div class="chips scroll">' + quick.map(q => '<button class="chip" data-go="dx_area"><span' + (local ? u : '') + '>' + q + '</span></button>').join('') + '</div>' +
+      '<div class="chips scroll">' + quick.map((q, i) => '<button class="chip" ' + QT[i] + '><span' + (local ? u : '') + '>' + q + '</span></button>').join('') + '</div>' +
       alert +
-      '<section class="card"' + mk(4) + '><div class="row between"><span class="t-label"' + (local ? u : '') + '>' + X('stageL') + '</span><span class="t-micro"' + (local ? u : '') + '>' + X('upd') + '</span></div><p class="t-title' + (local && rtl(st) ? ' ur' : '') + '" style="margin:6px 0 10px">' + (autumn ? 'Leaf fall · after harvest' : X('stage')) + '</p>' + stageStrip(autumn ? 'Leaf fall' : 'Petal fall') +
+      '<section class="card"' + mk(4) + '><div class="row between"><span class="t-label"' + (local ? u : '') + '>' + X('stageL') + '</span><span class="t-micro"' + (local ? u : '') + '>' + X('upd') + '</span></div><p class="t-title' + (local && rtl(st) ? ' ur' : '') + '" style="margin:6px 0 10px">' + (autumn ? 'Leaf fall · after harvest' : X('stage')) + '</p>' + stageStrip(autumn ? 'Leaf fall' : 'Fruitlet') +
       '<button class="row" data-go="diary" style="margin-top:12px;width:100%"><span class="tile-ic sm leaf">' + ic('cal', 's18') + '</span><span class="t-small grow' + (local && rtl(st) ? ' ur' : '') + '">' + (autumn ? 'Next: <b>winter pruning</b> from mid-December' : X('next')) + '</span>' + ic('chevR', 'chev flip') + '</button></section>' +
       '<div class="grid2"' + mk(5) + '>' +
-        '<button class="card tight stack g6" data-go="mandi"><span class="t-label"' + (local ? u : '') + '>' + X('mandiL') + '</span><span class="t-big num">₹' + (autumn ? 78 : 92) + '<small style="font-size:13px;color:var(--ink-3);font-weight:600"' + (local ? u : '') + '> ' + X('perkg') + '</small></span><span class="t-micro"><span' + (local ? u : '') + '>' + (autumn ? 'Delicious A' : X('variety')) + '</span> <b class="' + (autumn ? 'down' : 'up') + '">' + (autumn ? '▼ 2%' : '▲ 3%') + '</b></span></button>' +
+        '<button class="card tight stack g6" data-go="mandi"><span class="t-label"' + (local ? u : '') + '>' + X('mandiL') + '</span><span class="t-big num">₹' + (autumn ? 78 : 92) + '<small style="font-size:13px;color:var(--ink-3);font-weight:600"' + (local ? u : '') + '> ' + X('perkg') + '</small></span><span class="t-micro"><span' + (local ? u : '') + '>' + (autumn ? 'Delicious A' : X('variety')) + '</span> <b class="' + (autumn ? 'down' : 'up') + '">' + (autumn ? '▼ 2%' : '▲ 2%') + '</b></span></button>' +
         '<button class="card tight stack g6" data-go="roads"><span class="t-label"' + (local ? u : '') + '>' + X('hwL') + '</span><span>' + pillFor('good', '<span' + (local ? u : '') + '>' + X('open') + '</span>') + '</span><span class="t-micro"' + (local ? u : '') + '>' + X('hw') + '</span></button>' +
         '<button class="card tight stack g6" data-go="weather"><span class="t-label"' + (local ? u : '') + '>' + (autumn ? 'Tonight' : X('swL')) + '</span><span class="t-title"' + (local ? u : '') + '>' + (autumn ? 'Frost, −1 °C' : X('sw')) + '</span><span class="t-micro"' + (local ? u : '') + '>' + (autumn ? 'Cover young HDP plants' : X('swS')) + '</span></button>' +
         '<button class="card tight stack g6" data-go="' + (autumn ? 'services' : 'labour') + '"><span class="t-label"' + (local ? u : '') + '>' + (autumn ? 'CA storage' : X('teamL')) + '</span><span class="t-title"' + (local ? u : '') + '>' + (autumn ? '2 stores free' : X('team')) + '</span><span class="t-micro"' + (local ? u : '') + '>' + (autumn ? 'within 25 km' : X('teamS')) + '</span></button></div>' +
@@ -1166,24 +1202,30 @@ body { margin: 0; background: var(--page); color: var(--ink); font-family: var(-
 
   S.dx_q = (st) => {
     const ds = dxState(st);
-    const q = ds.next || D.questions.find(x => x.area === ds.area);
-    const n = ds.nAns + 2;
+    const area = D.areas.find(a => a.id === ds.area);
+    if (!ds.next) {
+      return frame(st, { id: 'dx_q', back: true, title: 'Orchard Doctor', sub: area.name, body: dots(3, 4) +
+        '<section class="card"><p class="t-title">We have enough answers</p><p class="t-small" style="margin-top:4px">One last question about how much of the orchard is affected.</p></section>' +
+        '<button class="btn block" data-go="dx_sev">Continue ' + ic('chevR', 'flip') + '</button>' });
+    }
+    const q = ds.next;
     const panel = (spec, i) => '<div>' + artAny(spec, 120, 112, 5 + i) + '<span class="cap">' + (i === 0 ? '<span class="c-good">' + ic('check', 's16') + '</span> ' : '<span class="c-risk">' + ic('x', 's16') + '</span> ') + spec[2] + '</span></div>';
     const top = ds.ranked.slice(0, 3);
-    const body = dots(n, 4) +
+    const body = dots(2, 4) +
       '<section class="qcard"' + mk(1) + '><div class="qart">' + q.art.map(panel).join('') + '</div><div class="qbody"><p class="t-label">Question ' + (ds.nAns + 1) + '</p><h2 style="margin-top:4px">' + q.q + '</h2>' +
       '<button class="chip" style="margin-top:10px" aria-label="Listen to the question">' + ic('speaker') + L(st, 'listen') + '</button></div></section>' +
       '<div class="answers"' + mk(2) + '><button class="answer yes" data-ans="yes" data-q="' + q.id + '">' + ic('check') + L(st, 'yes') + '</button><button class="answer no" data-ans="no" data-q="' + q.id + '">' + ic('x') + L(st, 'no') + '</button><button class="answer unsure" data-ans="unsure" data-q="' + q.id + '">' + ic('help') + L(st, 'unsure') + '</button></div>' +
       '<section class="card tight"' + mk(3) + '><div class="row between" style="margin-bottom:8px"><span class="t-label">Narrowing down</span><span class="t-micro">' + ds.nAns + ' answer' + (ds.nAns === 1 ? '' : 's') + ' so far</span></div><div class="candidates">' +
       top.map(([c, p]) => { const lv = level(p); return '<div class="cand"><b>' + D.conditions[c].name.replace(/ \(.*\)/, '') + '</b><span class="meter ' + (lv[1] === 'good' ? '' : 'warn') + '"><i style="width:' + Math.max(4, Math.round(p * 100)) + '%"></i></span><span class="pc">' + Math.round(p * 100) + '%</span></div>'; }).join('') + '</div></section>' +
       '<button class="link" data-go="dx_expert" style="align-self:center">' + ic('phone', 's16') + ' Talk to an expert instead</button>';
-    return frame(st, { id: 'dx_q', back: true, title: 'Orchard Doctor', sub: D.areas.find(a => a.id === ds.area).name + ' · question ' + (ds.nAns + 1), body });
+    return frame(st, { id: 'dx_q', back: true, title: 'Orchard Doctor', sub: area.name + ' · question ' + (ds.nAns + 1), body });
   };
 
+  const SEV = { 1: 'a few trees', 2: 'about half the orchard', 3: 'most of the orchard' };
   S.dx_sev = (st) => frame(st, { id: 'dx_sev', back: true, title: 'Orchard Doctor', sub: 'Last step', body:
     dots(4, 4) + '<h2 class="t-big">How many trees show this?</h2>' +
-    '<div class="stack"' + mk(1) + '>' + [['A few trees', 'Less than 10', 1], ['About half the orchard', 'Spread across blocks', 2], ['Most of the orchard', 'Nearly every tree', 3]].map(([a, b, k]) => '<button class="opt ' + ((st.dx.sev || 2) === k ? 'on' : '') + '" data-sev="' + k + '"><span class="row" style="gap:0;width:100px;flex:none;color:' + ((st.dx.sev || 2) === k ? 'var(--leaf)' : 'var(--ink-3)') + '">' + Array.from({ length: 5 }, (_, i) => ic('tree', 's20').replace('class="ic s20"', 'class="ic s20" style="opacity:' + (i < [1, 3, 5][k - 1] ? 1 : .22) + '"')).join('') + '</span><span class="grow"><span class="tt">' + a + '</span><br><span class="st">' + b + '</span></span></button>').join('') + '</div>' +
-    '<section class="card tight"' + mk(2) + '><div class="row between"><span class="t-label">Your last spray · from your diary</span><button class="link">Change</button></div><div class="row" style="margin-top:8px"><span class="tile-ic sm sky">' + ic('spray', 's18') + '</span><span class="grow"><b>3 May · Mancozeb 75% WP</b><br><span class="t-small">Petal fall · 10 drums · both blocks</span></span></div>' +
+    '<div class="stack"' + mk(1) + '>' + [['A few trees', 'Less than 10', 1], ['About half the orchard', 'Spread across blocks', 2], ['Most of the orchard', 'Nearly every tree', 3]].map(([a, b, k]) => '<button class="opt ' + ((st.dx.sev || 2) === k ? 'on' : '') + '" data-sev="' + k + '" aria-pressed="' + ((st.dx.sev || 2) === k) + '"><span class="row" style="gap:0;width:100px;flex:none;color:' + ((st.dx.sev || 2) === k ? 'var(--leaf)' : 'var(--ink-3)') + '">' + Array.from({ length: 5 }, (_, i) => ic('tree', 's20').replace('class="ic s20"', 'class="ic s20" style="opacity:' + (i < [1, 3, 5][k - 1] ? 1 : .22) + '"')).join('') + '</span><span class="grow"><span class="tt">' + a + '</span><br><span class="st">' + b + '</span></span></button>').join('') + '</div>' +
+    '<section class="card tight"' + mk(2) + '><div class="row between"><span class="t-label">Your last spray · from your diary</span><button class="link" data-go="diary">Change</button></div><div class="row" style="margin-top:8px"><span class="tile-ic sm sky">' + ic('spray', 's18') + '</span><span class="grow"><b>3 May · Difenoconazole 25% EC</b><br><span class="t-small">Petal fall · 10 drums · both blocks</span></span></div>' +
     '<p class="t-micro" style="margin-top:8px">We did not ask you this again. It came from the spray you saved on 3 May.</p></section>' +
     '<button class="btn block" data-go="dx_result">See what it is ' + ic('chevR', 'flip') + '</button>' });
 
@@ -1192,81 +1234,112 @@ body { margin: 0; background: var(--page); color: var(--ink); font-family: var(-
     const [cid, p] = ds.ranked[0];
     const c = D.conditions[cid];
     const lv = level(p);
-    const yes = Object.entries(st.dx.answers || {}).filter(([, a]) => a === 'yes').map(([q]) => WHY[q]).filter(Boolean);
+    if (!ds.sure) {
+      const body = '<section class="card lift"' + mk(1) + '><span class="t-label">Not sure yet</span><h2 class="t-big" style="margin-top:4px">We couldn\'t narrow it down</h2><p class="t-small" style="margin-top:6px">Your answers fit several problems. A photo or an expert will settle it. Don\'t spray until you know what it is.</p></section>' +
+        '<section class="card"><p class="t-title">Still possible</p><div class="hr-list" style="margin-top:4px">' + ds.ranked.slice(0, 3).map(([oid, op]) => '<div class="listrow"><span class="art" style="width:44px;height:52px;flex:none">' + art(D.conditions[oid].art, 40, 50, 4) + '</span><span class="grow"><span class="tt" style="font-size:14px">' + D.conditions[oid].name + '</span><br><span class="st">' + D.conditions[oid].season + '</span></span><span class="pc t-micro">' + Math.round(op * 100) + '%</span></div>').join('') + '</div></section>' +
+        '<div class="grid2"' + mk(2) + '><button class="btn" data-go="dx_photo">' + ic('camera', 's18') + ' Photo check</button><button class="btn ghost" data-go="dx_expert">' + ic('phone', 's18') + ' Ask an expert</button></div>';
+      return frame(st, { id: 'dx_result', back: true, title: 'Orchard Doctor', sub: 'Result', body });
+    }
+    const why = ds.supports.map(([q, a]) => [a, WHY[q]]).filter(x => x[1]);
     const prods = c.products.map(id => [id, D.products[id]]).filter(x => x[1]);
     const body =
       '<section class="card lift"' + mk(1) + '><div class="row top" style="gap:14px"><div class="art" style="width:92px;height:112px;flex:none">' + art(c.art, 84, 108, 9) + '</div><div class="grow stack g6"><span class="t-label">Most likely</span><h2 class="t-big">' + c.name + '</h2><span class="t-micro"><i>' + c.sci + '</i> · ' + c.kind + '</span><span>' + pillFor(lv[1], lv[0] + ' · ' + Math.round(p * 100) + '%') + '</span></div></div>' +
-      (yes.length ? '<div class="divider" style="margin:12px 0 10px"></div><p class="t-label">Why we think so</p><div class="stack g6" style="margin-top:6px">' + yes.map(y => '<div class="row" style="gap:8px"><span class="c-good">' + ic('check', 's18') + '</span><span class="t-small" style="color:var(--ink)">' + y + '</span></div>').join('') + '</div>' : '') + '</section>' +
-      (cid === 'scab' ? '<div class="banner risk"' + mk(2) + '>' + ic('alert', 's20') + '<span><b>Act before Wednesday\'s rain.</b> Rain on new leaves now can start a severe infection.</span></div>' : '') +
+      (why.length ? '<div class="divider" style="margin:12px 0 10px"></div><p class="t-label">Why we think so</p><div class="stack g6" style="margin-top:6px">' + why.map(([a, y]) => '<div class="row" style="gap:8px"><span class="' + (a === 'yes' ? 'c-good' : 'faint') + '">' + ic(a === 'yes' ? 'check' : 'x', 's18') + '</span><span class="t-small" style="color:var(--ink)">' + (a === 'yes' ? y : 'Not seen: ' + y.charAt(0).toLowerCase() + y.slice(1)) + '</span></div>').join('') + '</div>' : '') + '</section>' +
+      (cid === 'scab' ? '<div class="banner risk"' + mk(2) + '>' + ic('alert', 's20') + '<span><b>Act before Wednesday\'s rain.</b> SKUAST-K advises spraying before rain at every stage; rain on young leaves and fruit now can start a severe infection.</span></div>' : '') +
       '<section class="card"' + mk(3) + '><p class="t-title">What to do now</p><ol class="stack g6" style="margin:8px 0 0;padding-inline-start:20px">' + c.now.map(x => '<li class="t-small" style="color:var(--ink)">' + x + '</li>').join('') + '</ol></section>' +
-      (prods.length ? '<section class="card"' + mk(4) + '><div class="row between"><p class="t-title">Sprays that work now</p><span class="tag">SKUAST-K list</span></div><div class="hr-list" style="margin-top:6px">' + prods.map(([id, pr]) => '<div class="listrow"><span style="flex:none">' + A.pack(pr.pack[0], pr.pack[1], pr.pack[2], 34, 42) + '</span><span class="grow"><span class="tt" style="font-size:14px">' + pr.name + '</span><br><span class="st">' + pr.group + (pr.lastUsed ? ' · used last time' : '') + '</span></span><button class="btn xs soft" data-go="product" data-pid="' + id + '">' + money(pr.price) + '</button></div>').join('') + '</div><p class="t-micro" style="margin-top:6px">Always read the label. Doses follow the current SKUAST-K schedule.</p></section>' : '') +
+      (prods.length ? '<section class="card"' + mk(4) + '><div class="row between"><p class="t-title">Sprays that fit now</p><span class="tag">SKUAST-K 2026</span></div><div class="hr-list" style="margin-top:6px">' + prods.map(([id, pr]) => '<div class="listrow"><span style="flex:none">' + A.pack(pr.pack[0], pr.pack[1], pr.pack[2], 34, 42) + '</span><span class="grow"><span class="tt" style="font-size:14px">' + pr.name + '</span><br><span class="st">' + pr.group + (pr.dose ? ' · ' + pr.dose + ' ' + pr.doseUnit + ' per 100 L' : '') + (pr.lastUsed ? ' · used last time' : '') + '</span></span><button class="btn xs soft" data-go="product" data-pid="' + id + '">' + money(pr.price) + '</button></div>').join('') + '</div><p class="t-micro" style="margin-top:6px">Choose one. Always read the label. Doses from the SKUAST-K 2026 management guide.</p></section>' : '') +
       '<section class="card"><p class="t-title">Stop it next season</p><ul class="stack g6" style="margin:8px 0 0;padding-inline-start:20px">' + c.prevent.map(x => '<li class="t-small" style="color:var(--ink)">' + x + '</li>').join('') + '</ul></section>' +
       (c.also.length ? '<section class="card"><p class="t-title">Could also be</p><div class="hr-list" style="margin-top:4px">' + c.also.map(([oid, hint]) => '<div class="listrow"><span class="art" style="width:44px;height:52px;flex:none">' + art(D.conditions[oid].art, 40, 50, 4) + '</span><span class="grow"><span class="tt" style="font-size:14px">' + D.conditions[oid].name + '</span><br><span class="st">' + hint + '</span></span></div>').join('') + '</div></section>' : '') +
       '<div class="grid2"' + mk(5) + '><button class="btn ghost" data-go="dx_expert">' + ic('phone', 's18') + ' Ask an expert</button><button class="btn" data-act="save-diary">' + ic('file', 's18') + ' Save to diary</button></div>' +
-      '<div class="row between card tight"><span class="t-small">Was this answer right?</span><span class="row" style="gap:6px"><button class="chip">' + ic('check') + 'Yes</button><button class="chip">' + ic('x') + 'No</button></span></div>';
+      '<div class="row between card tight"><span class="t-small">Was this answer right?</span><span class="row" style="gap:6px"><button class="chip" data-act="feedback">' + ic('check') + 'Yes</button><button class="chip" data-act="feedback">' + ic('x') + 'No</button></span></div>';
     return frame(st, { id: 'dx_result', back: true, title: 'Orchard Doctor', sub: 'Result', body });
   };
 
   S.dx_photo = (st) => {
-    const done = st.photoDone !== false;
+    const answered = st.dx && st.dx.area && Object.keys(st.dx.answers || {}).length > 0;
+    const ds = answered ? dxState(st) : null;
+    const agrees = ds && ds.ranked[0][0] === 'scab';
+    const msg = agrees ? 'This agrees with your answers. The expert team reviews low-confidence photos.' : answered ? 'Your answers point elsewhere, so an expert will look at both.' : 'Answer two quick questions to confirm.';
     const body = '<div style="position:relative;flex:1;min-height:430px;border-radius:22px;overflow:hidden;background:radial-gradient(circle at 50% 40%,#3B5B33,#16241A 70%)"' + mk(1) + '>' +
       '<div style="position:absolute;inset:0;display:grid;place-items:center">' + A.leaf('scab', 210, 290, 12) + '</div>' +
       '<div style="position:absolute;inset:34px 36px 70px;border:2.5px dashed rgba(255,255,255,.85);border-radius:26px"></div>' +
       '<div style="position:absolute;left:0;right:0;top:12px;text-align:center;color:#fff;font-weight:700;font-size:14px">Hold one leaf flat, in daylight</div>' +
-      (done ? '<div class="card" style="position:absolute;left:12px;right:12px;bottom:12px;padding:12px"' + mk(2) + '><div class="row between"><span class="t-label">Photo check · beta</span>' + pillFor('good', '87% match') + '</div><p class="t-title" style="margin-top:4px">Looks like apple scab</p><p class="t-small">This agrees with your answers. The expert team reviews low-confidence photos.</p></div>' : '') + '</div>' +
-      '<div class="row" style="justify-content:space-around;padding:6px 0 2px"><span class="iconbtn" style="color:#fff">' + ic('grid') + '</span><button aria-label="Take photo" style="width:70px;height:70px;border-radius:50%;border:5px solid #fff;background:rgba(255,255,255,.25)"></button><span class="iconbtn" style="color:#fff">' + ic('sparkle') + '</span></div>';
+      '<div class="card" style="position:absolute;left:12px;right:12px;bottom:12px;padding:12px"' + mk(2) + '><div class="row between"><span class="t-label">Photo check · beta</span>' + pillFor('good', '87% match') + '</div><p class="t-title" style="margin-top:4px">Looks like apple scab</p><p class="t-small">' + msg + '</p>' + (answered ? '' : '<button class="btn sm" style="margin-top:8px" data-area="leaves">Confirm with questions</button>') + '</div></div>' +
+      '<div class="row" style="justify-content:space-around;padding:6px 0 2px"><span class="iconbtn" style="color:#fff" aria-hidden="true">' + ic('grid') + '</span><button aria-label="Take photo" style="width:70px;height:70px;border-radius:50%;border:5px solid #fff;background:rgba(255,255,255,.25)"></button><span class="iconbtn" style="color:#fff" aria-hidden="true">' + ic('sparkle') + '</span></div>';
     return frame(st, { id: 'dx_photo', cls: 'cam', darkbar: true, appbar: '<header class="ab" style="color:#fff"><button class="iconbtn" data-back style="color:#fff" aria-label="Back">' + ic('x') + '</button><h1>Photo check</h1></header>', body });
   };
 
-  S.dx_expert = (st) => frame(st, { id: 'dx_expert', back: true, title: 'Ask an expert', sub: 'Your case is ready to send', body:
-    '<section class="card"' + mk(1) + '><p class="t-label">Your case</p><div class="row" style="margin-top:8px;gap:10px"><span class="art" style="width:58px;height:70px;flex:none">' + A.leaf('scab', 52, 66, 12) + '</span><span class="art" style="width:58px;height:70px;flex:none">' + A.fruit('scab', 54, 54, 4) + '</span><span class="grow t-small" style="color:var(--ink)"><b>Apple scab?</b> Strong match<br>Leaves and young fruit · about half the trees · last spray 3 May</span></div></section>' +
-    '<section class="card tight"' + mk(2) + '><div class="row"><button class="tile-ic apple" aria-label="Record voice note">' + ic('mic') + '</button><span class="grow"><b>Voice note</b><br><span class="t-small">Speak in Kashmiri · 0:18 recorded</span></span><span style="display:flex;gap:2px;align-items:center;height:28px">' + [8, 16, 11, 22, 14, 26, 10, 18, 24, 12, 20, 9].map(h => '<i style="width:3px;height:' + h + 'px;border-radius:2px;background:var(--leaf)"></i>').join('') + '</span></div></section>' +
-    '<p class="t-label">Who should answer?</p><div class="stack"' + mk(3) + '>' + [['Crop doctor on Baghbaan', 'Free · replies in about 2 hours (8 AM–6 PM)', 'cap', true], ['University / KVK scientist', 'Free · when available, for hard cases', 'beaker', false], ['Field visit by an expert', '₹300 · tomorrow morning', 'pin', false]].map(([a, b, i, on]) => '<button class="opt ' + (on ? 'on' : '') + '"><span class="tile-ic sm ' + (on ? 'leaf' : 'plain') + '">' + ic(i, 's18') + '</span><span class="grow"><span class="tt">' + a + '</span><br><span class="st">' + b + '</span></span></button>').join('') + '</div>' +
-    '<p class="t-micro row" style="gap:6px">' + ic('lock', 's16') + 'Only the expert sees your photos and phone number.</p>' +
-    '<button class="btn block" data-act="send-expert">' + ic('send', 's18') + ' Send to expert</button>' });
+  S.dx_expert = (st) => {
+    let caseArt = A.leaf('healthy', 52, 66, 12), caseText = '<b>No diagnosis yet</b><br>Add photos and a voice note; the expert will ask what they need.';
+    if (st.dx && st.dx.area) {
+      const ds = dxState(st), [cid, p] = ds.ranked[0], c = D.conditions[cid];
+      caseArt = art(c.art, 52, 66, 12);
+      caseText = '<b>' + c.name.replace(/ \(.*\)/, '') + '?</b> ' + level(p)[0] + '<br>' + D.areas.find(a => a.id === ds.area).name + ' · ' + SEV[st.dx.sev || 2] + ' · ' + ds.nAns + ' answers · last spray 3 May';
+    }
+    return frame(st, { id: 'dx_expert', back: true, title: 'Ask an expert', sub: 'Your case is ready to send', body:
+      '<section class="card"' + mk(1) + '><p class="t-label">Your case</p><div class="row" style="margin-top:8px;gap:10px"><span class="art" style="width:58px;height:70px;flex:none">' + caseArt + '</span><span class="art" style="width:58px;height:70px;flex:none;color:var(--ink-3)">' + ic('camera', 's26') + '</span><span class="grow t-small" style="color:var(--ink)">' + caseText + '</span></div></section>' +
+      '<section class="card tight"' + mk(2) + '><div class="row"><button class="tile-ic apple" aria-label="Record voice note">' + ic('mic') + '</button><span class="grow"><b>Voice note</b><br><span class="t-small">Speak in Kashmiri · 0:18 recorded</span></span><span style="display:flex;gap:2px;align-items:center;height:28px" aria-hidden="true">' + [8, 16, 11, 22, 14, 26, 10, 18, 24, 12, 20, 9].map(h => '<i style="width:3px;height:' + h + 'px;border-radius:2px;background:var(--leaf)"></i>').join('') + '</span></div></section>' +
+      '<p class="t-label">Who should answer?</p><div class="stack"' + mk(3) + '>' + [['Crop doctor on Baghbaan', 'Free · replies in about 2 hours (8 AM–6 PM)', 'cap', 0], ['University / KVK scientist', 'Free · when available, for hard cases', 'beaker', 1], ['Field visit by an expert', '₹300 · tomorrow morning', 'pin', 2]].map(([a, b, i, k]) => { const on = (st.who || 0) === k; return '<button class="opt ' + (on ? 'on' : '') + '" data-who="' + k + '" aria-pressed="' + on + '"><span class="tile-ic sm ' + (on ? 'leaf' : 'plain') + '">' + ic(i, 's18') + '</span><span class="grow"><span class="tt">' + a + '</span><br><span class="st">' + b + '</span></span></button>'; }).join('') + '</div>' +
+      '<p class="t-micro row" style="gap:6px">' + ic('lock', 's16') + 'Only the expert sees your photos and phone number.</p>' +
+      '<button class="btn block" data-act="send-expert">' + ic('send', 's18') + ' Send to expert</button>' });
+  };
 
   /* ---------- Buy ---------- */
-  const cartBtn = (st) => '<button class="iconbtn" data-go="cart" aria-label="Cart">' + ic('cart') + '<span class="dot" style="width:16px;height:16px;top:4px;right:4px;font:800 10px/16px var(--f-body);color:#fff;text-align:center">' + (st.cartCount || 3) + '</span></button>';
-  S.shop = (st) => frame(st, { id: 'shop', tab: 'shop', title: 'Buy', sub: 'Licensed dealers near Shopian', right: cartBtn(st), body:
-    '<div class="search"' + mk(1) + '>' + ic('search', 's20') + '<span class="grow">Medicine, fertilizer, tool…</span><span class="mic" style="background:var(--card-2);color:var(--ink-2)">' + ic('scan', 's18') + '</span><span class="mic">' + ic('mic', 's18') + '</span></div>' +
-    '<button class="card" style="background:var(--leaf-soft);border-color:transparent;text-align:start"' + mk(2) + ' data-go="cart"><div class="row top"><div class="grow stack g6"><span class="t-label" style="color:var(--leaf)">Made for your orchard</span><p class="t-title">Petal-fall spray kit</p><p class="t-small">Matched to 25 kanal · stage: petal fall · rotates away from Mancozeb used last time</p><span class="row" style="gap:8px;margin-top:4px"><b class="t-title num">' + money(3405) + '</b><span class="pill leaf">3 items</span></span></div><div style="display:flex;margin-top:4px">' + A.pack('pouch', '#2E6FA3', 'DODINE|65% WP', 40, 52) + A.pack('pouch', '#4A5C51', 'BORON|20%', 40, 52) + '</div></div></button>' +
+  const cartOf = (st) => st.cart || Object.fromEntries(D.kit);
+  const cartLines = (st) => Object.entries(cartOf(st)).filter(([id, q]) => q > 0 && D.products[id]);
+  const cartSum = (st) => cartLines(st).reduce((a, [id, q]) => [a[0] + D.products[id].price * q, a[1] + (D.products[id].mrp - D.products[id].price) * q], [0, 0]);
+  const fmtAmt = (v, u) => u === 'g' ? (v >= 1000 ? +(v / 1000).toFixed(2) + ' kg' : v + ' g') : u === 'ml' ? (v >= 1000 ? +(v / 1000).toFixed(2) + ' L' : v + ' ml') : v + ' ' + u;
+  function need(p) { if (!p.dose) return null; const perDrum = p.dose * 2, total = perDrum * D.drums; return { perDrum, total, packs: p.amt ? Math.ceil(total / p.amt) : null }; }
+  const brandsOf = (p) => p.brands || (['fung', 'mite', 'oil', 'insect'].includes(p.cat) ? [['Brand A', p.price], ['Brand B', Math.round(p.price * 1.05 / 5) * 5], ['Brand C', Math.round(p.price * 1.1 / 5) * 5]] : [['Licensed dealer, Shopian', p.price]]);
+  const cartBtn = (st) => '<button class="iconbtn" data-go="cart" aria-label="Cart, ' + cartLines(st).length + ' items">' + ic('cart') + '<span class="dot" style="width:16px;height:16px;top:4px;right:4px;font:800 10px/16px var(--f-body);color:var(--on-apple);text-align:center" aria-hidden="true">' + cartLines(st).length + '</span></button>';
+  S.shop = (st) => {
+    const kitSum = D.kit.reduce((a, [id, q]) => a + D.products[id].price * q, 0);
+    return frame(st, { id: 'shop', tab: 'shop', title: 'Buy', sub: 'Licensed dealers near Shopian', right: cartBtn(st), body:
+    '<div class="search"' + mk(1) + '>' + ic('search', 's20') + '<span class="grow">Medicine, fertilizer, tool…</span><button class="mic" style="background:var(--card-2);color:var(--ink-2)" data-go="verify" aria-label="Scan a pack">' + ic('scan', 's18') + '</button><span class="mic" aria-hidden="true">' + ic('mic', 's18') + '</span></div>' +
+    '<button class="card" style="background:var(--leaf-soft);border-color:transparent;text-align:start"' + mk(2) + ' data-act="kit"><div class="row top"><div class="grow stack g6"><span class="t-label" style="color:var(--leaf)">Made for your orchard</span><p class="t-title">Fruitlet spray kit</p><p class="t-small">Scab spray before Wednesday\'s rain, sized for 25 kanal (about 10 drums). Rotates away from Difenoconazole used on 3 May.</p><span class="row" style="gap:8px;margin-top:4px"><b class="t-title num">' + money(kitSum) + '</b><span class="pill leaf">' + D.kit.length + ' items</span></span></div><div style="display:flex;margin-top:4px">' + D.kit.map(([id]) => A.pack(D.products[id].pack[0], D.products[id].pack[1], D.products[id].pack[2], 40, 52)).join('') + '</div></div></button>' +
     '<div class="row" style="justify-content:space-between;gap:6px"' + mk(3) + '>' + [['shield', 'Licensed dealers only'], ['scan', 'Genuine-pack check'], ['file', 'Bill with every order']].map(([i, x]) => '<span class="row t-micro" style="gap:5px;color:var(--ink-2);font-weight:600">' + ic(i, 's16 c-leaf') + x + '</span>').join('') + '</div>' +
-    '<div class="sec-h"><h2>Shop by need</h2><a>All</a></div><div class="grid4">' + D.cats.map(([id, n, i]) => '<button class="cat" data-go="shop_list"><span class="tile-ic sm leaf">' + ic(i, 's18') + '</span>' + n + '</button>').join('') + '</div>' +
-    '<div class="sec-h"><h2>Bought near you this week</h2></div><div class="card tight hr-list">' + ['hmo', 'hexy', 'urea'].map(id => { const p = D.products[id]; return '<button class="listrow" data-go="product" data-pid="' + id + '">' + A.pack(p.pack[0], p.pack[1], p.pack[2], 34, 42) + '<span class="grow"><span class="tt" style="font-size:14px">' + p.name + '</span><br><span class="st">' + p.size + ' · ' + stars(p.rating) + ' ' + p.n + '</span></span><b class="num">' + money(p.price) + '</b></button>'; }).join('') + '</div>' });
+    '<div class="sec-h"><h2>Shop by need</h2></div><div class="grid4">' + D.cats.map(([id, n, i]) => '<button class="cat" data-go="shop_list"><span class="tile-ic sm leaf">' + ic(i, 's18') + '</span>' + n + '</button>').join('') + '</div>' +
+    '<div class="sec-h"><h2>Bought near you this week</h2></div><div class="card tight hr-list">' + ['hmo', 'hexy', 'calcium'].map(id => { const p = D.products[id]; return '<button class="listrow" data-go="product" data-pid="' + id + '">' + A.pack(p.pack[0], p.pack[1], p.pack[2], 34, 42) + '<span class="grow"><span class="tt" style="font-size:14px">' + p.name + '</span><br><span class="st">' + p.size + ' · ' + stars(p.rating) + ' ' + p.n + '</span></span><b class="num">' + money(p.price) + '</b></button>'; }).join('') + '</div>' });
+  };
 
-  function prodCard(id, opts) {
+  function prodCard(id) {
     const p = D.products[id];
-    return '<button class="card tight prod" data-go="product" data-pid="' + id + '" style="text-align:start' + (p.lastUsed ? ';opacity:.78' : '') + '"><span class="pack">' + A.pack(p.pack[0], p.pack[1], p.pack[2], 50, 62) + '</span><span class="stack g6" style="min-width:0"><span class="nm">' + p.name + '</span><span class="meta">' + p.for + '</span>' +
+    return '<button class="card tight prod" data-go="product" data-pid="' + id + '" style="text-align:start' + (p.lastUsed ? ';border-style:dashed' : '') + '"><span class="pack">' + A.pack(p.pack[0], p.pack[1], p.pack[2], 50, 62) + '</span><span class="stack g6" style="min-width:0"><span class="nm">' + p.name + '</span><span class="meta">' + p.for + '</span>' +
       '<span class="tagrow" style="margin-top:0"><span class="tag frac">' + p.group + '</span><span class="tag ok">' + ic('check', 's16').replace('class="ic s16"', 'class="ic" style="width:10px;height:10px;stroke-width:3"') + ' Label: ' + p.claim + '</span>' + (p.lastUsed ? '<span class="tag" style="background:var(--warn-soft);color:var(--warn);border-color:transparent">Used last time</span>' : '') + '</span>' +
       '<span class="row between"><span><span class="price num">' + money(p.price) + '</span><span class="mrp num">' + money(p.mrp) + '</span><span class="t-micro"> · ' + p.size + '</span></span><span class="t-micro">' + stars(p.rating) + ' ' + p.n + '</span></span></span></button>';
   }
-  S.shop_list = (st) => frame(st, { id: 'shop_list', back: true, title: 'Fungicides', sub: 'For apple scab · petal fall', right: cartBtn(st), body:
-    '<div class="chips scroll"' + mk(1) + '><span class="chip on">' + ic('x') + 'Apple scab</span><span class="chip on">Petal fall</span><span class="chip">Organic</span><span class="chip">' + ic('sliders') + 'Price</span></div>' +
-    '<div class="banner warn"' + mk(2) + '>' + ic('layers', 's20') + '<span><b>Rotate groups.</b> You sprayed Mancozeb (group M3) on 3 May. Pick a different group this time so scab does not build resistance.</span></div>' +
-    prodCard('dodine') + prodCard('difeno') + prodCard('captan') + prodCard('mancozeb') });
+  S.shop_list = (st) => frame(st, { id: 'shop_list', back: true, title: 'Fungicides', sub: 'For apple scab · fruitlet stage', right: cartBtn(st), body:
+    '<div class="chips scroll"' + mk(1) + '><span class="chip on">' + ic('x') + 'Apple scab</span><span class="chip on">Fruitlet</span><span class="chip">Organic</span><span class="chip">' + ic('sliders') + 'Price</span></div>' +
+    '<div class="banner warn"' + mk(2) + '>' + ic('layers', 's20') + '<span><b>Rotate.</b> You sprayed Difenoconazole (group 3) on 3 May. SKUAST-K says never use the same pesticide in two sprays in a row.</span></div>' +
+    prodCard('dodine') + prodCard('fluxpyra') + prodCard('boscalid') + prodCard('difeno') });
 
   S.product = (st) => {
-    const id = st.pid || 'dodine', p = D.products[id];
-    const drums = 10, perDrum = p.dose ? p.dose * 2 : 0, total = perDrum * drums;
+    const id = (st.pid && D.products[st.pid]) ? st.pid : 'dodine', p = D.products[id];
+    const n = need(p), brands = brandsOf(p);
+    const qty = (st.qty && st.qty[id]) || (n && n.packs) || 1;
     const body =
       '<div class="art" style="height:150px;background:var(--card)">' + A.pack(p.pack[0], p.pack[1], p.pack[2], 104, 132) + '</div>' +
       '<div class="stack g6"><h2 class="t-big">' + p.name + '</h2><p class="t-small">' + p.for + '</p><div class="tagrow"' + mk(1) + '><span class="tag frac">' + p.group + '</span><span class="tag ok">Label claim: ' + p.claim + '</span><span class="tag ok">Licensed seller</span></div></div>' +
-      '<section class="card tight"' + mk(2) + '><div class="row between"><span class="t-label">Same medicine · 3 brands</span><span class="t-micro">Shopian dealers</span></div><div class="hr-list" style="margin-top:4px">' + p.brands.map(([b, pr], i) => '<div class="listrow" style="padding:8px 0"><span class="grow"><b>' + b + '</b> <span class="t-micro">· ' + p.size + '</span></span>' + (i === 0 ? '<span class="pill good">Lowest</span>' : '') + '<b class="num">' + money(pr) + '</b></div>').join('') + '</div></section>' +
-      '<section class="card"' + mk(3) + '><div class="row between"><p class="t-title">How much do I need?</p><span class="tile-ic sm sky">' + ic('beaker', 's18') + '</span></div>' +
-      '<div class="grid2" style="margin-top:10px"><div><p class="t-micro">Your orchard</p><b>25 kanal · ~10 drums</b></div><div><p class="t-micro">Dose (sample)</p><b>' + p.dose + ' ' + p.doseUnit + ' / 100 L</b></div><div><p class="t-micro">Per 200 L drum</p><b>' + perDrum + ' ' + p.doseUnit + '</b></div><div><p class="t-micro">Total to buy</p><b class="c-leaf">' + (total >= 1000 ? (total / 1000) + ' kg' : total + ' ' + p.doseUnit) + ' → 5 packs</b></div></div>' +
-      '<p class="t-micro" style="margin-top:8px">Dose shown is a placeholder for the demo. The app uses the current SKUAST-K schedule and the product label.</p></section>' +
-      '<section class="card tight"' + mk(4) + '><p class="t-label">Use safely</p><div class="row wrap" style="gap:8px;margin-top:8px">' + [['shield', 'Gloves & mask'], ['bee', 'Not during bloom'], ['clock', 'Waiting days: see label'], ['drop', 'Keep from streams']].map(([i, x]) => '<span class="chip" style="font-size:12.5px;padding:7px 10px">' + ic(i) + x + '</span>').join('') + '</div></section>' +
-      '<section class="card tight"' + mk(5) + '><div class="row between"><p class="t-title">' + p.rating + ' ' + stars(p.rating) + '</p><span class="t-micro">' + p.n + ' verified buyers</span></div><div class="stack g6" style="margin-top:8px"><p class="t-small" style="color:var(--ink)">"Sprayed before the rain at petal fall, no new spots after." <span class="faint">— grower, Shopian · sample review</span></p><p class="t-small" style="color:var(--ink)">"Dissolves well in the drum. Genuine pack, QR matched." <span class="faint">— grower, Kulgam · sample review</span></p></div></section>';
-    const footer = '<div class="row" style="padding:10px 16px 12px;background:var(--card);border-top:1px solid var(--line)"><div class="stepper"><button aria-label="Less">' + ic('minus') + '</button><span class="num">5</span><button aria-label="More">' + ic('plus') + '</button></div><button class="btn grow" data-act="add-cart">' + ic('cart', 's18') + ' Add · ' + money(p.price * 5) + '</button></div>';
+      '<section class="card tight"' + mk(2) + '><div class="row between"><span class="t-label">' + (brands.length > 1 ? 'Same medicine · ' + brands.length + ' brands' : 'Sold by') + '</span><span class="t-micro">Shopian dealers</span></div><div class="hr-list" style="margin-top:4px">' + brands.map(([b, pr], i) => '<div class="listrow" style="padding:8px 0"><span class="grow"><b>' + b + '</b> <span class="t-micro">· ' + p.size + '</span></span>' + (i === 0 && brands.length > 1 ? '<span class="pill good">Lowest</span>' : '') + '<b class="num">' + money(pr) + '</b></div>').join('') + '</div></section>' +
+      (n ? '<section class="card"' + mk(3) + '><div class="row between"><p class="t-title">How much do I need?</p><span class="tile-ic sm sky">' + ic('beaker', 's18') + '</span></div>' +
+        '<div class="grid2" style="margin-top:10px"><div><p class="t-micro">Your orchard</p><b>25 kanal · ~' + D.drums + ' drums</b></div><div><p class="t-micro">Dose per 100 L</p><b>' + p.dose + ' ' + p.doseUnit + '</b></div><div><p class="t-micro">Per 200 L drum</p><b>' + fmtAmt(n.perDrum, p.doseUnit) + '</b></div><div><p class="t-micro">Total to buy</p><b class="c-leaf">' + fmtAmt(n.total, p.doseUnit) + (n.packs ? ' → ' + n.packs + ' × ' + p.size : '') + '</b></div></div>' +
+        '<p class="t-micro" style="margin-top:8px">Dose from the SKUAST-K 2026 management guide (per 100 L); the drum figure is ours (× 2). ' + (p.note ? p.note : 'Check the label before use.') + '</p></section>' : '') +
+      '<section class="card tight"' + mk(4) + '><p class="t-label">Use safely</p><div class="row wrap" style="gap:8px;margin-top:8px">' + [['shield', 'Gloves & mask'], ['bee', 'Not during bloom'], ['clock', p.phi ? 'Wait ' + p.phi + ' days before harvest' : 'Waiting days: see label'], ['drop', 'Keep from streams']].map(([i, x]) => '<span class="chip" style="font-size:12.5px;padding:7px 10px">' + ic(i) + x + '</span>').join('') + '</div></section>' +
+      '<section class="card tight"' + mk(5) + '><div class="row between"><p class="t-title">' + p.rating + ' ' + stars(p.rating) + '</p><span class="t-micro">' + p.n + ' verified buyers</span></div><div class="stack g6" style="margin-top:8px"><p class="t-small" style="color:var(--ink)">"Sprayed before the rain, no new spots after." <span class="faint">— grower, Shopian · sample review</span></p><p class="t-small" style="color:var(--ink)">"Genuine pack, the QR matched." <span class="faint">— grower, Kulgam · sample review</span></p></div></section>';
+    const footer = '<div class="row" style="padding:10px 16px;padding-bottom:max(12px, env(safe-area-inset-bottom, 0px));background:var(--card);border-top:1px solid var(--line)"><div class="stepper"><button data-act="qty-" aria-label="One pack fewer">' + ic('minus') + '</button><span class="num" aria-live="polite">' + qty + '</span><button data-act="qty+" aria-label="One pack more">' + ic('plus') + '</button></div><button class="btn grow" data-act="add-cart">' + ic('cart', 's18') + ' Add · ' + money(p.price * qty) + '</button></div>';
     return frame(st, { id: 'product', back: true, title: 'Product', right: cartBtn(st), body, footer });
   };
 
-  S.cart = (st) => frame(st, { id: 'cart', back: true, title: 'Your order', sub: 'Petal-fall kit · 3 items', body:
-    '<div class="card tight hr-list"' + mk(1) + '>' + [['dodine', 5], ['boron', 2], ['difeno', 1]].map(([id, q]) => { const p = D.products[id]; return '<div class="listrow">' + A.pack(p.pack[0], p.pack[1], p.pack[2], 34, 42) + '<span class="grow"><span class="tt" style="font-size:14px">' + p.name + '</span><br><span class="st">' + q + ' × ' + p.size + '</span></span><b class="num">' + money(p.price * q) + '</b></div>'; }).join('') + '</div>' +
-    '<p class="t-label">Get it</p><div class="stack"' + mk(2) + '>' + [['Pick up from dealer', 'Licensed dealer, Shopian · 2.5 km · ready 4 PM today', 'Free', true], ['Deliver to my village', 'Tomorrow before 11 AM', '₹40', false]].map(([a, b, c, on]) => '<button class="opt ' + (on ? 'on' : '') + '"><span class="tile-ic sm ' + (on ? 'leaf' : 'plain') + '">' + ic(on ? 'pin' : 'truck', 's18') + '</span><span class="grow"><span class="tt">' + a + '</span><br><span class="st">' + b + '</span></span><b>' + c + '</b></button>').join('') + '</div>' +
-    '<p class="t-label">Pay</p><div class="stack"' + mk(3) + '>' + [['UPI', 'Any UPI app', 'wallet', false], ['Cash at pickup', 'Pay the dealer', 'coin', true], ['Pay after harvest', 'Partner credit, linked to your KCC · approval in minutes', 'handcoins', false]].map(([a, b, i, on]) => '<button class="opt ' + (on ? 'on' : '') + '"><span class="tile-ic sm ' + (on ? 'leaf' : 'plain') + '">' + ic(i, 's18') + '</span><span class="grow"><span class="tt">' + a + '</span><br><span class="st">' + b + '</span></span></button>').join('') + '</div>' +
-    '<div class="card tight stack g6 num"><div class="row between t-small"><span>Items</span><span>' + money(3405) + '</span></div><div class="row between t-small"><span>Saved vs MRP</span><span class="c-good">− ' + money(340) + '</span></div><div class="row between"><b>Total</b><b class="t-title">' + money(3405) + '</b></div><p class="t-micro">GST bill from the licensed dealer comes with your order.</p></div>' +
+  S.cart = (st) => {
+    const lines = cartLines(st), [sum, saved] = cartSum(st);
+    if (!lines.length) return frame(st, { id: 'cart', back: true, title: 'Your order', body: '<section class="card"><p class="t-title">Your order is empty</p><p class="t-small" style="margin-top:4px">Add products from Buy or from an Orchard Doctor result.</p></section><button class="btn block" data-go="shop">Go to Buy</button>' });
+    return frame(st, { id: 'cart', back: true, title: 'Your order', sub: lines.length + ' item' + (lines.length === 1 ? '' : 's'), body:
+    '<div class="card tight hr-list"' + mk(1) + '>' + lines.map(([id, q]) => { const p = D.products[id]; return '<div class="listrow">' + A.pack(p.pack[0], p.pack[1], p.pack[2], 34, 42) + '<span class="grow"><span class="tt" style="font-size:14px">' + p.name + '</span><br><span class="st">' + q + ' × ' + p.size + '</span></span><b class="num">' + money(p.price * q) + '</b></div>'; }).join('') + '</div>' +
+    '<p class="t-label">Get it</p><div class="stack"' + mk(2) + '>' + [['Pick up from dealer', 'Licensed dealer, Shopian · 2.5 km · ready 3 PM today', 'Free', 0], ['Deliver to my village', 'Tomorrow before 11 AM', '₹40', 1]].map(([a, b, c, k]) => { const on = (st.ship || 0) === k; return '<button class="opt ' + (on ? 'on' : '') + '" data-ship="' + k + '" aria-pressed="' + on + '"><span class="tile-ic sm ' + (on ? 'leaf' : 'plain') + '">' + ic(k ? 'truck' : 'pin', 's18') + '</span><span class="grow"><span class="tt">' + a + '</span><br><span class="st">' + b + '</span></span><b>' + c + '</b></button>'; }).join('') + '</div>' +
+    '<p class="t-label">Pay</p><div class="stack"' + mk(3) + '>' + [['UPI', 'Any UPI app', 'wallet', 0], ['Cash at pickup', 'Pay the dealer', 'coin', 1], ['Pay after harvest', 'Partner credit, linked to your KCC · approval in minutes', 'handcoins', 2]].map(([a, b, i, k]) => { const on = (st.pay == null ? 1 : st.pay) === k; return '<button class="opt ' + (on ? 'on' : '') + '" data-pay="' + k + '" aria-pressed="' + on + '"><span class="tile-ic sm ' + (on ? 'leaf' : 'plain') + '">' + ic(i, 's18') + '</span><span class="grow"><span class="tt">' + a + '</span><br><span class="st">' + b + '</span></span></button>'; }).join('') + '</div>' +
+    '<div class="card tight stack g6 num"><div class="row between t-small"><span>Items</span><span>' + money(sum) + '</span></div><div class="row between t-small"><span>Saved vs MRP</span><span class="c-good">− ' + money(saved) + '</span></div><div class="row between t-small"><span>Delivery</span><span>' + ((st.ship || 0) === 1 ? '₹40' : 'Free') + '</span></div><div class="row between"><b>Total</b><b class="t-title">' + money(sum + ((st.ship || 0) === 1 ? 40 : 0)) + '</b></div><p class="t-micro">GST bill from the licensed dealer comes with your order.</p></div>' +
     '<button class="btn block" data-act="place-order">Place order</button>' });
+  };
 
   S.verify = (st) => frame(st, { id: 'verify', back: true, title: 'Genuine-pack check', body:
     '<div style="position:relative;height:200px;border-radius:20px;overflow:hidden;background:#17201B;display:grid;place-items:center"' + mk(1) + '>' + A.pack('pouch', '#2E6FA3', 'DODINE|65% WP', 120, 150) + '<div style="position:absolute;inset:40px 90px;border:3px solid #6EE7A8;border-radius:16px"></div><span style="position:absolute;bottom:10px;color:#fff;font-size:13px;font-weight:700">Point at the QR code on the pack</span></div>' +
@@ -1283,13 +1356,13 @@ body { margin: 0; background: var(--page); color: var(--ink); font-family: var(-
     '<div class="banner good">' + ic('download', 's18') + '<span>18 lessons saved on this phone. They play without internet.</span></div>' });
 
   S.lesson = (st) => frame(st, { id: 'lesson', back: true, title: 'Soil & manure', sub: 'Lesson 2 · 3 min 20 s', body:
-    '<div style="position:relative;height:170px;border-radius:18px;overflow:hidden"' + mk(1) + '>' + A.orchardScene(330, 170) + '<div style="position:absolute;inset:0;background:linear-gradient(transparent 40%,rgba(10,20,14,.75))"></div><span style="position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:58px;height:58px;border-radius:50%;background:rgba(255,255,255,.92);display:grid;place-items:center;color:#134F33">' + ic('play', 's26') + '</span><span style="position:absolute;left:14px;bottom:10px;color:#fff;font-weight:700;font-size:14px">' + ic('headphones', 's16') + ' Kashmiri audio · 3:20</span></div>' +
+    '<div class="fluid" style="position:relative;height:170px;border-radius:18px;overflow:hidden"' + mk(1) + '>' + A.orchardScene(330, 170) + '<div style="position:absolute;inset:0;background:linear-gradient(transparent 40%,rgba(10,20,14,.75))"></div><span style="position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:58px;height:58px;border-radius:50%;background:rgba(255,255,255,.92);display:grid;place-items:center;color:#134F33">' + ic('play', 's26') + '</span><span style="position:absolute;left:14px;bottom:10px;color:#fff;font-weight:700;font-size:14px">' + ic('headphones', 's16') + ' Kashmiri audio · 3:20</span></div>' +
     '<h2 class="t-big">How to take a soil sample</h2><p class="t-small" style="margin-top:-6px">A soil test tells you exactly which fertilizer your trees need, so you stop paying for what they don\'t.</p>' +
     '<div class="stack"' + mk(2) + '>' + [['Sample before manure', 'Take samples after harvest or in early spring, before you add manure or fertilizer.'], ['Many spots, two depths', 'Under 8–10 trees across the block, at the outer edge of the canopy, dig to 0–30 cm and 30–60 cm.'], ['Mix and take half a kilo', 'Mix each depth separately in a clean bucket. Remove stones and roots.'], ['Dry, pack, label', 'Dry in shade. Pack in a cloth bag with your name, village, block and date.']].map(([a, b], i) => '<div class="card tight row top"><span class="tile-ic sm leaf" style="font:800 16px var(--f-display)">' + (i + 1) + '</span><span class="grow"><b>' + a + '</b><br><span class="t-small">' + b + '</span></span></div>').join('') + '</div>' +
     '<button class="btn block" data-go="services">' + ic('beaker', 's18') + ' Book soil test pickup</button>' +
     '<section class="card"' + mk(3) + '><p class="t-label">Quick check</p><p class="t-title" style="margin-top:4px">When should you take the sample?</p><div class="stack g6" style="margin-top:10px"><button class="opt"><span class="grow">Right after adding manure</span></button><button class="opt on"><span class="grow"><b>Before manure and fertilizer</b></span>' + ic('check', 'c-leaf') + '</button></div></section>' });
 
-  S.library = (st) => frame(st, { id: 'library', back: true, title: 'Pests & diseases', sub: '24 problems · photos from Kashmir', body:
+  S.library = (st) => frame(st, { id: 'library', back: true, title: 'Pests & diseases', sub: '' + D.library.length + ' common problems · tap for details', body:
     '<div class="search">' + ic('search', 's20') + '<span class="grow">Search by name or symptom</span><span class="mic">' + ic('mic', 's18') + '</span></div>' +
     '<div class="chips scroll"><span class="chip on">All</span><span class="chip">Leaves</span><span class="chip">Fruit</span><span class="chip">Bark</span><span class="chip">Roots</span><span class="chip">In season now</span></div>' +
     '<div class="card tight hr-list"' + mk(1) + '>' + D.library.map(([cid, n, where, when, lv]) => '<div class="listrow"><span class="art" style="width:52px;height:56px;flex:none">' + art(D.conditions[cid].art, 46, 52, 6) + '</span><span class="grow"><span class="tt" style="font-size:14.5px">' + n + '</span><br><span class="st">' + where + '</span></span><span class="pill ' + lv + '">' + when + '</span></div>').join('') + '</div>' });
@@ -1304,9 +1377,9 @@ body { margin: 0; background: var(--page); color: var(--ink); font-family: var(-
   S.mandi = (st) => frame(st, { id: 'mandi', tab: 'mandi', title: 'Mandi & news', sub: 'Sample rates · updated 7:30 AM', body:
     seg('mandi') +
     '<div class="row between"' + mk(1) + '><div class="chips"><span class="chip on">Delicious</span><span class="chip">American</span><span class="chip">Maharaji</span></div></div>' +
-    '<section class="card"' + mk(2) + '><div class="row between"><span class="t-label">Sopore · A grade · CA</span><span class="pill good">' + ic('trendUp') + '+9% in 30 days</span></div><div class="row" style="align-items:baseline;gap:8px;margin:6px 0 4px"><span class="t-huge num">₹92</span><span class="t-small">per kg · about ' + money(92 * 16) + ' per 16 kg box</span></div>' +
+    '<section class="card"' + mk(2) + '><div class="row between"><span class="t-label">Sopore · A grade · CA</span><span class="pill good">' + ic('trendUp') + '+10% in 30 days</span></div><div class="row" style="align-items:baseline;gap:8px;margin:6px 0 4px"><span class="t-huge num">₹92</span><span class="t-small">per kg · about ' + money(92 * 16) + ' per 16 kg box</span></div>' +
     '<div style="position:relative" class="chartwrap">' + A.lineChart(D.trend, { w: 320, h: 120, step: 2, fmt: v => '₹' + v, xlabels: [[0, '13 Apr'], [14, '27 Apr'], [29, '12 May']], label: 'Sopore Delicious A price, last 30 days' }) + '</div></section>' +
-    '<section class="card tight"' + mk(3) + '><table class="ptable"><thead><tr><th>Mandi</th><th>₹ / kg</th><th>Change</th></tr></thead><tbody>' + D.mandis.map(([m, s, v, c]) => '<tr><td>' + m + '<span class="sub">' + s + '</span></td><td>' + v + '</td><td class="' + (c >= 0 ? 'up' : 'down') + '">' + (c >= 0 ? '▲ ' : '▼ ') + Math.abs(c) + '%</td></tr>').join('') + '</tbody></table></section>' +
+    '<section class="card tight"' + mk(3) + '><table class="ptable"><thead><tr><th>Mandi</th><th>₹ / kg</th><th>Week</th></tr></thead><tbody>' + D.mandis.map(([m, s, v, c]) => '<tr><td>' + m + '<span class="sub">' + s + '</span></td><td>' + v + '</td><td class="' + (c >= 0 ? 'up' : 'down') + '">' + (c >= 0 ? '▲ ' : '▼ ') + Math.abs(c) + '%</td></tr>').join('') + '</tbody></table></section>' +
     '<div class="grid2"' + mk(4) + '><button class="btn" data-go="sell">' + ic('route', 's18') + ' Where to sell?</button><button class="btn ghost">' + ic('bell', 's18') + ' Price alert</button></div>' });
 
   S.sell = (st) => {
@@ -1323,13 +1396,13 @@ body { margin: 0; background: var(--page); color: var(--ink); font-family: var(-
     '<section class="card"' + mk(1) + '><div class="row between"><span class="row" style="gap:8px"><span class="tile-ic sm leaf">' + ic('road', 's18') + '</span><b>NH-44 Srinagar–Jammu</b></span>' + pillFor('good', 'Open') + '</div><div class="stack g6" style="margin-top:10px"><div class="row t-small" style="gap:8px">' + ic('truck', 's18 c-leaf') + '<span>Trucks allowed <b>Srinagar → Jammu</b> today</span></div><div class="row t-small" style="gap:8px">' + ic('clock', 's18 c-warn') + '<span>Slow near Ramban: one-lane stretch</span></div><div class="row t-small" style="gap:8px">' + ic('users', 's18') + '<span>Cars both ways</span></div></div><p class="t-micro" style="margin-top:8px">Source: traffic police advisory, 7:10 AM (sample)</p></section>' +
     '<section class="card tight row"' + mk(2) + '><span class="tile-ic sm chinar">' + ic('mountain', 's18') + '</span><span class="grow"><b>Mughal Road</b><br><span class="t-small">Open for light vehicles only</span></span>' + pillFor('warn', 'Limited') + '</section>' +
     '<section class="card tight row"' + mk(3) + '><span class="tile-ic sm sky">' + ic('train', 's18') + '</span><span class="grow"><b>Rail parcel to Delhi</b><br><span class="t-small">Budgam → Delhi parcel van, about ₹2.4/kg · next 6:40 PM (sample)</span></span>' + ic('chevR', 'chev flip') + '</section>' +
-    '<section class="card tight row"' + mk(4) + '><span class="tile-ic sm apple">' + ic('bell', 's18') + '</span><span class="grow"><b>Tell me when it changes</b><br><span class="t-small">Alert by app, SMS or voice call</span></span><span class="toggle on" role="switch" aria-checked="true"></span></section>' +
+    '<section class="card tight row"' + mk(4) + '><span class="tile-ic sm apple">' + ic('bell', 's18') + '</span><span class="grow"><b>Tell me when it changes</b><br><span class="t-small">Alert by app, SMS or voice call</span></span><button type="button" class="toggle ' + (tog(st, 'road', true) ? 'on' : '') + '" role="switch" data-tog="road" aria-checked="' + tog(st, 'road', true) + '" aria-label="Tell me when highway status changes"></button></section>' +
     '<section class="card tight"><p class="t-label">Reported by drivers · last 2 h</p><div class="stack g6" style="margin-top:8px"><div class="row t-small" style="gap:8px">' + ic('alert', 's18 c-warn') + '<span>Queue of fruit trucks at Qazigund, about 40 min wait</span></div><div class="row t-small" style="gap:8px">' + ic('check', 's18 c-good') + '<span>Banihal tunnel moving normally</span></div></div></section>' });
 
   S.weather = (st) => frame(st, { id: 'weather', tab: 'mandi', title: 'Mandi & news', sub: 'Weather · Wachi', body:
     seg('weather') +
     '<section class="card tight"' + mk(1) + '><div class="wx">' + D.weather.map(([d, i, hi, lo, r], k) => '<div class="' + (k === 0 ? 'now' : '') + '"><span class="d">' + d + '</span>' + ic(i) + '<b class="num">' + hi + '°</b><span class="t-micro num">' + lo + '°</span><span class="rain num">' + (r ? r + ' mm' : '&nbsp;') + '</span></div>').join('') + '</div></section>' +
-    '<section class="card"' + mk(2) + '><div class="row between"><p class="t-title">Best time to spray today</p>' + pillFor('good', 'Good') + '</div><p class="t-huge" style="margin:6px 0 2px">6 – 11 AM</p><div class="row wrap" style="gap:6px;margin-top:6px"><span class="chip">' + ic('wind') + 'Wind 6 km/h</span><span class="chip">' + ic('drop') + 'No rain for 20 h</span><span class="chip">' + ic('thermo') + '12–19 °C</span></div></section>' +
+    '<section class="card"' + mk(2) + '><div class="row between"><p class="t-title">Best time to spray today</p>' + pillFor('good', 'Good') + '</div><p class="t-huge" style="margin:6px 0 2px">4 – 7 PM</p><div class="row wrap" style="gap:6px;margin-top:6px"><span class="chip">' + ic('wind') + 'Wind 6 km/h</span><span class="chip">' + ic('drop') + 'No rain for 20 h</span><span class="chip">' + ic('thermo') + '12–19 °C</span></div></section>' +
     '<section class="card"' + mk(3) + '><p class="t-title">Disease & pest risk · next 3 days</p><div class="stack" style="margin-top:10px">' + [['Apple scab', 'risk', 'High · Wed', 92], ['Powdery mildew', 'warn', 'Medium', 50], ['Red spider mite', 'good', 'Low', 18]].map(([n, lv, tx, w]) => '<div><div class="row between t-small" style="margin-bottom:4px"><b style="color:var(--ink)">' + n + '</b><span class="pill ' + lv + '">' + tx + '</span></div><div class="meter ' + (lv === 'good' ? '' : lv) + '"><i style="width:' + w + '%"></i></div></div>').join('') + '</div><p class="t-micro" style="margin-top:8px">From rain, leaf wetness and temperature (scab infection model).</p></section>' +
     '<div class="banner warn"' + mk(4) + '>' + ic('hail', 's20') + '<span><b>Hail possible Monday evening.</b> Keep anti-hail nets closed from Sunday night.</span></div>' });
 
@@ -1340,14 +1413,14 @@ body { margin: 0; background: var(--page); color: var(--ink); font-family: var(-
   /* ---------- Services ---------- */
   S.services = (st) => frame(st, { id: 'services', tab: 'services', title: 'Services', sub: 'Book help for your orchard', body:
     '<div class="search">' + ic('search', 's20') + '<span class="grow">Truck, labour, expert…</span><span class="mic">' + ic('mic', 's18') + '</span></div>' +
-    '<div class="grid3"' + mk(1) + '>' + D.services.map(([id, n, i, c]) => '<button class="cat" data-go="' + (id === 'truck' ? 'truck' : id === 'labour' || id === 'spray' ? 'labour' : 'services') + '"><span class="tile-ic ' + c + '">' + ic(i) + '</span>' + n + '</button>').join('') + '</div>' +
+    '<div class="grid3"' + mk(1) + '>' + D.services.map(([id, n, i, c]) => '<button class="cat" ' + ({ truck: 'data-go="truck"', labour: 'data-go="labour"', spray: 'data-go="labour"', expert: 'data-go="dx_expert"', soil: 'data-go="lesson"', buyers: 'data-go="sell"' }[id] || 'data-act="soon"') + '><span class="tile-ic ' + c + '">' + ic(i) + '</span>' + n + '</button>').join('') + '</div>' +
     '<div class="sec-h"><h2>Your bookings</h2></div><button class="card tight row" data-go="booking"' + mk(2) + '><span class="tile-ic sky">' + ic('truck') + '</span><span class="grow"><b>Truck to Azadpur</b><br><span class="t-small">Thu 14 May · 600 boxes · Bilal Ahmad</span></span>' + pillFor('good', 'Confirmed') + '</button>' +
-    '<button class="card tight row" data-go="booking"><span class="tile-ic leaf">' + ic('spray') + '</span><span class="grow"><b>Spray team (4)</b><br><span class="t-small">Tue 12 May · 6 AM · Ali Mohammad</span></span>' + pillFor('info', 'Today') + '</button>' +
+    '<button class="card tight row" data-go="booking"><span class="tile-ic leaf">' + ic('spray') + '</span><span class="grow"><b>Spray team (4)</b><br><span class="t-small">Today · 4 PM · Ali Mohammad</span></span>' + pillFor('info', 'Today') + '</button>' +
     '<div class="banner good"' + mk(3) + '>' + ic('shield', 's18') + '<span>Every provider is ID-checked and rated by growers. Pay after the work is done.</span></div>' });
 
   S.labour = (st) => frame(st, { id: 'labour', back: true, title: 'Book a team', sub: 'Shopian · within 10 km', body:
     '<div class="chips scroll"' + mk(1) + '>' + ['Spraying', 'Pruning', 'Thinning', 'Harvest', 'Grading & packing'].map((x, i) => '<span class="chip ' + (i === 0 ? 'on' : '') + '">' + x + '</span>').join('') + '</div>' +
-    '<section class="card tight"' + mk(2) + '><div class="grid3"><div><p class="t-micro">Date</p><b>Thu 14 May</b></div><div><p class="t-micro">Start</p><b>6:00 AM</b></div><div><p class="t-micro">People</p><b>4</b></div></div><div class="divider" style="margin:10px 0"></div><div class="row t-small" style="gap:8px">' + ic('coin', 's18 c-leaf') + '<span>Usual rate in Shopian: <b>₹650–800 a day</b> per person (sample)</span></div></section>' +
+    '<section class="card tight"' + mk(2) + '><div class="grid3"><div><p class="t-micro">Date</p><b>Today</b></div><div><p class="t-micro">Start</p><b>4:00 PM</b></div><div><p class="t-micro">People</p><b>4</b></div></div><div class="divider" style="margin:10px 0"></div><div class="row t-small" style="gap:8px">' + ic('coin', 's18 c-leaf') + '<span>Usual rate in Shopian: <b>₹650–800 a day</b> per person (sample)</span></div></section>' +
     '<div class="stack"' + mk(3) + '>' + D.teams.map((tm, i) => '<section class="card tight"><div class="row top"><span class="tile-ic ' + (i === 0 ? 'leaf' : 'plain') + '" style="font:800 15px var(--f-display)">' + tm.name.split(' ').map(w => w[0]).slice(0, 2).join('') + '</span><span class="grow"><b>' + tm.name + '</b><br><span class="t-small">' + tm.size + ' people · ' + tm.dist + ' · ' + tm.langs + '</span><br><span class="t-micro">' + stars(tm.rating) + ' ' + tm.rating + ' · ' + tm.jobs + ' jobs</span></span><span style="text-align:end"><b class="num">' + money(tm.rate) + '</b><br><span class="t-micro">per person / day</span></span></div><div class="row between" style="margin-top:10px"><span class="tagrow" style="margin:0">' + tm.tags.map(x => '<span class="tag ok">' + x + '</span>').join('') + '</span><button class="btn xs" data-go="booking">Book</button></div></section>').join('') + '</div>' });
 
   S.truck = (st) => frame(st, { id: 'truck', back: true, title: 'Send apples', sub: 'Compare trucks and share loads', body:
@@ -1358,7 +1431,7 @@ body { margin: 0; background: var(--page); color: var(--ink); font-family: var(-
 
   S.booking = (st) => frame(st, { id: 'booking', back: true, title: 'Truck booking', sub: 'Booking #A-2291', body:
     '<section class="card"' + mk(1) + '><div class="row"><span class="tile-ic sky" style="font:800 15px var(--f-display)">BA</span><span class="grow"><b>Bilal Ahmad</b> · 10-wheeler<br><span class="t-small">JK-22 ●● 4417 · ' + stars(4.7) + ' 4.7 (210 trips)</span></span></div><div class="tagrow"><span class="tag ok">Licence checked</span><span class="tag ok">Truck papers checked</span><span class="tag ok">Load photos at pickup</span></div><div class="grid2" style="margin-top:12px"><button class="btn sm ghost">' + ic('phone', 's18') + ' Call</button><button class="btn sm ghost" data-go="chat">' + ic('chat', 's18') + ' Message</button></div></section>' +
-    '<section class="card"' + mk(2) + '><p class="t-title" style="margin-bottom:10px">Trip status</p><div class="tl">' + [['Booked', 'Tue 10:02 AM', 'done'], ['Loading at your orchard', 'Thu 5:00 PM · 600 boxes counted', 'done'], ['On the highway', 'Passed Qazigund 9:40 PM', 'now'], ['At Azadpur mandi', 'Expected Sat 5 AM', ''], ['Paid', 'After unloading', '']].map(([a, b, s]) => '<div class="it ' + s + '"><span class="bul">' + (s === 'done' ? ic('check') : s === 'now' ? ic('truck') : '') + '</span><div><span class="tt">' + a + '</span><br><span class="st">' + b + '</span></div></div>').join('') + '</div></section>' +
+    '<section class="card"' + mk(2) + '><p class="t-title" style="margin-bottom:10px">Trip status</p><div class="tl">' + [['Booked', 'Tue 10:02 AM', 'done'], ['Driver confirmed', 'Tue 10:15 AM · Bilal Ahmad', 'now'], ['Loading at your orchard', 'Thu 5 PM · 600 boxes', ''], ['On the highway', 'Leaves Thu 8 PM · alerts on', ''], ['At Azadpur mandi', 'Expected Sat early morning', ''], ['Paid', 'After unloading', '']].map(([a, b, s]) => '<div class="it ' + s + '"><span class="bul">' + (s === 'done' ? ic('check') : s === 'now' ? ic('clock') : '') + '</span><div><span class="tt">' + a + '</span><br><span class="st">' + b + '</span></div></div>').join('') + '</div></section>' +
     '<section class="card tight row"' + mk(3) + '><span class="tile-ic sm leaf">' + ic('wallet', 's18') + '</span><span class="grow"><b>' + money(38400) + '</b> · ₹64 per box<br><span class="t-small">Pay by UPI or cash after unloading</span></span></section>' +
     '<button class="btn block ghost">' + ic('send', 's18') + ' Share trip with my commission agent</button>' });
 
@@ -1366,16 +1439,17 @@ body { margin: 0; background: var(--page); color: var(--ink); font-family: var(-
   S.orchard = (st) => frame(st, { id: 'orchard', back: true, title: 'My orchard', sub: 'Wachi, Shopian · 25 kanal', right: '<button class="iconbtn" data-go="privacy" aria-label="Privacy">' + ic('lock') + '</button>', body:
     '<section class="card"' + mk(1) + '><div class="row between"><span class="t-label">Orchard details</span><span class="t-micro">5 of 8 added</span></div><div class="meter" style="margin:8px 0 10px"><i style="width:62%"></i></div><p class="t-small">Add a <b>soil test</b> to get a fertilizer plan made for your soil. <a class="link">Add</a></p></section>' +
     '<div class="stack"' + mk(2) + '>' + D.orchard.blocks.map(b => '<section class="card tight"><div class="row"><span class="tile-ic ' + (b.id === 'A' ? 'leaf' : 'chinar') + '">' + ic(b.id === 'A' ? 'tree' : 'grid') + '</span><span class="grow"><b>Block ' + b.id + ' · ' + b.name + '</b><br><span class="t-small">' + b.kind + ' · ' + b.kanal + ' kanal · ' + b.trees + '</span></span></div><div class="t-small" style="margin-top:8px">' + b.vars + '<br><span class="faint">' + b.root + ' · ' + b.age + '</span></div></section>').join('') + '</div>' +
-    '<div class="grid2"' + mk(3) + '>' + [['diary', 'Spray diary', 'spray', '4 sprays this season'], ['orchard', 'Costs & income', 'wallet', '₹41,600 spent'], ['orchard', 'Harvest record', 'box', '2025: 2,350 boxes'], ['privacy', 'Privacy & data', 'lock', 'You decide']].map(([g, a, i, b]) => '<button class="card tight stack g6" data-go="' + g + '"><span class="tile-ic sm leaf">' + ic(i, 's18') + '</span><b>' + a + '</b><span class="t-micro">' + b + '</span></button>').join('') + '</div>' });
+    '<div class="grid2"' + mk(3) + '>' + [['diary', 'Spray diary', 'spray', '4 sprays this season'], ['soon', 'Costs & income', 'wallet', '₹41,600 spent'], ['soon', 'Harvest record', 'box', '2025: 2,350 boxes'], ['privacy', 'Privacy & data', 'lock', 'You decide']].map(([g, a, i, b]) => '<button class="card tight stack g6" ' + (g === 'soon' ? 'data-act="soon"' : 'data-go="' + g + '"') + '><span class="tile-ic sm leaf">' + ic(i, 's18') + '</span><b>' + a + '</b><span class="t-micro">' + b + '</span></button>').join('') + '</div>' });
 
+  const DIARY = [['18 Mar · Delayed dormancy', 'hmo', 12, 'done'], ['3 Apr · Green tip (rain forecast)', 'mancozeb', 10, 'done'], ['16 Apr · Pink bud', 'metpyra', 10, 'done'], ['3 May · Petal fall', 'difeno', 10, 'done'], ['Due before Wed 13 May rain · Fruitlet', 'dodine', 10, 'now']];
   S.diary = (st) => frame(st, { id: 'diary', back: true, title: 'Spray diary', sub: '2026 season · both blocks', right: '<button class="iconbtn" aria-label="Export">' + ic('download') + '</button>', body:
-    '<div class="tl"' + mk(1) + '>' + [['18 Mar · Dormant', 'Horticultural mineral oil', 'Oil · 12 drums · ₹6,900', 'done'], ['2 Apr · Green tip', 'Captan 50% WP', 'FRAC M4 · 10 drums · ₹2,070', 'done'], ['17 Apr · Pink bud', 'Difenoconazole 25% EC', 'FRAC 3 · 10 drums · ₹1,530', 'done'], ['3 May · Petal fall', 'Mancozeb 75% WP', 'FRAC M3 · 10 drums · ₹3,120', 'done'], ['Due ~22 May · Fruitlet', 'Choose from schedule', 'Avoid M3 again', 'now']].map(([a, b, c, s]) => '<div class="it ' + s + '"><span class="bul">' + (s === 'done' ? ic('check') : ic('clock')) + '</span><div class="card tight" style="' + (s === 'now' ? 'border-style:dashed' : '') + '"><span class="t-micro">' + a + '</span><br><b>' + b + '</b><br><span class="t-small">' + c + '</span></div></div>').join('') + '</div>' +
+    '<div class="tl"' + mk(1) + '>' + DIARY.map(([d, id, drums, s2]) => { const p = D.products[id], n = p.dose ? Math.ceil(p.dose * 2 * drums / p.amt) : 0; return '<div class="it ' + s2 + '"><span class="bul">' + (s2 === 'done' ? ic('check') : ic('clock')) + '</span><div class="card tight" style="' + (s2 === 'now' ? 'border-style:dashed' : '') + '"><span class="t-micro">' + d + '</span><br><b>' + (s2 === 'now' ? 'Pick one from the fruitlet list' : p.name) + '</b><br><span class="t-small">' + (s2 === 'now' ? 'Not Difenoconazole again · spray before the rain' : p.group + ' · ' + drums + ' drums · ' + n + ' × ' + p.size + ' · ' + money(n * p.price)) + '</span></div></div>'; }).join('') + '</div>' +
     '<div class="banner info"' + mk(2) + '>' + ic('file', 's18') + '<span>Your diary is a ready spray record for buyers, exporters and relief claims. Download it as PDF any time.</span></div>' +
     '<button class="btn block">' + ic('plus', 's18') + ' Add a spray</button>' });
 
   S.privacy = (st) => frame(st, { id: 'privacy', back: true, title: 'Your data, your choice', body:
     '<p class="t-small">You control what Baghbaan keeps. Turn things off any time. Advice still works.</p>' +
-    '<div class="card tight hr-list"' + mk(1) + '>' + [['Use my village for weather and alerts', 'Needed for local advice', true, true], ['Share pest sightings to warn neighbours', 'Only counts by area, never your name', true, false], ['Let dealers send me offers', 'Off by default', false, false], ['Help research (anonymous)', 'Universities improve the Doctor', false, false]].map(([a, b, on, lock]) => '<div class="listrow"><span class="grow"><span class="tt" style="font-size:14.5px">' + a + '</span><br><span class="st">' + b + '</span></span>' + (lock ? '<span class="t-micro">' + ic('lock', 's16') + '</span>' : '') + '<span class="toggle ' + (on ? 'on' : '') + '" role="switch" aria-checked="' + on + '"></span></div>').join('') + '</div>' +
+    '<div class="card tight hr-list"' + mk(1) + '>' + [['Use my village for weather and alerts', 'Needed for local advice', true, true], ['Share pest sightings to warn neighbours', 'Only counts by area, never your name', true, false], ['Let dealers send me offers', 'Off by default', false, false], ['Help research (anonymous)', 'Universities improve the Doctor', false, false]].map(([a, b, on, lock], k) => '<div class="listrow"><span class="grow"><span class="tt" style="font-size:14.5px">' + a + '</span><br><span class="st">' + b + '</span></span>' + (lock ? '<span class="t-micro" aria-hidden="true">' + ic('lock', 's16') + '</span>' : '') + '<button type="button" class="toggle ' + (tog(st, 'p' + k, on) ? 'on' : '') + '" role="switch" data-tog="p' + k + '"' + (lock ? ' aria-disabled="true"' : '') + ' aria-checked="' + tog(st, 'p' + k, on) + '" aria-label="' + a + '"></button></div>').join('') + '</div>' +
     '<section class="card tight"' + mk(2) + '><p class="t-label">We never ask for</p><div class="stack g6" style="margin-top:8px">' + ['Aadhaar number', 'Bank passwords or OTPs', 'Land papers or khasra numbers'].map(x => '<div class="row t-small" style="gap:8px">' + ic('x', 's18 c-risk') + '<span style="color:var(--ink)">' + x + '</span></div>').join('') + '</div></section>' +
     '<div class="grid2"' + mk(3) + '><button class="btn ghost sm">' + ic('download', 's18') + ' Get my data</button><button class="btn ghost sm" style="color:var(--risk)">' + ic('trash', 's18') + ' Delete all</button></div>' });
 
@@ -1387,15 +1461,15 @@ body { margin: 0; background: var(--page); color: var(--ink); font-family: var(-
 
   S.offline = (st) => frame(Object.assign({}, st, { online: false }), { id: 'offline', tab: 'home', title: 'Baghbaan', sub: 'Offline mode', body:
     '<section class="card"' + mk(1) + '><div class="row"><span class="tile-ic sky">' + ic('clock') + '</span><span class="grow"><b>Your question is saved</b><br><span class="t-small">"Spots on leaves" will go to the expert when the internet is back.</span></span></div></section>' +
-    '<p class="t-label">Need help now?</p><div class="stack"' + mk(2) + '><div class="opt"><span class="tile-ic sm leaf">' + ic('sms', 's18') + '</span><span class="grow"><span class="tt">Send by SMS</span><br><span class="st">Text <b>SCAB</b> or <b>RATE</b> to the helpline number</span></span></div><div class="opt"><span class="tile-ic sm leaf">' + ic('phone', 's18') + '</span><span class="grow"><span class="tt">Call the free helpline</span><br><span class="st">Voice menu in Kashmiri, Urdu, Hindi</span></span></div></div>' +
+    '<p class="t-label">Need help now?</p><div class="stack"' + mk(2) + '><div class="opt"><span class="tile-ic sm leaf">' + ic('sms', 's18') + '</span><span class="grow"><span class="tt">Send by SMS</span><br><span class="st">Text <b>SPRAY</b>, <b>RATE</b> or <b>ROAD</b> to the helpline number</span></span></div><div class="opt"><span class="tile-ic sm leaf">' + ic('phone', 's18') + '</span><span class="grow"><span class="tt">Call the free helpline</span><br><span class="st">Voice menu in Kashmiri, Urdu, Hindi</span></span></div></div>' +
     '<p class="t-label">Saved on this phone</p><div class="grid2"' + mk(3) + '>' + [['book', '18 lessons'], ['bug', 'Pest library'], ['cal', 'Spray schedule'], ['chart', 'Rates from 7:10 AM']].map(([i, x]) => '<div class="card tight row"><span class="tile-ic sm plain">' + ic(i, 's18') + '</span><b style="font-size:13.5px">' + x + '</b></div>').join('') + '</div>' });
 
   S.chat = (st) => frame(st, { id: 'chat', back: true, title: 'Baghbaan helpline', sub: 'Chat · also works by SMS', bodyCls: 'chatsc', body:
     '<div class="stack" style="gap:8px"' + mk(1) + '>' +
     '<div class="bubble out">spray<span class="tm">7:02</span></div>' +
-    '<div class="bubble in">Wachi, Shopian: <b>petal fall</b> stage. Scab risk is <b>high on Wednesday</b>.<br>Reply 1 for spray options, 2 for mandi rates, 3 to talk to an expert.<span class="tm">7:02</span></div>' +
+    '<div class="bubble in">Wachi, Shopian: <b>fruitlet</b> stage. Scab risk is <b>high on Wednesday</b>.<br>Reply 1 for spray options, 2 for mandi rates, 3 to talk to an expert.<span class="tm">7:02</span></div>' +
     '<div class="bubble out">1<span class="tm">7:03</span></div>' +
-    '<div class="bubble in">Petal-fall options from the SKUAST-K list: Dodine 65 WP, Difenoconazole 25 EC or Captan 50 WP. You used Mancozeb last time, so choose another group.<span class="tm">7:03</span></div>' +
+    '<div class="bubble in">Fruitlet options from the SKUAST-K 2026 guide, per 100 L: Dodine 65 WP 60 g, Fluxapyroxad + Pyraclostrobin SC 20 ml, or Pyraclostrobin + Boscalid WG 30 g. You used Difenoconazole last time, so pick another.<span class="tm">7:03</span></div>' +
     '<div class="bubble out row" style="gap:8px">' + ic('play', 's16') + '<span style="display:flex;gap:2px;align-items:center">' + [6, 12, 9, 16, 10, 14, 7, 12, 15, 8].map(h => '<i style="width:3px;height:' + h + 'px;border-radius:2px;background:currentColor;opacity:.85"></i>').join('') + '</span> 0:09<span class="tm">7:04</span></div>' +
     '<div class="bubble in">Voice note received in Kashmiri. An expert will call you back within 2 hours.<span class="tm">7:04</span></div></div>' +
     '<div class="quick"' + mk(2) + '><span>1 · Spray options</span><span>2 · Mandi rates</span><span>3 · Expert</span></div>',
@@ -1415,14 +1489,18 @@ body { margin: 0; background: var(--page); color: var(--ink); font-family: var(-
   G.APP = { S, dxState, frame, consoleView, art, level };
 })(typeof window !== 'undefined' ? window : globalThis);
 
-/* Baghbaan prototype — live demo controller (navigation, answers, toasts, chart hover, device scaling). */
+/* Baghbaan prototype — live demo controller (navigation, answers, cart, toasts, chart hover, device fitting). */
 (function () {
   const { S, dxState } = window.APP;
-  const A = window.ART, ic = A.ic;
+  const A = window.ART, D = window.DATA, ic = A.ic;
   const dev = document.getElementById('device');
-  const st = { lang: 'en', route: 'home', stack: [], dx: { area: null, answers: {} }, season: 'spring', online: true, pid: 'dodine', chrome: true, toast: null, sheet: null };
-  try { const l = localStorage.getItem('bb-lang'); if (l) st.lang = l; } catch (e) { /* storage unavailable */ }
+  const guide = document.getElementById('guide');
+  const PHONE = '(max-width: 560px), (max-height: 500px) and (pointer: coarse)';
+  const st = { lang: 'en', route: 'home', stack: [], dx: { area: null, answers: {} }, season: 'spring', online: true, pid: 'dodine', chrome: true, toast: null, sheet: null, tourChip: true, cart: Object.fromEntries(D.kit), qty: {}, toggles: {} };
+  try { const l = localStorage.getItem('bb-lang'); if (l && D.T[l]) st.lang = l; } catch (e) { /* storage unavailable */ }
 
+  const own = (o, k) => Object.prototype.hasOwnProperty.call(o, k);
+  const isScreen = (id) => id === 'home_autumn' || own(S, id);
   const toId = (h) => h.replace(/^#/, '').replace(/-/g, '_');
   const toHash = (id) => '#' + id.replace(/_/g, '-');
   const TOUR = [
@@ -1436,73 +1514,119 @@ body { margin: 0; background: var(--page); color: var(--ink); font-family: var(-
     ['Low connectivity', [['offline', 'Offline mode'], ['chat', 'SMS / chat helpline']]],
     ['Seasons', [['home', 'Home in May'], ['home_autumn', 'Home in November']]]
   ];
+  const sampleDx = () => ({ area: 'leaves', answers: { velvety: 'yes', fruit_too: 'yes' }, sev: 2 });
 
-  function render() {
-    const id = st.route === 'home_autumn' ? 'home' : st.route;
-    const view = Object.assign({}, st, { season: st.route === 'home_autumn' ? 'autumn' : 'spring' });
-    let html = (S[id] || S.home)(view);
+  /* ---------- rendering ---------- */
+  function focusKey(el) {
+    if (!el || !dev.contains(el)) return null;
+    for (const a of ['data-go', 'data-act', 'data-ans', 'data-sev', 'data-tog', 'data-who', 'data-ship', 'data-pay', 'data-lang', 'data-area', 'aria-label']) if (el.hasAttribute(a)) return '[' + a + '="' + CSS.escape(el.getAttribute(a)) + '"]';
+    return null;
+  }
+  function render(opts) {
+    opts = opts || {};
+    const id = own(S, st.route) ? st.route : 'home';
+    let html;
+    try { html = S[id](st); } catch (err) { console.error(err); st.toast = 'This screen is not ready in the demo'; html = S.home(st); }
     if (st.sheet === 'tour') html = html.replace(/<\/div>$/, tourSheet() + '</div>');
+    const oldSc = dev.querySelector('.sc'), keep = opts.keepScroll && oldSc ? oldSc.scrollTop : 0;
+    const fk = opts.focus === 'same' ? focusKey(document.activeElement) : null;
     dev.innerHTML = html;
+    const sc = dev.querySelector('.sc'); if (sc) sc.scrollTop = keep;
     const scr = dev.querySelector('.screen');
-    if (scr && (id === 'home') && window.innerWidth < 900) {
-      const sc = scr.querySelector('.sc');
-      sc.insertAdjacentHTML('afterbegin', '<button class="chip" data-act="tour" style="align-self:flex-start;border-style:dashed">' + ic('grid') + 'Demo tour: jump to any screen</button>');
-    }
+    if (st.sheet === 'tour' && scr) {
+      scr.querySelectorAll(':scope > :not(.scrim)').forEach(n => { n.inert = true; });
+      const c = scr.querySelector('.sheet [data-act="close-sheet"]'); if (c) c.focus();
+    } else if (fk && dev.querySelector(fk)) dev.querySelector(fk).focus();
+    else if (opts.focus === 'title') { const h = dev.querySelector('.ab h1'); if (h) { h.tabIndex = -1; h.focus({ preventScroll: true }); } }
     wireCharts();
-    document.querySelectorAll('[data-guide]').forEach(b => b.classList.toggle('on', b.dataset.guide === st.route));
-    if (st.toast) { clearTimeout(render.t); render.t = setTimeout(() => { st.toast = null; render(); }, 2600); }
+    if (guide) guide.querySelectorAll('[data-guide]').forEach(b => b.classList.toggle('on', b.dataset.guide === (st.route === 'home' && st.season === 'autumn' ? 'home_autumn' : st.route)));
+    if (st.toast) {
+      clearTimeout(render.t);
+      render.t = setTimeout(() => { st.toast = null; const t = dev.querySelector('.toast'); if (t) t.remove(); }, 2800);
+    }
   }
   function tourSheet() {
-    return '<div class="scrim" data-act="close-sheet"><div class="sheet" role="dialog" aria-label="Demo tour" data-stop><span class="grab"></span><div class="row between"><p class="t-title">Demo tour</p><button class="iconbtn" data-act="close-sheet" aria-label="Close">' + ic('x') + '</button></div>' +
+    return '<div class="scrim" data-act="close-sheet"><div class="sheet" role="dialog" aria-modal="true" aria-label="Demo tour" data-stop><span class="grab"></span><div class="row between"><p class="t-title">Demo tour</p><button class="iconbtn" data-act="close-sheet" aria-label="Close">' + ic('x') + '</button></div>' +
       TOUR.map(([g, items]) => '<div><p class="t-label" style="margin-bottom:6px">' + g + '</p><div class="chips">' + items.map(([id, n]) => '<button class="chip" data-go="' + id + '">' + n + '</button>').join('') + '</div></div>').join('') + '</div></div>';
   }
   function go(id, push) {
-    if (id === st.route && !st.sheet) return;
+    if (!isScreen(id)) id = 'home';
+    if (id === 'home_autumn') { st.season = 'autumn'; id = 'home'; }
+    else if (id === 'home' && push !== false && st.sheet === 'tour') st.season = 'spring';
+    if (id === st.route && !st.sheet) { if (id === 'home') render({ focus: 'title' }); return; }
     if (push !== false && st.route !== id) st.stack.push(st.route);
-    st.route = id; st.sheet = null;
+    st.route = id; st.sheet = null; st.toast = null;
     if (['home', 'shop', 'learn', 'mandi', 'services'].includes(id)) st.stack = [];
-    try { history.replaceState(null, '', toHash(id)); } catch (e) { /* ignore */ }
-    render();
-    const sc = dev.querySelector('.sc'); if (sc) sc.scrollTop = 0;
+    try { history.replaceState(null, '', toHash(id === 'home' && st.season === 'autumn' ? 'home_autumn' : id)); } catch (e) { /* ignore */ }
+    render({ focus: 'title' });
   }
   function back() {
-    if (st.route === 'dx_q') {
-      const keys = Object.keys(st.dx.answers);
-      if (keys.length) { delete st.dx.answers[keys[keys.length - 1]]; render(); return; }
-    }
+    const keys = Object.keys(st.dx.answers || {});
+    if (st.route === 'dx_q' && keys.length) { delete st.dx.answers[keys[keys.length - 1]]; return render({ focus: 'title' }); }
+    if (st.route === 'dx_sev' && keys.length) delete st.dx.answers[keys[keys.length - 1]];
     go(st.stack.pop() || 'home', false);
   }
   function answer(q, a) {
     st.dx.answers[q] = a;
-    const ds = dxState(st);
-    if (ds.done) go('dx_sev'); else { render(); const sc = dev.querySelector('.sc'); if (sc) sc.scrollTop = 0; }
+    if (dxState(st).done) go('dx_sev'); else render({ focus: 'title' });
   }
+  function setLang(l) {
+    if (!D.T[l]) return;
+    st.lang = l;
+    try { localStorage.setItem('bb-lang', l); } catch (x) { /* ignore */ }
+    if (guide) guide.querySelectorAll('[data-glang]').forEach(x => x.classList.toggle('on', x.dataset.glang === l));
+    render({ keepScroll: true, focus: 'same' });
+  }
+  function toast(msg) { st.toast = msg; render({ keepScroll: true, focus: 'same' }); }
 
   dev.addEventListener('click', (e) => {
-    const el = e.target.closest('[data-go],[data-back],[data-lang],[data-area],[data-ans],[data-sev],[data-act],[data-mq],.toggle,[data-stop]');
+    const el = e.target.closest('[data-go],[data-back],[data-lang],[data-area],[data-ans],[data-sev],[data-who],[data-ship],[data-pay],[data-act],[data-mq],[data-tog],[data-stop]');
     if (!el) return;
     if (el.hasAttribute('data-stop') && !e.target.closest('[data-go],[data-act]')) return;
     if (el.dataset.pid) st.pid = el.dataset.pid;
     if (el.hasAttribute('data-back')) return back();
-    if (el.dataset.lang) { st.lang = el.dataset.lang; try { localStorage.setItem('bb-lang', st.lang); } catch (x) { /* ignore */ } return render(); }
+    if (el.dataset.lang) return setLang(el.dataset.lang);
     if (el.dataset.area) { st.dx = { area: el.dataset.area, answers: {} }; return go('dx_q'); }
     if (el.dataset.ans) return answer(el.dataset.q, el.dataset.ans);
-    if (el.dataset.sev) { st.dx.sev = +el.dataset.sev; return render(); }
-    if (el.hasAttribute('data-mq')) { st.toast = 'Thanks. This helps growers near you.'; return render(); }
-    if (el.classList.contains('toggle')) { el.classList.toggle('on'); el.setAttribute('aria-checked', el.classList.contains('on')); return; }
+    if (el.dataset.sev) { st.dx.sev = +el.dataset.sev; return render({ keepScroll: true, focus: 'same' }); }
+    if (el.dataset.who) { st.who = +el.dataset.who; return render({ keepScroll: true, focus: 'same' }); }
+    if (el.dataset.ship) { st.ship = +el.dataset.ship; return render({ keepScroll: true, focus: 'same' }); }
+    if (el.dataset.pay) { st.pay = +el.dataset.pay; return render({ keepScroll: true, focus: 'same' }); }
+    if (el.hasAttribute('data-mq')) return toast('Thanks. This helps growers near you.');
+    if (el.dataset.tog) {
+      if (el.getAttribute('aria-disabled') === 'true') return toast('Needed for local advice. You can delete your village under Delete all.');
+      st.toggles[el.dataset.tog] = el.getAttribute('aria-checked') !== 'true';
+      return render({ keepScroll: true, focus: 'same' });
+    }
     if (el.dataset.go) {
       if (el.dataset.go === 'dx_area') st.dx = { area: null, answers: {} };
-      if (el.dataset.go === 'dx_result' && !st.dx.area) st.dx = { area: 'leaves', answers: { velvety: 'yes', fruit_too: 'yes' }, sev: 2 };
+      if ((el.dataset.go === 'dx_result' || el.dataset.go === 'dx_sev') && !st.dx.area) st.dx = sampleDx();
       return go(el.dataset.go);
     }
     const act = el.dataset.act;
-    const toasts = { 'save-diary': 'Saved to your spray diary', 'send-expert': 'Sent. An expert will reply in about 2 hours', 'add-cart': 'Added 5 packs to your order', 'place-order': 'Order placed. Pickup ready at 4 PM' };
+    const pid = own(D.products, st.pid) ? st.pid : 'dodine';
     if (act === 'tour') { st.sheet = 'tour'; return render(); }
-    if (act === 'close-sheet') { st.sheet = null; return render(); }
-    if (toasts[act]) { st.toast = toasts[act]; if (act === 'add-cart') st.cartCount = 4; return render(); }
+    if (act === 'close-sheet') { st.sheet = null; render(); const t = dev.querySelector('.tour-chip'); if (t) t.focus(); return; }
+    if (act === 'qty+' || act === 'qty-') {
+      const cur = st.qty[pid] || +((dev.querySelector('.stepper .num') || {}).textContent) || 1;
+      st.qty[pid] = Math.max(1, cur + (act === 'qty+' ? 1 : -1));
+      return render({ keepScroll: true, focus: 'same' });
+    }
+    if (act === 'add-cart') {
+      const q = st.qty[pid] || +((dev.querySelector('.stepper .num') || {}).textContent) || 1;
+      st.cart[pid] = q;
+      return toast(q + ' × ' + D.products[pid].name + ' in your order');
+    }
+    if (act === 'kit') { st.cart = Object.fromEntries(D.kit); return go('cart'); }
+    if (act === 'place-order') { st.cart = {}; return toast('Order placed. Pickup ready at 3 PM today'); }
+    const toasts = { 'save-diary': 'Saved to your spray diary', 'send-expert': 'Sent. An expert will reply in about 2 hours', soon: 'Booking for this opens in the next version of the demo', feedback: 'Thanks. Experts use this to improve the Doctor' };
+    if (toasts[act]) return toast(toasts[act]);
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && st.sheet) { st.sheet = null; render(); const t = dev.querySelector('.tour-chip'); if (t) t.focus(); }
   });
 
-  /* chart hover: crosshair + tooltip */
+  /* chart hover: crosshair + tooltip, positioned in % so device zoom does not shift it */
   function wireCharts() {
     dev.querySelectorAll('svg.chart[data-chart]').forEach(svg => {
       const m = JSON.parse(svg.dataset.chart), vals = svg.dataset.values.split(',').map(Number);
@@ -1519,7 +1643,7 @@ body { margin: 0; background: var(--page); color: var(--ink); font-family: var(-
         cross.setAttribute('x1', x); cross.setAttribute('x2', x); cross.setAttribute('visibility', 'visible');
         dot.setAttribute('cx', x); dot.setAttribute('cy', y); dot.setAttribute('visibility', 'visible');
         tip.hidden = false; tip.textContent = day(i) + ' · ₹' + vals[i] + ' /kg';
-        tip.style.left = (x * r.width / m.W) + 'px'; tip.style.top = (y * r.height / m.H) + 'px';
+        tip.style.left = (x / m.W * 100) + '%'; tip.style.top = (y / m.H * 100) + '%';
       };
       const leave = () => { cross.setAttribute('visibility', 'hidden'); dot.setAttribute('visibility', 'hidden'); tip.hidden = true; };
       svg.addEventListener('pointermove', move); svg.addEventListener('pointerleave', leave);
@@ -1527,34 +1651,42 @@ body { margin: 0; background: var(--page); color: var(--ink); font-family: var(-
   }
 
   /* desktop guide */
-  const guide = document.getElementById('guide');
   const gl = document.getElementById('glogo'); if (gl) gl.innerHTML = A.logo(48);
   if (guide) {
     guide.querySelector('.tour').innerHTML = TOUR.map(([g, items]) => '<div><p class="t-label" style="margin-bottom:6px">' + g + '</p><div class="chips">' + items.map(([id, n]) => '<button class="chip" data-guide="' + id + '">' + n + '</button>').join('') + '</div></div>').join('');
     guide.addEventListener('click', (e) => {
       const b = e.target.closest('[data-guide],[data-glang]'); if (!b) return;
-      if (b.dataset.glang) { st.lang = b.dataset.glang; try { localStorage.setItem('bb-lang', st.lang); } catch (x) { /* ignore */ } guide.querySelectorAll('[data-glang]').forEach(x => x.classList.toggle('on', x === b)); return render(); }
+      if (b.dataset.glang) return setLang(b.dataset.glang);
       const id = b.dataset.guide;
       if (id === 'dx_area') st.dx = { area: null, answers: {} };
-      go(id);
+      if (['dx_q', 'dx_sev', 'dx_result'].includes(id) && !st.dx.area) st.dx = sampleDx();
+      if (id === 'home') st.season = 'spring';
+      st.sheet = 'x'; go(id); st.sheet = null;
     });
     guide.querySelectorAll('[data-glang]').forEach(x => x.classList.toggle('on', x.dataset.glang === st.lang));
   }
 
-  /* fit the device to short desktop windows */
+  /* fit the framed device to short desktop windows; phones get the full-bleed app */
   function fit() {
-    if (window.innerWidth <= 560) { dev.style.zoom = ''; return; }
+    if (window.matchMedia(PHONE).matches) { dev.style.zoom = ''; return; }
     const z = Math.min(1, (window.innerHeight - 40) / 784);
     dev.style.zoom = z < 1 ? z.toFixed(3) : '';
   }
   window.addEventListener('resize', fit);
-  window.addEventListener('hashchange', () => { const id = toId(location.hash); if (id && (S[id] || id === 'home_autumn') && id !== st.route) go(id); });
-
-  const start = toId(location.hash || '');
-  if (start && (S[start] || start === 'home_autumn')) {
-    st.route = start;
-    if (start.startsWith('dx_') && start !== 'dx_area' && start !== 'dx_photo' && start !== 'dx_expert') st.dx = { area: 'leaves', answers: start === 'dx_q' ? {} : { velvety: 'yes', fruit_too: 'yes' }, sev: 2 };
+  function openFromHash() {
+    const id = toId(location.hash || '');
+    if (!id || !isScreen(id)) return false;
+    if (['dx_q', 'dx_sev', 'dx_result'].includes(id) && !st.dx.area) st.dx = id === 'dx_q' ? { area: 'leaves', answers: {} } : sampleDx();
+    if (id === 'home_autumn') { st.season = 'autumn'; st.route = 'home'; } else st.route = id;
+    return true;
   }
+  window.addEventListener('hashchange', () => {
+    const id = toId(location.hash || '');
+    const cur = st.route === 'home' && st.season === 'autumn' ? 'home_autumn' : st.route;
+    if (id && isScreen(id) && id !== cur) { if (['dx_q', 'dx_sev', 'dx_result'].includes(id) && !st.dx.area) st.dx = sampleDx(); st.sheet = 'x'; go(id); st.sheet = null; }
+  });
+
+  openFromHash();
   fit(); render();
 })();
 

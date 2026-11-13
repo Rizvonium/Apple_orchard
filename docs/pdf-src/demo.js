@@ -46,7 +46,7 @@
     'Today a grower asks the dealer what to spray, hears prices from the commission agent, follows the highway on WhatsApp and phones around for trucks and labour. Baghbaan puts all of it in one place, built around the first question every grower has: what is wrong with my trees, and what do I do?',
     '<div class="cols c3" style="margin-top:16px">' + pillars.map(([i, h, p], k) => '<div class="box' + (k === 0 ? ' mist' : '') + '"><h3><span class="tile-ic sm ' + (k === 0 ? 'apple' : 'leaf') + '">' + ic(i, 's18') + '</span>' + h + '</h3><p>' + p + '</p></div>').join('') + '</div>' +
     '<p class="kicker" style="margin-top:18px">How the parts work together</p><div class="flow">' +
-    [['Spot a problem', 'Home alert or own eyes'], ['Doctor finds it', '2–5 Yes / No questions'], ['Buy the right spray', 'Rotated group, exact dose'], ['Book a spray team', 'Verified, rated'], ['Saved to diary', 'Reused next time'], ['Sell at best mandi', 'Net price after freight']].map(([a, b], i) => (i ? arrow : '') + '<div class="st"><b>' + a + '</b>' + b + '</div>').join('') + '</div>'));
+    [['Spot a problem', 'Home alert or own eyes'], ['Doctor finds it', '2–6 Yes / No questions'], ['Buy the right spray', 'Rotated group, exact dose'], ['Book a spray team', 'Verified, rated'], ['Saved to diary', 'Reused next time'], ['Sell at best mandi', 'Net price after freight']].map(([a, b], i) => (i ? arrow : '') + '<div class="st"><b>' + a + '</b>' + b + '</div>').join('') + '</div>'));
 
   /* 3 who */
   const persona = (ini, col, name, meta, rows) => '<div class="box persona"><div class="who"><span class="av" style="background:' + col[0] + ';color:' + col[1] + '">' + ini + '</span><div><h3 style="font:700 17px var(--f-display)">' + name + '</h3><span class="meta">' + meta + '</span></div></div><dl>' + rows.map(([a, b]) => '<dt>' + a + '</dt><dd>' + b + '</dd>').join('') + '</dl></div>';
@@ -99,7 +99,7 @@
   P.push(page('Seasons and languages', 'The same home screen in May, in November and in three languages',
     'Content follows the orchard calendar and the language follows the grower. Urdu and Kashmiri modes switch the whole layout to right-to-left.',
     '<div class="phones" style="gap:22px">' +
-    shot('home', {}, { zoom: .54 }, cap('A', 'May · petal fall', 'Scab risk, petal-fall spray, bees during bloom.', 205)) +
+    shot('home', {}, { zoom: .54 }, cap('A', 'May · fruitlet', 'Scab risk before rain, the fruitlet spray, a bee question.', 205)) +
     shot('home', { season: 'autumn' }, { zoom: .54 }, cap('B', 'November · leaf fall', 'Urea on leaves against next year\'s scab, frost alerts, CA storage space.', 205)) +
     shot('home', { lang: 'ur' }, { zoom: .54 }, cap('C', 'Urdu', 'Right-to-left layout, Nastaliq type, Urdu numbers kept in Western digits for prices.', 205)) +
     shot('home', { lang: 'hi' }, { zoom: .54 }, cap('D', 'Hindi', 'For non-Kashmiri workers, traders and family members who help.', 205)) + '</div>'));
@@ -118,7 +118,7 @@
       ['Likely cause, with the reasons', 'The answers that led here are listed, so the grower can see why. Match strength is shown honestly.'],
       ['Urgency from the weather', 'The result knows tomorrow\'s rain. Acting before it is what matters most for scab.'],
       ['Steps in plain words', 'Personal: it knows the last spray from the diary and warns against repeating the same fungicide group.'],
-      ['Products that fit', 'Only products with a label claim for apple and on the university schedule. One tap to buy from a licensed dealer.'],
+      ['Products that fit', 'Only products on the SKUAST-K 2026 guide for this stage, with a label claim for apple. One tap to buy from a licensed dealer.'],
       ['Expert and diary', 'Escalate with all answers attached, or save the case to the spray diary. "Could also be" covers look-alikes.']]) + '</div>'));
 
   /* 10 doctor 3 */
@@ -139,9 +139,9 @@
     'The Doctor is a small, auditable model, not a black box. Experts write the questions and how likely each answer is for each problem. The app does the arithmetic.',
     '<div class="cols c2" style="margin-top:14px;gap:28px"><div class="stack g14">' + notes([
       ['Start from what is common now', 'Each problem has a starting score for the season, altitude and recent reports nearby. In May, scab leads on leaves.'],
-      ['Update with every answer', 'A Yes or No multiplies each problem\'s score by how often that symptom appears with it (naive Bayes). "Not sure" changes nothing.'],
-      ['Ask the most useful next question', 'The app picks the question that splits the remaining problems best (largest expected information gain), so most cases end in 2–4 questions.'],
-      ['Stop, or hand over', 'It stops when one cause passes 90%, and hands over to an expert when answers conflict or nothing fits.'],
+      ['Update with every answer', 'A Yes or No multiplies each problem\'s score by how often that symptom appears with it (naive Bayes). "Not sure" leaves the scores as they are.'],
+      ['Ask the most useful next question', 'The app picks the question that splits the remaining problems best (largest expected information gain). Clear cases end in 2–3 questions; the most it asks is 6.'],
+      ['Stop, or hand over', 'It stops when one cause passes 90% after two real answers. If the answers do not point anywhere (below 35%), it says so and offers a photo check or an expert instead of a guess.'],
       ['Learn from every case', 'Expert confirmations and photo labels tune the scores each season. Every version of the question bank is signed off by the content partner.']], true) + '</div>' +
     '<div><p class="kicker">Worked example from this demo · leaves, mid-May</p><table class="t"><thead><tr><th>Possible cause</th><th class="num">Start</th><th class="num">After "velvety spots: Yes"</th><th class="num">After "spots on fruit: Yes"</th></tr></thead><tbody>' +
     rowsC.map(c => '<tr><td>' + names[c] + '</td>' + cell(pr(ds0, c)) + cell(pr(ds1, c)) + cell(pr(ds2, c)) + '</tr>').join('') + '</tbody></table>' +
@@ -152,7 +152,7 @@
   P.push(page('Buy · 1', 'A shop that knows the orchard',
     'The shop opens on a kit matched to the stage, the orchard size and the last spray. Products are sorted by problem, not by brand.',
     '<div class="phones">' +
-    shot('shop', {}, {}, cap(1, 'Made for your orchard', 'Kit for petal fall, sized for 25 kanal, rotated away from the last fungicide group.')) +
+    shot('shop', {}, {}, cap(1, 'Made for your orchard', 'Fruitlet kit sized for 25 kanal, rotated away from the fungicide used last time.')) +
     shot('shop_list', {}, {}, cap(2, 'Filtered by problem and stage', 'Each card shows the resistance group and the label claim, and greys out the group used last time.')) +
     shot('product', {}, {}, cap(3, 'Compare brands of the same medicine', 'Price per pack across licensed dealers, the dose for the grower\'s drums, safety and verified reviews.')) + '</div>'));
 
@@ -170,7 +170,7 @@
     '<div class="phones" style="gap:22px">' +
     shot('learn', {}, { zoom: .54 }, cap(1, 'For this season', 'Thinning, the 20-leaf mite check, safe spraying near bees.', 205)) +
     shot('lesson', {}, { zoom: .54 }, cap(2, 'Step by step', 'Soil sampling in four picture steps, with one-tap booking of a soil test.', 205)) +
-    shot('library', {}, { zoom: .54 }, cap(3, 'Pests & diseases', 'Every problem with its season, look-alikes and what to do.', 205)) +
+    shot('library', {}, { zoom: .54 }, cap(3, 'Pests & diseases', 'Each problem with the part it attacks and its season.', 205)) +
     shot('calendar', {}, { zoom: .54 }, cap(4, 'Orchard year', 'Month by month, adjusted for higher and lower belts.', 205)) + '</div>'));
 
   /* 15 mandi */
@@ -248,7 +248,7 @@
     '', '<div class="cols c3" style="margin-top:14px">' +
     '<div class="box"><h3>' + ic('check', 's18 c-good') + 'Working in the clickable demo</h3><ul><li>All 34 screens and navigation between them</li><li>The Orchard Doctor engine: real scoring and question choice for leaves, fruit, flowers, bark and roots</li><li>Language switch with right-to-left Urdu and Kashmiri modes</li><li>Chart hover, toasts, bookings and booking states</li></ul></div>' +
     '<div class="box"><h3>' + ic('info', 's18 c-sky') + 'Sample data</h3><ul><li>All names, providers, prices, mandi rates, freight, headlines and reviews</li><li>Weather, disease risk and highway status</li><li>Likelihood values in the question bank</li><li>Product brands (shown as Brand A, B, C)</li></ul></div>' +
-    '<div class="box"><h3>' + ic('alert', 's18 c-warn') + 'To verify before launch</h3><ul><li>Every dose and product choice against the current SKUAST-K spray schedule and product labels</li><li>Kashmiri voice recordings by native speakers</li><li>Legal review: pesticide sales licensing, DPDP consent, platform-worker rules</li><li>The name "Baghbaan" (trademark search)</li></ul></div></div>' +
+    '<div class="box"><h3>' + ic('alert', 's18 c-warn') + 'To verify before launch</h3><ul><li>Doses now follow the SKUAST-K 2026 guide, read from a copy of the booklet: check against the printed booklet and product labels</li><li>Kashmiri voice recordings by native speakers</li><li>Legal review: pesticide sales licensing, DPDP consent, platform-worker rules</li><li>The name "Baghbaan" (trademark search)</li></ul></div></div>' +
     '<div class="box mist" style="margin-top:16px"><h3>' + ic('file', 's18') + 'Companion documents</h3><p>The research and integration plan covers the market, the data sources and APIs, the technologies, datasets, regulations, competitors and partners in detail.' + (DEMO_URL ? ' Clickable demo: <b>' + DEMO_URL + '</b>.' : '') + ' Source code: <b>prototype/</b> in the project repository.</p></div>'));
 
   /* 24 thanks */

@@ -20,7 +20,8 @@ def build():
     (ROOT / "dist").mkdir(exist_ok=True)
     (ROOT / "dist" / "artifact.html").write_text(body, encoding="utf-8")
     head = ('<!doctype html>\n<html lang="en">\n<meta charset="utf-8">\n'
-            '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n')
+            '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n'
+            '<style>html { box-sizing: border-box; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }</style>\n')
     (ROOT / "index.html").write_text(head + body + "\n</html>\n", encoding="utf-8")
     print("built", ROOT / "index.html", "and", ROOT / "dist" / "artifact.html")
 

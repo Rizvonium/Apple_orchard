@@ -336,14 +336,14 @@
 
   /* ---------- area map (pest reports) ---------- */
   function areaMap(w, h, reports) {
-    let s = '<rect width="340" height="230" fill="#E4EEDF"/>';
-    s += '<g fill="none" stroke="#C9D8C4" stroke-width="1">' + [0, 1, 2, 3, 4, 5].map(i => '<path d="M-10 ' + (30 + i * 38) + ' Q80 ' + (10 + i * 38) + ' 170 ' + (36 + i * 38) + ' T350 ' + (24 + i * 38) + '"/>').join('') + '</g>';
-    s += '<path d="M-10 196 Q60 170 120 182 T230 150 T350 120" stroke="#8EBBDA" stroke-width="6" fill="none" stroke-linecap="round"/>';
-    s += '<path d="M40 -10 L70 60 L120 96 L170 120 L230 128 L300 170" stroke="#FFFFFF" stroke-width="3" fill="none"/><path d="M40 -10 L70 60 L120 96 L170 120 L230 128 L300 170" stroke="#B9C7B4" stroke-width="1" fill="none" stroke-dasharray="4 4"/>';
-    [['Wachi', 168, 112], ['Zainapora', 236, 70], ['Shopian', 92, 72], ['Keller', 60, 160], ['Imamsahib', 266, 186]].forEach(([n, x, y]) => { s += '<circle cx="' + x + '" cy="' + y + '" r="3" fill="#4A5C51"/><text x="' + (x + 6) + '" y="' + (y + 4) + '" font-family="Mukta, sans-serif" font-size="11" font-weight="600" fill="#4A5C51">' + n + '</text>'; });
-    (reports || []).forEach(([x, y, rr, col]) => { s += '<circle cx="' + x + '" cy="' + y + '" r="' + rr + '" fill="' + col + '" fill-opacity=".28" stroke="' + col + '" stroke-width="1.5"/>'; });
+    let s = '<rect class="land" width="340" height="230" fill="#E4EEDF"/>';
+    s += '<g class="contour" fill="none" stroke="#C9D8C4" stroke-width="1">' + [0, 1, 2, 3, 4, 5].map(i => '<path d="M-10 ' + (30 + i * 38) + ' Q80 ' + (10 + i * 38) + ' 170 ' + (36 + i * 38) + ' T350 ' + (24 + i * 38) + '"/>').join('') + '</g>';
+    s += '<path class="river" d="M-10 196 Q60 170 120 182 T230 150 T350 120" stroke="#8EBBDA" stroke-width="6" fill="none" stroke-linecap="round"/>';
+    s += '<path class="road" d="M40 -10 L70 60 L120 96 L170 120 L230 128 L300 170" stroke="#FFFFFF" stroke-width="3" fill="none"/><path d="M40 -10 L70 60 L120 96 L170 120 L230 128 L300 170" stroke="#B9C7B4" stroke-width="1" fill="none" stroke-dasharray="4 4"/>';
+    [['Wachi', 168, 112], ['Zainapora', 236, 70], ['Shopian', 92, 72], ['Keller', 60, 160], ['Imamsahib', 266, 186]].forEach(([n, x, y]) => { s += '<circle class="vdot" cx="' + x + '" cy="' + y + '" r="3" fill="#4A5C51"/><text class="lbl" x="' + (x + 6) + '" y="' + (y + 4) + '" font-family="Mukta, sans-serif" font-size="11" font-weight="600" fill="#4A5C51">' + n + '</text>'; });
+    (reports || []).forEach(([x, y, rr, col]) => { const k = col === '#B3261E' ? 'rep-risk' : col === '#A3560C' ? 'rep-warn' : 'rep-good'; s += '<circle class="' + k + '" cx="' + x + '" cy="' + y + '" r="' + rr + '" fill="' + col + '" fill-opacity=".28" stroke="' + col + '" stroke-width="1.5"/>'; });
     s += '<circle cx="168" cy="112" r="26" fill="none" stroke="#1C6A46" stroke-width="1.5" stroke-dasharray="4 3"/>';
-    s += '<g transform="translate(160 88)"><path d="M8 0C3.6 0 0 3.6 0 8c0 6 8 14 8 14s8-8 8-14c0-4.4-3.6-8-8-8Z" fill="#C4283B"/><circle cx="8" cy="8" r="3" fill="#fff"/></g>';
+    s += '<g transform="translate(160 88)"><path class="you" d="M8 0C3.6 0 0 3.6 0 8c0 6 8 14 8 14s8-8 8-14c0-4.4-3.6-8-8-8Z" fill="#C4283B"/><circle cx="8" cy="8" r="3" fill="#fff"/></g>';
     return '<svg width="' + w + '" height="' + h + '" viewBox="0 0 340 230" preserveAspectRatio="xMidYMid slice" aria-hidden="true">' + s + '</svg>';
   }
 
