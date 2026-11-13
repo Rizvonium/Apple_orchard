@@ -34,7 +34,7 @@ blockquote { margin: 6px 0; padding-left: 10px; border-left: 3px solid var(--lea
 <p><strong>An all-in-one app for Kashmir's apple growers: what it should contain, and which tools, data, technologies and partners to build it with.</strong></p>
 <p>Companion to the <em>Baghbaan demo app walkthrough</em> (PDF) and the clickable prototype (claude.ai/artifact/T7wV1p9vo63Sqa659bEQCG; source in <code>prototype/</code>). Prepared November 2026.</p>
 <div class="callout">
-<b>How to read this report.</b> Part 1 is the recommendation: what the app should contain and how each part works. Part 2 catalogues what we can integrate: data sources and APIs, technologies, datasets, apps to learn from, competitors and regulations. Part 3 covers architecture, business model, roadmap and risks. Appendices A–C hold the full desk research with a source link next to each fact. Facts marked <b>[V]</b> were read at the source, <b>[S]</b> come from search summaries and should be re-checked, and <b>UNVERIFIED</b> items are leads only. Crop-protection content in section 4 is general practice and must be checked against the current SKUAST-K Package of Practices before anything reaches growers.
+<b>How to read this report.</b> Part 1 is the recommendation: what the app should contain and how each part works. Part 2 catalogues what we can integrate: data sources and APIs, technologies, datasets, apps to learn from, competitors and regulations. Part 3 covers architecture, business model, roadmap and risks. Appendices A–D hold the full desk research with a source link next to each fact. Facts marked <b>[V]</b> were read at the source, <b>[S]</b> come from search summaries and should be re-checked, and <b>UNVERIFIED</b> items are leads only. Crop-protection content follows SKUAST-K's 2026 guide, read from a copy of the booklet; check it against the printed booklet before anything reaches growers.
 </div>
 
 <h2>Summary</h2>
@@ -43,6 +43,7 @@ blockquote { margin: 6px 0; padding-left: 10px; border-left: 3px solid var(--lea
 <li><strong>Growers lose money at five predictable points:</strong> disease (2026 was a bad scab year, with B/C grades selling at ₹200–250 a box at Sopore against ₹1,000–1,300 for premium fruit), spurious inputs, highway closures (the 26 Aug–17 Sep 2025 NH-44 closure stranded 2,000+ trucks; traders put losses at ₹500–700 crore and freight jumped from ₹70–100 to ₹200–300 a box), weak price information, and labour and transport at harvest. There is no crop insurance for apple today (scheme on hold, Sept 2026) (Appendix B §2–5).</li>
 <li><strong>Recommendation: build Baghbaan around one question, "what is wrong with my orchard and what do I do?"</strong> The home screen is the <strong>Orchard Doctor</strong>, a Yes / No and picture-based diagnosis that works offline. Around it sit <strong>Buy</strong> (licensed-dealer marketplace), <strong>Learn</strong> (short Kashmiri-audio lessons), <strong>Mandi &amp; news</strong> (rates, where-to-sell, highway, rail, weather, advisories) and <strong>Services</strong> (trucks, labour, spray teams, equipment, experts, cold storage). <strong>My orchard</strong> quietly builds a spray diary and orchard record from what growers already do.</li>
 <li><strong>Design for the real conditions:</strong> voice and pictures first; Kashmiri voice with Urdu-script text; offline-first with SMS and a missed-call voice line, because J&amp;K has had more internet shutdowns than any other part of India; no signup form, and data asked only when it improves an answer.</li>
+<li><strong>Advice follows SKUAST-K's 2026 management guide.</strong> It has 15 crop stages with doses per 100 L, and fungicide sprays are tied to rain forecasts. A verification round confirmed 270 of about 290 claims and corrected six: codling moth <em>is</em> present in the valley, Alternaria spots are not "frog-eye", and apple blotch leaf miner is the emerging pest growers mistake for Alternaria (Appendix D).</li>
 <li><strong>Integrate first:</strong> SKUAST-K's spray schedule as the advice rule base; data.gov.in / Agmarknet mandi prices; IMD and a commercial weather API for spray windows and a Mills-type scab model; Bhashini and IndicTrans2 for Kashmiri; Kashmir-specific CC BY 4.0 leaf-image datasets for a later photo model; J&amp;K Traffic Police advisories plus driver reports for roads; and partnerships with the Department of Horticulture's Kisan Khidmat Ghars for assisted onboarding.</li>
 <li><strong>Competition exists but leaves the core gap open.</strong> Orchardly (claims 15,000+ growers), Farmit by Qul, Apple Doc and others offer advisory or IoT. None found offers Kashmiri voice, a neutral licensed-dealer marketplace, and labour and transport booking in one app (Appendix C §2).</li>
 <li><strong>Start with a two-district pilot</strong> (Shopian and Baramulla/Sopore, the two largest dispatch mandis), earn trust with free diagnosis, rates and alerts, then add the marketplace and credit.</li>
@@ -147,12 +148,12 @@ blockquote { margin: 6px 0; padding-left: 10px; border-left: 3px solid var(--lea
 <ul>
 <li><strong>The main question</strong> in a green card: "What's troubling your orchard today?" with Start, a microphone (speak the problem in Kashmiri) and a camera (photo check).</li>
 <li><strong>Quick chips</strong> for common entry points: spots on leaves, insects and mites, fruit problem, tree drying, what to spray now.</li>
-<li><strong>An alert with an action</strong>, e.g. "Scab infection risk on Wednesday: 14 mm rain, leaves wet ~18 h at 11–16 °C, your last spray was 9 days ago → Spray before Wednesday noon".</li>
+<li><strong>An alert with an action</strong>, e.g. "Scab infection risk on Wednesday: 14 mm rain, leaves wet ~18 h at 11–16 °C, your last spray was 9 days ago → Spray before Wednesday's rain".</li>
 <li><strong>Crop stage for this altitude</strong> (dormant → green tip → pink bud → bloom → petal fall → fruitlet → growth → harvest → leaf fall) and the next spray due.</li>
 <li><strong>Four tiles:</strong> mandi rate and trend, NH-44 status, today's spray window, free spray teams nearby.</li>
 <li><strong>One quick question a day</strong> (optional, one tap, reason shown): bees seen during bloom? pests seen this week? crop better or worse than last year?</li>
 </ul>
-<p>The home content changes with the season: scab and bloom in spring, mites and Alternaria in summer, harvest, trucks and CA storage in autumn, urea on leaves and pruning in late autumn and winter.</p>
+<p>The home content changes with the season: scab and bloom in spring, mites and Alternaria in summer, harvest, trucks and CA storage in autumn, 3–4% urea on yellowing leaves and pruning in late autumn and winter.</p>
 <h3>3.2 How a diagnosis works</h3>
 <ol>
 <li><strong>Where is the problem?</strong> Leaves, fruit, flowers, branches and bark, roots and whole tree, or "not sure: take a photo".</li>
@@ -166,7 +167,7 @@ blockquote { margin: 6px 0; padding-left: 10px; border-left: 3px solid var(--lea
 <p><strong>Photo check (phase 2).</strong> An on-phone image model (LiteRT, MobileNet-class) trained on Kashmir field images (Appendix C §3–4) confirms, but does not replace, the questions. Models trained only on PlantVillage lab images drop sharply in accuracy on field photos, so field images must be collected with consent through the app.</p>
 <p><strong>Safety rules hard-coded in the engine:</strong> suggest only products with a CIB&amp;RC label claim for apple and on the current SKUAST-K schedule; never an insecticide during bloom; never a banned or restricted molecule; show "read the label" with every product; escalate uncertain or high-consequence cases.</p>
 <h2>4. The problem library (diagnosis knowledge base, first version)</h2>
-<p>General symptom and management notes for the most important problems in Kashmir's apple belt. <strong>Management lines are deliberately at the level of practice and product class; doses and product names must come from the current SKUAST-K schedule.</strong></p>
+<p>General symptom and management notes for the most important problems in Kashmir's apple belt. <strong>Rows were checked against SKUAST-K's 2026 guide and monthly advisories, ICAR and peer-reviewed sources (Appendix D, section 4); doses and product names come only from the current SKUAST-K schedule.</strong></p>
 <div class="tw"><table>
 <thead>
 <tr>
@@ -183,17 +184,17 @@ blockquote { margin: 6px 0; padding-left: 10px; border-left: 3px solid var(--lea
 <td>Apple scab (<em>Venturia inaequalis</em>)</td>
 <td>Leaves, fruit</td>
 <td>Olive-green to black, velvety spots; dark, corky, cracking spots on fruit</td>
-<td>Spring rains, green tip to fruitlet; infection needs hours of leaf wetness that depend on temperature</td>
+<td>Primary infection green tip to 2–3 weeks after petal fall; rain-splashed secondary infection all season (severe in July–Aug 2026)</td>
 <td>Alternaria, Marssonina, spray burn</td>
-<td>Protective sprays timed before rain from green tip; rotate fungicide groups; urea on leaves at leaf fall or destroy fallen leaves; open canopy</td>
+<td>Spray before forecast rain from green tip; never repeat a product in consecutive sprays (Kashmir isolates show reduced sensitivity to difenoconazole and flusilazole); 3–4% urea when half the leaves yellow; open canopy</td>
 </tr>
 <tr>
-<td>Alternaria leaf blotch (<em>A. mali</em>)</td>
+<td>Alternaria leaf blotch (<em>Alternaria</em> spp.)</td>
 <td>Leaves</td>
-<td>Small round brown spots, some with a darker ring ("frog-eye"); defoliation</td>
-<td>Warm, humid summer; worse after mite damage</td>
-<td>Scab, Marssonina, mites</td>
-<td>Summer cover sprays as per schedule; control mites; balanced nutrition</td>
+<td>Small (0.5–2 mm) light-brown round spots merging into blotches; defoliation</td>
+<td>From mid-May; worst in warm, humid June–August</td>
+<td>Apple blotch leaf miner, Marssonina, necrotic leaf blotch</td>
+<td>Cover sprays before rain as per schedule; check for leaf miner before spraying fungicide</td>
 </tr>
 <tr>
 <td>Marssonina blotch / premature leaf fall (<em>Diplocarpon coronariae</em>)</td>
@@ -214,10 +215,10 @@ blockquote { margin: 6px 0; padding-left: 10px; border-left: 3px solid var(--lea
 <tr>
 <td>European red mite / two-spotted spider mite</td>
 <td>Leaves</td>
-<td>Dull, bronze leaves; tiny moving dots under leaves; fine webbing</td>
+<td>Dull, bronzed leaves; tiny moving dots under leaves</td>
 <td>Hot, dry June–August</td>
 <td>Alternaria, nutrient problems</td>
-<td>Dormant oil at silver tip–green tip; 20-leaf threshold check; rotate acaricide groups; protect predators</td>
+<td>Mineral oil before green tip (kills red-mite eggs only); spray only above SKUAST thresholds: 4–5 mites per leaf at petal fall, &gt;5 fruitlet, &gt;10 fruit development; rotate acaricides</td>
 </tr>
 <tr>
 <td>San Jose scale</td>
@@ -233,7 +234,7 @@ blockquote { margin: 6px 0; padding-left: 10px; border-left: 3px solid var(--lea
 <td>White cotton-like masses on wounds and cuts; galls on roots</td>
 <td>All year</td>
 <td>Scale</td>
-<td>Brush colonies; listed insecticide; resistant rootstocks (MM106, MM111) in new plantings</td>
+<td>Brush colonies; listed insecticide; MM111 rootstock in new plantings (MM106 also resists it but is prone to collar rot on wet sites)</td>
 </tr>
 <tr>
 <td>Aphids (green, rosy)</td>
@@ -241,7 +242,7 @@ blockquote { margin: 6px 0; padding-left: 10px; border-left: 3px solid var(--lea
 <td>Curled young leaves, sticky honeydew, ants</td>
 <td>Spring</td>
 <td>Mildew</td>
-<td>Prune affected tips; spray only if widespread; never in bloom</td>
+<td>Prune affected tips; spray only if 40% of young shoots are infested; never in bloom</td>
 </tr>
 <tr>
 <td>Leaf-eating caterpillars (Indian gypsy moth, tent caterpillar)</td>
@@ -321,27 +322,35 @@ blockquote { margin: 6px 0; padding-left: 10px; border-left: 3px solid var(--lea
 <td>Flowers drop without setting; few bees; cold rainy bloom</td>
 <td>Bloom</td>
 <td>Frost</td>
-<td>Pollinizers (~1 in 9 trees); beehives; no insecticide in bloom</td>
+<td>Pollinizer varieties; beehives (SKUAST-K 2026 guide: 3–4 per hectare at 5–10% bloom; April 2026 advisory: 2 per acre); no insecticide in bloom</td>
 </tr>
 <tr>
-<td>Codling moth (quarantine pest)</td>
+<td>Codling moth</td>
 <td>Fruit</td>
-<td>Entry holes with frass</td>
-<td>Reported from Ladakh, not established in the Kashmir valley (to confirm)</td>
-<td>—</td>
-<td>Report immediately; quarantine rules</td>
+<td>Entry holes with frass; early fruit drop</td>
+<td>Present in the Kashmir valley: DNA-confirmed in Baramulla after 2019, reported in six districts by 2023; about 3.5 generations a year</td>
+<td>Other fruit borers</td>
+<td>Pheromone-trap monitoring and SKUAST-K 'fruit borer' sprays; report new areas</td>
+</tr>
+<tr>
+<td>Apple blotch leaf miner (<em>Leucoptera malifoliella</em>)</td>
+<td>Leaves</td>
+<td>Blotch-shaped mines with a larva or frass inside; often mistaken for Alternaria</td>
+<td>May–September; 13–100% defoliation in south Kashmir (2023)</td>
+<td>Alternaria</td>
+<td>Destroy fallen leaves, scrape bark, traps; spray only the leaf-miner options in SKUAST-K advisories</td>
 </tr>
 <tr>
 <td>Fire blight</td>
 <td>Shoots, blossoms</td>
 <td>Blackened blossoms and shoot tips bent like a shepherd's crook</td>
-<td>Status in J&amp;K to confirm</td>
+<td>Not known in India or J&amp;K (EPPO: absent, unreliable old record)</td>
 <td>Frost, canker</td>
-<td>Always escalate to the department</td>
+<td>Escalate-only alert: report suspected cases to the department</td>
 </tr>
 </tbody>
 </table></div>
-<p><strong>Spray-schedule backbone (by stage).</strong> The Doctor, the home alerts and the shop all hang off the SKUAST-K schedule's stages: dormant / silver tip (horticultural mineral oil for scale and mite eggs), green tip and pink bud (scab protection), bloom (no insecticides; bees), petal fall and fruitlet (scab, mildew; thinning), fruit development (Alternaria, Marssonina, mites; calcium), pre-harvest, and post-harvest / leaf fall (urea on leaves; sanitation). The schedule is revised yearly and has high-density variants; the app must load the current edition and show its year on every recommendation.</p>
+<p><strong>Spray-schedule backbone.</strong> The Doctor, the home alerts and the shop all follow SKUAST-K's <em>Integrated Management Guide for Apple Orchards in Kashmir 2026</em> (No. AU/DEx/449-BL/01/26), issued through the Directorate of Horticulture. It has 15 stages: delayed dormancy (horticultural mineral oil 2 L per 100 L, before green tip), green tip and tight cluster (contact fungicide at 300 g per 100 L only if a full day of rain is forecast; skip if the next 7 days are dry), pink bud (scab spray; boron 1–1.5 g/L if needed; 3–4 beehives per hectare), flowering (no spray unless 10 days since the last fungicide and rain is due), petal fall and fruitlet (systemic fungicides before rain; mites only above thresholds; thinning at 10–12 mm), fruit development I–IV (fungicide only if rain is forecast; three calcium chloride sprays at 3–4 g/L), pre-harvest (storage-rot spray 15–20 days before picking CA fruit), harvest, post-harvest (3–4% urea when half the leaves are yellow) and dormancy (5% urea on fallen leaves if missed). Rules: never mix pesticides, keep 3–4 days between insecticide and fungicide sprays, never repeat a product in consecutive sprays, no spraying in full bloom. There is no separate high-density schedule. SKUAST-K's own 2026 documents disagree on a few points (Zineb + Hexaconazole dose, pre-harvest timing, when to stop spraying); the app must hold those rows back until SKUAST-K confirms. Full stage table with sources: Appendix D, section 1.</p>
 <h2>5. Buy: a licensed-dealer marketplace</h2>
 <p><strong>Categories:</strong> fungicides; insecticides; mite control (acaricides); spray oils (HMO); fertilizers (urea, DAP, MOP, NPK, CAN, SSP); micronutrients (boron, zinc, calcium); organic and biological (vermicompost, FYM, neem, <em>Trichoderma</em>, biofertilizers); tools and sprayers; hail nets and supports; packing (cartons, trays); saplings and rootstocks (NHB-accredited nurseries); safety kits (PPE).</p>
 <p><strong>What makes it different from a general agri shop:</strong></p>
@@ -356,7 +365,7 @@ blockquote { margin: 6px 0; padding-left: 10px; border-left: 3px solid var(--lea
 <li><strong>Payment:</strong> UPI, cash at pickup, and pay-after-harvest credit through a regulated lender.</li>
 <li><strong>Reviews only from verified buyers,</strong> shown with district.</li>
 </ul>
-<p><strong>Compliance.</strong> Pesticides may be sold only by licensed sellers; run the shop as a marketplace for licensed dealers, store each dealer's licence and show it on orders, and sell only products registered for apple. National platforms already operate this way. Fertilizer sales follow the Fertilizer Control Order through authorised dealers; urea and DAP have government-fixed MRPs. Confirm the current online-sale conditions for both with a lawyer (Appendix C §7, flagged UNVERIFIED there).</p>
+<p><strong>Compliance.</strong> Since the Insecticides (Second Amendment) Rules 2022 (rule 10E), a licensed seller may sell insecticides through an e-commerce platform, and the platform must verify the seller's state licence first; the Central Consumer Protection Authority enforced this against major marketplaces in May 2026. So run the shop as a marketplace for licensed dealers, store and show each licence, and list only products registered for apple. Malathion is no longer approved for apple and dimethoate lost its label claims on fruit eaten raw (Insecticides (Prohibition) Order 2023). Fertilizer sales go through authorised dealers under the Fertiliser (Control) Order; urea and DAP have fixed MRPs. Genuine-pack checks matter: 85 of 5,772 pesticide samples tested in J&amp;K in 2025-26 were substandard, and a 2026 Shopian case over a mancozeb batch led to an FIR (Appendix D, section 5).</p>
 <h2>6. Learn: short lessons in Kashmiri</h2>
 <p><strong>Format.</strong> Three-minute videos with Kashmiri audio (recorded by native speakers, not synthesized), picture step cards, a one-question check at the end, offline downloads, and lessons that surface by season. Digital Green's farmer-to-farmer video model has shown much higher adoption than conventional extension (Appendix A §1.2).</p>
 <p><strong>Curriculum (12 topics, about 120 lessons):</strong></p>
@@ -772,7 +781,7 @@ blockquote { margin: 6px 0; padding-left: 10px; border-left: 3px solid var(--lea
 </tr>
 <tr>
 <td>Pesticide sales</td>
-<td>Insecticides Act 1968 and rules: licensed sellers, registered products, label claims</td>
+<td>Insecticides Act 1968; rule 10E (2022) allows online sale by licensed sellers after platform verification; label claims; Prohibition Order 2023</td>
 <td>Marketplace for licensed dealers only; apple-registered products only</td>
 </tr>
 <tr>
@@ -912,16 +921,26 @@ blockquote { margin: 6px 0; padding-left: 10px; border-left: 3px solid var(--lea
 </tr>
 </tbody>
 </table></div>
-<h2>20. Open questions to settle next</h2>
+<h2>20. Answered since the first draft, and still open</h2>
+<p><strong>Answered (sources in Appendix D):</strong></p>
+<ul>
+<li><strong>Spray schedule:</strong> SKUAST-K's 2026 guide is current; the app now follows it. It was read from a copy of the booklet, so check against the printed booklet before launch.</li>
+<li><strong>HDP subsidy:</strong> the Revised Modified High Density Plantation Scheme gives a 50% subsidy until 31 March 2027. The minimum area is 1 kanal, and growers apply through the Kisan Sathi portal. Separately, anti-hail nets carry a subsidy of ₹27,000 per kanal.</li>
+<li><strong>Online sale of pesticides:</strong> legal for licensed sellers whose licence the platform verifies (rule 10E, 2022).</li>
+<li><strong>Labour:</strong> harvest labour in Shopian cost ₹1,200–1,500 a day in October 2026, and pickers earned ₹800–1,100 in 2025. The statutory minimum for unskilled work is ₹311.</li>
+<li><strong>Codling moth:</strong> present in the Kashmir valley. <strong>Fire blight:</strong> not known in India or J&amp;K.</li>
+<li><strong>CA storage:</strong> about ₹35 per 17 kg crate per month at Lassipora.</li>
+</ul>
+<p><strong>Still open:</strong></p>
 <ol>
-<li>Partnership and reuse terms for the SKUAST-K schedule and lessons.</li>
-<li>Current HDP subsidy rates and whether the scheme continues after March 2026.</li>
-<li>Current online-sale conditions for pesticides and fertilizers.</li>
-<li>Labour wage rates by district and task (not found in desk research).</li>
-<li>Status of fire blight and codling moth in the Kashmir valley.</li>
-<li>Whether apple crop insurance will relaunch, and in what form.</li>
+<li>An official copy of the 2026 guide, and SKUAST-K's ruling on its internal conflicts.</li>
+<li>Partnership and reuse terms for SKUAST-K content.</li>
+<li>Whether the tentative fertilizer schedule for high-density orchards (July 2026) was adopted.</li>
+<li>Current CIB&amp;RC apple label status for chlorpyrifos, thiacloprid and carbendazim mixes.</li>
+<li>Task wages for pruning, spraying and packing by district, and employers' duties for non-local labour.</li>
+<li>Whether apple crop insurance will relaunch.</li>
 <li>Grower testing: show the demo to 20 growers in Shopian and Sopore and record what they change.</li>
-</ol><section class="appx"><h1>Appendix A · UX, connectivity, data collection and services marketplace</h1><p class="appx-note">Desk research notes, November 2026. Tags: [V] read at source; [S] from a search summary; UNVERIFIED = lead only.</p><p>Prepared 12 Nov 2026. Scope: design guidance for a mobile app for apple orchard growers in Kashmir (users often older, some with low literacy; Kashmiri, Urdu, Hindi, English), with a services marketplace (trucks, labour gangs, spray services, equipment, experts, cold storage).</p>
+</ol><section class="appx"><h1>Appendix A · UX, connectivity, data collection and services marketplace</h1><p class="appx-note">Desk research notes, November 2026. Tags: [V] read at source (in Appendix D: confirmed by an independent verifier); [S] from a search summary or not re-confirmed; UNVERIFIED = lead only.</p><p>Prepared 12 Nov 2026. Scope: design guidance for a mobile app for apple orchard growers in Kashmir (users often older, some with low literacy; Kashmiri, Urdu, Hindi, English), with a services marketplace (trucks, labour gangs, spray services, equipment, experts, cold storage).</p>
 <p><strong>How to read the evidence tags</strong></p>
 <ul>
 <li><strong>[V]</strong>: I opened and read the cited page or PDF in this session.</li>
@@ -1794,7 +1813,7 @@ blockquote { margin: 6px 0; padding-left: 10px; border-left: 3px solid var(--lea
 <p><strong>Platforms</strong>
 - <strong>Porter</strong>, <strong>Kisan Rath</strong>, <strong>Plantix</strong> community features, <strong>Jugalbandi</strong> (WhatsApp), <strong>Samunnati</strong>, Celcius cold-chain, Gram Vaani's current scale, and cancellation policies of booking apps: not researched.
 - CHC/FARMS app usage numbers: only a secondary claim.
-- Several financial figures (BlackBuck, BigHaat, Gramophone FY25, Arya.ag PAT growth of 70% vs 79%) vary across trackers.</p></section><section class="appx"><h1>Appendix B · Market, logistics, weather, schemes and labour</h1><p class="appx-note">Desk research notes, November 2026. Tags: [V] read at source; [S] from a search summary; UNVERIFIED = lead only.</p><p>Research for an app for apple growers in Kashmir. Compiled 12 November 2026.</p>
+- Several financial figures (BlackBuck, BigHaat, Gramophone FY25, Arya.ag PAT growth of 70% vs 79%) vary across trackers.</p></section><section class="appx"><h1>Appendix B · Market, logistics, weather, schemes and labour</h1><p class="appx-note">Desk research notes, November 2026. Tags: [V] read at source (in Appendix D: confirmed by an independent verifier); [S] from a search summary or not re-confirmed; UNVERIFIED = lead only.</p><p>Research for an app for apple growers in Kashmir. Compiled 12 November 2026.</p>
 <p><strong>How to read this file</strong>
 - Every fact has its source link beside it. Every statistic gives its year or date.
 - <strong>UNVERIFIED</strong> means one of three things: I could not confirm it against a primary or reputable source in this session, the sources disagree, or it comes from background knowledge I did not re-check.
@@ -3314,7 +3333,7 @@ blockquote { margin: 6px 0; padding-left: 10px; border-left: 3px solid var(--lea
 <li>J&amp;K Horticulture Planning &amp; Marketing: https://dhpm.jk.gov.in/</li>
 <li>NHB price and arrival reports: https://nhb.gov.in/</li>
 <li>Open-Meteo terms and pricing: https://open-meteo.com/en/terms and https://open-meteo.com/en/pricing</li>
-</ul></section><section class="appx"><h1>Appendix C · Technology, apps, competitors, datasets and regulations</h1><p class="appx-note">Desk research notes, November 2026. Tags: [V] read at source; [S] from a search summary; UNVERIFIED = lead only.</p><p>Research date: 2026-11-12. Prepared for: the "orchard doctor" yes/no diagnosis wizard (later photo AI), agro-input shop, lessons, mandi/road/weather info and services marketplace.</p>
+</ul></section><section class="appx"><h1>Appendix C · Technology, apps, competitors, datasets and regulations</h1><p class="appx-note">Desk research notes, November 2026. Tags: [V] read at source (in Appendix D: confirmed by an independent verifier); [S] from a search summary or not re-confirmed; UNVERIFIED = lead only.</p><p>Research date: 2026-11-12. Prepared for: the "orchard doctor" yes/no diagnosis wizard (later photo AI), agro-input shop, lessons, mandi/road/weather info and services marketplace.</p>
 <h3>How to read this document</h3>
 <p>Every item has a source link. Evidence tags:</p>
 <ul>
@@ -4380,4 +4399,1957 @@ blockquote { margin: 6px 0; padding-left: 10px; border-left: 3px solid var(--lea
 <li>Dataset licences: the Plant Pathology 2020/2021 Kaggle rules, ATLDSD, the original PlantVillage terms, and AppleScab-LT availability.</li>
 <li>Current availability of <strong>Apple Doc</strong> and <strong>Kash Crop</strong> (not found on Play on 2026-11-12); whether FarmIT (2022) is Qul's Farmit; whether Hazik Hussain (Kash Crop) is the "Haziq Hussain" behind SKUAST-K's clinic app.</li>
 <li>Bhashini usage terms and SLAs; whether Saaras v3 covers Kashmiri; whether the Kashmiri ASR WER figures appear in the Bolbosh paper.</li>
+</ol></section><section class="appx"><h1>Appendix D · Agronomy, spray schedule, inputs and open questions</h1><p class="appx-note">Desk research notes, November 2026. Tags: [V] read at source (in Appendix D: confirmed by an independent verifier); [S] from a search summary or not re-confirmed; UNVERIFIED = lead only.</p><p>Research date: 2026-11-13. Part D of the Baghbaan research appendix (follows A, B and C in this folder). It covers the spray schedule, nutrition, harvest and storage, the pest and disease library, input quality and rules, labour and costs, and what is still open.</p>
+<blockquote>
+<p><strong>Spray schedule edition: SKUAST-K "Integrated Management Guide for Apple Orchards in Kashmir 2026", document No. AU/DEx/449-BL/01/26</strong> (here "IMG 2026"). No 2027 edition had been found as of 13 Nov 2026. It was read from a third-party Scribd copy of the booklet (same document number, 32 pages), not from an official SKUAST-K URL. The verifier parsed the same copy. Check every row against the printed booklet (district horticulture offices) before release. The app must show "IMG 2026" on every recommendation drawn from it.</p>
+</blockquote>
+<h3>How to read this document</h3>
+<p>Every fact has a tag and a source link.</p>
+<ul>
+<li><strong>[V]</strong>: confirmed by the independent verifier at the source (or at a better source, which is then the one linked).</li>
+<li><strong>[S]</strong>: the researcher read it at the source, but the verifier could not open or confirm it. Check before relying on it.</li>
+<li><strong>UNVERIFIED</strong>: known only from a search-engine summary, or the verifier marked it uncertain and nobody read it at source. Treat it as a lead.</li>
+<li><strong>Corrected</strong>: the verifier refuted the researcher's claim. Only the corrected fact is given, with the verifier's source.</li>
+<li><strong>Analysis</strong>: my own reading or recommendation, not a sourced fact.</li>
+</ul>
+<p>Doses are given <strong>only</strong> where a fact is tagged [V] or [S]. SKUAST gives doses per <strong>100 L of water</strong>; any per-drum (200 L) figure would be our own doubling, not a SKUAST figure [V] (<a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a>).</p>
+<p>Shorthand for sources used many times:</p>
+<ul>
+<li>IMG 2026: https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K</li>
+<li>IMG 2025 (No. AU/DE/386BL/01/2025, 27-01-2025): https://www.scribd.com/document/841000027/Spray-Schedule-2025</li>
+<li>Guide 2023 (PDF mirror): https://theorchardmaster.in/wp-content/uploads/2023/08/Advisory-for-Management-of-apple-2023.pdf</li>
+<li>DoE Apr 2026 (SKUAST-K Directorate of Extension monthly message): https://skuastkashmir.ac.in/frmPDF.aspx?FN=April+2026+06-04-2026.pdf</li>
+<li>DoE Aug 2026: https://skuastkashmir.ac.in/frmPDF.aspx?FN=August+2026+03082026.pdf</li>
+<li>REAC 2026 (tentative fertilizer schedule, Annexure-VI): https://skuastkashmir.ac.in/frmPDF.aspx?FN=Conduct+of+58th+59th+Research+and+Extension+Advisory+committee+REACMeeting.pdf</li>
+<li>SKUAST-J HDP PoP: https://skuastjammu.ac.in/newsite/pdf/POP-High-Density-Apple.pdf</li>
+</ul>
+<hr />
+<h3>1. Spray schedule</h3>
+<h4>1.1 Which edition and who issues it</h4>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Fact</th>
+<th>Tag</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>The newest schedule is the IMG 2026, compiled by the SKUAST-K Directorate of Research, No. AU/DEx/449-BL/01/26. It has 15 numbered stages, from delayed dormancy to dormancy. No 2027 edition found (search on 2026-11-13).</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td>Issued through the Directorate of Horticulture, Kashmir; printed and published by the SKUAST-K Directorate of Extension. Implementing agencies: SKUAST-K Directorate of Research, Directorate of Extension, KVKs, and the Department of Horticulture, Kashmir.</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td>Drafted with inputs from the Department of Horticulture Kashmir and the J&amp;K Directorate of Enforcement. Use and sale of listed products is subject to CIB&amp;RC registration and label claim.</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td>27 Mar 2026: Director Horticulture Kashmir said the department and SKUAST distributed schedules and booklets, available at district horticulture offices.</td>
+<td>[V]</td>
+<td><a href="https://www.knskashmir.com/high-density-apple-farming-gains-push-in-kashmir--dir-horticulture-203029">KNS</a></td>
+</tr>
+<tr>
+<td>The 2025 guide was formally unveiled on 19 Mar 2025 and made downloadable from the department website. No press report of a formal 2026 release event was found.</td>
+<td>[V]</td>
+<td><a href="https://ziraattimes.com/2025/03/horticulture-dept-kashmir-unveils-management-guide-2025-for-fruit-crops/">Ziraat Times</a></td>
+</tr>
+<tr>
+<td>The guide replaced the older fungicide/insecticide "spray schedule" with an integrated approach (SKUAST-K entomologist).</td>
+<td>[V]</td>
+<td><a href="https://www.greaterkashmir.com/opinion/from-bud-to-basket-11759483">Greater Kashmir, 23 Apr 2026</a></td>
+</tr>
+<tr>
+<td>Edition changes: IMG 2025 gave day intervals between sprays (for example fruitlet 10-14 days after petal fall); IMG 2026 drops them and ties fungicide sprays to rain forecasts. The 2023 guide had no tight-cluster or flowering spray and used Dimethoate 30 EC; Dimethoate is gone from IMG 2026 (it still appears in the Aug 2026 message for pin-hole/shot-hole borer).</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/841000027/Spray-Schedule-2025">IMG 2025</a>, <a href="https://theorchardmaster.in/wp-content/uploads/2023/08/Advisory-for-Management-of-apple-2023.pdf">Guide 2023</a></td>
+</tr>
+</tbody>
+</table></div>
+<h4>1.2 Stage table (IMG 2026, plus 2026 monthly messages)</h4>
+<p>All rows below are [V]. Rows marked UNRESOLVED or TIMING CONFLICT disagree between SKUAST's own 2026 documents: hold the dose or timing back in the app until SKUAST-K confirms it. Stage 13 (harvest) has no spray.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Stage</th>
+<th>Target</th>
+<th>Product (choose one where several)</th>
+<th>Dose per 100 L water</th>
+<th>Notes</th>
+<th>Tag</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 Delayed dormancy</td>
+<td>San Jose scale, mite eggs, overwintering pests</td>
+<td>Horticultural mineral oil (Orchol, Duratek AgriSpray Oil, HP Spray Oil E/HP HMO, MAK, SERVO)</td>
+<td>2 L</td>
+<td>Apply before green tip. No fungicide at this stage.</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td>2 Green tip</td>
+<td>Scab</td>
+<td>Mancozeb 75 WP; Captan 50 WP; Propineb 70 WP; Zineb 75 WP; Metiram 70 WG</td>
+<td>300 g each</td>
+<td>Choose one. Skip if the next 7 days are dry; spray before rain of a full day or more. No insecticide.</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td>3 Tight cluster</td>
+<td>Scab</td>
+<td>Mancozeb 75 WP; Captan 50 WP; Propineb 70 WP; Zineb 75 WP; Metiram 70 WG; Mancozeb 75 WG</td>
+<td>300 g each</td>
+<td>Choose one. Same rain rule as green tip. No insecticide.</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td>4 Pink bud</td>
+<td>San Jose scale and other overwintering pests (only if HMO spray was missed)</td>
+<td>Chlorpyriphos 20 EC</td>
+<td>100 ml</td>
+<td>Need-based.</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td>4 Pink bud</td>
+<td>San Jose scale, woolly apple aphid, two-spotted mite (only if HMO spray was missed)</td>
+<td>Quinalphos 25 EC</td>
+<td>100 ml</td>
+<td>Alternative to Chlorpyriphos in the April 2026 message; not listed in the 2026 guide at this stage.</td>
+<td>[V]</td>
+<td><a href="https://skuastkashmir.ac.in/frmPDF.aspx?FN=April+2026+06-04-2026.pdf">DoE Apr 2026</a></td>
+</tr>
+<tr>
+<td>4 Pink bud</td>
+<td>Blossom thrips (2 or more per flower), leaf roller</td>
+<td>Thiacloprid 21.7 SC</td>
+<td>40 ml</td>
+<td>Need-based.</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td>4 Pink bud</td>
+<td>Scab (primary infection stage)</td>
+<td>Zineb 68% + Hexaconazole 4% 72 WP</td>
+<td>125 g in the guide; 100 g (0.1%) in the April 2026 message</td>
+<td>UNRESOLVED: guide prints 'Hexaconazole 5%' (annexure says 4% 72 WP) and 125 g. Confirm with SKUAST-K before showing a dose.</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td>4 Pink bud</td>
+<td>Scab (primary infection stage)</td>
+<td>Metiram 55% + Pyraclostrobin 5% 60 WG (100 g); Dodine 65 WP (60 g); Dodine 40 SC (90 ml); Tebuconazole 6.7% + Captan 26.9% 33.6 SC (250 ml); Tebuconazole 38.9% SC (40 ml); Chlorothalonil 40% + Difenoconazole 4% 44 SC (180 ml)</td>
+<td>as listed</td>
+<td>Choose one. In dry weather spray when most flowers are at pink, to avoid early bloom.</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td>4 Pink bud</td>
+<td>Scab (primary infection stage)</td>
+<td>Mancozeb 63% + Carbendazim 12% (WP in table, WG in annexure)</td>
+<td>250 (unit missing at this stage; 250 g at later stages)</td>
+<td>UNRESOLVED unit and formulation. Confirm before showing.</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td>4 Pink bud</td>
+<td>Boron nutrition (need-based)</td>
+<td>Boron (foliar)</td>
+<td>1-1.5 g per litre</td>
+<td>Also 3-4 bee hives per hectare at 5-10% bloom.</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td>5 Flowering</td>
+<td>Scab (only if 10 days since last fungicide AND rain forecast)</td>
+<td>Mancozeb 75 WP; Captan 50 WP; Propineb 70 WP; Zineb 75 WP; Metiram 70 WG; Mancozeb 75 WG</td>
+<td>300 g each</td>
+<td>Spraying not advised in flowering. No insecticide. Pheromone traps 8-10/ha for leaf blotch miner.</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td>6 Petal fall (60-70%)</td>
+<td>Insects (need-based)</td>
+<td>Neem oil (1500 ppm) (300 ml); Chlorpyriphos 20 EC (100 ml); Quinalphos 25 EC (100 ml)</td>
+<td>as listed</td>
+<td>Choose one.</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td>6 Petal fall (60-70%)</td>
+<td>Mites (4-5 per leaf)</td>
+<td>Etoxazole 10 SC (110 ml); Hexythiazox 5.45 EC (40 ml); Spiromesifen 22.9 SC (40 ml); Cyenopyrafen 30 SC (30 ml)</td>
+<td>as listed</td>
+<td>Choose one.</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td>6 Petal fall (60-70%)</td>
+<td>Scab and other diseases (spray before rain)</td>
+<td>Difenoconazole 25 EC (30 ml); Flusilazole 40 EC (20 ml); Penconazole 10 EC (50 ml); Fluxapyroxad 75 g/l + Difenoconazole 50 g/l SC (30 ml); Trifloxystrobin 25% + Tebuconazole 50% 75 WG (40 g); Fluopyram 17.7% + Tebuconazole 17.7% 400 SC (50 ml); Trifloxystrobin 10% + Difenoconazole 12.25% + Sulphur 3% SC (90 ml)</td>
+<td>as listed</td>
+<td>Choose one. Boron 1-1.5 g/L if not given at pink bud.</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td>7 Fruitlet</td>
+<td>Insects</td>
+<td>Quinalphos 25 EC (100 ml); Chlorpyriphos 20 EC (100 ml); Thiacloprid 21.7 SC (40 ml)</td>
+<td>as listed</td>
+<td>Choose one. Fruit borer areas: pheromone traps 8-10/ha (monitoring), 40/ha (mass trapping).</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td>7 Fruitlet</td>
+<td>Mites (more than 5 per leaf)</td>
+<td>Hexythiazox 5.45 EC; Spiromesifen 22.9 SC</td>
+<td>40 ml each</td>
+<td>Choose one.</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td>7 Fruitlet</td>
+<td>Scab (spray before rain)</td>
+<td>Zineb 68% + Hexaconazole 4% 72 WP</td>
+<td>125 g in the guide; 100 g (0.1%) in 2026 monthly messages</td>
+<td>UNRESOLVED, as at pink bud.</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td>7 Fruitlet</td>
+<td>Scab (spray before rain)</td>
+<td>Dodine 65 WP (60 g); Dodine 40 SC (90 ml); Fluxapyroxad 250 g/l + Pyraclostrobin 250 g/l 500 SC (20 ml); Tebuconazole 6.7% + Captan 26.9% 33.6 SC (250 ml); Pyraclostrobin 12.8% + Boscalid 25.2% WG (30 g); Tebuconazole 38.9% SC (40 ml); Mancozeb 63% + Carbendazim 12% WP (250 g)</td>
+<td>as listed</td>
+<td>Choose one. Heavy set: thin by hand or NAA 5-10 ppm at 10-12 mm fruit.</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td>8 Fruit development I</td>
+<td>Insects (need-based)</td>
+<td>Neem oil (1500 ppm), then Lecanicillium lecanii 1.15% WP 4 days later (300 ml, then 500 g); Chlorpyriphos 20 EC (100 ml); Quinalphos 25 EC (100 ml)</td>
+<td>as listed</td>
+<td>Do not spray the bio-agent where sericulture is practised.</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td>8 Fruit development I</td>
+<td>Mites (more than 10 per leaf)</td>
+<td>Hexythiazox 5.45 EC; Spiromesifen 22.9 SC</td>
+<td>40 ml each</td>
+<td>Choose one.</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td>8 Fruit development I</td>
+<td>Scab and foliar diseases (only if rain forecast)</td>
+<td>Mancozeb 75 WP (300 g); Captan 50 WP (300 g); Propineb 70 WP (300 g); Zineb 75 WP (300 g); Ziram 80 WP (200 g); Metiram 70 WG (300 g)</td>
+<td>as listed</td>
+<td>Choose one. Calcium chloride 3-4 g/L (1st of 3). Second soil fertilizer dose.</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td>9 Fruit development II</td>
+<td>Insects</td>
+<td>Chlorpyriphos 20 EC (100 ml); Quinalphos 25 EC (100 ml); Thiacloprid 21.7 SC (40 ml); Summer spray oil (750 ml)</td>
+<td>as listed</td>
+<td>Choose one.</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td>9 Fruit development II</td>
+<td>Mites</td>
+<td>Hexythiazox 5.45 EC (40 ml); Fenazaquin 10 EC (40 ml); Spiromesifen 22.9 SC (40 ml); Propargite 42% + Hexythiazox 2% EC (100 ml); Etoxazole 10% SC (110 ml); Summer spray oil (750 ml)</td>
+<td>as listed</td>
+<td>Choose one.</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td>9 Fruit development II</td>
+<td>Scab and foliar diseases (only if rain forecast)</td>
+<td>Difenoconazole 25 EC (30 ml); Flusilazole 40 EC (20 ml); Penconazole 10 EC (50 ml); Trifloxystrobin + Tebuconazole 75 WG (40 g); Fluopyram 17.7% + Tebuconazole 17.7% 400 SC (50 ml); Fluxapyroxad 250 g/l + Pyraclostrobin 250 g/l 500 SC (20 ml); Fluxapyroxad 75 g/l + Difenoconazole 50 g/l SC (30 ml); Chlorothalonil 40% + Difenoconazole 4% 44 SC (180 ml); Mancozeb 63% + Carbendazim 12% WP (250 g); Trifloxystrobin 10% + Difenoconazole 12.25% + Sulphur 3% SC (90 ml)</td>
+<td>as listed</td>
+<td>Choose one. Calcium chloride 3-4 g/L (2nd).</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td>10 Fruit development III</td>
+<td>Insects (need-based)</td>
+<td>Chlorpyriphos 20 EC (100 ml); Quinalphos 25 EC (100 ml); Thiacloprid 21.7 SC (40 ml); Neem oil (1500 ppm), then Lecanicillium lecanii 1.15% WP or Metarhizium anisopliae 1.0% WP 4 days later (300 ml, then 500 g)</td>
+<td>as listed</td>
+<td>Bio-agents not in sericulture areas. Fruit fly: methyl eugenol traps 25-40/ha (August message: 25/ha from flowering).</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td>10 Fruit development III</td>
+<td>Mites (more than 10 per leaf)</td>
+<td>Fenazaquin 10 EC (40 ml); Cyenopyrafen 30 SC (30 ml); Etoxazole 10% SC (110 ml)</td>
+<td>as listed</td>
+<td>Choose one.</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td>10 Fruit development III</td>
+<td>Foliar diseases (only if rain forecast)</td>
+<td>Mancozeb 75 WP (300 g); Zineb 75 WP (300 g); Ziram 80 WP (200 g); Ziram 27 SC (600 ml); Chlorothalonil 75 WP (150 g); Mancozeb 75 WG (300 g)</td>
+<td>as listed</td>
+<td>Choose one. Calcium chloride 3-4 g/L (3rd); potassium sulphate 4-5 g/L if colour needed; last 1/3 of urea.</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td>11 Fruit development IV</td>
+<td>Alternaria leaf blotch or scab (if present)</td>
+<td>Zineb 68% + Hexaconazole 4% 72 WP</td>
+<td>125 g in the guide; 100 g (0.1%) in the August 2026 message</td>
+<td>UNRESOLVED dose. No insecticide at this stage.</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td>11 Fruit development IV</td>
+<td>Alternaria leaf blotch or scab (if present)</td>
+<td>Hexaconazole 5 EC (50 ml); Myclobutanil 10 WP (70 g); Metiram 55% + Pyraclostrobin 5% 60 WG (100 g); Pyraclostrobin 12.8% + Boscalid 25.2% WG (30 g)</td>
+<td>as listed</td>
+<td>Choose one. No insecticide at this stage.</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td>11 Fruit development IV</td>
+<td>Sooty blotch, flyspeck (August 2026 message adds Marssonina)</td>
+<td>Mancozeb 75 WP (300 g); Ziram 27 SC (600 ml); Propineb 70 WP (300 g); Ziram 80 WP (200 g); Mancozeb 75 WG (300 g)</td>
+<td>as listed</td>
+<td>Choose one.</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td>12 Pre-harvest</td>
+<td>Storage rots (fruit for long-term storage)</td>
+<td>Captan 50 WP (300 g); Ziram 80 WP (200 g); Zineb 75 WP (300 g)</td>
+<td>as listed</td>
+<td>TIMING CONFLICT: 15-20 days before harvest in the guide, 25 days in the August 2026 message. No insecticide.</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td>12 Pre-harvest</td>
+<td>Storage rots (fruit for long-term storage)</td>
+<td>Propineb 70 WP</td>
+<td>300 g</td>
+<td>TIMING CONFLICT: the guide's own waiting period for Propineb is 29 days, longer than the 15-20 day timing. Do not show without this caveat.</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td>12 Pre-harvest</td>
+<td>Need-based nutrition and fruit drop</td>
+<td>NAA (10 ppm); Potassium sulphate (4-5 g per litre); Calcium chloride (3-4 g per litre)</td>
+<td>as listed</td>
+<td>NAA against pre-harvest drop; K2SO4 (2nd) for colour; CaCl2 for storage life.</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td>14 Post-harvest</td>
+<td>Scab / Alternaria inoculum (infected orchards)</td>
+<td>Urea</td>
+<td>3-4% (3-4 kg)</td>
+<td>Spray when 50% of leaves have turned yellow naturally.</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td>14 Post-harvest</td>
+<td>Insects (need-based)</td>
+<td>Chlorpyriphos 20 EC</td>
+<td>100 ml</td>
+<td></td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td>14 Post-harvest</td>
+<td>Mites (more than 20 per leaf)</td>
+<td>Fenazaquin 10 EC (40 ml); Etoxazole 10% SC (110 ml)</td>
+<td>as listed</td>
+<td>Choose one.</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td>14 Post-harvest</td>
+<td>Apple blotch leaf miner (where a problem)</td>
+<td>Quinalphos 25 EC</td>
+<td>100 ml</td>
+<td>Listed as an 'essential spray' in those areas.</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td>15 Dormancy</td>
+<td>Fallen-leaf decomposition (scab inoculum)</td>
+<td>Urea on orchard floor</td>
+<td>5% (5 kg)</td>
+<td>Only if the autumn urea spray was missed. No pesticide.</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td>Monthly message (August 2026)</td>
+<td>Apple blotch leaf miner</td>
+<td>Thiamethoxam 25 WG (50 g); Flubendiamide 39.35 SC (40 ml); Chlorantraniliprole 18.5 SC (100 ml); Thiacloprid 21.7 SC (60 ml); Lambda-cyhalothrin 5% EC (50 ml); Thiamethoxam 12.6% + Lambda-cyhalothrin 9.5% ZC (50 ml); Imidacloprid 6% + Lambda-cyhalothrin 4% SL (50 ml)</td>
+<td>as listed</td>
+<td>Not in the 2026 guide's stage table; stage fit not stated. 15-day interval stated with Lambda-cyhalothrin.</td>
+<td>[V]</td>
+<td><a href="https://skuastkashmir.ac.in/frmPDF.aspx?FN=August+2026+03082026.pdf">DoE Aug 2026</a></td>
+</tr>
+<tr>
+<td>Monthly message (August 2026)</td>
+<td>Fruit borer (incl. codling moth) when adults trapped</td>
+<td>Chlorpyriphos 50% + Cypermethrin 5% EC (125 ml); Chlorantraniliprole 18.5% SC (100 ml)</td>
+<td>as listed</td>
+<td>Monitoring traps 20/ha in August (8-10/ha in April message and guide).</td>
+<td>[V]</td>
+<td><a href="https://skuastkashmir.ac.in/frmPDF.aspx?FN=August+2026+03082026.pdf">DoE Aug 2026</a></td>
+</tr>
+<tr>
+<td>Monthly message (August 2026)</td>
+<td>San Jose scale / woolly apple aphid (more than 13 SJS crawlers per cm2 of twig, or WAA colonies on terminal shoots)</td>
+<td>Chlorpyriphos 20 EC (100 ml); Quinalphos 25 EC (100 ml); Thiacloprid 21.7 SC (40 ml)</td>
+<td>as listed</td>
+<td>Need-based.</td>
+<td>[V]</td>
+<td><a href="https://skuastkashmir.ac.in/frmPDF.aspx?FN=August+2026+03082026.pdf">DoE Aug 2026</a></td>
+</tr>
+<tr>
+<td>Monthly message (August 2026)</td>
+<td>European red mite / two-spotted mite (more than 15 per leaf)</td>
+<td>Fenazaquin 10 EC (40 ml); Etoxazole 10% SC (110 ml); Cyenopyrafen 30 SC (30 ml)</td>
+<td>as listed</td>
+<td>Need-based. Stop insecticides/acaricides 14 days before harvest (guide says stop all sprays 3-4 weeks before).</td>
+<td>[V]</td>
+<td><a href="https://skuastkashmir.ac.in/frmPDF.aspx?FN=August+2026+03082026.pdf">DoE Aug 2026</a></td>
+</tr>
+<tr>
+<td>Monthly message (April 2026)</td>
+<td>Sticker in rainy season (any fungicide stage)</td>
+<td>Sandovit (sticker)</td>
+<td>50-75 ml</td>
+<td>Never with Dodine.</td>
+<td>[V]</td>
+<td><a href="https://skuastkashmir.ac.in/frmPDF.aspx?FN=April+2026+06-04-2026.pdf">DoE Apr 2026</a></td>
+</tr>
+</tbody>
+</table></div>
+<h4>1.3 Spray rules (IMG 2026 instructions)</h4>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Rule</th>
+<th>Tag</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Do not mix fungicides, insecticides and spray suspensions; keep 3-4 days between an insecticide and a fungicide spray.</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td>If heavy rain falls within 12 hours of a spray made without adjuvant or sticker, repeat it immediately.</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td>Do not use the same pesticide in two consecutive sprays.</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td>No spray in full bloom. Stop insecticide and fungicide sprays 3-4 weeks before harvest (but see the conflicts below).</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td>Always spray before rain. Avoid spraying right after severe rain after 15 June, especially at low altitude.</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td>Spray early morning or evening; avoid heat and rain (phytotoxicity). Tell nearby beekeepers the spray time and keep colonies away.</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td>Use only SKUAST-K recommended brands and doses; avoid tank-mixing (SKUAST-K DoE, 2 Jul 2026).</td>
+<td>[V]</td>
+<td><a href="https://risingkashmir.com/top-stories/skuast-k-issues-dos-and-donts-for-apple-growers-ahead-farming-season-12128701">Rising Kashmir</a></td>
+</tr>
+<tr>
+<td>After hail (May 2026 advisory, newspaper report): protective fungicide once weather stabilises, then 0.2% urea 3 days later; if a systemic was applied just before the hail, wait 4-5 days before reapplying.</td>
+<td>[V]</td>
+<td><a href="https://www.greaterkashmir.com/education/skuast-k-flags-disease-risk-after-hailstorms-advises-preventive-action-11792888">Greater Kashmir, 3 May 2026</a></td>
+</tr>
+<tr>
+<td>2023 guide only: no HMO beyond green tip; Captan 50 WP at least 10 days after the oil spray. Not restated in IMG 2026.</td>
+<td>[V]</td>
+<td><a href="https://theorchardmaster.in/wp-content/uploads/2023/08/Advisory-for-Management-of-apple-2023.pdf">Guide 2023</a></td>
+</tr>
+</tbody>
+</table></div>
+<h4>1.4 Waiting periods (pre-harvest interval, days, IMG 2026 table)</h4>
+<p>Growers must not harvest, cut grass or let poultry or livestock into the orchard until the waiting period is over [V].</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Product</th>
+<th>Days</th>
+<th>Product</th>
+<th>Days</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Hexaconazole 5 EC</td>
+<td>10</td>
+<td>Flusilazole 40 EC</td>
+<td>25</td>
+</tr>
+<tr>
+<td>Fluxapyroxad 250 g/l SC</td>
+<td>14</td>
+<td>Fluopyram 17.7% SC</td>
+<td>7</td>
+</tr>
+<tr>
+<td>Difenoconazole 25 EC</td>
+<td>15</td>
+<td>Tebuconazole 17.7% SC</td>
+<td>6</td>
+</tr>
+<tr>
+<td>Pyraclostrobin 250 g/l 500 SC</td>
+<td>25</td>
+<td>Trifloxystrobin 25 WG</td>
+<td>4</td>
+</tr>
+<tr>
+<td>Ziram 80 WP</td>
+<td>17</td>
+<td>Boscalid 25.2 WG</td>
+<td>13</td>
+</tr>
+<tr>
+<td>Metiram 70 WG</td>
+<td>11</td>
+<td>Myclobutanil 10 WP</td>
+<td>15</td>
+</tr>
+<tr>
+<td>Dodine 65 WP</td>
+<td>22</td>
+<td>Imidacloprid 17.8 SL</td>
+<td>11</td>
+</tr>
+<tr>
+<td>Penconazole 10 EC</td>
+<td>13</td>
+<td>Spiromesifen 22.9 SC</td>
+<td>9</td>
+</tr>
+<tr>
+<td>Captan 50 WP</td>
+<td>1 (unusually short; reproduced as printed)</td>
+<td>Hexythiazox 5.45 EC</td>
+<td>13</td>
+</tr>
+<tr>
+<td>Propineb 70 WP</td>
+<td>29</td>
+<td>Propargite 57 EC</td>
+<td>9</td>
+</tr>
+<tr>
+<td>Chlorothalonil 75 WP</td>
+<td>36</td>
+<td>Mancozeb 75</td>
+<td>14</td>
+</tr>
+</tbody>
+</table></div>
+<p>Tag [V]; source <a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a>. Imidacloprid 17.8 SL and Propargite 57 EC appear in this table but in no stage row.</p>
+<h4>1.5 Conflicts in SKUAST's own 2026 documents (do not show as settled)</h4>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Issue</th>
+<th>IMG 2026 says</th>
+<th>Other 2026 SKUAST source says</th>
+<th>Tag</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Zineb + Hexaconazole at pink bud and fruitlet</td>
+<td>"Hexaconazole 5%", 125 g</td>
+<td>Annexure (Avtar) and FD-IV row: 4% 72 WP; Apr and Aug messages: 0.1% = 100 g; 2023 guide: 100 g. Treat "5%" as a typo; dose unresolved.</td>
+<td>[V]</td>
+<td><a href="https://skuastkashmir.ac.in/frmPDF.aspx?FN=April+2026+06-04-2026.pdf">DoE Apr 2026</a></td>
+</tr>
+<tr>
+<td>Mancozeb 63% + Carbendazim 12% at pink bud</td>
+<td>"250" with no unit, called WP</td>
+<td>250 g at later stages; annexure calls it WG (SAAF)</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td>Pre-harvest storage fungicide timing</td>
+<td>15-20 days before harvest</td>
+<td>Aug 2026 message: 25 days before harvest; IMG's own PHI for Propineb is 29 days</td>
+<td>[V]</td>
+<td><a href="https://skuastkashmir.ac.in/frmPDF.aspx?FN=August+2026+03082026.pdf">DoE Aug 2026</a></td>
+</tr>
+<tr>
+<td>When to stop spraying</td>
+<td>All insecticide and fungicide sprays stop 3-4 weeks before harvest</td>
+<td>Aug 2026: stop insecticides/acaricides 14 days before harvest</td>
+<td>[V]</td>
+<td><a href="https://skuastkashmir.ac.in/frmPDF.aspx?FN=August+2026+03082026.pdf">DoE Aug 2026</a></td>
+</tr>
+<tr>
+<td>Fruit borer pheromone traps</td>
+<td>8-10/ha (monitoring), 40/ha (mass trapping)</td>
+<td>Aug 2026: 20/ha</td>
+<td>[V]</td>
+<td><a href="https://skuastkashmir.ac.in/frmPDF.aspx?FN=August+2026+03082026.pdf">DoE Aug 2026</a></td>
+</tr>
+<tr>
+<td>Fruit fly methyl eugenol traps</td>
+<td>25-40/ha</td>
+<td>Aug 2026: 25/ha from onset of flowering</td>
+<td>[V]</td>
+<td><a href="https://skuastkashmir.ac.in/frmPDF.aspx?FN=August+2026+03082026.pdf">DoE Aug 2026</a></td>
+</tr>
+<tr>
+<td>Pink bud if HMO missed</td>
+<td>Chlorpyriphos only</td>
+<td>Apr 2026 also allows Quinalphos 25 EC (both 100 ml)</td>
+<td>[V]</td>
+<td><a href="https://skuastkashmir.ac.in/frmPDF.aspx?FN=April+2026+06-04-2026.pdf">DoE Apr 2026</a></td>
+</tr>
+<tr>
+<td>Sticker</td>
+<td>No sticker recommendation in the instruction list</td>
+<td>Apr 2026: Sandovit 50-75 ml/100 L in rainy season, never with Dodine (2025 guide said the same)</td>
+<td>[V]</td>
+<td><a href="https://skuastkashmir.ac.in/frmPDF.aspx?FN=April+2026+06-04-2026.pdf">DoE Apr 2026</a></td>
+</tr>
+<tr>
+<td>Mite action thresholds</td>
+<td>4-5/leaf (petal fall), &gt;5 (fruitlet), &gt;10 (FD-I, FD-III), &gt;20 (post-harvest)</td>
+<td>Aug 2026: &gt;15/leaf</td>
+<td>[V]</td>
+<td><a href="https://skuastkashmir.ac.in/frmPDF.aspx?FN=August+2026+03082026.pdf">DoE Aug 2026</a></td>
+</tr>
+</tbody>
+</table></div>
+<p>Analysis: the app should hold each conflicting value back, show "confirm with your Horticulture Development Officer", and ask SKUAST-K for a written ruling as part of the partnership.</p>
+<h4>1.6 High-density plantations (HDP)</h4>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Fact</th>
+<th>Tag</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>There is <strong>no separate SKUAST-K spray schedule for HDP</strong> in IMG 2026. The chemicals and doses are the same as for traditional orchards. The report's line that the schedule "has high-density variants" is not supported.</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td>HDP appears only as cultural notes: at petal fall scout HDP closely and check the lower side of leaves; remove scab-infected leaves before rain ("practical in HDP"); post-harvest, tighten trellis wires (and close anti-hail nets, stake branches against snow).</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td>The IMG 2026 fertilizer annexure is labelled "Conventional Orchards". The only HDP fertilizer table is the tentative REAC 2026 one and the SKUAST-Jammu PoP (section 2).</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h3>2. Nutrition, soil and high-density orchards</h3>
+<h4>2.1 Fertilizer by tree age, traditional (conventional) orchards, g per tree per year</h4>
+<p>The <strong>official IMG 2026 Annexure-1</strong> is the source to use. A <strong>tentative</strong> SKUAST-K schedule presented to the REAC on 16 July 2026 has the same urea and DAP but lower MOP for years 3-14, and adds vermicompost. Whether REAC adopted it is not known. Do not show the REAC MOP values as the recommendation.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Age (yr)</th>
+<th>Urea</th>
+<th>DAP</th>
+<th>MOP (IMG 2026)</th>
+<th>MOP (REAC tentative)</th>
+<th>FYM kg (IMG 2026)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>50</td>
+<td>25</td>
+<td>80</td>
+<td>80</td>
+<td>10-15</td>
+</tr>
+<tr>
+<td>2</td>
+<td>100</td>
+<td>50</td>
+<td>160</td>
+<td>160</td>
+<td>10-15</td>
+</tr>
+<tr>
+<td>3</td>
+<td>150</td>
+<td>75</td>
+<td>250</td>
+<td>240</td>
+<td>10-15</td>
+</tr>
+<tr>
+<td>4</td>
+<td>200</td>
+<td>100</td>
+<td>330</td>
+<td>320</td>
+<td>10-15</td>
+</tr>
+<tr>
+<td>5</td>
+<td>250</td>
+<td>125</td>
+<td>420</td>
+<td>400</td>
+<td>10-15</td>
+</tr>
+<tr>
+<td>6</td>
+<td>350</td>
+<td>175</td>
+<td>580</td>
+<td>550</td>
+<td>15-25</td>
+</tr>
+<tr>
+<td>7</td>
+<td>450</td>
+<td>225</td>
+<td>750</td>
+<td>720</td>
+<td>15-25</td>
+</tr>
+<tr>
+<td>8</td>
+<td>550</td>
+<td>275</td>
+<td>920</td>
+<td>870</td>
+<td>15-25</td>
+</tr>
+<tr>
+<td>9</td>
+<td>650</td>
+<td>325</td>
+<td>1080</td>
+<td>1000</td>
+<td>15-25</td>
+</tr>
+<tr>
+<td>10</td>
+<td>750</td>
+<td>375</td>
+<td>1250</td>
+<td>1150</td>
+<td>15-25</td>
+</tr>
+<tr>
+<td>11</td>
+<td>900</td>
+<td>450</td>
+<td>1500</td>
+<td>1450</td>
+<td>25-40</td>
+</tr>
+<tr>
+<td>12</td>
+<td>1050</td>
+<td>525</td>
+<td>1750</td>
+<td>1700</td>
+<td>25-40</td>
+</tr>
+<tr>
+<td>13</td>
+<td>1200</td>
+<td>600</td>
+<td>2000</td>
+<td>1900</td>
+<td>25-40</td>
+</tr>
+<tr>
+<td>14</td>
+<td>1350</td>
+<td>675</td>
+<td>2250</td>
+<td>2100</td>
+<td>25-40</td>
+</tr>
+<tr>
+<td>15 (IMG: "15 &amp; above")</td>
+<td>1500</td>
+<td>750</td>
+<td>2500</td>
+<td>2500</td>
+<td>25-40 (40-60 kg from year 16)</td>
+</tr>
+</tbody>
+</table></div>
+<p>Tag [V]. Sources: <a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026 Annexure-1</a> (verifier read it there), <a href="https://skuastkashmir.ac.in/frmPDF.aspx?FN=Conduct+of+58th+59th+Research+and+Extension+Advisory+committee+REACMeeting.pdf">REAC 2026</a>. FYM goes on in February-March. IMG 2026 says inorganic doses should follow soil and leaf analysis where available [V]. REAC adds vermicompost 4-15 kg/tree by age [V]. The J&amp;K Horticulture FAQ quotes the same year-1 and 15+ endpoints, but the page could not be opened (UNVERIFIED, <a href="https://horticulture.jk.gov.in/FAQs.html">FAQ</a>).</p>
+<h4>2.2 Fertilizer timing and placement</h4>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Fact</th>
+<th>Tag</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Split: at green tip, FYM + 1/3 urea + all DAP + 1/2 MOP; at fruit development I, 1/3 urea + remaining 1/2 MOP; at fruit development III, the last 1/3 urea. Same in the 2023 guide and IMG 2026.</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td><strong>Corrected</strong> (the 2023 rule "keep 60 cm around the trunk undisturbed; apply 1-2 ft from trunk" is superseded): IMG 2026 says keep 1-2 feet of soil around the trunk undisturbed, apply fertilizers along the canopy line, and raise phosphorus by 20% in alkaline or acidic soils.</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td>No extra soil nitrogen in August: late N delays maturity, reduces colour and increases storage disorders.</td>
+<td>[V]</td>
+<td><a href="https://skuastkashmir.ac.in/frmPDF.aspx?FN=August+2026+03082026.pdf">DoE Aug 2026</a></td>
+</tr>
+<tr>
+<td>SKUAST-Jammu HDP PoP words timing differently: basal dose about 3 weeks before bloom, second about 3 weeks after fruit set, third urea in June-July.</td>
+<td>[V]</td>
+<td><a href="https://skuastjammu.ac.in/newsite/pdf/POP-High-Density-Apple.pdf">SKUAST-J HDP PoP</a></td>
+</tr>
+</tbody>
+</table></div>
+<h4>2.3 Foliar nutrition</h4>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Nutrient</th>
+<th>IMG 2026 (use this)</th>
+<th>Other SKUAST sources (conflicting)</th>
+<th>Tag</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calcium chloride</td>
+<td>3-4 g/L at FD I, II and III, plus need-based pre-harvest</td>
+<td>2023 guide: 4 g/L x3; REAC tentative: 3 g/L; Aug 2026 Soil Science: 0.4-0.5% (4-5 g/L) or Ca nitrate 0.5-0.75% every 10-15 days</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a>, <a href="https://skuastkashmir.ac.in/frmPDF.aspx?FN=August+2026+03082026.pdf">DoE Aug 2026</a></td>
+</tr>
+<tr>
+<td>Boron</td>
+<td>1-1.5 g/L need-based at pink bud, or petal fall if missed</td>
+<td>REAC: boric acid 1.5 g/L at pink bud and petal fall; Aug 2026: boric acid 0.1%</td>
+<td>[V]</td>
+<td>same</td>
+</tr>
+<tr>
+<td>Zinc sulphate</td>
+<td>No routine spray in IMG 2026</td>
+<td>2023 guide: 3-4 g/L at petal fall; REAC: 1 g/L at green tip/pink bud and after harvest; Aug 2026: zinc only after leaf analysis confirms need</td>
+<td>[V]</td>
+<td>same</td>
+</tr>
+<tr>
+<td>Potassium sulphate (colour)</td>
+<td>4-5 g/L need-based at FD III and pre-harvest</td>
+<td>Aug 2026 Fruit Science: 5 g/L for late varieties; same message's Soil Science: 1% (10 g/L) for heavy crop or deficiency</td>
+<td>[V]</td>
+<td>same</td>
+</tr>
+<tr>
+<td>Urea (post-harvest)</td>
+<td>3-4% when 50% of leaves yellow naturally, in scab/Alternaria-infected orchards; 5% on orchard floor at dormancy if missed</td>
+<td>IMG 2025: 2-3% two weeks after harvest plus 4% at 50% yellowing; SKUAST-J: 2-3%</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td>Urea (quick N recovery)</td>
+<td>not in IMG 2026</td>
+<td>J&amp;K Horticulture FAQ: 0.5% (page not opened)</td>
+<td>UNVERIFIED</td>
+<td><a href="https://horticulture.jk.gov.in/FAQs.html">FAQ</a></td>
+</tr>
+<tr>
+<td>Calcium (HDP, SKUAST-Jammu)</td>
+<td>n/a</td>
+<td>0.3% Ca nitrate or CaCl2 fortnightly from mid-June to picking; CaCl2 can scorch leaves in heat. (The same PoP's "boron 1-1.5 per cent" is probably a typo; do not use.)</td>
+<td>[V]</td>
+<td><a href="https://skuastjammu.ac.in/newsite/pdf/POP-High-Density-Apple.pdf">SKUAST-J HDP PoP</a></td>
+</tr>
+</tbody>
+</table></div>
+<p>Background on post-harvest urea timing: a 2021 article says the best time is just before natural leaf fall in early November, and early or mid-October sprays delay hardening [V] (<a href="https://kashmirreader.com/2021/10/18/clearing-misunderstandings-vis-a-vis-post-harvest-urea-application-in-apple/">Kashmir Reader 2021</a>). Prefer the IMG 2026 trigger (50% of leaves yellow).</p>
+<h4>2.4 Soil and leaf testing</h4>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Fact</th>
+<th>Tag</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Soil test after harvest; leaf tissue test at FD III. Leaf sampling window 15 July-15 August, 25 trees and 100-200 leaves per sample.</td>
+<td>[V]</td>
+<td><a href="https://skuastkashmir.ac.in/frmPDF.aspx?FN=August+2026+03082026.pdf">DoE Aug 2026</a>, <a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td>Directorate of Horticulture Kashmir Soil and Leaf Analysis Laboratory, Rajbagh, Srinagar (est. March 1995).</td>
+<td>UNVERIFIED</td>
+<td><a href="https://hortikashmir.gov.in/Soil.html">hortikashmir.gov.in</a></td>
+</tr>
+<tr>
+<td>Soil testing lab at Shopian and mobile labs at Anantnag and Baramulla (undated page).</td>
+<td>UNVERIFIED</td>
+<td><a href="https://horticulture.jk.gov.in/Schemes.html">horticulture.jk.gov.in</a></td>
+</tr>
+</tbody>
+</table></div>
+<h4>2.5 High-density orchards</h4>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Fact</th>
+<th>Tag</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HDP fertilizer, g/tree/yr (urea/DAP/MOP; vermicompost and FYM kg): yr 0 only VC 2, FYM 3; yr 1 108/54/100, VC 2.5, FYM 4; yr 2 206/108/200, 3, 5; yr 3 303/162/300, 3.5, 6; yr 4 401/217/400, 4, 7; yr 5 488/271/500, 5, 8. TENTATIVE (REAC). SKUAST-J has the same table, with year 5 as "5 and above" (N 225, P2O5 125, K2O 300 g).</td>
+<td>[V]</td>
+<td><a href="https://skuastkashmir.ac.in/frmPDF.aspx?FN=Conduct+of+58th+59th+Research+and+Extension+Advisory+committee+REACMeeting.pdf">REAC 2026</a>, <a href="https://skuastjammu.ac.in/newsite/pdf/POP-High-Density-Apple.pdf">SKUAST-J HDP PoP</a></td>
+</tr>
+<tr>
+<td>Fertigation principles only (no dose table): start N at rapid shoot growth, split over 4-6 weeks, finish by mid-July; fertigation can halve N doses.</td>
+<td>[V]</td>
+<td><a href="https://skuastjammu.ac.in/newsite/pdf/POP-High-Density-Apple.pdf">SKUAST-J HDP PoP</a></td>
+</tr>
+<tr>
+<td>Drip water need in July (Shalimar campus research): 2.1-2.5 L/plant/day in year 1 to 8.0-8.5 in year 6+.</td>
+<td>[V]</td>
+<td><a href="https://skuastjammu.ac.in/newsite/pdf/POP-High-Density-Apple.pdf">SKUAST-J HDP PoP</a></td>
+</tr>
+<tr>
+<td>Densities: medium 1,111/ha (3x3 m on MM-106, MM-111, M-7); high 2,222 or 3,333/ha (1.5x3 or 1x3 m on dwarfing stocks), bearing in year 2-3, commercial yield year 5-6; traditional 150-200/ha.</td>
+<td>[V]</td>
+<td><a href="https://skuastjammu.ac.in/newsite/pdf/POP-High-Density-Apple.pdf">SKUAST-J HDP PoP</a></td>
+</tr>
+<tr>
+<td>M-9: tree 25-30% of full size, shallow roots, needs irrigation and support, prone to suckering, susceptible to woolly aphid and fire blight. MM-111: well anchored, resists collar rot and woolly aphid, suits heavy poorly drained soils.</td>
+<td>[V]</td>
+<td><a href="https://skuastjammu.ac.in/newsite/pdf/POP-High-Density-Apple.pdf">SKUAST-J HDP PoP</a></td>
+</tr>
+<tr>
+<td>Department supplies M9, MM-106 and MM-111 rootstock to nurseries at 50% subsidy (2022 nursery scheme; current status not checked).</td>
+<td>[V]</td>
+<td><a href="https://risingkashmir.com/horticulture-deptt-launches-new-scheme-to-improve-high-density-apple-production/">Rising Kashmir 2022</a></td>
+</tr>
+<tr>
+<td>"3.0 x 1.5 m on M-9" (Horticulture FAQ) could not be opened; SKUAST-J gives 1x3 and 1.5x3 m.</td>
+<td>UNVERIFIED</td>
+<td><a href="https://horticulture.jk.gov.in/FAQs.html">FAQ</a></td>
+</tr>
+<tr>
+<td>Kashmir Division HDP: 1,103.79 ha, about 4,428 farmers; ~90% Gala and Red Delicious strains (Assembly reply, Sep 2026).</td>
+<td>[V]</td>
+<td><a href="https://www.greaterkashmir.com/kashmir/1103-hectares-under-high-density-apple-plantations-in-kashmir-4428-farmers-covered-12580674">Greater Kashmir, 27 Sep 2026</a></td>
+</tr>
+<tr>
+<td>Pollinizers by variety (no percentage given anywhere): Gala Redlum: Braeburn, Granny Smith, Cox, Fuji, Golden Delicious; Red Chief Camspur: Golden Delicious, Gala, Fuji, Golden Hornet, Elstar; Red Delicious Silver Spur: Elstar, Gala, Golden Delicious, Granny Smith; Granny Smith: Gala, Red Delicious, Golden Delicious, Idared.</td>
+<td>[V]</td>
+<td><a href="https://skuastjammu.ac.in/newsite/pdf/POP-High-Density-Apple.pdf">SKUAST-J HDP PoP</a></td>
+</tr>
+<tr>
+<td>Picking and cold-store life: Gala Redlum early-mid Aug (7-8 months); Gala Mitch mid-late Aug; Red Chief, Red Velox mid-Sep; Red Delicious Silver Spur, Super Chief late Sep (6-7 months); Golden Delicious Reinders early Oct; Granny Smith early-mid Oct; Fuji Zehn Aztec mid-late Oct (7-8 months).</td>
+<td>[V]</td>
+<td><a href="https://skuastjammu.ac.in/newsite/pdf/POP-High-Density-Apple.pdf">SKUAST-J HDP PoP</a></td>
+</tr>
+<tr>
+<td>Bee hives: IMG 2026 says 3-4 per hectare at 5-10% bloom; the Apr 2026 message says 2 per acre (about 4.9/ha) at 10-15% bloom or when king flowers open, and bouquets where pollinizers are lacking. Same message's apiculture section says "@3/ha".</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a>, <a href="https://skuastkashmir.ac.in/frmPDF.aspx?FN=April+2026+06-04-2026.pdf">DoE Apr 2026</a></td>
+</tr>
+<tr>
+<td>HDP establishment cost (3,333 trees/ha, 2021-era department scheme costing): about Rs 41 lakh/ha (Rs 22 lakh government, Rs 19 lakh beneficiary), plants at Rs 500.</td>
+<td>[V]</td>
+<td><a href="https://skuastjammu.ac.in/newsite/pdf/POP-High-Density-Apple.pdf">SKUAST-J HDP PoP</a></td>
+</tr>
+<tr>
+<td>Units: 1 acre = 8 kanal; 1 kanal ≈ 505.86 m²; 1 ha ≈ 19.77 kanal.</td>
+<td>[V]</td>
+<td><a href="https://kashmirreader.com/2021/10/18/clearing-misunderstandings-vis-a-vis-post-harvest-urea-application-in-apple/">Kashmir Reader 2021</a></td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h3>3. Harvest, grading and storage</h3>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Fact</th>
+<th>Tag</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Maturity indices: starch index 2.5 (CA storage) or 3.5 (table) on a 0-6 scale; easy separation from spur; &gt;75% red (variety-specific); TSS 12-14 °Brix; firmness 16-18 lb/sq inch. IMG 2026 changes seed colour to "&gt;75% dark brown" and adds days after full bloom (variety-specific).</td>
+<td>[V]</td>
+<td><a href="https://www.scribd.com/document/1002728111/Apple-Spray-Schedule-2026-SKUAST-K">IMG 2026</a></td>
+</tr>
+<tr>
+<td>Early varieties: harvest at starch-iodine 3-4/6, not for long storage. Harvest at proper size and at least 70% of varietal colour, upward twist, 2-3 pickings a week or fortnight apart.</td>
+<td>[V]</td>
+<td><a href="https://skuastkashmir.ac.in/frmPDF.aspx?FN=August+2026+03082026.pdf">DoE Aug 2026</a></td>
+</tr>
+<tr>
+<td>Red Delicious optimal harvest (single 2023-24 study): 161 days from full bloom Srinagar, 163 Budgam, 162 Pattan, Anantnag and Shopian, 152 Kupwara.</td>
+<td>[V]</td>
+<td><a href="https://www.agriculturaljournals.com/archives/2026.v8.i3.A.1227/effect-of-harvesting-dates-on-physical-characteristics-of-apple-red-delicious-across-various-locations-of-the-kashmir-valley">Agricultural journals 2026</a></td>
+</tr>
+<tr>
+<td>Handling: padded baskets, shade, move to godown quickly; pickers keep nails short.</td>
+<td>[V]</td>
+<td><a href="https://skuastkashmir.ac.in/frmPDF.aspx?FN=August+2026+03082026.pdf">DoE Aug 2026</a></td>
+</tr>
+<tr>
+<td>Grades (SKUAST-K food scientist, opinion piece): about 8 lakh MT A-grade (needs CA), 7 lakh MT B-grade (straight to market), 6 lakh MT C-grade (processing only, should not leave the Valley as fresh fruit). No official J&amp;K grading norm found.</td>
+<td>[V]</td>
+<td><a href="https://kashmirlife.net/saving-kashmirs-apple-cart-vol-17-issue-46-422464/">Kashmir Life, 10 Feb 2026</a></td>
+</tr>
+<tr>
+<td>1-MCP within 1-2 days of harvest at starch 2.5-3.0; CA fruit then keeps up to 25 days after removal against 8-10 untreated. Sachets Rs 14 per 10 kg, Rs 20 per 17-kg box (same opinion piece).</td>
+<td>[V]</td>
+<td><a href="https://kashmirlife.net/saving-kashmirs-apple-cart-vol-17-issue-46-422464/">Kashmir Life, 10 Feb 2026</a></td>
+</tr>
+<tr>
+<td>CA rent (one grower, Lassipora): Rs 35 per 17-kg crate per month, about Rs 180-220 per crate for 5-6 months; can rise at peak. Transport to the store about Rs 100-110 per 20-kg box over ~32 km (another grower).</td>
+<td>[V]</td>
+<td><a href="https://101reporters.com/article/agriculture/Kashmirs_apple_growers_have_to_pay_to_replace_a_winter_that_once_came_free">101Reporters, 21 Oct 2026</a></td>
+</tr>
+<tr>
+<td>2025: about Rs 180 per 20-kg box for three months (columnist). 2022: Rs 2/kg/month plus Rs 2/kg grading and Rs 2/kg packing (CA association president).</td>
+<td>[V]</td>
+<td><a href="https://kashmirobserver.net/2025/09/19/rotting-apples-on-kashmirs-roads-show-why-cold-storage-cant-wait/">Kashmir Observer 2025</a>, <a href="https://kashmirlife.net/selfless-grower-vol-14-issue-32-303493/">Kashmir Life 2022</a></td>
+</tr>
+<tr>
+<td>Capacity: 76 CA stores, 2.92 lakh MT, against a 6 lakh MT need; mostly Lassipora and Aglar; Rs 600 crore budgeted for 40 new stores (2026-27); no scheme pays growers' storage rent. Production 21.09 lakh MT in 2024-25 (Economic Survey, as cited).</td>
+<td>[V]</td>
+<td><a href="https://101reporters.com/article/agriculture/Kashmirs_apple_growers_have_to_pay_to_replace_a_winter_that_once_came_free">101Reporters</a></td>
+</tr>
+<tr>
+<td>2026 season: cold stores booked months ahead, many full by late September; operators require grading first.</td>
+<td>[V]</td>
+<td><a href="https://kashmirobserver.net/2026/09/23/kashmir-apple-growers-find-relief-as-markets-storage-demand-improve/">Kashmir Observer, 23 Sep 2026</a></td>
+</tr>
+</tbody>
+</table></div>
+<p>No CA set-points (temperature, O2, CO2) from a Kashmir source were found.</p>
+<hr />
+<h3>4. Pests and diseases: corrections and status</h3>
+<h4>4.1 Fire blight</h4>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Fact</th>
+<th>Tag</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>EPPO: India "Absent, unreliable record" (evaluation based on 1992 information; one doubtful 1978 record on rose). No J&amp;K record.</td>
+<td>[V]</td>
+<td><a href="https://gd.eppo.int/taxon/ERWIAM/distribution/IN">EPPO</a></td>
+</tr>
+<tr>
+<td>No peer-reviewed or official report of fire blight in J&amp;K was found. A 2024 SKUAST-K paper mentions it only as a pathogen spreading in China.</td>
+<td>[V]</td>
+<td><a href="https://www.nature.com/articles/s41598-024-61585-3">Sci Rep 2024</a></td>
+</tr>
+<tr>
+<td>Symptoms: shoot tips wilt and blacken and bend into a hook; ooze in warm humid weather; dark sunken cankers where the bacterium overwinters.</td>
+<td>[V]</td>
+<td><a href="https://netreefruit.org/apples/diseases/fire-blight">netreefruit</a></td>
+</tr>
+</tbody>
+</table></div>
+<p>Analysis: keep fire blight as "not known in J&amp;K, report suspected cases to the Horticulture Department". Never give it as a diagnosis.</p>
+<h4>4.2 Codling moth</h4>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Fact</th>
+<th>Tag</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Corrected:</strong> codling moth (<em>Cydia pomonella</em>) <strong>is present in the Kashmir valley</strong>. SKUAST-K confirmed it by morphology and COI barcoding at Nadihal, Chak Gojri and Delina (Baramulla), after heavy premature fruit drop in 2019.</td>
+<td>[V]</td>
+<td><a href="https://www.nature.com/articles/s41598-024-61585-3">Sci Rep 14:11972, 2024</a></td>
+</tr>
+<tr>
+<td>Before this it was known in India only from Ladakh; the Kashmir population most likely came from Leh (the paper says "possible route").</td>
+<td>[V]</td>
+<td><a href="https://www.nature.com/articles/s41598-024-61585-3">Sci Rep 2024</a></td>
+</tr>
+<tr>
+<td>3 full generations plus a half overwintering generation; in 2022 the first ran standard weeks 16-25 (mid-April to late June), the third ended week 42 (mid-October). Baramulla karewa data.</td>
+<td>[V]</td>
+<td><a href="https://www.nature.com/articles/s41598-024-61585-3">Sci Rep 2024</a></td>
+</tr>
+<tr>
+<td>April 2023 news: officials named Baramulla, Bandipora, Pulwama, Anantnag, Shopian and Budgam; present unidentified for about three years. (The "up to 80%" line is a generic statement, not a Kashmir measurement.)</td>
+<td>[V]</td>
+<td><a href="https://www.freshplaza.com/asia/article/9518232/codling-moth-hits-orchards-in-parts-of-kashmir/">FreshPlaza / Rising Kashmir</a></td>
+</tr>
+<tr>
+<td>A 2023 pheromone-trap paper reports it in the Baramulla "incursion belt" and calls for containment elsewhere; whether it found it "only" there could not be checked.</td>
+<td>UNVERIFIED</td>
+<td><a href="https://www.researchgate.net/publication/373385712_Pheromone-based_monitoring_of_codling_moth_in_isolated_belt_of_Baramulla_Jammu_and_Kashmir_India">ResearchGate</a></td>
+</tr>
+<tr>
+<td>SKUAST-K 2026 messages carry "fruit borer" (not named codling moth) management: survey, awareness, pheromone traps (8-10/ha April; 20/ha August), sprays if adults are trapped (rows in section 1.2).</td>
+<td>[V]</td>
+<td><a href="https://skuastkashmir.ac.in/frmPDF.aspx?FN=April+2026+06-04-2026.pdf">DoE Apr 2026</a></td>
+</tr>
+<tr>
+<td>Ladakh: declared a quarantine pest decades ago, with an embargo on moving apples out of Ladakh (2018 article).</td>
+<td>[V]</td>
+<td><a href="https://www.greaterkashmir.com/opinion/scourge-of-codling-moth-in-ladakh-and-its-management/">Greater Kashmir 2018</a></td>
+</tr>
+<tr>
+<td>India's domestic quarantine (DIP Act) provided for restricting inter-state movement of nine pests incl. codling moth, San José scale and apple scab (2010 policy paper; current DPPQS schedule not checked).</td>
+<td>[V]</td>
+<td><a href="https://naas.org.in/Policy%20Papers/Policy%2044.pdf">NAAS Policy Paper 44</a></td>
+</tr>
+</tbody>
+</table></div>
+<h4>4.3 Apple scab in 2026</h4>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Fact</th>
+<th>Tag</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Two weeks of rain in late July-early August 2026 triggered secondary scab in Shopian; J&amp;K had 35% surplus rain in July. Necrotic leaf blotch, Gala cracking and waterlogging reported too.</td>
+<td>[V]</td>
+<td><a href="https://www.greaterkashmir.com/business/continuous-rains-trigger-secondary-apple-scab-in-shopian-orchards-12243611">Greater Kashmir, 9 Aug 2026</a></td>
+</tr>
+<tr>
+<td>Secondary scab reported in Nagbal (Shopian), Dachnipora (Anantnag), Aharbal (Kulgam), Shadimarg (Pulwama).</td>
+<td>[V]</td>
+<td><a href="https://kashmirthunder.in/index.php/2026/08/12/apple-scab-threat-looms-over-kashmir-orchards/">Kashmir Thunder, 12 Aug 2026</a></td>
+</tr>
+<tr>
+<td>By Diwali, dealers' association: about 50-60% of apples reaching mandis were Grade B/C (trade estimate, no official survey).</td>
+<td>[V]</td>
+<td><a href="https://kashmirobserver.net/2026/11/01/kashmiri-apple-supplies-fall-short-of-diwali-demand-amid-fungal-outbreak/">Kashmir Observer, 1 Nov 2026</a></td>
+</tr>
+<tr>
+<td>Sopore, Nov 2026: B/C-grade fruit hit by scab, Alternaria, leaf miner and aphids fetched about Rs 200-250 a box.</td>
+<td>[V]</td>
+<td><a href="https://risingkashmir.com/anchor/festive-rush-bitter-returns-at-asias-second-largest-fruit-market-12777464">Rising Kashmir, 3 Nov 2026</a></td>
+</tr>
+<tr>
+<td>SKUAST-K scientist (interview): Delicious-type apples lose 30-40% a year to scab; about Rs 325 crore of fungicide used a year.</td>
+<td>[V]</td>
+<td><a href="https://kashmirlife.net/we-found-around-20-new-scab-resistance-genes-in-kashmir-apples-vol-18-issue-28-454300/">Kashmir Life, 8 Oct 2026</a></td>
+</tr>
+<tr>
+<td>No source links a measured share of 2026 scab losses to fake fungicide; reported causes are prolonged rain and humidity.</td>
+<td>[V]</td>
+<td><a href="https://www.greaterkashmir.com/business/government-intensifies-measures-to-curb-spurious-pesticides-in-jk-javid-ahmad-dar-12573218">Greater Kashmir, 24 Sep 2026</a></td>
+</tr>
+<tr>
+<td>Biology: ascospores mature over 4-6 weeks from 1/4-inch green to 2-3 weeks after petal fall (primary window); rain-splashed conidia cause secondary cycles all season. Lesions show 9-17 days after infection; infection rare above 78°F.</td>
+<td>[V]</td>
+<td><a href="https://extension.psu.edu/tree-fruit-disease-an-apple-scab-review">Penn State</a></td>
+</tr>
+<tr>
+<td>Kashmir isolates of <em>V. inaequalis</em> show a major shift to reduced sensitivity to difenoconazole and flusilazole, stable and with no fitness cost (Sci Rep). A 2018 SKUAST-K thesis found the biggest shift in myclobutanil, then flusilazole.</td>
+<td>[V]</td>
+<td><a href="https://communities.springernature.com/posts/profiling-difenoconazole-and-flusilazole-resistance-fitness-penalty-and-phenotypic-stability-in-venturia-inaequalis">Springer Nature</a>, <a href="https://krishikosh.egranth.ac.in/server/api/core/bitstreams/a46ff331-2ff0-45c9-94d0-47a2320eb681/content">Krishikosh thesis</a></td>
+</tr>
+<tr>
+<td>5% urea on fallen leaves speeds breakdown; spore-reduction strategies cut spore load 50-80% (MSU; page blocked). Penn State encourages fall urea for leaf decomposition.</td>
+<td>UNVERIFIED (figures); [V] (direction)</td>
+<td><a href="https://www.canr.msu.edu/news/reduction_of_overwintering_inoculum_in_orchards_with_apple_scab">MSU</a>, <a href="https://extension.psu.edu/apple-disease-marssonina-blotch">Penn State Marssonina</a></td>
+</tr>
+</tbody>
+</table></div>
+<h4>4.4 Mills (scab infection) table</h4>
+<p>Hours of continuous leaf wetness needed for infection at a given average temperature (average = (lowest + highest during the wet period) / 2; wetting ends when RH falls below 90%; add wet periods re-wetted within 8 hours). Celsius values are conversions.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Avg temp °F (°C)</th>
+<th>Penn State revised Mills, min h</th>
+<th>NEWA (MacHardy-Gadoury) min h</th>
+<th>Jones "Low" (light infection) h</th>
+<th>Moderate h</th>
+<th>Heavy h</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>39 (3.9)</td>
+<td>28</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>41 (5.0)</td>
+<td>21</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>43 (6.1)</td>
+<td>18</td>
+<td>18</td>
+<td>21</td>
+<td>30</td>
+<td>47</td>
+</tr>
+<tr>
+<td>45 (7.2)</td>
+<td>15</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>46 (7.8)</td>
+<td>13</td>
+<td>14</td>
+<td>16</td>
+<td>24</td>
+<td>37</td>
+</tr>
+<tr>
+<td>48 (8.9)</td>
+<td>12</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>50 (10.0)</td>
+<td>11</td>
+<td>11</td>
+<td>14</td>
+<td>19</td>
+<td>29</td>
+</tr>
+<tr>
+<td>52 (11.1)</td>
+<td>9</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>54 (12.2)</td>
+<td>8 (54-56)</td>
+<td>8.5</td>
+<td>11</td>
+<td>16</td>
+<td>24</td>
+</tr>
+<tr>
+<td>57-59 (13.9-15.0)</td>
+<td>7</td>
+<td>7</td>
+<td>10</td>
+<td>14</td>
+<td>22</td>
+</tr>
+<tr>
+<td>60 (15.6)</td>
+<td></td>
+<td>6.5</td>
+<td>9</td>
+<td>13</td>
+<td>20</td>
+</tr>
+<tr>
+<td>61-75 (16.1-23.9)</td>
+<td>6</td>
+<td>6</td>
+<td>9</td>
+<td>12</td>
+<td>18</td>
+</tr>
+<tr>
+<td>77 (25.0)</td>
+<td>8</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>79 (26.1)</td>
+<td>11</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<p>Tag [V]. Sources: <a href="https://extension.psu.edu/tree-fruit-disease-an-apple-scab-review">Penn State</a>, <a href="https://netreefruit.org/apples/diseases/apple-scab">netreefruit</a>. Ascospores are not released in the dark, so night rain is counted from 8:00 a.m. [V] (netreefruit). The APS example (18°C, 9 h = light infection) is UNVERIFIED (<a href="https://www.apsnet.org/edcenter/disandpath/fungalasco/pdlessons/Pages/AppleScab.aspx">APS</a>), but matches the Jones "Low" column. Analysis: the app must name the table version driving its alerts; the Penn State minimum is the most sensitive, Jones "Low" fits "light infection" wording.</p>
+<h4>4.5 Other diseases</h4>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Fact</th>
+<th>Tag</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Alternaria leaf blotch in Kashmir HDP (2021-22): first spots 2nd week of May, blotches by 4th week of May, yellowing and leaf drop by late June.</td>
+<td>[V]</td>
+<td><a href="https://epubs.icar.org.in/index.php/IJAgS/article/download/155250/62990/494987">IJAgS 95(8) 2025</a></td>
+</tr>
+<tr>
+<td>Kashmir leaf blotch/leaf spot is associated with <em>A. alternata</em>, <em>A. tenuissima</em> and <em>A. arborescens</em>; scab is the top foliar disease, Alternaria second.</td>
+<td>[V]</td>
+<td><a href="https://epubs.icar.org.in/index.php/IJAgS/article/download/155250/62990/494987">IJAgS 2025</a></td>
+</tr>
+<tr>
+<td>"Frog-eye leaf spot" is the leaf phase of black rot (<em>Botryosphaeria obtusa</em>): purple-bordered spots with tan centres. Not a name for Alternaria.</td>
+<td>[V]</td>
+<td><a href="https://fruitscout.ca.uky.edu/frog-eye-leaf-spot-apple">Univ. of Kentucky</a></td>
+</tr>
+<tr>
+<td>July 2025: Alternaria and necrotic leaf blotch (a physiological disorder) outbreaks; SKUAST-K pathologist estimated ~30% of farms affected, worse in dense unpruned canopies.</td>
+<td>[V]</td>
+<td><a href="https://www.greaterkashmir.com/front-page-2/kashmirs-apple-economy-under-weather-strain/">Greater Kashmir, 26 Jul 2025</a></td>
+</tr>
+<tr>
+<td>SKUAST-K Aug 2026 gives separate product lists for "Alternaria leaf blotch and scab" and "Marssonina / sooty blotch / flyspeck".</td>
+<td>[V]</td>
+<td><a href="https://skuastkashmir.ac.in/frmPDF.aspx?FN=August+2026+03082026.pdf">DoE Aug 2026</a></td>
+</tr>
+<tr>
+<td>Marssonina: spots from about mid-June on upper surface of mature leaves, 5-10 mm, grey-brown to black with purple edge, then yellowing and leaf drop. Ascospores released from late bloom to petal fall for 3-4 weeks, so protection starts then (Pennsylvania timing).</td>
+<td>[V]</td>
+<td><a href="https://extension.psu.edu/apple-disease-marssonina-blotch">Penn State</a></td>
+</tr>
+<tr>
+<td>Marssonina is established in Kashmir (listed among important diseases). The 2004-05 SKUAST-K survey incidence figures (17-29%) could not be found.</td>
+<td>[V] (established); UNVERIFIED (figures)</td>
+<td><a href="https://epubs.icar.org.in/index.php/IJAgS/article/download/155250/62990/494987">IJAgS 2025</a>, <a href="https://krishikosh.egranth.ac.in/items/8cd5074b-0c3b-4def-9eb5-4c4be3128b4f">Krishikosh</a></td>
+</tr>
+<tr>
+<td>Powdery mildew overwinters in terminal buds; scab fungicides from pink onwards should have mildew activity.</td>
+<td>[V]</td>
+<td><a href="https://netreefruit.org/apples/diseases/powdery-mildew">netreefruit</a></td>
+</tr>
+<tr>
+<td>Sooty blotch and flyspeck are surface fungi, active from 1-2 weeks after petal fall to harvest, visible in late summer; pruning helps.</td>
+<td>[V]</td>
+<td><a href="https://netreefruit.org/apples/diseases/sooty-blotch-and-flyspeck">netreefruit</a></td>
+</tr>
+<tr>
+<td>Collar rot: clean the collar, apply Chaubatia or Bordeaux paste, drench under canopy with Metalaxyl MZ 72 WP 0.5%. Root rot: drench with Carbendazim 50 WP 0.1% or Carbendazim + Mancozeb 0.5% in 15-20 cm holes 30 cm apart.</td>
+<td>[V]</td>
+<td><a href="https://skuastkashmir.ac.in/frmPDF.aspx?FN=April+2026+06-04-2026.pdf">DoE Apr 2026</a></td>
+</tr>
+<tr>
+<td>White root rot: 22 <em>Malus</em> species screened, none immune (2013); "no rootstock immune" is an inference.</td>
+<td>[V]</td>
+<td><a href="https://journal.iahs.org.in/index.php/ijh/article/view/1467">Indian J. Hortic.</a></td>
+</tr>
+</tbody>
+</table></div>
+<h4>4.6 Insects and mites (including emerging pests)</h4>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Fact</th>
+<th>Tag</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Apple blotch leaf miner</strong> (<em>Leucoptera malifoliella</em>): invasive, confirmed in J&amp;K (NCBI OR244421). 2023 NBAIR-SKUAST survey of Shopian, Anantnag, Pulwama, Kulgam: 13-100% defoliation, worst in Shopian, estimated 20-50% loss (to be ascertained).</td>
+<td>[V]</td>
+<td><a href="https://www.nbair.res.in/sites/default/files/2025-11/ALBM%20pest%20alert%20final.pdf">ICAR-NBAIR alert</a></td>
+</tr>
+<tr>
+<td>Growers mistake early leaf-miner blotches for Alternaria and overspray fungicide; miner feeding also opens the way to secondary Alternaria. Signs: mine/blotch with a larva inside; H- or boat-shaped white silk cocoons on bark and leaf undersides.</td>
+<td>[V]</td>
+<td><a href="https://www.nbair.res.in/sites/default/files/2025-11/ALBM%20pest%20alert%20final.pdf">ICAR-NBAIR alert</a></td>
+</tr>
+<tr>
+<td>Management: sanitation, pest-free plants, collect and burn leaves, scrape bark to expose pupae, gunny-bag trunk bands, yellow sticky traps (Aug 2026: about 10 m apart), watch April-May moth emergence; sprays work poorly as larvae sit inside the mine. SKUAST Aug 2026 now lists sprays (section 1.2).</td>
+<td>[V]</td>
+<td><a href="https://www.nbair.res.in/sites/default/files/2025-11/ALBM%20pest%20alert%20final.pdf">ICAR-NBAIR</a>, <a href="https://skuastkashmir.ac.in/frmPDF.aspx?FN=August+2026+03082026.pdf">DoE Aug 2026</a></td>
+</tr>
+<tr>
+<td>Leaf miner spread from Zainapora (Shopian) to Litter, Wachi, Yaripora, Lassipora, Tahab, Bijbehara (2024). Awareness programme for ~150 Kupwara growers, June 2026; no infestation level given.</td>
+<td>[V]</td>
+<td><a href="https://kashmirlife.net/south-kashmir-apple-growers-worried-over-leaf-miner-pest-356838/">Kashmir Life 2024</a>, <a href="https://www.dailyheadlinestoday.com/education/skuast-k-holds-apple-leaf-blotch-miner-awareness-programme-at-handwara/article-9061">Daily Headlines Today</a></td>
+</tr>
+<tr>
+<td>Oriental fruit fly (<em>Bactrocera dorsalis</em>) infests apple, apricot, nectarine, pear, peach and quince in the Kashmir valley (2019 paper).</td>
+<td>UNVERIFIED</td>
+<td><a href="https://gd.eppo.int/taxon/DACUDO/distribution/IN_jk">EPPO J&amp;K</a></td>
+</tr>
+<tr>
+<td>Fruit fly management (SKUAST 2026): bury dropped fruit, rake soil to expose pupae, methyl eugenol traps 25/ha from flowering, yellow sticky traps 25/ha to September.</td>
+<td>[V]</td>
+<td><a href="https://skuastkashmir.ac.in/frmPDF.aspx?FN=August+2026+03082026.pdf">DoE Aug 2026</a></td>
+</tr>
+<tr>
+<td>Brown marmorated stink bug: only a 2017 species-list record, apparently from Jammu-province districts; no damage reports. Do not present as an emerging Kashmir pest.</td>
+<td>UNVERIFIED</td>
+<td><a href="https://i-scholar.in/index.php/RZSI/article/view/171254">Rec. Zool. Surv. India</a></td>
+</tr>
+<tr>
+<td>Mites: ERM overwinters as eggs on twigs and bark (dormant oil targets these; hatch tight cluster-petal fall); two-spotted mite overwinters as females in ground cover (oil does not reach it). Damage: bronzing, small fruit, drop, poor set next year. (Webbing as a two-spotted sign is general knowledge, not from this source.)</td>
+<td>[V]</td>
+<td><a href="https://netreefruit.org/apples/insects/mites">netreefruit</a></td>
+</tr>
+<tr>
+<td>Kashmir <em>P. ulmi</em> acaricide resistance (PAU study): fenazaquin resistance factor 6.54 at Mattan, dimethoate 11.47 at Kunil (Kupwara); lab selection ~15-fold by generation 8. (Corrects the researcher's "no data found".)</td>
+<td>UNVERIFIED</td>
+<td><a href="https://core.ac.uk/works/44541857">CORE</a></td>
+</tr>
+<tr>
+<td>San Jose scale: grey rough bark; reddish-purple ring around each scale on fruit. SKUAST threshold &gt;13 crawlers per cm² of twig.</td>
+<td>[V]</td>
+<td><a href="https://netreefruit.org/apples/insects/san-jose-scale-sjs">netreefruit</a>, <a href="https://skuastkashmir.ac.in/frmPDF.aspx?FN=August+2026+03082026.pdf">DoE Aug 2026</a></td>
+</tr>
+<tr>
+<td>Woolly apple aphid: reddish-brown under white wax, in bark cracks, cuts and wounds; root galls; above-ground numbers do not show root load.</td>
+<td>[V]</td>
+<td><a href="https://netreefruit.org/apples/insects/aphid-woolly-apple-aphid-waa">netreefruit</a></td>
+</tr>
+<tr>
+<td>MM.106 and MM.111 resist woolly apple aphid, but MM.106 is highly susceptible to crown and collar rot (US source).</td>
+<td>[V]</td>
+<td><a href="https://apples.extension.org/tag/mm106">apples.extension.org</a></td>
+</tr>
+<tr>
+<td>Apple aphid: spray only if 40% of succulent shoots or leaves are infested; no mixing; stop insecticides 14 days before harvest.</td>
+<td>[V]</td>
+<td><a href="https://skuastkashmir.ac.in/frmPDF.aspx?FN=August+2026+03082026.pdf">DoE Aug 2026</a></td>
+</tr>
+<tr>
+<td>Hairy caterpillar / leaf roller: collect and destroy egg masses; Chlorpyriphos 20 EC 100 ml/100 L if foliage damage. The species (<em>Lymantria obfuscata</em>, one generation a year) is from search only.</td>
+<td>[V] (advice); UNVERIFIED (species)</td>
+<td><a href="https://skuastkashmir.ac.in/frmPDF.aspx?FN=August+2026+03082026.pdf">DoE Aug 2026</a></td>
+</tr>
+<tr>
+<td><strong>Corrected:</strong> the Kashmir apple trunk borer is <em>Aeolesthes sarta</em>. <em>A. holosericea</em> is a separate species, not a synonym. No primary source for its 2-year life cycle in Kashmir.</td>
+<td>[V]</td>
+<td><a href="https://search.napstic.cn/literature/periodical/5befe1bc95bdd8e434332dd67e54722a">Mantoo et al. 2010</a></td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h3>5. Input quality, banned products and online-sale rules</h3>
+<h4>5.1 Spurious and substandard inputs in J&amp;K</h4>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Fact</th>
+<th>Tag</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2025-26: 5,772 pesticide samples tested, 85 substandard; 93 show-cause notices, 52 prosecutions, 22 FIRs, Rs 70,000 fines (Assembly, 24 Sep 2026).</td>
+<td>[V]</td>
+<td><a href="https://kashmirlife.net/151-substandard-pesticide-samples-found-in-jammu-kashmir-in-two-years-govt-453445/">Kashmir Life</a></td>
+</tr>
+<tr>
+<td>2026-27 to Sep: 1,658 tested, 66 substandard; 19 licences cancelled or suspended, 19 prosecutions, 3 FIRs, Rs 1.33 lakh fines.</td>
+<td>[V]</td>
+<td><a href="https://kashmirlife.net/151-substandard-pesticide-samples-found-in-jammu-kashmir-in-two-years-govt-453445/">Kashmir Life</a></td>
+</tr>
+<tr>
+<td>32 highly toxic pesticide formulations banned or restricted in J&amp;K "in line with central advisories". No list or order number published.</td>
+<td>[V]</td>
+<td><a href="https://kashmirlife.net/151-substandard-pesticide-samples-found-in-jammu-kashmir-in-two-years-govt-453445/">Kashmir Life</a></td>
+</tr>
+<tr>
+<td>Two pesticide QC labs (Lal Mandi, Srinagar; Talab Tillo, Jammu) within four notified QC labs; a State Pesticide Residue Testing Lab near completion. <strong>Corrected:</strong> do not say "six pesticide testing labs" (one Kashmir Life report).</td>
+<td>[V]</td>
+<td><a href="https://kashmirreader.com/2026/09/25/govt-intensifies-measures-to-curb-spurious-pesticides-javid-dar/">Kashmir Reader, 25 Sep 2026</a>, <a href="https://risingkashmir.com/fake-fertilizers-under-scanner-jk-launches-massive-crackdown-across-entry-points/">Rising Kashmir, 21 Feb 2026</a></td>
+</tr>
+<tr>
+<td>Two-year figures to Dec 2025: 12,549 inspections, 10,222 samples, 190 misbranded/non-standard, 149 prosecutions, Rs 3.50 lakh fines; SOPs issued Sept 2025.</td>
+<td>[V]</td>
+<td><a href="https://kashmirlife.net/149-prosecutions-over-spurious-pesticides-in-jammu-kashmir-429840/">Kashmir Life, 28 Mar 2026</a></td>
+</tr>
+<tr>
+<td><strong>Shopian 2026 "Super M-45" (mancozeb) case:</strong> growers reported fruit drop after spraying; 235 kg seized on 27 Jun 2026; later the government reported 238 kg of batch SP-1902 across 12 dealers, with mismatched QR code, registration and licence details, label, manufacturing date and certificate of analysis; FIR 0200, Shopian PS, 23 Sep 2026. Lab reports and the joint committee's final report were still pending in early October.</td>
+<td>[V]</td>
+<td><a href="https://kashmirreader.com/2026/10/01/probe-ordered-into-premature-apple-fall-in-shopian-fir-registered-govt/">Kashmir Reader, 1 Oct 2026</a>, <a href="https://kashmirlife.net/crackdown-on-substandard-farm-inputs-235-kg-of-suspected-pesticide-seized-441182/">Kashmir Life, 27 Jun 2026</a>, <a href="https://risingkashmir.com/jammu-and-kashmir/kashmir/apple-drop-crisis-widens-in-shopian-action-initiated-against-dealers-12055478">Rising Kashmir, 19 Jun 2026</a></td>
+</tr>
+<tr>
+<td>SKUAST-K saw fruit fall in all 61 orchards surveyed in 37 villages; Shopian preliminary loss 6,593 trees on 335.75 kanal, ~10.7 lakh kg, ~Rs 4.42 crore.</td>
+<td>[V]</td>
+<td><a href="https://kashmirreader.com/2026/10/01/probe-ordered-into-premature-apple-fall-in-shopian-fir-registered-govt/">Kashmir Reader, 1 Oct 2026</a></td>
+</tr>
+<tr>
+<td>Feb 2025: specific batches of Indofil M-45 (mancozeb 75 WP) and Rallis CAPTAF (captan 50 WP) declared misbranded (batch-specific, not a brand-wide finding). Growers say lab results can take almost a year.</td>
+<td>[V]</td>
+<td><a href="https://kashmirobserver.net/2025/02/08/kashmir-orchardists-warned-as-govt-finds-pesticides-misbranded/">Kashmir Observer, 8 Feb 2025</a></td>
+</tr>
+<tr>
+<td>Entry-point control: fertilizer sampled at rail rakes (Bari Brahmana, Udhampur, Anantnag) and Lower Munda road entry; Sept 2026 announcement of pesticide checkpoints at entry points.</td>
+<td>[V]</td>
+<td><a href="https://risingkashmir.com/fake-fertilizers-under-scanner-jk-launches-massive-crackdown-across-entry-points/">Rising Kashmir</a>, <a href="https://www.dailyexcelsior.com/jk-moves-to-check-inflow-of-substandard-pesticides/">Daily Excelsior</a></td>
+</tr>
+<tr>
+<td>Pesticides may legally be sold only through licensed dealers; buy registered products from licensed dealers.</td>
+<td>[V]</td>
+<td><a href="https://kashmirreader.com/2026/03/08/agri-dept-rebuts-claims-on-unchecked-sale-of-substandard-pesticides/">Kashmir Reader, 8 Mar 2026</a></td>
+</tr>
+<tr>
+<td>Fertilizer SOPs (FCO 1985): retailers display licence, stock and price list; sales linked to soil health card and Aadhaar; PoS/IFMS stock monitoring; complaints verified in 7 days, action report in 15.</td>
+<td>[V]</td>
+<td><a href="https://kashmirlife.net/149-prosecutions-over-spurious-pesticides-in-jammu-kashmir-429840/">Kashmir Life</a></td>
+</tr>
+<tr>
+<td>Opinion claim: spurious agrochemicals above one-third of the valley market (earlier field studies).</td>
+<td>[V] (that the author says so)</td>
+<td><a href="https://kashmirobserver.net/2026/07/31/fake-pesticides-are-destroying-kashmirs-apple-farmers/">Kashmir Observer opinion</a></td>
+</tr>
+</tbody>
+</table></div>
+<h4>5.2 National bans and restrictions relevant to apple</h4>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Fact</th>
+<th>Tag</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Insecticides (Prohibition) Order 2023, S.O. 4294(E), 29 Sep 2023: dicofol, dinocap and methomyl banned outright (3 of the 27 in the 2020 draft).</td>
+<td>[V]</td>
+<td><a href="https://pan-india.org/wp-content/uploads/2023/10/Insecticides-Prohibition-Order-2023.pdf">Gazette</a></td>
+</tr>
+<tr>
+<td>Monocrotophos 36% SL discontinued; existing stock only until expiry.</td>
+<td>[V]</td>
+<td><a href="https://pan-india.org/wp-content/uploads/2023/10/Insecticides-Prohibition-Order-2023.pdf">Gazette</a></td>
+</tr>
+<tr>
+<td><strong>Malathion: apple removed from approved uses.</strong> Dimethoate: label claims deleted for fruit eaten raw (covers apple). Chlorpyrifos lost only ber, citrus, tobacco; mancozeb only guava, jowar, tapioca. Carbofuran limited to 3% CG. Captan not in the order. (Current CIB&amp;RC major-uses list not checked.)</td>
+<td>[V]</td>
+<td><a href="https://pan-india.org/wp-content/uploads/2023/10/Insecticides-Prohibition-Order-2023.pdf">Gazette</a></td>
+</tr>
+<tr>
+<td>2018 order S.O. 3951(E) banned carbaryl, diazinon, dichlorvos, fenthion, methyl parathion, phorate, phosphamidon, triazophos, trichlorfon, benomyl, tridemorph and others (some phased to 31 Dec 2020). Secondary source.</td>
+<td>[V]</td>
+<td><a href="https://en.wikipedia.org/wiki/List_of_banned_and_restricted_pesticides_in_India">Wikipedia list</a></td>
+</tr>
+<tr>
+<td>Carbosulfan: draft ban order Aug 2026 (30-day comments); no final ban as of 13 Nov 2026.</td>
+<td>[V]</td>
+<td><a href="https://www.business-standard.com/industry/agriculture/government-proposes-carbosulfan-ban-health-environment-risks-126082500364_1.html">Business Standard</a></td>
+</tr>
+<tr>
+<td>Glyphosate: Registration Committee (30 Jul 2026) recommended use only by trained personnel or PCOs; final decision with DA&FW; sub judice.</td>
+<td>[V]</td>
+<td><a href="https://www.global-agriculture.com/crop-protection/india-reviews-expert-committee-report-on-restricted-use-of-glyphosate/">Global Agriculture</a></td>
+</tr>
+</tbody>
+</table></div>
+<h4>5.3 Online sale, licensing and traceability</h4>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Fact</th>
+<th>Tag</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Insecticides (Second Amendment) Rules 2022 (rule 10E): a licensed seller may sell through an e-commerce platform for doorstep delivery; the platform must verify the State licence before engaging the seller; both follow the Consumer Protection (E-commerce) Rules 2020.</td>
+<td>[V]</td>
+<td><a href="https://www.scconline.com/blog/post/2022/11/28/provision-for-sale-of-insecticides-through-e-commerce-entity-introduced-vide-insecticides-second-amendment-rules-2022/">SCC Online</a></td>
+</tr>
+<tr>
+<td>Rule 10E does not relax licence, product endorsement, Principal Certificate, approved premises or area limits; platforms need no pesticide licence (CropLife calls it a gap).</td>
+<td>[V]</td>
+<td><a href="https://www.global-agriculture.com/crop-protection/croplife-india-flags-rising-risks-from-unauthorised-pesticide-sales-on-e-commerce-platforms/">Global Agriculture, 27 Jan 2026</a></td>
+</tr>
+<tr>
+<td>May 2026: CCPA had Amazon, Flipkart, Meesho and JioMart delist an unregistered herbicide; listings lacked composition, licence number and validity, hazard warnings and Principal Certificate details.</td>
+<td>[V]</td>
+<td><a href="https://www.business-standard.com/industry/news/ccpa-orders-probe-into-unregistered-herbicide-sale-on-e-commerce-sites-126051600843_1.html">Business Standard</a></td>
+</tr>
+<tr>
+<td>Insecticides (Amendment) Rules 2026, G.S.R. 493(E), 17 Jun 2026, in force 90 days after publication: digital licence applications, electronic stock registers, monthly e-returns within 15 days. (Secondary source; gazette not read.)</td>
+<td>[V]</td>
+<td><a href="https://indianchemicalregulation.com/india-insecticides-amendment-rules-2026/">Indian Chemical Regulation</a></td>
+</tr>
+<tr>
+<td>QR code on insecticide labels (Insecticides (First Amendment) Rules 2025, 3 Jun 2025; non-compliant stock not saleable after 30 months, about Dec 2027). G.S.R. number (367 or 368) and start of the 30 months unclear; vendor source.</td>
+<td>[S]</td>
+<td><a href="https://www.qrcode-tiger.com/insecticide-labeling-rules">QR Tiger</a>, <a href="https://www.legalitysimplified.com/?p=64603">legalitysimplified</a></td>
+</tr>
+<tr>
+<td>Earlier QR rule for retail packs (G.S.R. 211(E), 23 Mar 2023).</td>
+<td>[S]</td>
+<td><a href="https://www.qrcode-tiger.com/insecticide-labeling-rules">QR Tiger</a></td>
+</tr>
+<tr>
+<td>No J&amp;K-specific QR or traceability system for agrochemicals was found.</td>
+<td>UNVERIFIED</td>
+<td>n/a (negative finding)</td>
+</tr>
+<tr>
+<td>Draft Pesticides Management Bill (released 7 Jan 2026, comments to 4 Feb 2026) would replace the Insecticides Act 1968; not enacted as of Nov 2026 (negative not provable). The 2020 Bill (RS, 23 Mar 2020) never passed.</td>
+<td>[V] (draft); UNVERIFIED (status)</td>
+<td><a href="https://www.business-standard.com/industry/agriculture/govt-issues-new-draft-of-pesticides-management-bill-to-curb-spurious-sales-126010701146_1.html">Business Standard</a>, <a href="https://www.prsindia.org/billtrack/pesticide-management-bill-2020">PRS</a></td>
+</tr>
+<tr>
+<td>Fertilizer sellers need an FCO clause 8 registration certificate (Form A + Form O), separate for wholesale and retail. No FCO rule specific to online sale found.</td>
+<td>[V]</td>
+<td><a href="https://indiankanoon.org/doc/100013966/">Indian Kanoon</a></td>
+</tr>
+<tr>
+<td>Subsidised fertilizer sold only after Aadhaar authentication on retailer PoS devices (since March 2018).</td>
+<td>UNVERIFIED</td>
+<td><a href="https://rsdebate.nic.in/bitstream/123456789/757719/1/PQ_267_04022025_U191_p205_p209.pdf">Rajya Sabha Q.191</a></td>
+</tr>
+</tbody>
+</table></div>
+<h4>5.4 Nurseries and planting material</h4>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Fact</th>
+<th>Tag</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>J&amp;K Fruit Nurseries (Licensing) Act, 1987 (Act XXII of 1987), enforced from 1 Oct 1988. The 1978 date and "1991 Rules (SRO 167)" were not confirmed.</td>
+<td>UNVERIFIED</td>
+<td><a href="https://indiacode.nic.in/bitstream/123456789/16039/1/the_jammu_and_kashmir_fruit_nurseries_%28licensing%29_act%2c_1987.pdf">India Code</a></td>
+</tr>
+<tr>
+<td>Oct 2025: registration certificates to 205 new private nursery growers; other departments require the certificate.</td>
+<td>[V]</td>
+<td><a href="https://thekashmirimages.com/2025/10/27/director-horticulture-distributes-registration-certificates-to-private-nursery-growers/">Kashmir Images</a></td>
+</tr>
+<tr>
+<td>NHB nursery recognition is voluntary and star-rated, first granted for two years.</td>
+<td>[V]</td>
+<td><a href="https://www.nhb.gov.in/guideline/Guidelinesfruitplantnurseries.pdf">NHB guidelines</a></td>
+</tr>
+<tr>
+<td>June 2025: department to import high-density plants itself after late/substandard private supply; show-cause notice to "FruitWall" for canker-affected saplings.</td>
+<td>[V]</td>
+<td><a href="https://www.etvbharat.com/en/!state/high-density-low-quality-kashmir-horticulture-dept-steps-in-to-end-arbitrariness-of-pvt-firms-in-modern-fruit-plantation-enn25061702718">ETV Bharat</a></td>
+</tr>
+</tbody>
+</table></div>
+<p>Analysis for the shop: list only CIB&amp;RC-registered products with licence number and validity, composition, hazard warnings and batch/QR shown; sell only through licensed J&amp;K dealers; flag products named in J&amp;K misbranding orders by batch; never list malathion or dimethoate for apple.</p>
+<hr />
+<h3>6. Labour, subsidies and costs</h3>
+<h4>6.1 Labour</h4>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Fact</th>
+<th>Tag</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2026 harvest, Shopian: Rs 1,200-1,500 a day (worker shortage, bigger crop). Labour Department: a minimum wage is fixed, no upper cap.</td>
+<td>[V]</td>
+<td><a href="https://www.greaterkashmir.com/kashmir/labour-wages-touch-rs-1500-a-day-as-apple-harvest-peaks-in-shopian-12705739">Greater Kashmir, 22 Oct 2026</a></td>
+</tr>
+<tr>
+<td>2025 harvest, Shopian: Rs 800-1,100 a day for picking; workers from Chenab Valley, Rajouri, Poonch and Bihar.</td>
+<td>[V]</td>
+<td><a href="https://kashmirlife.net/kashmirs-apple-harvest-turns-sour-amid-labour-costs-market-glut-highway-crisis-407192/">Kashmir Life, 28 Sep 2025</a></td>
+</tr>
+<tr>
+<td>General daily labour Rs 600-700 plus food, tea and tobacco ≈ Rs 1,000 (2025 op-ed; it does not mention apples).</td>
+<td>[V]</td>
+<td><a href="https://kashmirobserver.net/2025/03/19/changing-face-of-kashmirs-labor-market/">Kashmir Observer, 19 Mar 2025</a></td>
+</tr>
+<tr>
+<td>2022 task rates: master pruner up to Rs 1,200/day (3-4 trees a day); packer Rs 800-1,000/day, max 30 boxes.</td>
+<td>[V]</td>
+<td><a href="https://kashmirlife.net/selfless-grower-vol-14-issue-32-303493/">Kashmir Life 2022</a></td>
+</tr>
+<tr>
+<td>Minimum wage (S.O. 513, 12 Oct 2022, from 17 Oct 2022): unskilled Rs 311, semi-skilled 400, skilled 483, highly skilled 552, admin 449 a day. No later J&amp;K UT revision found; a draft J&amp;K Code on Wages Rules 2026 is pending. Secondary sources.</td>
+<td>[V]</td>
+<td><a href="https://labourlawindia.com/minimum-wages/jammu-and-kashmir/">labourlawindia</a>, <a href="https://www.teamleaseregtech.com/updates/article/19599/govt-of-jammu-kashmir-revises-the-minimum-rate-of-wages-of-the-schedul/">TeamLease</a></td>
+</tr>
+<tr>
+<td><strong>Corrected:</strong> Labour Bureau's J&amp;K series cited is the "Packaging and Agriculture" occupation for men, not an all-agriculture average: Rs 718.18 (Jul 2026), Rs 727.27 (Aug 2026).</td>
+<td>[V]</td>
+<td><a href="https://www.ceicdata.com/en/india/average-daily-wage-rate-rural-agricultural-by-state-packaging-and-agriculture/average-daily-wage-rate-rural-agricultural-packaging-and-agriculture-men-jammu-and-kashmir">CEIC</a></td>
+</tr>
+<tr>
+<td>Aug 2026 J&amp;K Police advisory: newly arriving non-local labourers must register at the nearest police station; those at isolated sites told to move. No employer or landlord duty stated.</td>
+<td>[V]</td>
+<td><a href="https://www.wionews.com/india-news/j-k-police-issues-new-advisory-for-non-local-labourers-after-recent-terror-attacks-15-lakh-reward-announced-for-let-terrorist-1786002596846">WION</a></td>
+</tr>
+<tr>
+<td>Jammu division only: Kathua DM (Oct 2026, s.163 BNSS) bars contractors from engaging labourers without prior police verification; Kishtwar order (30 Jun 2026, 2 months, likely lapsed) gave employers 7 days; Jammu "Kirayedar" tenant portal (Dec 2025).</td>
+<td>[V]</td>
+<td><a href="https://www.greaterkashmir.com/jammu/mandatory-police-verification-of-labourers-ordered-in-kathua-12658454">Greater Kashmir</a>, <a href="https://gulistannewstv.com/dm-kishtwar-makes-tenant-employee-verification-mandatory-issues-order-under-section-163-bnss/">Gulistan News</a>, <a href="https://risingkashmir.com/jk-police-launch-online-tenant-verification-portal-kirayedar/">Rising Kashmir</a></td>
+</tr>
+</tbody>
+</table></div>
+<h4>6.2 High-density plantation subsidy</h4>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Fact</th>
+<th>Tag</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Revised Modified HDP Scheme: 5,500 ha of apple, walnut, almond, cherry over 2022-23 to 2026-27, overall 50% subsidy. It runs to 31 Mar 2027 (not March 2026); no successor announced.</td>
+<td>[V]</td>
+<td><a href="https://www.greaterkashmir.com/business/kashmir-sees-growing-shift-to-high-density-apple-plantations-12449221">Greater Kashmir, 29 Aug 2026</a></td>
+</tr>
+<tr>
+<td>Up to Dec 2025: 1,119.21 ha, Rs 138.57 crore paid; 2026-27: 1,455 ha high/medium density with Rs 70 crore.</td>
+<td>[V]</td>
+<td><a href="https://kashmirlife.net/hadp-push-drives-expansion-across-jammu-kashmir-agriculture-horticulture-425702/">Kashmir Life, Feb 2026</a></td>
+</tr>
+<tr>
+<td>Cost sharing: 50% subsidy, up to 40% optional bank loan (interest deferred 3 years, repayment from year 4), 10% farmer. Extras: micro-irrigation, virus-free material, anti-hail nets.</td>
+<td>[V]</td>
+<td><a href="https://kashmirlife.net/kashmir-high-density-apple-farming-shift-399578/">Kashmir Life, 1 Aug 2025</a></td>
+</tr>
+<tr>
+<td>Minimum area now 1 kanal; J&amp;K Bank loans with 3-4 year moratorium; five-feather plants about Rs 500 each (Mar 2026).</td>
+<td>[V]</td>
+<td><a href="https://www.knskashmir.com/high-density-apple-farming-gains-push-in-kashmir--dir-horticulture-203029">KNS, 27 Mar 2026</a></td>
+</tr>
+<tr>
+<td>"Rs 27,000 per kanal" is the <strong>anti-hail net</strong> subsidy in HDP (Rs 27.50/m² in traditional orchards), not the plantation subsidy.</td>
+<td>[V]</td>
+<td><a href="https://www.knskashmir.com/high-density-apple-farming-gains-push-in-kashmir--dir-horticulture-203029">KNS</a></td>
+</tr>
+<tr>
+<td><strong>Corrected:</strong> the 40% (general) / 50% (Himalayan) assistance up to 2 ha per beneficiary is under <strong>MIDH</strong>, not HADP/JKCIP (Lok Sabha, Aug 2026).</td>
+<td>[V]</td>
+<td><a href="https://www.kashmirnewsobserver.com/top-stories/high-density-apple-plantation-promoted-across-jandk-under-hadp-jkcip-centre-kno-204191">KNO</a></td>
+</tr>
+<tr>
+<td>Apply on the HADP Kisan Sathi portal (Oct 2026: 6,97,728 applications, 1,15,295 pending; horticulture 66,818).</td>
+<td>[V]</td>
+<td><a href="https://risingkashmir.com/top-stories/over-115-lakh-hadp-applications-pending-in-jk-12755359">Rising Kashmir, 27 Oct 2026</a></td>
+</tr>
+<tr>
+<td>Credit-linked HADP cases go to banks only through Kisan Sathi; no offline cases (J&amp;K Bank annexure, not opened).</td>
+<td>UNVERIFIED</td>
+<td><a href="https://www.jkbank.com/pdfs/loans/agriculture/Annexure_A_HADP%2029_projects.pdf">J&amp;K Bank</a></td>
+</tr>
+<tr>
+<td>2022: 50% capital support "up to Rs 22.15 lakh" (unit not stated).</td>
+<td>[V]</td>
+<td><a href="https://kashmirreader.com/2022/06/15/high-density-plantation-scheme-vigorously-transforming-horticulture-landscape-of-jk/">Kashmir Reader 2022</a></td>
+</tr>
+<tr>
+<td>Cost estimates: Rs 1-2 lakh per kanal (2024 op-ed, 120-150 plants at Rs 250-300); Rs 3,51,759 per kanal over first 5 years (unnamed 2026 study of 200 growers).</td>
+<td>[V]</td>
+<td><a href="https://www.dailyexcelsior.com/growth-of-high-density-apple-farming-in-kashmir-valley/">Daily Excelsior 2024</a>, <a href="https://kashmirvision.in/2026/10/22/rising-costs-uneven-prices-squeeze-kashmirs-apple-growers/">Kashmir Vision 2026</a></td>
+</tr>
+<tr>
+<td>Traditional 10-12 trees/kanal against 160-170 under HDP; ~30% vs ~90% Grade-A (Chief Horticulture Officer).</td>
+<td>[V]</td>
+<td><a href="https://kashmirlife.net/kashmir-high-density-apple-farming-shift-399578/">Kashmir Life 2025</a></td>
+</tr>
+</tbody>
+</table></div>
+<h4>6.3 Market, freight and packing costs</h4>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Fact</th>
+<th>Tag</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mandi commission: official 6%; 12-15% plus bags, weighing, loading reported (Aug 2025). May 2026: Directorate of Horticulture P&amp;M told AMO Sopore to stop unauthorised commission.</td>
+<td>[V]</td>
+<td><a href="https://www.kashmirnewsobserver.com/top-stories/exploitation-in-fruit-trade-leaves-kashmir-s-orchardists-in-distress-kno-197321">KNO 2025</a>, <a href="https://kashmirdotcom.in/2026/05/22/fruit-growers-flag-sopore-mandi-malpractices-horticulture-department-orders-action-against-defaulters/">KDC 2026</a></td>
+</tr>
+<tr>
+<td>2022 Shopian: 6% (market up to 13%), Rs 4/box unloading, Rs 2/box association; Delhi agents 12-14% with advance, 6-8% without.</td>
+<td>[V]</td>
+<td><a href="https://kashmirlife.net/selfless-grower-vol-14-issue-32-303493/">Kashmir Life 2022</a></td>
+</tr>
+<tr>
+<td>2013: Delhi HC set aside the notification letting Azadpur charge sellers 6%; current enforcement unverified.</td>
+<td>[V]</td>
+<td><a href="https://thenewshimachal.com/2013/10/delhi-high-court-apple-growers-not-to-pay-commission-in-azadpur-mandi/">The News Himachal</a></td>
+</tr>
+<tr>
+<td>Freight to Delhi: usual Rs 70-100/box; Transport Dept "fair" Rs 100-120 (2025); crisis Rs 200-350; RTC cap Rs 90-130; association fixed Rs 130 Delhi, Rs 120 Punjab (Sep 2025). No 2026 normal-season rate found.</td>
+<td>[V]</td>
+<td><a href="https://www.greaterkashmir.com/business/soaring-freight-costs-threaten-kashmirs-fruit-trade/">Greater Kashmir</a>, <a href="https://www.etvbharat.com/en/!state/exorbitant-transportation-charges-put-kashmir-apple-growers-into-more-distress-enn25092103015">ETV Bharat</a>, <a href="https://kashmirobserver.net/2025/09/20/apple-express-6400-tonnes-reach-delhi-via-train/">Kashmir Observer</a></td>
+</tr>
+<tr>
+<td>Northern Railway proposal (Oct 2026): 1.5x JP Scale for a round trip on JPP-RCS parcel coaches, i.e. 50% off return freight.</td>
+<td>[V]</td>
+<td><a href="https://kashmirobserver.net/2026/10/30/kashmir-fruit-traders-get-50-return-freight-discount/">Kashmir Observer, 30 Oct 2026</a></td>
+</tr>
+<tr>
+<td>Boxes (2022, latest found): cardboard about Rs 50-53 (15 kg), wooden Rs 90-130 (up to 18 kg), plastic crates Rs 180-200; ~60% packed in cardboard.</td>
+<td>[V]</td>
+<td><a href="https://kashmirlife.net/selfless-grower-vol-14-issue-32-303493/">Kashmir Life 2022</a>, <a href="https://kashmirpulse.com/business-economy/apple-growers-fear-losses-as-packing-material-cost-rises-abruptly/95874.html">Kashmir Pulse 2022</a></td>
+</tr>
+<tr>
+<td><strong>Corrected attribution:</strong> break-even about Rs 450 per 16-kg box (all grades) was given by the head of Pulwama Fruit Mandi, not a Shopian grower (2022).</td>
+<td>[V]</td>
+<td><a href="https://kashmirlife.net/selfless-grower-vol-14-issue-32-303493/">Kashmir Life 2022</a></td>
+</tr>
+<tr>
+<td>Prices, Nov 2026, Shopian: premium Rs 1,300-1,500/box, medium five-layer Rs 1,000-1,200.</td>
+<td>[V]</td>
+<td><a href="https://www.greaterkashmir.com/business/kashmiri-apple-prices-surge-ahead-of-diwali-12790792">Greater Kashmir, 7 Nov 2026</a></td>
+</tr>
+<tr>
+<td>Kisan Khidmat Ghars: 2,000 planned, 1,309 operational (about Feb 2026); Kisan Sathi access to 120+ schemes, seeds/fertilizer/pesticide, micro-ATM/POS and KCC. Operators are entrepreneurs ("Krishi Udyamis" per a district notice).</td>
+<td>[V]; UNVERIFIED (operator term, nodal agency)</td>
+<td><a href="https://kashmirlife.net/hadp-push-drives-expansion-across-jammu-kashmir-agriculture-horticulture-425702/">Kashmir Life</a>, <a href="https://www.tribuneindia.com/news/j-k/140-kisan-khidmat-ghar-centres-set-up-across-rajouri-to-support-farmers/">Tribune</a>, <a href="https://udhampur.nic.in/notice/publication-of-the-advertisement-notice-for-inviting-the-applications-from-eligible-candidates-for-engagement-as-krishi-udyamis-kus-agricultural-entrepreneur-for-proposed-kisan-khidmat-ghars-under-h">Udhampur notice</a></td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h3>7. Still open</h3>
+<ol>
+<li><strong>Official IMG 2026 PDF</strong> from SKUAST-K or the Horticulture Department (all 2026 guide rows come from a Scribd copy). Check against the printed booklet.</li>
+<li><strong>SKUAST-K ruling on the 2026 conflicts:</strong> Zineb + Hexaconazole dose (125 g vs 100 g) and strength; Mancozeb + Carbendazim unit and WP/WG; pre-harvest timing (15-20 vs 25 days, Propineb PHI 29); stop-spray rule (3-4 weeks vs 14 days); trap densities; mite thresholds; hive rate.</li>
+<li><strong>HDP spray schedule:</strong> none exists from SKUAST-K; the HDP fertilizer table is tentative (REAC). Whether REAC adopted the tentative age-wise schedule.</li>
+<li><strong>Leaf miner and fruit borer chemicals</strong>: how the Aug 2026 message options fit the stage table.</li>
+<li><strong>CIB&amp;RC label status</strong> of listed molecules on apple (chlorpyrifos, thiacloprid, carbendazim mixes, captan) after 2023; current consolidated banned list.</li>
+<li><strong>Codling moth:</strong> current spread in the valley (2024-26) and whether any domestic quarantine now covers Kashmir (DPPQS notification unread).</li>
+<li><strong>Official 2026 scab loss survey</strong> (only trade estimates exist); recent Marssonina incidence data.</li>
+<li><strong>J&amp;K list of 32 banned/restricted formulations</strong> and order number; Super M-45 lab results and committee report.</li>
+<li><strong>QR-code and Insecticides Amendment 2026 gazette texts</strong>; any FCO rule on online fertilizer sale; status of the Pesticides Management Bill.</li>
+<li><strong>Nursery Act and Rules</strong> text (fees, validity).</li>
+<li><strong>HDP scheme after 31 Mar 2027</strong>, official unit cost per ha or kanal, and the unit of the Rs 22.15 lakh ceiling.</li>
+<li><strong>Labour:</strong> 2025-26 rates for pruning, spraying, packing and grading; J&amp;K agriculture scheduled-employment rate; any Kashmir-valley order on employer/landlord duties for non-local workers.</li>
+<li><strong>Costs:</strong> official CA tariff, 2026 carton prices, 2026 normal-season freight, current mandi deductions per box.</li>
+<li><strong>Crop insurance:</strong> not researched in this round; whether apple insurance will relaunch, and in what form, is unknown.</li>
+<li><strong>Soil-testing services:</strong> labs, fees and turnaround (department pages unreachable).</li>
+<li>CA set-points and an official J&amp;K grading norm.</li>
 </ol></section></main></body></html>

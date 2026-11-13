@@ -5,7 +5,8 @@ HERE = pathlib.Path(__file__).resolve().parent
 RES = HERE.parent / "research"
 APPX = [("A", "UX, connectivity, data collection and services marketplace", "A-ux-data-collection-services.md"),
         ("B", "Market, logistics, weather, schemes and labour", "B-market-logistics-schemes.md"),
-        ("C", "Technology, apps, competitors, datasets and regulations", "C-technology-datasets-regulations.md")]
+        ("C", "Technology, apps, competitors, datasets and regulations", "C-technology-datasets-regulations.md"),
+        ("D", "Agronomy, spray schedule, inputs and open questions", "D-agronomy-inputs-and-open-questions.md")]
 
 def demote(md):
     out, fence = [], False
@@ -23,7 +24,7 @@ html = conv(main)
 for k, title, f in APPX:
     body = demote((RES / f).read_text(encoding="utf-8"))
     body = re.sub(r"^## .*\n", "", body, count=1, flags=re.M)  # drop the note's own title
-    html += f'<section class="appx"><h1>Appendix {k} · {title}</h1><p class="appx-note">Desk research notes, November 2026. Tags: [V] read at source; [S] from a search summary; UNVERIFIED = lead only.</p>{conv(body)}</section>'
+    html += f'<section class="appx"><h1>Appendix {k} · {title}</h1><p class="appx-note">Desk research notes, November 2026. Tags: [V] read at source (in Appendix D: confirmed by an independent verifier); [S] from a search summary or not re-confirmed; UNVERIFIED = lead only.</p>{conv(body)}</section>'
 html = html.replace("<table>", '<div class="tw"><table>').replace("</table>", "</table></div>")
 css = (HERE / "report.css").read_text(encoding="utf-8")
 page = f"""<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Baghbaan — Research and Integration Plan</title>

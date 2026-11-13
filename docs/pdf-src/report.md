@@ -5,7 +5,7 @@
 Companion to the *Baghbaan demo app walkthrough* (PDF) and the clickable prototype (claude.ai/artifact/T7wV1p9vo63Sqa659bEQCG; source in `prototype/`). Prepared November 2026.
 
 <div class="callout">
-<b>How to read this report.</b> Part 1 is the recommendation: what the app should contain and how each part works. Part 2 catalogues what we can integrate: data sources and APIs, technologies, datasets, apps to learn from, competitors and regulations. Part 3 covers architecture, business model, roadmap and risks. Appendices A–C hold the full desk research with a source link next to each fact. Facts marked <b>[V]</b> were read at the source, <b>[S]</b> come from search summaries and should be re-checked, and <b>UNVERIFIED</b> items are leads only. Crop-protection content in section 4 is general practice and must be checked against the current SKUAST-K Package of Practices before anything reaches growers.
+<b>How to read this report.</b> Part 1 is the recommendation: what the app should contain and how each part works. Part 2 catalogues what we can integrate: data sources and APIs, technologies, datasets, apps to learn from, competitors and regulations. Part 3 covers architecture, business model, roadmap and risks. Appendices A–D hold the full desk research with a source link next to each fact. Facts marked <b>[V]</b> were read at the source, <b>[S]</b> come from search summaries and should be re-checked, and <b>UNVERIFIED</b> items are leads only. Crop-protection content follows SKUAST-K's 2026 guide, read from a copy of the booklet; check it against the printed booklet before anything reaches growers.
 </div>
 
 ## Summary
@@ -14,6 +14,7 @@ Companion to the *Baghbaan demo app walkthrough* (PDF) and the clickable prototy
 - **Growers lose money at five predictable points:** disease (2026 was a bad scab year, with B/C grades selling at ₹200–250 a box at Sopore against ₹1,000–1,300 for premium fruit), spurious inputs, highway closures (the 26 Aug–17 Sep 2025 NH-44 closure stranded 2,000+ trucks; traders put losses at ₹500–700 crore and freight jumped from ₹70–100 to ₹200–300 a box), weak price information, and labour and transport at harvest. There is no crop insurance for apple today (scheme on hold, Sept 2026) (Appendix B §2–5).
 - **Recommendation: build Baghbaan around one question, "what is wrong with my orchard and what do I do?"** The home screen is the **Orchard Doctor**, a Yes / No and picture-based diagnosis that works offline. Around it sit **Buy** (licensed-dealer marketplace), **Learn** (short Kashmiri-audio lessons), **Mandi & news** (rates, where-to-sell, highway, rail, weather, advisories) and **Services** (trucks, labour, spray teams, equipment, experts, cold storage). **My orchard** quietly builds a spray diary and orchard record from what growers already do.
 - **Design for the real conditions:** voice and pictures first; Kashmiri voice with Urdu-script text; offline-first with SMS and a missed-call voice line, because J&K has had more internet shutdowns than any other part of India; no signup form, and data asked only when it improves an answer.
+- **Advice follows SKUAST-K's 2026 management guide.** It has 15 crop stages with doses per 100 L, and fungicide sprays are tied to rain forecasts. A verification round confirmed 270 of about 290 claims and corrected six: codling moth *is* present in the valley, Alternaria spots are not "frog-eye", and apple blotch leaf miner is the emerging pest growers mistake for Alternaria (Appendix D).
 - **Integrate first:** SKUAST-K's spray schedule as the advice rule base; data.gov.in / Agmarknet mandi prices; IMD and a commercial weather API for spray windows and a Mills-type scab model; Bhashini and IndicTrans2 for Kashmiri; Kashmir-specific CC BY 4.0 leaf-image datasets for a later photo model; J&K Traffic Police advisories plus driver reports for roads; and partnerships with the Department of Horticulture's Kisan Khidmat Ghars for assisted onboarding.
 - **Competition exists but leaves the core gap open.** Orchardly (claims 15,000+ growers), Farmit by Qul, Apple Doc and others offer advisory or IoT. None found offers Kashmiri voice, a neutral licensed-dealer marketplace, and labour and transport booking in one app (Appendix C §2).
 - **Start with a two-district pilot** (Shopian and Baramulla/Sopore, the two largest dispatch mandis), earn trust with free diagnosis, rates and alerts, then add the marketplace and credit.
@@ -59,12 +60,12 @@ The home screen answers "what should I do today?" for this grower's village and 
 
 - **The main question** in a green card: "What's troubling your orchard today?" with Start, a microphone (speak the problem in Kashmiri) and a camera (photo check).
 - **Quick chips** for common entry points: spots on leaves, insects and mites, fruit problem, tree drying, what to spray now.
-- **An alert with an action**, e.g. "Scab infection risk on Wednesday: 14 mm rain, leaves wet ~18 h at 11–16 °C, your last spray was 9 days ago → Spray before Wednesday noon".
+- **An alert with an action**, e.g. "Scab infection risk on Wednesday: 14 mm rain, leaves wet ~18 h at 11–16 °C, your last spray was 9 days ago → Spray before Wednesday's rain".
 - **Crop stage for this altitude** (dormant → green tip → pink bud → bloom → petal fall → fruitlet → growth → harvest → leaf fall) and the next spray due.
 - **Four tiles:** mandi rate and trend, NH-44 status, today's spray window, free spray teams nearby.
 - **One quick question a day** (optional, one tap, reason shown): bees seen during bloom? pests seen this week? crop better or worse than last year?
 
-The home content changes with the season: scab and bloom in spring, mites and Alternaria in summer, harvest, trucks and CA storage in autumn, urea on leaves and pruning in late autumn and winter.
+The home content changes with the season: scab and bloom in spring, mites and Alternaria in summer, harvest, trucks and CA storage in autumn, 3–4% urea on yellowing leaves and pruning in late autumn and winter.
 
 ### 3.2 How a diagnosis works
 
@@ -84,18 +85,18 @@ The home content changes with the season: scab and bloom in spring, mites and Al
 
 ## 4. The problem library (diagnosis knowledge base, first version)
 
-General symptom and management notes for the most important problems in Kashmir's apple belt. **Management lines are deliberately at the level of practice and product class; doses and product names must come from the current SKUAST-K schedule.**
+General symptom and management notes for the most important problems in Kashmir's apple belt. **Rows were checked against SKUAST-K's 2026 guide and monthly advisories, ICAR and peer-reviewed sources (Appendix D, section 4); doses and product names come only from the current SKUAST-K schedule.**
 
 | Problem | Part | Distinguishing signs (become Yes / No questions) | Season / trigger | Look-alikes | Management direction |
 |---|---|---|---|---|---|
-| Apple scab (*Venturia inaequalis*) | Leaves, fruit | Olive-green to black, velvety spots; dark, corky, cracking spots on fruit | Spring rains, green tip to fruitlet; infection needs hours of leaf wetness that depend on temperature | Alternaria, Marssonina, spray burn | Protective sprays timed before rain from green tip; rotate fungicide groups; urea on leaves at leaf fall or destroy fallen leaves; open canopy |
-| Alternaria leaf blotch (*A. mali*) | Leaves | Small round brown spots, some with a darker ring ("frog-eye"); defoliation | Warm, humid summer; worse after mite damage | Scab, Marssonina, mites | Summer cover sprays as per schedule; control mites; balanced nutrition |
+| Apple scab (*Venturia inaequalis*) | Leaves, fruit | Olive-green to black, velvety spots; dark, corky, cracking spots on fruit | Primary infection green tip to 2–3 weeks after petal fall; rain-splashed secondary infection all season (severe in July–Aug 2026) | Alternaria, Marssonina, spray burn | Spray before forecast rain from green tip; never repeat a product in consecutive sprays (Kashmir isolates show reduced sensitivity to difenoconazole and flusilazole); 3–4% urea when half the leaves yellow; open canopy |
+| Alternaria leaf blotch (*Alternaria* spp.) | Leaves | Small (0.5–2 mm) light-brown round spots merging into blotches; defoliation | From mid-May; worst in warm, humid June–August | Apple blotch leaf miner, Marssonina, necrotic leaf blotch | Cover sprays before rain as per schedule; check for leaf miner before spraying fungicide |
 | Marssonina blotch / premature leaf fall (*Diplocarpon coronariae*) | Leaves | Dark brown blotches on upper surface; leaves yellow with green islands and drop early | July–September after wet spells | Alternaria, mites | Timely summer sprays; sanitation; urea at leaf fall |
 | Powdery mildew (*Podosphaera leucotricha*) | Shoots, flowers | White powder on young leaves, shoot tips, flower clusters; narrow curled leaves | Spring growth | Aphid curl | Prune out infected shoots in winter; sprays at pink bud / petal fall as per schedule |
-| European red mite / two-spotted spider mite | Leaves | Dull, bronze leaves; tiny moving dots under leaves; fine webbing | Hot, dry June–August | Alternaria, nutrient problems | Dormant oil at silver tip–green tip; 20-leaf threshold check; rotate acaricide groups; protect predators |
+| European red mite / two-spotted spider mite | Leaves | Dull, bronzed leaves; tiny moving dots under leaves | Hot, dry June–August | Alternaria, nutrient problems | Mineral oil before green tip (kills red-mite eggs only); spray only above SKUAST thresholds: 4–5 mites per leaf at petal fall, >5 fruitlet, >10 fruit development; rotate acaricides |
 | San Jose scale | Bark, fruit | Grey crusty bumps on bark; red spots with grey centres on fruit | All year | Woolly aphid | Horticultural mineral oil at dormancy; prune heavily infested wood |
-| Woolly apple aphid | Bark, roots | White cotton-like masses on wounds and cuts; galls on roots | All year | Scale | Brush colonies; listed insecticide; resistant rootstocks (MM106, MM111) in new plantings |
-| Aphids (green, rosy) | Leaves | Curled young leaves, sticky honeydew, ants | Spring | Mildew | Prune affected tips; spray only if widespread; never in bloom |
+| Woolly apple aphid | Bark, roots | White cotton-like masses on wounds and cuts; galls on roots | All year | Scale | Brush colonies; listed insecticide; MM111 rootstock in new plantings (MM106 also resists it but is prone to collar rot on wet sites) |
+| Aphids (green, rosy) | Leaves | Curled young leaves, sticky honeydew, ants | Spring | Mildew | Prune affected tips; spray only if 40% of young shoots are infested; never in bloom |
 | Leaf-eating caterpillars (Indian gypsy moth, tent caterpillar) | Leaves | Eaten leaves, nests, egg masses | Spring | — | Destroy nests and egg masses; listed insecticide if spreading |
 | Cankers (smoky blight, papery bark, others) | Bark | Sunken, cracked or peeling dead bark | All year | Borer damage | Scrape to healthy wood, paste wounds, burn debris; paint pruning cuts |
 | Apple stem borer / root borer | Trunk, roots | Holes with sawdust-like frass; grubs on roots; declining tree | All year / summer | Canker | Clean and plug holes; destroy grubs; expert advice for soil treatment |
@@ -105,11 +106,12 @@ General symptom and management notes for the most important problems in Kashmir'
 | Boron / zinc deficiency | Fruit, leaves | Cracking, corky core (boron); small bunched leaves, rosettes (zinc) | Growth | Scab cracking | Soil test; foliar micronutrients as per schedule |
 | Sooty blotch & flyspeck | Fruit | Grey smudges and clusters of tiny black dots that rub off | Wet late summer | Scab | Summer sprays; airflow; fruit can be cleaned |
 | Hail, frost | Fruit, flowers | Dents and bruises after storms; black flower centres after a cold night | Spring and summer storms; bloom | Disease | Nets; alerts; protective spray after hail; record damage |
-| Poor fruit set | Flowers | Flowers drop without setting; few bees; cold rainy bloom | Bloom | Frost | Pollinizers (~1 in 9 trees); beehives; no insecticide in bloom |
-| Codling moth (quarantine pest) | Fruit | Entry holes with frass | Reported from Ladakh, not established in the Kashmir valley (to confirm) | — | Report immediately; quarantine rules |
-| Fire blight | Shoots, blossoms | Blackened blossoms and shoot tips bent like a shepherd's crook | Status in J&K to confirm | Frost, canker | Always escalate to the department |
+| Poor fruit set | Flowers | Flowers drop without setting; few bees; cold rainy bloom | Bloom | Frost | Pollinizer varieties; beehives (SKUAST-K 2026 guide: 3–4 per hectare at 5–10% bloom; April 2026 advisory: 2 per acre); no insecticide in bloom |
+| Codling moth | Fruit | Entry holes with frass; early fruit drop | Present in the Kashmir valley: DNA-confirmed in Baramulla after 2019, reported in six districts by 2023; about 3.5 generations a year | Other fruit borers | Pheromone-trap monitoring and SKUAST-K 'fruit borer' sprays; report new areas |
+| Apple blotch leaf miner (*Leucoptera malifoliella*) | Leaves | Blotch-shaped mines with a larva or frass inside; often mistaken for Alternaria | May–September; 13–100% defoliation in south Kashmir (2023) | Alternaria | Destroy fallen leaves, scrape bark, traps; spray only the leaf-miner options in SKUAST-K advisories |
+| Fire blight | Shoots, blossoms | Blackened blossoms and shoot tips bent like a shepherd's crook | Not known in India or J&K (EPPO: absent, unreliable old record) | Frost, canker | Escalate-only alert: report suspected cases to the department |
 
-**Spray-schedule backbone (by stage).** The Doctor, the home alerts and the shop all hang off the SKUAST-K schedule's stages: dormant / silver tip (horticultural mineral oil for scale and mite eggs), green tip and pink bud (scab protection), bloom (no insecticides; bees), petal fall and fruitlet (scab, mildew; thinning), fruit development (Alternaria, Marssonina, mites; calcium), pre-harvest, and post-harvest / leaf fall (urea on leaves; sanitation). The schedule is revised yearly and has high-density variants; the app must load the current edition and show its year on every recommendation.
+**Spray-schedule backbone.** The Doctor, the home alerts and the shop all follow SKUAST-K's *Integrated Management Guide for Apple Orchards in Kashmir 2026* (No. AU/DEx/449-BL/01/26), issued through the Directorate of Horticulture. It has 15 stages: delayed dormancy (horticultural mineral oil 2 L per 100 L, before green tip), green tip and tight cluster (contact fungicide at 300 g per 100 L only if a full day of rain is forecast; skip if the next 7 days are dry), pink bud (scab spray; boron 1–1.5 g/L if needed; 3–4 beehives per hectare), flowering (no spray unless 10 days since the last fungicide and rain is due), petal fall and fruitlet (systemic fungicides before rain; mites only above thresholds; thinning at 10–12 mm), fruit development I–IV (fungicide only if rain is forecast; three calcium chloride sprays at 3–4 g/L), pre-harvest (storage-rot spray 15–20 days before picking CA fruit), harvest, post-harvest (3–4% urea when half the leaves are yellow) and dormancy (5% urea on fallen leaves if missed). Rules: never mix pesticides, keep 3–4 days between insecticide and fungicide sprays, never repeat a product in consecutive sprays, no spraying in full bloom. There is no separate high-density schedule. SKUAST-K's own 2026 documents disagree on a few points (Zineb + Hexaconazole dose, pre-harvest timing, when to stop spraying); the app must hold those rows back until SKUAST-K confirms. Full stage table with sources: Appendix D, section 1.
 
 ## 5. Buy: a licensed-dealer marketplace
 
@@ -127,7 +129,7 @@ General symptom and management notes for the most important problems in Kashmir'
 - **Payment:** UPI, cash at pickup, and pay-after-harvest credit through a regulated lender.
 - **Reviews only from verified buyers,** shown with district.
 
-**Compliance.** Pesticides may be sold only by licensed sellers; run the shop as a marketplace for licensed dealers, store each dealer's licence and show it on orders, and sell only products registered for apple. National platforms already operate this way. Fertilizer sales follow the Fertilizer Control Order through authorised dealers; urea and DAP have government-fixed MRPs. Confirm the current online-sale conditions for both with a lawyer (Appendix C §7, flagged UNVERIFIED there).
+**Compliance.** Since the Insecticides (Second Amendment) Rules 2022 (rule 10E), a licensed seller may sell insecticides through an e-commerce platform, and the platform must verify the seller's state licence first; the Central Consumer Protection Authority enforced this against major marketplaces in May 2026. So run the shop as a marketplace for licensed dealers, store and show each licence, and list only products registered for apple. Malathion is no longer approved for apple and dimethoate lost its label claims on fruit eaten raw (Insecticides (Prohibition) Order 2023). Fertilizer sales go through authorised dealers under the Fertiliser (Control) Order; urea and DAP have fixed MRPs. Genuine-pack checks matter: 85 of 5,772 pesticide samples tested in J&K in 2025-26 were substandard, and a 2026 Shopian case over a mancozeb batch led to an FIR (Appendix D, section 5).
 
 ## 6. Learn: short lessons in Kashmiri
 
@@ -276,7 +278,7 @@ General symptom and management notes for the most important problems in Kashmir'
 | Area | What applies | Product decision |
 |---|---|---|
 | Personal data | DPDP Act 2023, DPDP Rules 2025 (main duties ~May 2027) | Itemised consent in four languages; minimal data; export/delete; breach process; under-18 consent |
-| Pesticide sales | Insecticides Act 1968 and rules: licensed sellers, registered products, label claims | Marketplace for licensed dealers only; apple-registered products only |
+| Pesticide sales | Insecticides Act 1968; rule 10E (2022) allows online sale by licensed sellers after platform verification; label claims; Prohibition Order 2023 | Marketplace for licensed dealers only; apple-registered products only |
 | Fertilizer sales | Fertilizer Control Order; fixed MRPs for some products | Authorised dealers; show MRP |
 | Saplings | Nursery registration / accreditation | Sell only from NHB-accredited or J&K-licensed nurseries |
 | E-commerce | Consumer Protection (E-Commerce) Rules 2020 | Seller details, grievance officer, returns policy |
@@ -330,12 +332,23 @@ General symptom and management notes for the most important problems in Kashmir'
 | Regulatory change (pesticide e-commerce, platform workers) | Legal review before Phase 2; licensed partners |
 | Kashmiri language technology gaps | Recorded audio; Urdu text; collect consented speech for future models |
 
-## 20. Open questions to settle next
+## 20. Answered since the first draft, and still open
 
-1. Partnership and reuse terms for the SKUAST-K schedule and lessons.
-2. Current HDP subsidy rates and whether the scheme continues after March 2026.
-3. Current online-sale conditions for pesticides and fertilizers.
-4. Labour wage rates by district and task (not found in desk research).
-5. Status of fire blight and codling moth in the Kashmir valley.
-6. Whether apple crop insurance will relaunch, and in what form.
+**Answered (sources in Appendix D):**
+
+- **Spray schedule:** SKUAST-K's 2026 guide is current; the app now follows it. It was read from a copy of the booklet, so check against the printed booklet before launch.
+- **HDP subsidy:** the Revised Modified High Density Plantation Scheme gives a 50% subsidy until 31 March 2027. The minimum area is 1 kanal, and growers apply through the Kisan Sathi portal. Separately, anti-hail nets carry a subsidy of ₹27,000 per kanal.
+- **Online sale of pesticides:** legal for licensed sellers whose licence the platform verifies (rule 10E, 2022).
+- **Labour:** harvest labour in Shopian cost ₹1,200–1,500 a day in October 2026, and pickers earned ₹800–1,100 in 2025. The statutory minimum for unskilled work is ₹311.
+- **Codling moth:** present in the Kashmir valley. **Fire blight:** not known in India or J&K.
+- **CA storage:** about ₹35 per 17 kg crate per month at Lassipora.
+
+**Still open:**
+
+1. An official copy of the 2026 guide, and SKUAST-K's ruling on its internal conflicts.
+2. Partnership and reuse terms for SKUAST-K content.
+3. Whether the tentative fertilizer schedule for high-density orchards (July 2026) was adopted.
+4. Current CIB&RC apple label status for chlorpyrifos, thiacloprid and carbendazim mixes.
+5. Task wages for pruning, spraying and packing by district, and employers' duties for non-local labour.
+6. Whether apple crop insurance will relaunch.
 7. Grower testing: show the demo to 20 growers in Shopian and Sopore and record what they change.

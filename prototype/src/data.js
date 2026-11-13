@@ -41,8 +41,10 @@
       prevent: ['In autumn, when half the leaves have turned yellow, spray 3–4% urea on them. The fungus survives winter in fallen leaves.', 'Missed it? Spray 5% urea on the fallen leaves on the orchard floor during dormancy, or rake and destroy them.', 'Prune to open the canopy so leaves dry faster. From green tip, spray before every forecast rain.'],
       also: [['alternaria', 'Spots are small, round and brown with a darker ring'], ['marssonina', 'Dark blotches in July–Aug, leaves turn yellow and drop']],
       products: ['dodine', 'fluxpyra', 'boscalid'] },
-    alternaria: { name: 'Alternaria leaf blotch', sci: 'Alternaria mali', areas: ['leaves'], prior: .05, art: ['leaf', 'alternaria'], season: 'Jun–Aug, warm & humid', kind: 'Fungal disease',
-      now: ['Spray a fungicide listed for Alternaria in the SKUAST-K schedule.', 'Check for mites too. Mite-damaged leaves get Alternaria more easily.'], prevent: ['Keep mites under control in June–July.', 'Balanced nutrition; avoid excess nitrogen.'], also: [['scab', 'Velvety olive spots after spring rain'], ['marssonina', 'Large dark blotches, yellowing, early leaf fall']], products: ['trifloxy', 'mancozeb'] },
+    alternaria: { name: 'Alternaria leaf blotch', sci: 'Alternaria spp. (A. alternata complex)', areas: ['leaves'], prior: .07, art: ['leaf', 'alternaria'], season: 'From mid-May; worst Jun–Aug', kind: 'Fungal disease',
+      now: ['Spray a fungicide listed for Alternaria in the SKUAST-K schedule, before rain.', 'Check for leaf miner first: its mines are often mistaken for Alternaria, and fungicide does not stop it.'], prevent: ['Keep mites under control in June–July.', 'Balanced nutrition; avoid excess nitrogen.'], also: [['leafminer', 'Mines in the leaf with a tiny larva inside'], ['marssonina', 'Large dark blotches, yellowing, early leaf fall']], products: ['trifloxy', 'mancozeb'] },
+    leafminer: { name: 'Apple blotch leaf miner', sci: 'Leucoptera malifoliella', areas: ['leaves'], prior: .08, art: ['leaf', 'alternaria'], season: 'May–Sep; spreading in south Kashmir', kind: 'Pest',
+      now: ['Hold a leaf to the light: a blotch-shaped mine with a tiny larva or frass inside means leaf miner, not a fungus.', 'Spray only the leaf-miner options in the current SKUAST-K advisory; fungicides will not help.'], prevent: ['Collect and destroy fallen leaves; scrape loose bark in winter.', 'Pheromone traps (8–10 per hectare) at flowering show when adults fly.'], also: [['alternaria', 'Brown spots with no mine or larva']], products: [] },
     marssonina: { name: 'Marssonina blotch (premature leaf fall)', sci: 'Diplocarpon coronariae', areas: ['leaves'], prior: .03, art: ['leaf', 'marssonina'], season: 'Jul–Sep, after wet spells', kind: 'Fungal disease',
       now: ['Spray a fungicide listed for premature leaf fall in the SKUAST-K schedule.', 'Collect and destroy fallen leaves.'], prevent: ['Keep sprays on time in June–August, especially after rain.', 'Urea spray at leaf fall also reduces carry-over.'], also: [['alternaria', 'Small round spots with a ring'], ['mites', 'Bronze, dusty leaves']], products: ['trifloxy', 'mancozeb'] },
     mildew: { name: 'Powdery mildew', sci: 'Podosphaera leucotricha', areas: ['leaves', 'flowers'], prior: .12, art: ['leaf', 'mildew'], season: 'Apr–Jun, new shoots', kind: 'Fungal disease',
@@ -50,7 +52,7 @@
     mites: { name: 'Red spider mite / European red mite', sci: 'Panonychus ulmi, Tetranychus urticae', areas: ['leaves'], prior: .07, art: ['leaf', 'mites'], season: 'Jun–Aug, hot & dry', kind: 'Pest',
       now: ['Count mites under 20 leaves with a hand lens. Spray only above 4–5 mites per leaf at petal fall, 5 at fruitlet and 10 in fruit development (SKUAST-K 2026).', 'Use one mite killer (acaricide) from the schedule, and a different one next time.'], prevent: ['Horticultural mineral oil at the delayed-dormant stage, before green tip, kills overwintering eggs.', 'Avoid unnecessary insecticides that kill the mites\' natural enemies.'], also: [['alternaria', 'Brown spots with a ring']], products: ['hexy', 'hmo'] },
     aphids: { name: 'Aphids (green / rosy apple aphid)', sci: 'Aphis pomi, Dysaphis plantaginea', areas: ['leaves'], prior: .14, art: ['leaf', 'aphids'], season: 'Apr–Jun', kind: 'Pest',
-      now: ['If only a few shoots are affected, cut them off or wash with water.', 'Spray an insecticide listed for aphids only if many shoots are curled. Never spray insecticides during bloom.'], prevent: ['Protect ladybirds and hoverflies; they eat aphids.'], also: [['mildew', 'White powder on shoot tips']], products: ['neem'] },
+      now: ['If only a few shoots are affected, cut them off or wash with water.', 'Spray a listed insecticide only if 40% or more of young shoots are infested (SKUAST-K). Never spray insecticides during bloom.'], prevent: ['Protect ladybirds and hoverflies; they eat aphids.'], also: [['mildew', 'White powder on shoot tips']], products: ['neem'] },
     caterpillars: { name: 'Leaf-eating caterpillars', sci: 'Gypsy moth, tent caterpillar', areas: ['leaves'], prior: .08, art: ['leaf', 'holes'], season: 'Apr–Jun', kind: 'Pest',
       now: ['Remove and destroy caterpillar nests and egg masses by hand.', 'Spray a listed insecticide if damage is spreading.'], prevent: ['Scrape egg masses off bark in winter.'], also: [], products: ['neem'] },
     zinc: { name: 'Zinc deficiency (little leaf)', sci: 'Nutrient disorder', areas: ['leaves'], prior: .06, art: ['leaf', 'zinc'], season: 'Spring growth', kind: 'Nutrient',
@@ -70,15 +72,15 @@
     frost: { name: 'Frost injury at bloom', sci: 'Weather damage', areas: ['flowers'], prior: .25, art: ['flowers', 'frost'], season: 'Bloom', kind: 'Weather',
       now: ['Nothing can save flowers with black centres. Do not spray to "cure" them.', 'Count healthy flowers before planning thinning.'], prevent: ['The app sends frost alerts the evening before.'], also: [['pollination', 'Flowers fall without setting fruit']], products: [] },
     pollination: { name: 'Poor pollination', sci: 'Few pollinizers or bees', areas: ['flowers'], prior: .35, art: ['flowers', 'fallen'], season: 'Bloom', kind: 'Orchard management',
-      now: ['Book beehives for next bloom: 3–4 hives per hectare at 5–10% bloom (SKUAST-K 2026).', 'Never spray insecticides during bloom.'], prevent: ['Plant or graft pollinizer varieties (about 1 in 9 trees).'], also: [['frost', 'Black flower centres after a cold night']], products: [] },
+      now: ['Book beehives for next bloom: 3–4 hives per hectare at 5–10% bloom (SKUAST-K 2026 guide).', 'Never spray insecticides during bloom.'], prevent: ['Plant or graft pollinizer varieties through the block; ask the horticulture officer for the right mix.'], also: [['frost', 'Black flower centres after a cold night']], products: [] },
     woolly: { name: 'Woolly apple aphid', sci: 'Eriosoma lanigerum', areas: ['bark', 'roots'], prior: .30, art: ['bark', 'woolly'], season: 'All year', kind: 'Pest',
-      now: ['Brush off the colonies on cuts and wounds.', 'Use an insecticide listed for woolly aphid if colonies are many; root colonies need a soil treatment.'], prevent: ['Plant on resistant rootstocks (MM106, MM111) in new orchards.'], also: [['sjs', 'Grey crusty bumps on bark']], products: ['neem'] },
+      now: ['Brush off the colonies on cuts and wounds.', 'Use an insecticide listed for woolly aphid if colonies are many; root colonies need a soil treatment.'], prevent: ['New orchards: MM111 resists woolly aphid. MM106 also resists it but gets collar rot on wet, poorly drained land.'], also: [['sjs', 'Grey crusty bumps on bark']], products: ['neem'] },
     canker: { name: 'Canker (smoky blight, papery bark)', sci: 'Fungal canker', areas: ['bark'], prior: .25, art: ['bark', 'canker'], season: 'All year', kind: 'Fungal disease',
       now: ['Scrape the dead bark back to healthy wood and paint the wound with a fungicide paste.', 'Burn the removed bark; do not leave it in the orchard.'], prevent: ['Paint all big pruning cuts. Avoid bark injuries.'], also: [['borer', 'Holes with sawdust']], products: ['captan'] },
     borer: { name: 'Apple stem borer', sci: 'Aeolesthes sarta', areas: ['bark'], prior: .15, art: ['bark', 'borer'], season: 'All year', kind: 'Pest',
       now: ['Clean the hole with a wire to kill the grub.', 'Plug the hole with cotton soaked in a listed insecticide and seal with mud.'], prevent: ['Check trunks every month in summer.'], also: [], products: [] },
     collar: { name: 'Collar rot', sci: 'Phytophthora cactorum', areas: ['roots'], prior: .30, art: ['roots', 'collar'], season: 'Wet soils, spring & autumn', kind: 'Fungal disease',
-      now: ['Remove soil from the trunk base, scrape the rotten bark and paint with a listed fungicide paste.', 'Improve drainage so water does not stand near the trunk.'], prevent: ['Do not pile manure against the trunk. Trichoderma with manure helps.'], also: [['rootrot', 'White threads on roots, sudden wilting']], products: ['tricho'] },
+      now: ['Remove soil from the trunk base, scrape the rotten bark and paint it with Chaubatia or Bordeaux paste.', 'Drench the soil under the canopy as advised by SKUAST-K (April 2026), and improve drainage.'], prevent: ['Do not pile manure against the trunk. Trichoderma with manure helps.'], also: [['rootrot', 'White threads on roots, sudden wilting']], products: ['tricho'] },
     rootrot: { name: 'White root rot', sci: 'Dematophora necatrix', areas: ['roots'], prior: .25, art: ['roots', 'rootrot'], season: 'Summer', kind: 'Fungal disease',
       now: ['Call an expert. White root rot spreads through soil to nearby trees.', 'Drench the root zone of affected and neighbouring trees as advised.'], prevent: ['Dig a trench around infected trees to stop spread. Trichoderma helps.'], also: [['collar', 'Rotten bark at soil level']], products: ['tricho'] },
     rootborer: { name: 'Root borer', sci: 'Dorysthenes hugelii', areas: ['roots'], prior: .20, art: ['roots', 'grubs'], season: 'Summer', kind: 'Pest',
@@ -89,7 +91,8 @@
     { id: 'velvety', area: 'leaves', q: 'Are there olive-green to black spots with a soft, velvety look?', art: [['leaf', 'scab', 'Like this'], ['leaf', 'alternaria', 'Not like this']], p: { scab: .9, alternaria: .12, marssonina: .2 }, dflt: .03 },
     { id: 'fruit_too', area: 'leaves', q: 'Do you also see dark, rough spots on the young fruit?', art: [['fruit', 'scab', 'Dark, rough spots'], ['fruit', 'healthy', 'Clean fruit']], p: { scab: .78, alternaria: .08 }, dflt: .05 },
     { id: 'after_rain', area: 'leaves', q: 'Did it start after rainy days this spring?', art: [['icon', 'rain', 'Rainy spell'], ['icon', 'sun', 'Dry weather']], p: { scab: .85, mildew: .35, alternaria: .3, marssonina: .45, aphids: .3 }, dflt: .25 },
-    { id: 'frogeye', area: 'leaves', q: 'Are the spots small, round and brown, some with a darker ring?', art: [['leaf', 'alternaria', 'Like this'], ['leaf', 'scab', 'Not like this']], p: { alternaria: .88, marssonina: .25, scab: .12, burn: .2 }, dflt: .03 },
+    { id: 'frogeye', area: 'leaves', q: 'Are the spots small, round and light brown, some joining into bigger blotches?', art: [['leaf', 'alternaria', 'Like this'], ['leaf', 'scab', 'Not like this']], p: { alternaria: .88, leafminer: .45, marssonina: .25, scab: .12, burn: .2 }, dflt: .03 },
+    { id: 'mines', area: 'leaves', q: 'Hold a leaf to the light: are there mines with a tiny larva or black specks inside?', art: [['leaf', 'alternaria', 'Mines inside the leaf'], ['leaf', 'healthy', 'Healthy leaf']], p: { leafminer: .92, alternaria: .05 }, dflt: .03 },
     { id: 'blotch', area: 'leaves', q: 'Do leaves get dark brown patches, then turn yellow and fall early?', art: [['leaf', 'marssonina', 'Like this'], ['leaf', 'healthy', 'Healthy leaf']], p: { marssonina: .9, alternaria: .45, mites: .3, scab: .25 }, dflt: .05 },
     { id: 'powder', area: 'leaves', q: 'Is there a white powder on young leaves or shoot tips?', art: [['leaf', 'mildew', 'White powder'], ['leaf', 'healthy', 'Healthy leaf']], p: { mildew: .95 }, dflt: .03 },
     { id: 'bronze', area: 'leaves', q: 'Do leaves look dull or bronze, with tiny moving dots underneath?', art: [['leaf', 'mites', 'Bronze, dusty'], ['leaf', 'healthy', 'Healthy leaf']], p: { mites: .92, alternaria: .1 }, dflt: .05 },
@@ -174,7 +177,7 @@
   D.library = [
     ['scab', 'Apple scab', 'Leaves & fruit', 'Apr–Jun', 'risk'], ['alternaria', 'Alternaria leaf blotch', 'Leaves', 'Jun–Aug', 'warn'],
     ['marssonina', 'Premature leaf fall', 'Leaves', 'Jul–Sep', 'warn'], ['mildew', 'Powdery mildew', 'Shoots & flowers', 'Apr–Jun', 'warn'],
-    ['mites', 'Red spider mite', 'Leaves', 'Jun–Aug', 'neutral'], ['woolly', 'Woolly apple aphid', 'Bark & roots', 'All year', 'neutral'],
+    ['mites', 'Red spider mite', 'Leaves', 'Jun–Aug', 'neutral'], ['leafminer', 'Apple blotch leaf miner', 'Leaves', 'May–Sep', 'warn'], ['woolly', 'Woolly apple aphid', 'Bark & roots', 'All year', 'neutral'],
     ['sjs', 'San Jose scale', 'Bark & fruit', 'All year', 'neutral'], ['collar', 'Collar rot', 'Trunk base', 'Wet soils', 'neutral'],
     ['canker', 'Canker', 'Bark', 'All year', 'neutral']
   ];
@@ -207,9 +210,9 @@
     ['packing', 'Grading & packing', 'box', 'chinar'], ['buyers', 'Sell to buyers', 'handcoins', 'apple'], ['repair', 'Sprayer repair', 'sliders', 'plain']
   ];
   D.teams = [
-    { name: 'Ali Mohammad & team', size: 4, rating: 4.8, jobs: 112, dist: '3 km', rate: 750, tags: ['ID verified', 'Own power sprayer'], langs: 'Kashmiri, Urdu' },
-    { name: 'Showkat Ahmad & team', size: 6, rating: 4.6, jobs: 86, dist: '5 km', rate: 700, tags: ['ID verified', 'Pruning experts'], langs: 'Kashmiri' },
-    { name: 'Rakesh Kumar & team', size: 5, rating: 4.5, jobs: 64, dist: '7 km', rate: 680, tags: ['ID verified', 'Police registration done'], langs: 'Hindi, Urdu' }
+    { name: 'Ali Mohammad & team', size: 4, rating: 4.8, jobs: 112, dist: '3 km', rate: 1000, tags: ['ID verified', 'Own power sprayer'], langs: 'Kashmiri, Urdu' },
+    { name: 'Showkat Ahmad & team', size: 6, rating: 4.6, jobs: 86, dist: '5 km', rate: 950, tags: ['ID verified', 'Pruning experts'], langs: 'Kashmiri' },
+    { name: 'Rakesh Kumar & team', size: 5, rating: 4.5, jobs: 64, dist: '7 km', rate: 900, tags: ['ID verified', 'Police registration done'], langs: 'Hindi, Urdu' }
   ];
   D.trucks = [
     ['6-wheeler truck', 'Fits ~650 boxes · open body', 95, 'Leaves Thu 6 PM'],
