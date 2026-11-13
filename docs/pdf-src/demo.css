@@ -97,3 +97,16 @@ table.t td.num, table.t th.num { text-align: right; font-variant-numeric: tabula
 .phase h3 { font: 700 18px/1.15 var(--f-display); margin: 0; }
 .phase ul { margin: 0; padding-left: 16px; display: flex; flex-direction: column; gap: 4px; font-size: 12.4px; line-height: 1.42; color: var(--ink-2); }
 .phase.now { background: var(--leaf-soft); border-color: transparent; }
+
+/* Unslop pass for the walkthrough (unslop by Damir Sokolovsky, @heydamir, CC BY 4.0) */
+.eyebrow, .kicker { font: 500 13px/1.2 var(--f-body); letter-spacing: 0; text-transform: none; color: var(--leaf); }
+.kicker { color: var(--ink-3); }
+.pg-head h2 { font: 500 31px/1.08 var(--f-display); letter-spacing: -.015em; }
+.cover .in > h1 { font: 500 84px/0.95 var(--f-display); letter-spacing: -.03em; }
+.cover { background: #1C2A21; }
+.dcap b, .note b, .box h3, .phase h3, .persona h3, .map6 .col h3, .flow .st b, .band b, .ladder .rung .when { font-family: var(--f-body); font-weight: 600; }
+.phase .when, .persona dt, table.t th, .ladder .hd { text-transform: none; letter-spacing: 0; font-weight: 500; font-size: 12px; }
+.box.mist, .map6 .col, .ladder .rung { background: #F3F1EC; }
+.flow .st, .phase.now, .band.leaf { background: #EEF3EE; }
+.band.sky { background: #F3F1EC; }
+.stat { font-family: var(--f-body); font-weight: 600; }

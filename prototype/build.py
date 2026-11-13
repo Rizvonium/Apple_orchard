@@ -5,7 +5,7 @@ Outputs
   prototype/index.html           standalone demo (open in any browser; fonts from Google Fonts)
   prototype/dist/artifact.html   same page without the document skeleton (for hosting as a claude.ai artifact)
 """
-import pathlib
+import pathlib, shutil
 
 ROOT = pathlib.Path(__file__).resolve().parent
 SRC = ROOT / "src"
@@ -18,6 +18,8 @@ def build():
     assert "</script>" not in js, "inline JS must not contain a closing script tag"
     body = page.replace("/*APP_CSS*/", css).replace("/*APP_JS*/", js)
     (ROOT / "dist").mkdir(exist_ok=True)
+    for dest in (ROOT / "assets", ROOT / "dist" / "assets"):
+        shutil.copytree(SRC / "assets", dest, dirs_exist_ok=True)
     (ROOT / "dist" / "artifact.html").write_text(body, encoding="utf-8")
     head = ('<!doctype html>\n<html lang="en">\n<meta charset="utf-8">\n'
             '<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n'

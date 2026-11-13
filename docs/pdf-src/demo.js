@@ -26,7 +26,7 @@
   /* 1 cover */
   pageNo++;
   P.push('<section class="pg cover"><span class="chinarbg">' + A.chinar(560, '#fff') + '</span><div class="in">' +
-    '<div style="display:flex;align-items:center;gap:12px">' + A.logo(64) + '<span style="font:700 13px var(--f-body);letter-spacing:.16em;text-transform:uppercase;color:#A9CDB7">Demo app · concept v0.1</span></div>' +
+    '<div style="display:flex;align-items:center;gap:12px">' + A.logo(64) + '<span style="font:500 15px var(--f-body);color:#C9DCCF">Demo app · concept v0.1</span></div>' +
     '<h1>Baghbaan</h1><p class="ctag">Everything a Kashmiri apple grower needs, in one app: find what is wrong, buy the right medicine, learn, sell well and book help.</p>' +
     '<div class="facts"><span>Orchard Doctor: Yes / No diagnosis</span><span>Genuine inputs</span><span>Mandi, highway & weather</span><span>Trucks & labour</span><span>Kashmiri · Urdu · Hindi · English</span><span>Works offline</span></div>' +
     '<p class="cmeta"><b>Demo app walkthrough</b><br>November 2026 · All names, prices, rates and headlines are sample data.' + (DEMO_URL ? '<br>Clickable demo: ' + DEMO_URL : '') + '</p></div>' +

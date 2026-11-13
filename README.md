@@ -32,3 +32,9 @@ The repo is static; no build step is needed. `vercel.json` serves the clickable 
 3. Deploy. For a branch other than the default, either merge it to `main` first or use the branch's preview URL.
 
 After editing anything in `prototype/src/`, run `python3 prototype/build.py` and commit the rebuilt `prototype/index.html`.
+
+## Credits
+
+- Design pass follows [unslop](https://github.com/heydamir/unslop) by Damir Sokolovsky ([@heydamir](https://x.com/heydamir)), licensed CC BY 4.0.
+- Home-screen orchard painting generated with Canva for this demo (`prototype/src/assets/hero-orchard.webp`).
+- Fonts: Newsreader, Mukta, Noto Nastaliq Urdu (SIL Open Font License).

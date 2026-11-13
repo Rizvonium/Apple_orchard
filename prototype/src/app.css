@@ -1,60 +1,63 @@
 /* Baghbaan prototype — shared styles for the live demo and the PDF showcase.
    Layout: phone-first orchard app. On wide screens the app sits in a device frame beside a demo guide. */
 :root {
-  --mist: #F1F5F0;      /* app background: orchard morning mist */
+  /* Direction (unslop pass): a Kashmir orchard at first light. Quiet warm-neutral chrome, one orchard-green accent,
+     apple red only for the logo and real risk. Richness lives in the painted hero, the symptom pictures and the price chart. */
+  --mist: #F6F4EF;      /* page: warm near-neutral */
   --card: #FFFFFF;
-  --card-2: #F6F9F5;
-  --ink: #13231A;
-  --ink-2: #4A5C51;
-  --ink-3: #5B6B61;
+  --card-2: #EFECE5;    /* raised: inputs, active rows, icon wells */
+  --ink: #1F1B16;
+  --ink-2: #554D43;
+  --ink-3: #6E665B;
   --on-apple: #FFFFFF;
-  --map-land: #E4EEDF; --map-line: #C9D8C4; --map-road: #FFFFFF; --map-river: #8EBBDA; --map-text: #4A5C51;
-  --line: #DAE4DB;
-  --line-2: #C3D1C6;
-  --leaf: #1C6A46;      /* primary: orchard leaf */
-  --leaf-2: #134F33;
+  --map-land: #ECE8DF; --map-line: #DAD4C8; --map-road: #FFFFFF; --map-river: #A9C3D6; --map-text: #554D43;
+  --line: #E6E1D8;      /* hairline */
+  --line-2: #D6D0C4;
+  --leaf: #1F6B45;      /* the one accent */
+  --leaf-2: #17553A;
   --on-leaf: #FFFFFF;
-  --leaf-soft: #E0EFE5;
-  --apple: #C4283B;     /* brand accent: Kashmiri Delicious */
-  --apple-soft: #FBE5E7;
-  --chinar: #BC5E16;    /* autumn chinar */
-  --chinar-soft: #FBEAD9;
-  --sky: #2A6898;
-  --sky-soft: #E0ECF6;
+  --leaf-soft: #E4EFE7;
+  --apple: #B8293A;
+  --apple-soft: #F7E6E6;
+  --chinar: #9A5A1E;
+  --chinar-soft: #F4EADF;
+  --sky: #375F80;
+  --sky-soft: #E7EDF2;
   --good: #1D7A4B;
-  --good-soft: #DCF0E3;
-  --warn: #A3560C;
-  --warn-soft: #FCEAD2;
+  --good-soft: #E2F0E6;
+  --warn: #8F530F;
+  --warn-soft: #F6EAD7;
   --risk: #B3261E;
-  --risk-soft: #FCE2DE;
-  --page: #E4EBE3;
-  --bezel: #1A231D;
-  --scrim: rgba(12, 22, 16, .45);
-  --shadow-1: 0 1px 2px rgba(19, 35, 26, .06), 0 2px 10px rgba(19, 35, 26, .05);
-  --shadow-2: 0 18px 40px rgba(19, 35, 26, .18), 0 2px 6px rgba(19, 35, 26, .08);
-  --f-display: "Baloo 2", "Mukta", system-ui, sans-serif;
+  --risk-soft: #F8E3E0;
+  --page: #ECE8E0;
+  --bezel: #1F1C18;
+  --scrim: rgba(20, 17, 13, .45);
+  --shadow-1: 0 1px 2px rgba(31, 27, 22, .05);
+  --shadow-2: 0 8px 24px rgba(31, 27, 22, .10), 0 1px 3px rgba(31, 27, 22, .06);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --f-display: "Newsreader", "Mukta", Georgia, serif;   /* large headlines only */
   --f-body: "Mukta", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --f-urdu: "Noto Nastaliq Urdu", "Noto Naskh Arabic", "Segoe UI", serif;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --mist: #0E1511; --card: #16201A; --card-2: #1B271F; --ink: #E3ECE5; --ink-2: #A6B6AB; --ink-3: #8A9B90; --on-apple: #2A0A10; --map-land: #1B271F; --map-line: #2C3B31; --map-road: #34463A; --map-river: #2F5A78; --map-text: #A6B6AB;
-    --line: #26342B; --line-2: #34463A; --leaf: #5DC28B; --leaf-2: #86D6A9; --on-leaf: #07150E; --leaf-soft: #163024;
-    --apple: #F06A7B; --apple-soft: #3A1A20; --chinar: #F2A15C; --chinar-soft: #3A2615; --sky: #80B6E2; --sky-soft: #132839;
-    --good: #66C993; --good-soft: #13301F; --warn: #F1B266; --warn-soft: #382811; --risk: #FF8C82; --risk-soft: #3D1714;
-    --page: #0A0F0C; --bezel: #000000; --scrim: rgba(0, 0, 0, .6);
-    --shadow-1: 0 1px 2px rgba(0, 0, 0, .35); --shadow-2: 0 18px 40px rgba(0, 0, 0, .55);
+    --mist: #161513; --card: #1C1A18; --card-2: #262421; --ink: #EFE9DE; --ink-2: #B3AC9F; --ink-3: #958E82; --on-apple: #2A0A10; --map-land: #23211E; --map-line: #34312C; --map-road: #3A3631; --map-river: #3B5468; --map-text: #B3AC9F;
+    --line: #2C2925; --line-2: #3A3631; --leaf: #73C79A; --leaf-2: #93D6B1; --on-leaf: #0E1A13; --leaf-soft: #1E2B23;
+    --apple: #EF7380; --apple-soft: #3A1E21; --chinar: #D9A066; --chinar-soft: #2E2519; --sky: #93B4D0; --sky-soft: #1E252C;
+    --good: #6CC795; --good-soft: #1B2A20; --warn: #E3AE66; --warn-soft: #2E2517; --risk: #F08A80; --risk-soft: #3A1E1B;
+    --page: #100F0D; --bezel: #000000; --scrim: rgba(0, 0, 0, .6);
+    --shadow-1: none; --shadow-2: 0 18px 40px rgba(0, 0, 0, .5);
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --mist: #0E1511; --card: #16201A; --card-2: #1B271F; --ink: #E3ECE5; --ink-2: #A6B6AB; --ink-3: #8A9B90; --on-apple: #2A0A10; --map-land: #1B271F; --map-line: #2C3B31; --map-road: #34463A; --map-river: #2F5A78; --map-text: #A6B6AB;
-  --line: #26342B; --line-2: #34463A; --leaf: #5DC28B; --leaf-2: #86D6A9; --on-leaf: #07150E; --leaf-soft: #163024;
-  --apple: #F06A7B; --apple-soft: #3A1A20; --chinar: #F2A15C; --chinar-soft: #3A2615; --sky: #80B6E2; --sky-soft: #132839;
-  --good: #66C993; --good-soft: #13301F; --warn: #F1B266; --warn-soft: #382811; --risk: #FF8C82; --risk-soft: #3D1714;
-  --page: #0A0F0C; --bezel: #000000; --scrim: rgba(0, 0, 0, .6);
-  --shadow-1: 0 1px 2px rgba(0, 0, 0, .35); --shadow-2: 0 18px 40px rgba(0, 0, 0, .55);
-  color-scheme: dark;
+    --mist: #161513; --card: #1C1A18; --card-2: #262421; --ink: #EFE9DE; --ink-2: #B3AC9F; --ink-3: #958E82; --on-apple: #2A0A10; --map-land: #23211E; --map-line: #34312C; --map-road: #3A3631; --map-river: #3B5468; --map-text: #B3AC9F;
+    --line: #2C2925; --line-2: #3A3631; --leaf: #73C79A; --leaf-2: #93D6B1; --on-leaf: #0E1A13; --leaf-soft: #1E2B23;
+    --apple: #EF7380; --apple-soft: #3A1E21; --chinar: #D9A066; --chinar-soft: #2E2519; --sky: #93B4D0; --sky-soft: #1E252C;
+    --good: #6CC795; --good-soft: #1B2A20; --warn: #E3AE66; --warn-soft: #2E2517; --risk: #F08A80; --risk-soft: #3A1E1B;
+    --page: #100F0D; --bezel: #000000; --scrim: rgba(0, 0, 0, .6);
+    --shadow-1: none; --shadow-2: 0 18px 40px rgba(0, 0, 0, .5);
+    color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
@@ -369,3 +372,84 @@ button.toggle { display: inline-block; cursor: pointer; }
 .map .rep-risk { fill: var(--risk); stroke: var(--risk); } .map .rep-warn { fill: var(--warn); stroke: var(--warn); } .map .rep-good { fill: var(--good); stroke: var(--good); }
 .map .you { fill: var(--apple); }
 .tour-chip { display: none; align-self: flex-start; border-style: dashed; }
+
+/* ---------- Unslop pass (direction: Kashmir orchard at first light) ----------
+   Design method: unslop by Damir Sokolovsky (@heydamir), CC BY 4.0 — github.com/heydamir/unslop */
+.ic { stroke-width: 1.6; }
+.ab h1 { font: 600 18px/1.2 var(--f-body); letter-spacing: 0; }
+.ab .sub { font: 400 13px/1.3 var(--f-body); color: var(--ink-3); }
+.t-title { font: 600 16px/1.3 var(--f-body); }
+.t-big { font: 500 26px/1.12 var(--f-display); letter-spacing: -.01em; }
+.t-huge { font: 500 32px/1.05 var(--f-display); letter-spacing: -.015em; }
+.t-label { font: 500 12px/1.35 var(--f-body); letter-spacing: 0; text-transform: none; color: var(--ink-3); }
+.t-micro { font-size: 12px; }
+.sec-h h2 { font: 600 16px/1.3 var(--f-body); }
+.b, .listrow .tt, .opt .tt { font-weight: 600; }
+.pill { font: 500 12px/1 var(--f-body); letter-spacing: 0; border-radius: 6px; padding: 5px 8px; }
+.chip { border-radius: 10px; font: 500 14px/1 var(--f-body); border-color: var(--line-2); transition: background-color 150ms var(--ease), border-color 150ms var(--ease); }
+.chip:hover { background: var(--card-2); }
+.chip.on, .chip.on:hover { background: var(--leaf); border-color: var(--leaf); color: var(--on-leaf); }
+.btn { border-radius: 10px; font: 600 15px/1 var(--f-body); transition: background-color 150ms var(--ease), transform 120ms var(--ease); }
+.btn:active { transform: scale(.98); }
+.btn.sm, .btn.xs { border-radius: 8px; }
+.btn.ghost { border: 1px solid var(--line-2); }
+.card { border-radius: 14px; padding: 16px; border-color: var(--line); }
+.card.tight { padding: 12px; }
+.card.lift { box-shadow: var(--shadow-1); border-color: var(--line); }
+.sc { gap: 16px; }
+.tile-ic, .tile-ic.leaf, .tile-ic.apple, .tile-ic.chinar, .tile-ic.sky, .tile-ic.plain { background: var(--card-2); color: var(--ink-2); border: 0; border-radius: 10px; }
+.tile-ic.sm { border-radius: 8px; }
+.cat { border-radius: 12px; font: 500 12.5px/1.25 var(--f-body); }
+.tb button { font: 500 12px/1.1 var(--f-body); }
+.tb .on .tic { background: var(--leaf-soft); }
+.answer { border-radius: 14px; font: 600 18px/1 var(--f-body); }
+.answer.unsure { font-size: 16px; }
+.qcard { border-radius: 16px; }
+.qcard h2 { font: 500 23px/1.2 var(--f-display); letter-spacing: -.005em; }
+.area { border-radius: 14px; font: 600 15px/1.2 var(--f-body); }
+.area .art { border-radius: 10px; }
+.opt { border-radius: 12px; }
+.prod .nm { font: 600 15px/1.25 var(--f-body); }
+.prod .price { font: 600 17px/1 var(--f-body); }
+.prod .pack { border-radius: 10px; }
+.tag { border-radius: 4px; font-weight: 500; letter-spacing: 0; }
+.ptable th { font: 500 12px/1.2 var(--f-body); letter-spacing: 0; text-transform: none; }
+.banner { border-radius: 12px; }
+.search { border-radius: 10px; }
+.search .mic { border-radius: 8px; background: var(--card-2); color: var(--ink-2); }
+.stepper { border-radius: 10px; }
+.wx > div.now { background: var(--card-2); }
+.art { border-radius: 12px; }
+.qcard .qart, .qcard .qart > div { background: var(--card-2); }
+
+/* The one bright moment: the painted orchard behind the main question */
+.ask { border-radius: 20px; padding: 24px 20px 20px; min-height: 340px; display: flex; flex-direction: column; justify-content: space-between;
+  background: #2E3A4E url("assets/hero-orchard.webp") center 62% / cover no-repeat; color: #FFFFFF; isolation: isolate; }
+.ask::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit;
+  background: linear-gradient(to bottom, rgba(16, 20, 32, .55) 0%, rgba(16, 20, 32, .12) 38%, rgba(16, 20, 32, 0) 55%, rgba(16, 14, 10, .45) 100%); }
+.ask h2 { font: 500 28px/1.1 var(--f-display); letter-spacing: -.015em; max-width: 11em; color: #FFFFFF; }
+.ask p { color: rgba(255, 255, 255, .88); font-size: 14px; max-width: 19em; margin-top: 8px; }
+.ask .motif { display: none; }
+.ask .acts { margin-top: 0; }
+.ask .acts .btn { background: #FFFFFF; color: #1F1B16; }
+.ask .acts .btn.sq { background: rgba(255, 255, 255, .2); color: #FFFFFF; }
+.ask :focus-visible { outline-color: #FFFFFF; }
+
+/* Signature: a small leaf marks where the season is on the crop-stage line */
+.season .st.now { position: relative; }
+.season .st.now::before { content: ""; position: absolute; top: -16px; left: 50%; width: 12px; height: 12px; margin-left: -6px;
+  background: var(--leaf); -webkit-mask: var(--leaf-mark) center / contain no-repeat; mask: var(--leaf-mark) center / contain no-repeat; }
+.season { padding-top: 16px; }
+:root { --leaf-mark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 21.5 11.2 17.2 5.2 18.6 7.4 15.2 2.4 13.6 6.2 11.6 4 6.2 9.1 8.6 12 2 14.9 8.6 20 6.2 17.8 11.6 21.6 13.6 16.6 15.2 18.8 18.6 12.8 17.2Z'/%3E%3C/svg%3E"); }
+
+/* Today list replaces the 2x2 tile grid */
+.today .row-t { display: grid; grid-template-columns: 20px 1fr auto; gap: 12px; align-items: center; padding: 12px 0; width: 100%; text-align: start; }
+.today .row-t + .row-t { border-top: 1px solid var(--line); }
+.today .row-t .ic { color: var(--ink-3); width: 18px; height: 18px; }
+.today .lbl { font-size: 14px; color: var(--ink-2); }
+.today .val { font: 600 15px/1.2 var(--f-body); text-align: end; font-variant-numeric: tabular-nums; }
+.today .val small { display: block; font: 400 12px/1.3 var(--f-body); color: var(--ink-3); }
+@media (prefers-reduced-motion: reduce) { .btn:active { transform: none; } }
+.ask { justify-content: flex-start; }
+.ask h2 + p { margin-bottom: auto; }
+.ask .acts { padding-top: 24px; }

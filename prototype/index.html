@@ -8,65 +8,68 @@
 <meta name="description" content="Clickable demo of Baghbaan, an all-in-one app for Kashmir's apple growers. All data is sample data.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Mukta:wght@400;500;600;700&family=Noto+Nastaliq+Urdu:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Mukta:wght@400;500;600&family=Noto+Nastaliq+Urdu:wght@400;600&display=swap">
 <style>
 /* Baghbaan prototype — shared styles for the live demo and the PDF showcase.
    Layout: phone-first orchard app. On wide screens the app sits in a device frame beside a demo guide. */
 :root {
-  --mist: #F1F5F0;      /* app background: orchard morning mist */
+  /* Direction (unslop pass): a Kashmir orchard at first light. Quiet warm-neutral chrome, one orchard-green accent,
+     apple red only for the logo and real risk. Richness lives in the painted hero, the symptom pictures and the price chart. */
+  --mist: #F6F4EF;      /* page: warm near-neutral */
   --card: #FFFFFF;
-  --card-2: #F6F9F5;
-  --ink: #13231A;
-  --ink-2: #4A5C51;
-  --ink-3: #5B6B61;
+  --card-2: #EFECE5;    /* raised: inputs, active rows, icon wells */
+  --ink: #1F1B16;
+  --ink-2: #554D43;
+  --ink-3: #6E665B;
   --on-apple: #FFFFFF;
-  --map-land: #E4EEDF; --map-line: #C9D8C4; --map-road: #FFFFFF; --map-river: #8EBBDA; --map-text: #4A5C51;
-  --line: #DAE4DB;
-  --line-2: #C3D1C6;
-  --leaf: #1C6A46;      /* primary: orchard leaf */
-  --leaf-2: #134F33;
+  --map-land: #ECE8DF; --map-line: #DAD4C8; --map-road: #FFFFFF; --map-river: #A9C3D6; --map-text: #554D43;
+  --line: #E6E1D8;      /* hairline */
+  --line-2: #D6D0C4;
+  --leaf: #1F6B45;      /* the one accent */
+  --leaf-2: #17553A;
   --on-leaf: #FFFFFF;
-  --leaf-soft: #E0EFE5;
-  --apple: #C4283B;     /* brand accent: Kashmiri Delicious */
-  --apple-soft: #FBE5E7;
-  --chinar: #BC5E16;    /* autumn chinar */
-  --chinar-soft: #FBEAD9;
-  --sky: #2A6898;
-  --sky-soft: #E0ECF6;
+  --leaf-soft: #E4EFE7;
+  --apple: #B8293A;
+  --apple-soft: #F7E6E6;
+  --chinar: #9A5A1E;
+  --chinar-soft: #F4EADF;
+  --sky: #375F80;
+  --sky-soft: #E7EDF2;
   --good: #1D7A4B;
-  --good-soft: #DCF0E3;
-  --warn: #A3560C;
-  --warn-soft: #FCEAD2;
+  --good-soft: #E2F0E6;
+  --warn: #8F530F;
+  --warn-soft: #F6EAD7;
   --risk: #B3261E;
-  --risk-soft: #FCE2DE;
-  --page: #E4EBE3;
-  --bezel: #1A231D;
-  --scrim: rgba(12, 22, 16, .45);
-  --shadow-1: 0 1px 2px rgba(19, 35, 26, .06), 0 2px 10px rgba(19, 35, 26, .05);
-  --shadow-2: 0 18px 40px rgba(19, 35, 26, .18), 0 2px 6px rgba(19, 35, 26, .08);
-  --f-display: "Baloo 2", "Mukta", system-ui, sans-serif;
+  --risk-soft: #F8E3E0;
+  --page: #ECE8E0;
+  --bezel: #1F1C18;
+  --scrim: rgba(20, 17, 13, .45);
+  --shadow-1: 0 1px 2px rgba(31, 27, 22, .05);
+  --shadow-2: 0 8px 24px rgba(31, 27, 22, .10), 0 1px 3px rgba(31, 27, 22, .06);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --f-display: "Newsreader", "Mukta", Georgia, serif;   /* large headlines only */
   --f-body: "Mukta", "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --f-urdu: "Noto Nastaliq Urdu", "Noto Naskh Arabic", "Segoe UI", serif;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --mist: #0E1511; --card: #16201A; --card-2: #1B271F; --ink: #E3ECE5; --ink-2: #A6B6AB; --ink-3: #8A9B90; --on-apple: #2A0A10; --map-land: #1B271F; --map-line: #2C3B31; --map-road: #34463A; --map-river: #2F5A78; --map-text: #A6B6AB;
-    --line: #26342B; --line-2: #34463A; --leaf: #5DC28B; --leaf-2: #86D6A9; --on-leaf: #07150E; --leaf-soft: #163024;
-    --apple: #F06A7B; --apple-soft: #3A1A20; --chinar: #F2A15C; --chinar-soft: #3A2615; --sky: #80B6E2; --sky-soft: #132839;
-    --good: #66C993; --good-soft: #13301F; --warn: #F1B266; --warn-soft: #382811; --risk: #FF8C82; --risk-soft: #3D1714;
-    --page: #0A0F0C; --bezel: #000000; --scrim: rgba(0, 0, 0, .6);
-    --shadow-1: 0 1px 2px rgba(0, 0, 0, .35); --shadow-2: 0 18px 40px rgba(0, 0, 0, .55);
+    --mist: #161513; --card: #1C1A18; --card-2: #262421; --ink: #EFE9DE; --ink-2: #B3AC9F; --ink-3: #958E82; --on-apple: #2A0A10; --map-land: #23211E; --map-line: #34312C; --map-road: #3A3631; --map-river: #3B5468; --map-text: #B3AC9F;
+    --line: #2C2925; --line-2: #3A3631; --leaf: #73C79A; --leaf-2: #93D6B1; --on-leaf: #0E1A13; --leaf-soft: #1E2B23;
+    --apple: #EF7380; --apple-soft: #3A1E21; --chinar: #D9A066; --chinar-soft: #2E2519; --sky: #93B4D0; --sky-soft: #1E252C;
+    --good: #6CC795; --good-soft: #1B2A20; --warn: #E3AE66; --warn-soft: #2E2517; --risk: #F08A80; --risk-soft: #3A1E1B;
+    --page: #100F0D; --bezel: #000000; --scrim: rgba(0, 0, 0, .6);
+    --shadow-1: none; --shadow-2: 0 18px 40px rgba(0, 0, 0, .5);
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --mist: #0E1511; --card: #16201A; --card-2: #1B271F; --ink: #E3ECE5; --ink-2: #A6B6AB; --ink-3: #8A9B90; --on-apple: #2A0A10; --map-land: #1B271F; --map-line: #2C3B31; --map-road: #34463A; --map-river: #2F5A78; --map-text: #A6B6AB;
-  --line: #26342B; --line-2: #34463A; --leaf: #5DC28B; --leaf-2: #86D6A9; --on-leaf: #07150E; --leaf-soft: #163024;
-  --apple: #F06A7B; --apple-soft: #3A1A20; --chinar: #F2A15C; --chinar-soft: #3A2615; --sky: #80B6E2; --sky-soft: #132839;
-  --good: #66C993; --good-soft: #13301F; --warn: #F1B266; --warn-soft: #382811; --risk: #FF8C82; --risk-soft: #3D1714;
-  --page: #0A0F0C; --bezel: #000000; --scrim: rgba(0, 0, 0, .6);
-  --shadow-1: 0 1px 2px rgba(0, 0, 0, .35); --shadow-2: 0 18px 40px rgba(0, 0, 0, .55);
-  color-scheme: dark;
+    --mist: #161513; --card: #1C1A18; --card-2: #262421; --ink: #EFE9DE; --ink-2: #B3AC9F; --ink-3: #958E82; --on-apple: #2A0A10; --map-land: #23211E; --map-line: #34312C; --map-road: #3A3631; --map-river: #3B5468; --map-text: #B3AC9F;
+    --line: #2C2925; --line-2: #3A3631; --leaf: #73C79A; --leaf-2: #93D6B1; --on-leaf: #0E1A13; --leaf-soft: #1E2B23;
+    --apple: #EF7380; --apple-soft: #3A1E21; --chinar: #D9A066; --chinar-soft: #2E2519; --sky: #93B4D0; --sky-soft: #1E252C;
+    --good: #6CC795; --good-soft: #1B2A20; --warn: #E3AE66; --warn-soft: #2E2517; --risk: #F08A80; --risk-soft: #3A1E1B;
+    --page: #100F0D; --bezel: #000000; --scrim: rgba(0, 0, 0, .6);
+    --shadow-1: none; --shadow-2: 0 18px 40px rgba(0, 0, 0, .5);
+    color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
@@ -381,6 +384,87 @@ button.toggle { display: inline-block; cursor: pointer; }
 .map .rep-risk { fill: var(--risk); stroke: var(--risk); } .map .rep-warn { fill: var(--warn); stroke: var(--warn); } .map .rep-good { fill: var(--good); stroke: var(--good); }
 .map .you { fill: var(--apple); }
 .tour-chip { display: none; align-self: flex-start; border-style: dashed; }
+
+/* ---------- Unslop pass (direction: Kashmir orchard at first light) ----------
+   Design method: unslop by Damir Sokolovsky (@heydamir), CC BY 4.0 — github.com/heydamir/unslop */
+.ic { stroke-width: 1.6; }
+.ab h1 { font: 600 18px/1.2 var(--f-body); letter-spacing: 0; }
+.ab .sub { font: 400 13px/1.3 var(--f-body); color: var(--ink-3); }
+.t-title { font: 600 16px/1.3 var(--f-body); }
+.t-big { font: 500 26px/1.12 var(--f-display); letter-spacing: -.01em; }
+.t-huge { font: 500 32px/1.05 var(--f-display); letter-spacing: -.015em; }
+.t-label { font: 500 12px/1.35 var(--f-body); letter-spacing: 0; text-transform: none; color: var(--ink-3); }
+.t-micro { font-size: 12px; }
+.sec-h h2 { font: 600 16px/1.3 var(--f-body); }
+.b, .listrow .tt, .opt .tt { font-weight: 600; }
+.pill { font: 500 12px/1 var(--f-body); letter-spacing: 0; border-radius: 6px; padding: 5px 8px; }
+.chip { border-radius: 10px; font: 500 14px/1 var(--f-body); border-color: var(--line-2); transition: background-color 150ms var(--ease), border-color 150ms var(--ease); }
+.chip:hover { background: var(--card-2); }
+.chip.on, .chip.on:hover { background: var(--leaf); border-color: var(--leaf); color: var(--on-leaf); }
+.btn { border-radius: 10px; font: 600 15px/1 var(--f-body); transition: background-color 150ms var(--ease), transform 120ms var(--ease); }
+.btn:active { transform: scale(.98); }
+.btn.sm, .btn.xs { border-radius: 8px; }
+.btn.ghost { border: 1px solid var(--line-2); }
+.card { border-radius: 14px; padding: 16px; border-color: var(--line); }
+.card.tight { padding: 12px; }
+.card.lift { box-shadow: var(--shadow-1); border-color: var(--line); }
+.sc { gap: 16px; }
+.tile-ic, .tile-ic.leaf, .tile-ic.apple, .tile-ic.chinar, .tile-ic.sky, .tile-ic.plain { background: var(--card-2); color: var(--ink-2); border: 0; border-radius: 10px; }
+.tile-ic.sm { border-radius: 8px; }
+.cat { border-radius: 12px; font: 500 12.5px/1.25 var(--f-body); }
+.tb button { font: 500 12px/1.1 var(--f-body); }
+.tb .on .tic { background: var(--leaf-soft); }
+.answer { border-radius: 14px; font: 600 18px/1 var(--f-body); }
+.answer.unsure { font-size: 16px; }
+.qcard { border-radius: 16px; }
+.qcard h2 { font: 500 23px/1.2 var(--f-display); letter-spacing: -.005em; }
+.area { border-radius: 14px; font: 600 15px/1.2 var(--f-body); }
+.area .art { border-radius: 10px; }
+.opt { border-radius: 12px; }
+.prod .nm { font: 600 15px/1.25 var(--f-body); }
+.prod .price { font: 600 17px/1 var(--f-body); }
+.prod .pack { border-radius: 10px; }
+.tag { border-radius: 4px; font-weight: 500; letter-spacing: 0; }
+.ptable th { font: 500 12px/1.2 var(--f-body); letter-spacing: 0; text-transform: none; }
+.banner { border-radius: 12px; }
+.search { border-radius: 10px; }
+.search .mic { border-radius: 8px; background: var(--card-2); color: var(--ink-2); }
+.stepper { border-radius: 10px; }
+.wx > div.now { background: var(--card-2); }
+.art { border-radius: 12px; }
+.qcard .qart, .qcard .qart > div { background: var(--card-2); }
+
+/* The one bright moment: the painted orchard behind the main question */
+.ask { border-radius: 20px; padding: 24px 20px 20px; min-height: 340px; display: flex; flex-direction: column; justify-content: space-between;
+  background: #2E3A4E url("assets/hero-orchard.webp") center 62% / cover no-repeat; color: #FFFFFF; isolation: isolate; }
+.ask::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: inherit;
+  background: linear-gradient(to bottom, rgba(16, 20, 32, .55) 0%, rgba(16, 20, 32, .12) 38%, rgba(16, 20, 32, 0) 55%, rgba(16, 14, 10, .45) 100%); }
+.ask h2 { font: 500 28px/1.1 var(--f-display); letter-spacing: -.015em; max-width: 11em; color: #FFFFFF; }
+.ask p { color: rgba(255, 255, 255, .88); font-size: 14px; max-width: 19em; margin-top: 8px; }
+.ask .motif { display: none; }
+.ask .acts { margin-top: 0; }
+.ask .acts .btn { background: #FFFFFF; color: #1F1B16; }
+.ask .acts .btn.sq { background: rgba(255, 255, 255, .2); color: #FFFFFF; }
+.ask :focus-visible { outline-color: #FFFFFF; }
+
+/* Signature: a small leaf marks where the season is on the crop-stage line */
+.season .st.now { position: relative; }
+.season .st.now::before { content: ""; position: absolute; top: -16px; left: 50%; width: 12px; height: 12px; margin-left: -6px;
+  background: var(--leaf); -webkit-mask: var(--leaf-mark) center / contain no-repeat; mask: var(--leaf-mark) center / contain no-repeat; }
+.season { padding-top: 16px; }
+:root { --leaf-mark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 21.5 11.2 17.2 5.2 18.6 7.4 15.2 2.4 13.6 6.2 11.6 4 6.2 9.1 8.6 12 2 14.9 8.6 20 6.2 17.8 11.6 21.6 13.6 16.6 15.2 18.8 18.6 12.8 17.2Z'/%3E%3C/svg%3E"); }
+
+/* Today list replaces the 2x2 tile grid */
+.today .row-t { display: grid; grid-template-columns: 20px 1fr auto; gap: 12px; align-items: center; padding: 12px 0; width: 100%; text-align: start; }
+.today .row-t + .row-t { border-top: 1px solid var(--line); }
+.today .row-t .ic { color: var(--ink-3); width: 18px; height: 18px; }
+.today .lbl { font-size: 14px; color: var(--ink-2); }
+.today .val { font: 600 15px/1.2 var(--f-body); text-align: end; font-variant-numeric: tabular-nums; }
+.today .val small { display: block; font: 400 12px/1.3 var(--f-body); color: var(--ink-3); }
+@media (prefers-reduced-motion: reduce) { .btn:active { transform: none; } }
+.ask { justify-content: flex-start; }
+.ask h2 + p { margin-bottom: auto; }
+.ask .acts { padding-top: 24px; }
 
 html, body { height: 100%; }
 body { margin: 0; background: var(--page); color: var(--ink); font-family: var(--f-body); }
@@ -1040,7 +1124,7 @@ body { margin: 0; background: var(--page); color: var(--ink); font-family: var(-
 
   const TABS = [['home', 'home', 'home'], ['shop', 'bag', 'buy'], ['learn', 'book', 'learn'], ['mandi', 'chart', 'mandi'], ['services', 'users', 'services']];
   function statusbar(dark) {
-    return '<div class="sb"' + (dark ? ' style="color:#fff"' : '') + '><span class="num">10:24</span><span class="sbr">' + ic('signal') + '<span style="font-size:11px;font-weight:800">4G</span>' + ic('battery') + '</span></div>';
+    return '<div class="sb"' + (dark ? ' style="color:#fff"' : '') + '><span class="num">10:24</span><span class="sbr">' + ic('signal') + '<span style="font-size:11px;font-weight:600">4G</span>' + ic('battery') + '</span></div>';
   }
   function appbar(st, o) {
     const back = o.back ? '<button class="iconbtn" data-back aria-label="Back">' + ic('back', 'flip') + '</button>' : '';
@@ -1142,15 +1226,15 @@ body { margin: 0; background: var(--page); color: var(--ink); font-family: var(-
       quick: ['Spots on leaves', 'Insects & mites', 'Fruit problem', 'Tree drying', 'What to spray now?'], quickA: ['Leaves yellow early', 'Storage rot', 'Fertilizer for winter', 'Pruning help'],
       alertL: 'Disease alert', high: 'High risk', alertT: 'Scab infection risk on Wednesday', alertB: '14 mm rain expected. Leaves may stay wet about 18 hours at 11–16 °C. Your last spray was 9 days ago.', sprayBtn: 'Spray before Wednesday\'s rain', why: 'Why?',
       stageL: 'Crop stage · Wachi', upd: 'Updated today', stage: 'Fruitlet stage', next: 'Next spray: <b>before Wednesday\'s rain</b>, from the fruitlet list',
-      mandiL: 'Mandi · Sopore', perkg: '/kg', variety: 'Delicious A (CA)', hwL: 'NH-44 highway', open: 'Open', hw: 'Trucks: Srinagar → Jammu today', swL: 'Spray window', sw: '4 – 7 PM', swS: 'Calm and dry · 21° / 8°', teamL: 'Spray teams', team: '3 free this evening', teamS: 'within 7 km of you',
+      mandiL: 'Mandi · Sopore', perkg: '/kg', variety: 'Delicious A (CA)', hwL: 'NH-44 highway', open: 'Open', hw: 'Trucks Srinagar → Jammu today', swL: 'Spray window', sw: '4 – 7 PM', swS: 'Calm and dry · 21° / 8°', teamL: 'Spray teams', team: '3 free this evening', teamS: 'within 7 km of you',
       mqL: 'One quick question', skip: 'Skip', mq: 'Did you see bees in your orchard during bloom?', mqA: ['Many', 'A few', 'None'], mqWhy: 'Why we ask: to warn growers near you about poor fruit set. Only totals are shared.' },
-    ur: { app: 'باغبان', place: 'واچی، شوپیاں', greet: 'السلام علیکم، غلام نبی', date: 'منگل، 12 مئی', dateA: 'جمعرات، 12 نومبر',
+    ur: { stageShort: 'چھوٹے پھل کا مرحلہ', todayL: 'آج', app: 'باغبان', place: 'واچی، شوپیاں', greet: 'السلام علیکم، غلام نبی', date: 'منگل، 12 مئی', dateA: 'جمعرات، 12 نومبر',
       quick: ['پتوں پر دھبے', 'کیڑے اور مائٹ', 'پھل کا مسئلہ', 'درخت سوکھ رہا ہے', 'ابھی کیا اسپرے کریں؟'], quickA: ['پتے جلدی پیلے', 'اسٹوریج میں سڑن', 'سردیوں کی کھاد', 'کٹائی میں مدد'],
       alertL: 'بیماری کا الرٹ', high: 'زیادہ خطرہ', alertT: 'بدھ کو اسکیب لگنے کا خطرہ', alertB: '14 ملی میٹر بارش متوقع ہے۔ 11 سے 16 ڈگری پر پتے تقریباً 18 گھنٹے گیلے رہ سکتے ہیں۔ آپ کا پچھلا اسپرے 9 دن پہلے ہوا تھا۔', sprayBtn: 'بدھ کی بارش سے پہلے اسپرے کریں', why: 'کیوں؟',
       stageL: 'فصل کا مرحلہ · واچی', upd: 'آج اپ ڈیٹ ہوا', stage: 'چھوٹے پھل کا مرحلہ', next: 'اگلا اسپرے: <b>بدھ کی بارش سے پہلے</b>',
       mandiL: 'منڈی · سوپور', perkg: 'فی کلو', variety: 'ڈیلیشس اے (سی اے)', hwL: 'شاہراہ NH-44', open: 'کھلی ہے', hw: 'ٹرک آج سرینگر سے جموں', swL: 'اسپرے کا وقت', sw: 'شام 4 سے 7', swS: 'ہوا کم، موسم خشک', teamL: 'اسپرے ٹیمیں', team: 'آج شام 3 دستیاب', teamS: '7 کلومیٹر کے اندر',
       mqL: 'ایک چھوٹا سا سوال', skip: 'چھوڑیں', mq: 'کیا پھول کے دنوں میں آپ کے باغ میں شہد کی مکھیاں نظر آئیں؟', mqA: ['بہت', 'کچھ', 'کوئی نہیں'], mqWhy: 'ہم کیوں پوچھتے ہیں: تاکہ آس پاس کے باغبانوں کو کم پھل لگنے سے خبردار کر سکیں۔ صرف کل تعداد شیئر ہوتی ہے۔' },
-    hi: { app: 'बाग़बान', place: 'वाची, शोपियां', greet: 'अस्सलामु अलैकुम, ग़ुलाम नबी', date: 'मंगल, 12 मई', dateA: 'गुरु, 12 नवंबर',
+    hi: { stageShort: 'छोटे फल की अवस्था', todayL: 'आज', app: 'बाग़बान', place: 'वाची, शोपियां', greet: 'अस्सलामु अलैकुम, ग़ुलाम नबी', date: 'मंगल, 12 मई', dateA: 'गुरु, 12 नवंबर',
       quick: ['पत्तों पर धब्बे', 'कीड़े और माइट', 'फल की समस्या', 'पेड़ सूख रहा है', 'अभी क्या स्प्रे करें?'], quickA: ['पत्ते जल्दी पीले', 'स्टोरेज में सड़न', 'सर्दियों की खाद', 'छंटाई में मदद'],
       alertL: 'बीमारी अलर्ट', high: 'ज़्यादा ख़तरा', alertT: 'बुधवार को स्कैब का ख़तरा', alertB: '14 मि.मी. बारिश की संभावना। 11–16 °C पर पत्ते लगभग 18 घंटे गीले रह सकते हैं। आपका पिछला स्प्रे 9 दिन पहले हुआ था।', sprayBtn: 'बुधवार की बारिश से पहले स्प्रे करें', why: 'क्यों?',
       stageL: 'फ़सल की अवस्था · वाची', upd: 'आज अपडेट', stage: 'छोटे फल की अवस्था', next: 'अगला स्प्रे: <b>बुधवार की बारिश से पहले</b>',
@@ -1167,14 +1251,14 @@ body { margin: 0; background: var(--page); color: var(--ink); font-family: var(-
     const X = (k) => (local ? H[k] : E[k]);
     const ab = '<header class="ab"><span style="display:grid">' + A.logo(36) + '</span><h1>' + (lang === 'en' ? 'Baghbaan' : '<span' + u + '>' + H.app + '</span>') + '<span class="sub" style="display:flex;align-items:center;gap:3px">' + ic('pin', 's16') + '<span' + u + '>' + H.place + '</span>' + ic('chevD', 's16') + '</span></h1>' +
       '<button class="iconbtn" data-go="news" aria-label="Alerts">' + ic('bell') + '<span class="dot"></span></button>' +
-      '<button class="iconbtn" data-go="orchard" aria-label="My orchard" style="background:var(--leaf-soft);color:var(--leaf);font-weight:800;font-size:14px">' + D.user.initials + '</button></header>';
+      '<button class="iconbtn" data-go="orchard" aria-label="My orchard" style="background:var(--leaf-soft);color:var(--leaf);font-weight:600;font-size:14px">' + D.user.initials + '</button></header>';
     const alert = autumn
       ? '<section class="card"' + mk(3) + '><div class="row between"><span class="t-label">This week\'s task</span>' + pillFor('info', 'Leaf fall') + '</div><p class="t-title" style="margin-top:6px">Spray 3–4% urea when half the leaves are yellow</p><p class="t-small">It speeds up the rotting of fallen leaves, where scab survives winter. Fewer scab spores next spring (SKUAST-K 2026 guide).</p><div class="row" style="margin-top:10px;gap:8px"><button class="btn sm" data-go="calendar">How to mix</button><button class="btn sm ghost" data-go="shop">Buy urea</button></div></section>'
       : '<section class="card"' + mk(3) + '><div class="row between"><span class="t-label"' + (local ? u : '') + '>' + X('alertL') + '</span>' + pillFor('risk', '<span' + (local ? u : '') + '>' + X('high') + '</span>') + '</div><p class="t-title' + (local && rtl(st) ? ' ur' : '') + '" style="margin-top:6px">' + X('alertT') + '</p><p class="t-small' + (local && rtl(st) ? ' ur' : '') + '">' + X('alertB') + '</p><div class="row" style="margin-top:10px;gap:8px"><button class="btn sm" data-go="shop_list"><span' + (local ? u : '') + '>' + X('sprayBtn') + '</span></button><button class="btn sm ghost" data-go="weather"><span' + (local ? u : '') + '>' + X('why') + '</span></button></div></section>';
     const quick = autumn ? E.quickA : X('quick');
     const QT = autumn ? ['data-area="leaves"', 'data-area="fruit"', 'data-go="calendar"', 'data-go="lesson"'] : ['data-area="leaves"', 'data-area="leaves"', 'data-area="fruit"', 'data-area="roots"', 'data-go="shop_list"'];
     const body = (st.tourChip ? '<button class="chip tour-chip" data-act="tour">' + ic('grid') + 'Demo tour: jump to any screen</button>' : '') +
-      '<p class="t-small"' + mk(1) + '><span' + u + '>' + H.greet + ' · ' + (autumn ? H.dateA : H.date) + '</span></p>' +
+      '<p class="t-small"' + mk(1) + '><span' + u + '>' + (autumn ? H.dateA : H.date) + ' · ' + (autumn ? 'Leaf fall' : (H.stageShort || 'Fruitlet stage')) + '</span></p>' +
       '<section class="ask"' + mk(2) + '><span class="motif">' + A.chinar(150, '#fff') + '</span><h2' + (rtl(st) ? ' class="ur" style="font-size:20px;line-height:1.9"' : '') + '>' + t(st, 'ask') + '</h2><p' + (rtl(st) ? ' class="ur"' : '') + '>' + t(st, 'askSub') + '</p>' +
       '<div class="acts"><button class="btn" data-go="dx_area">' + L(st, 'start') + ic('chevR', 'flip') + '</button><button class="btn sq" data-go="chat" aria-label="Speak">' + ic('mic') + '</button><button class="btn sq" data-go="dx_photo" aria-label="Take a photo">' + ic('camera') + '</button></div>' +
       (st.lang === 'ks' ? '<p style="margin-top:10px;font-size:12.5px;opacity:.9">' + ic('speaker', 's16') + ' Kashmiri voice guidance is on</p>' : '') + '</section>' +
@@ -1182,11 +1266,12 @@ body { margin: 0; background: var(--page); color: var(--ink); font-family: var(-
       alert +
       '<section class="card"' + mk(4) + '><div class="row between"><span class="t-label"' + (local ? u : '') + '>' + X('stageL') + '</span><span class="t-micro"' + (local ? u : '') + '>' + X('upd') + '</span></div><p class="t-title' + (local && rtl(st) ? ' ur' : '') + '" style="margin:6px 0 10px">' + (autumn ? 'Leaf fall · after harvest' : X('stage')) + '</p>' + stageStrip(autumn ? 'Leaf fall' : 'Fruitlet') +
       '<button class="row" data-go="diary" style="margin-top:12px;width:100%"><span class="tile-ic sm leaf">' + ic('cal', 's18') + '</span><span class="t-small grow' + (local && rtl(st) ? ' ur' : '') + '">' + (autumn ? 'Next: <b>winter pruning</b> from mid-December' : X('next')) + '</span>' + ic('chevR', 'chev flip') + '</button></section>' +
-      '<div class="grid2"' + mk(5) + '>' +
-        '<button class="card tight stack g6" data-go="mandi"><span class="t-label"' + (local ? u : '') + '>' + X('mandiL') + '</span><span class="t-big num">₹' + (autumn ? 78 : 92) + '<small style="font-size:13px;color:var(--ink-3);font-weight:600"' + (local ? u : '') + '> ' + X('perkg') + '</small></span><span class="t-micro"><span' + (local ? u : '') + '>' + (autumn ? 'Delicious A' : X('variety')) + '</span> <b class="' + (autumn ? 'down' : 'up') + '">' + (autumn ? '▼ 2%' : '▲ 2%') + '</b></span></button>' +
-        '<button class="card tight stack g6" data-go="roads"><span class="t-label"' + (local ? u : '') + '>' + X('hwL') + '</span><span>' + pillFor('good', '<span' + (local ? u : '') + '>' + X('open') + '</span>') + '</span><span class="t-micro"' + (local ? u : '') + '>' + X('hw') + '</span></button>' +
-        '<button class="card tight stack g6" data-go="weather"><span class="t-label"' + (local ? u : '') + '>' + (autumn ? 'Tonight' : X('swL')) + '</span><span class="t-title"' + (local ? u : '') + '>' + (autumn ? 'Frost, −1 °C' : X('sw')) + '</span><span class="t-micro"' + (local ? u : '') + '>' + (autumn ? 'Cover young HDP plants' : X('swS')) + '</span></button>' +
-        '<button class="card tight stack g6" data-go="' + (autumn ? 'services' : 'labour') + '"><span class="t-label"' + (local ? u : '') + '>' + (autumn ? 'CA storage' : X('teamL')) + '</span><span class="t-title"' + (local ? u : '') + '>' + (autumn ? '2 stores free' : X('team')) + '</span><span class="t-micro"' + (local ? u : '') + '>' + (autumn ? 'within 25 km' : X('teamS')) + '</span></button></div>' +
+      '<section class="card today"' + mk(5) + '><p class="t-label"' + (local ? u : '') + '>' + (autumn ? 'Today' : (H.todayL || 'Today')) + '</p>' +
+        [['mandi', 'chart', X('mandiL'), '₹' + (autumn ? 78 : 92) + ' ' + X('perkg'), (autumn ? 'Delicious A · ▼ 2% vs last week' : X('variety') + ' · ▲ 2% vs last week')],
+         ['roads', 'road', X('hwL'), X('open'), X('hw')],
+         ['weather', 'cloudsun', autumn ? 'Tonight' : X('swL'), autumn ? 'Frost, −1 °C' : X('sw'), autumn ? 'Cover young HDP plants' : X('swS')],
+         [autumn ? 'services' : 'labour', autumn ? 'snow' : 'users', autumn ? 'CA storage' : X('teamL'), autumn ? '2 stores free' : X('team'), autumn ? 'within 25 km' : X('teamS')]]
+        .map(([g, i, l, v, sub]) => '<button class="row-t" data-go="' + g + '">' + ic(i) + '<span class="lbl"' + (local ? u : '') + '>' + l + '</span><span class="val"' + (local ? u : '') + '>' + v + '<small>' + sub + '</small></span></button>').join('') + '</section>' +
       '<section class="card"' + mk(6) + '><div class="row between"><span class="t-label"' + (local ? u : '') + '>' + X('mqL') + '</span><button class="link"' + (local ? u : '') + '>' + X('skip') + '</button></div><p class="t-title' + (local && rtl(st) ? ' ur' : '') + '" style="margin-top:6px">' + (autumn ? 'How was this year\'s crop compared to last year?' : X('mq')) + '</p>' +
       '<div class="chips" style="margin-top:10px">' + (autumn ? ['Better', 'Same', 'Worse'] : X('mqA')).map(x => '<button class="chip" data-mq><span' + (local ? u : '') + '>' + x + '</span></button>').join('') + '</div>' +
       '<p class="t-micro row" style="margin-top:10px;gap:6px;align-items:flex-start">' + ic('info', 's16') + '<span' + (local ? u : '') + '>' + (autumn ? 'Why we ask: it helps estimate this year\'s crop for your area. Only totals are shared.' : X('mqWhy')) + '</span></p></section>';
@@ -1266,7 +1351,7 @@ body { margin: 0; background: var(--page); color: var(--ink); font-family: var(-
     const body = '<div style="position:relative;flex:1;min-height:430px;border-radius:22px;overflow:hidden;background:radial-gradient(circle at 50% 40%,#3B5B33,#16241A 70%)"' + mk(1) + '>' +
       '<div style="position:absolute;inset:0;display:grid;place-items:center">' + A.leaf('scab', 210, 290, 12) + '</div>' +
       '<div style="position:absolute;inset:34px 36px 70px;border:2.5px dashed rgba(255,255,255,.85);border-radius:26px"></div>' +
-      '<div style="position:absolute;left:0;right:0;top:12px;text-align:center;color:#fff;font-weight:700;font-size:14px">Hold one leaf flat, in daylight</div>' +
+      '<div style="position:absolute;left:0;right:0;top:12px;text-align:center;color:#fff;font-weight:600;font-size:14px">Hold one leaf flat, in daylight</div>' +
       '<div class="card" style="position:absolute;left:12px;right:12px;bottom:12px;padding:12px"' + mk(2) + '><div class="row between"><span class="t-label">Photo check · beta</span>' + pillFor('good', '87% match') + '</div><p class="t-title" style="margin-top:4px">Looks like apple scab</p><p class="t-small">' + msg + '</p>' + (answered ? '' : '<button class="btn sm" style="margin-top:8px" data-area="leaves">Confirm with questions</button>') + '</div></div>' +
       '<div class="row" style="justify-content:space-around;padding:6px 0 2px"><span class="iconbtn" style="color:#fff" aria-hidden="true">' + ic('grid') + '</span><button aria-label="Take photo" style="width:70px;height:70px;border-radius:50%;border:5px solid #fff;background:rgba(255,255,255,.25)"></button><span class="iconbtn" style="color:#fff" aria-hidden="true">' + ic('sparkle') + '</span></div>';
     return frame(st, { id: 'dx_photo', cls: 'cam', darkbar: true, appbar: '<header class="ab" style="color:#fff"><button class="iconbtn" data-back style="color:#fff" aria-label="Back">' + ic('x') + '</button><h1>Photo check</h1></header>', body });
@@ -1294,12 +1379,12 @@ body { margin: 0; background: var(--page); color: var(--ink); font-family: var(-
   const fmtAmt = (v, u) => u === 'g' ? (v >= 1000 ? +(v / 1000).toFixed(2) + ' kg' : v + ' g') : u === 'ml' ? (v >= 1000 ? +(v / 1000).toFixed(2) + ' L' : v + ' ml') : v + ' ' + u;
   function need(p) { if (!p.dose) return null; const perDrum = p.dose * 2, total = perDrum * D.drums; return { perDrum, total, packs: p.amt ? Math.ceil(total / p.amt) : null }; }
   const brandsOf = (p) => p.brands || (['fung', 'mite', 'oil', 'insect'].includes(p.cat) ? [['Brand A', p.price], ['Brand B', Math.round(p.price * 1.05 / 5) * 5], ['Brand C', Math.round(p.price * 1.1 / 5) * 5]] : [['Licensed dealer, Shopian', p.price]]);
-  const cartBtn = (st) => '<button class="iconbtn" data-go="cart" aria-label="Cart, ' + cartLines(st).length + ' items">' + ic('cart') + '<span class="dot" style="width:16px;height:16px;top:4px;right:4px;font:800 10px/16px var(--f-body);color:var(--on-apple);text-align:center" aria-hidden="true">' + cartLines(st).length + '</span></button>';
+  const cartBtn = (st) => '<button class="iconbtn" data-go="cart" aria-label="Cart, ' + cartLines(st).length + ' items">' + ic('cart') + '<span class="dot" style="width:16px;height:16px;top:4px;right:4px;font:600 10px/16px var(--f-body);color:var(--on-apple);text-align:center" aria-hidden="true">' + cartLines(st).length + '</span></button>';
   S.shop = (st) => {
     const kitSum = D.kit.reduce((a, [id, q]) => a + D.products[id].price * q, 0);
     return frame(st, { id: 'shop', tab: 'shop', title: 'Buy', sub: 'Licensed dealers near Shopian', right: cartBtn(st), body:
     '<div class="search"' + mk(1) + '>' + ic('search', 's20') + '<span class="grow">Medicine, fertilizer, tool…</span><button class="mic" style="background:var(--card-2);color:var(--ink-2)" data-go="verify" aria-label="Scan a pack">' + ic('scan', 's18') + '</button><span class="mic" aria-hidden="true">' + ic('mic', 's18') + '</span></div>' +
-    '<button class="card" style="background:var(--leaf-soft);border-color:transparent;text-align:start"' + mk(2) + ' data-act="kit"><div class="row top"><div class="grow stack g6"><span class="t-label" style="color:var(--leaf)">Made for your orchard</span><p class="t-title">Fruitlet spray kit</p><p class="t-small">Scab spray before Wednesday\'s rain, sized for 25 kanal (about 10 drums). Rotates away from Difenoconazole used on 3 May.</p><span class="row" style="gap:8px;margin-top:4px"><b class="t-title num">' + money(kitSum) + '</b><span class="pill leaf">' + D.kit.length + ' items</span></span></div><div style="display:flex;margin-top:4px">' + D.kit.map(([id]) => A.pack(D.products[id].pack[0], D.products[id].pack[1], D.products[id].pack[2], 40, 52)).join('') + '</div></div></button>' +
+    '<button class="card lift" style="text-align:start"' + mk(2) + ' data-act="kit"><div class="row top"><div class="grow stack g6"><span class="t-label">Made for your orchard</span><p class="t-title">Fruitlet spray kit</p><p class="t-small">Scab spray before Wednesday\'s rain, sized for 25 kanal (about 10 drums). Rotates away from Difenoconazole used on 3 May.</p><span class="row" style="gap:8px;margin-top:4px"><b class="t-title num">' + money(kitSum) + '</b><span class="t-micro">' + D.kit.length + ' items</span></span></div><div style="display:flex;margin-top:4px">' + D.kit.map(([id]) => A.pack(D.products[id].pack[0], D.products[id].pack[1], D.products[id].pack[2], 40, 52)).join('') + '</div></div></button>' +
     '<div class="row" style="justify-content:space-between;gap:6px"' + mk(3) + '>' + [['shield', 'Licensed dealers only'], ['scan', 'Genuine-pack check'], ['file', 'Bill with every order']].map(([i, x]) => '<span class="row t-micro" style="gap:5px;color:var(--ink-2);font-weight:600">' + ic(i, 's16 c-leaf') + x + '</span>').join('') + '</div>' +
     '<div class="sec-h"><h2>Shop by need</h2></div><div class="grid4">' + D.cats.map(([id, n, i]) => '<button class="cat" data-go="shop_list"><span class="tile-ic sm leaf">' + ic(i, 's18') + '</span>' + n + '</button>').join('') + '</div>' +
     '<div class="sec-h"><h2>Bought near you this week</h2></div><div class="card tight hr-list">' + ['hmo', 'hexy', 'calcium'].map(id => { const p = D.products[id]; return '<button class="listrow" data-go="product" data-pid="' + id + '">' + A.pack(p.pack[0], p.pack[1], p.pack[2], 34, 42) + '<span class="grow"><span class="tt" style="font-size:14px">' + p.name + '</span><br><span class="st">' + p.size + ' · ' + stars(p.rating) + ' ' + p.n + '</span></span><b class="num">' + money(p.price) + '</b></button>'; }).join('') + '</div>' });
@@ -1345,7 +1430,7 @@ body { margin: 0; background: var(--page); color: var(--ink); font-family: var(-
   };
 
   S.verify = (st) => frame(st, { id: 'verify', back: true, title: 'Genuine-pack check', body:
-    '<div style="position:relative;height:200px;border-radius:20px;overflow:hidden;background:#17201B;display:grid;place-items:center"' + mk(1) + '>' + A.pack('pouch', '#2E6FA3', 'DODINE|65% WP', 120, 150) + '<div style="position:absolute;inset:40px 90px;border:3px solid #6EE7A8;border-radius:16px"></div><span style="position:absolute;bottom:10px;color:#fff;font-size:13px;font-weight:700">Point at the QR code on the pack</span></div>' +
+    '<div style="position:relative;height:200px;border-radius:20px;overflow:hidden;background:#17201B;display:grid;place-items:center"' + mk(1) + '>' + A.pack('pouch', '#2E6FA3', 'DODINE|65% WP', 120, 150) + '<div style="position:absolute;inset:40px 90px;border:3px solid #6EE7A8;border-radius:16px"></div><span style="position:absolute;bottom:10px;color:#fff;font-size:13px;font-weight:600">Point at the QR code on the pack</span></div>' +
     '<section class="card"' + mk(2) + '><div class="row"><span class="tile-ic leaf">' + ic('shield', 's26') + '</span><span class="grow"><span class="t-label" style="color:var(--good)">Genuine pack</span><p class="t-title">Dodine 65% WP · Brand A</p></span></div>' +
     '<div class="grid2" style="margin-top:12px">' + [['Batch', 'D-26-0412'], ['Made', 'Mar 2026'], ['Use before', 'Feb 2028'], ['Registered for apple', 'Yes']].map(([a, b]) => '<div><p class="t-micro">' + a + '</p><b>' + b + '</b></div>').join('') + '</div></section>' +
     '<div class="banner info">' + ic('info', 's18') + '<span>If a pack fails the check, do not use it. Report it here and we alert the Agriculture department and your dealer.</span></div>' +
@@ -1354,14 +1439,14 @@ body { margin: 0; background: var(--page); color: var(--ink); font-family: var(-
   /* ---------- Learn ---------- */
   S.learn = (st) => frame(st, { id: 'learn', tab: 'learn', title: 'Learn', sub: 'Short lessons · Kashmiri audio · offline', right: '<button class="iconbtn" aria-label="Search">' + ic('search') + '</button>', body:
     '<button class="card lift" data-go="lesson" style="text-align:start"' + mk(1) + '><div class="row"><span class="tile-ic chinar">' + ic('scissors', 's26') + '</span><span class="grow"><span class="t-label">Continue</span><p class="t-title">Pruning for better colour</p><span class="t-small">Lesson 3 of 6 · 4 min</span></span>' + ic('play', 's26 c-leaf') + '</div><div class="meter" style="margin-top:10px"><i style="width:45%"></i></div></button>' +
-    '<div class="sec-h"><h2>For this season · May</h2></div><div class="chips scroll"' + mk(2) + '>' + [['Thinning: how many fruit to keep', 'apple'], ['The 20-leaf mite check', 'bug'], ['Spraying safely near bees', 'bee']].map(([x, i]) => '<button class="card tight" data-go="lesson" style="flex:none;width:180px;text-align:start"><span class="tile-ic sm leaf">' + ic(i, 's18') + '</span><p class="t-small" style="color:var(--ink);font-weight:700;margin-top:8px">' + x + '</p><span class="t-micro">3 min · video</span></button>').join('') + '</div>' +
+    '<div class="sec-h"><h2>For this season · May</h2></div><div class="chips scroll"' + mk(2) + '>' + [['Thinning: how many fruit to keep', 'apple'], ['The 20-leaf mite check', 'bug'], ['Spraying safely near bees', 'bee']].map(([x, i]) => '<button class="card tight" data-go="lesson" style="flex:none;width:180px;text-align:start"><span class="tile-ic sm leaf">' + ic(i, 's18') + '</span><p class="t-small" style="color:var(--ink);font-weight:600;margin-top:8px">' + x + '</p><span class="t-micro">3 min · video</span></button>').join('') + '</div>' +
     '<div class="sec-h"><h2>All topics</h2></div><div class="grid3"' + mk(3) + '>' + D.topics.map(([n, i, c], k) => '<button class="cat" data-go="' + (k === 0 ? 'calendar' : k === 5 ? 'library' : 'lesson') + '"><span class="tile-ic sm ' + (k % 3 === 0 ? 'leaf' : k % 3 === 1 ? 'chinar' : 'sky') + '">' + ic(i, 's18') + '</span>' + n + '<span class="t-micro">' + c + ' lessons</span></button>').join('') + '</div>' +
     '<div class="banner good">' + ic('download', 's18') + '<span>18 lessons saved on this phone. They play without internet.</span></div>' });
 
   S.lesson = (st) => frame(st, { id: 'lesson', back: true, title: 'Soil & manure', sub: 'Lesson 2 · 3 min 20 s', body:
-    '<div class="fluid" style="position:relative;height:170px;border-radius:18px;overflow:hidden"' + mk(1) + '>' + A.orchardScene(330, 170) + '<div style="position:absolute;inset:0;background:linear-gradient(transparent 40%,rgba(10,20,14,.75))"></div><span style="position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:58px;height:58px;border-radius:50%;background:rgba(255,255,255,.92);display:grid;place-items:center;color:#134F33">' + ic('play', 's26') + '</span><span style="position:absolute;left:14px;bottom:10px;color:#fff;font-weight:700;font-size:14px">' + ic('headphones', 's16') + ' Kashmiri audio · 3:20</span></div>' +
+    '<div class="fluid" style="position:relative;height:170px;border-radius:18px;overflow:hidden"' + mk(1) + '>' + A.orchardScene(330, 170) + '<div style="position:absolute;inset:0;background:linear-gradient(transparent 40%,rgba(10,20,14,.75))"></div><span style="position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);width:58px;height:58px;border-radius:50%;background:rgba(255,255,255,.92);display:grid;place-items:center;color:#134F33">' + ic('play', 's26') + '</span><span style="position:absolute;left:14px;bottom:10px;color:#fff;font-weight:600;font-size:14px">' + ic('headphones', 's16') + ' Kashmiri audio · 3:20</span></div>' +
     '<h2 class="t-big">How to take a soil sample</h2><p class="t-small" style="margin-top:-6px">A soil test tells you exactly which fertilizer your trees need, so you stop paying for what they don\'t.</p>' +
-    '<div class="stack"' + mk(2) + '>' + [['Sample before manure', 'Take samples after harvest or in early spring, before you add manure or fertilizer.'], ['Many spots, two depths', 'Under 8–10 trees across the block, at the outer edge of the canopy, dig to 0–30 cm and 30–60 cm.'], ['Mix and take half a kilo', 'Mix each depth separately in a clean bucket. Remove stones and roots.'], ['Dry, pack, label', 'Dry in shade. Pack in a cloth bag with your name, village, block and date.']].map(([a, b], i) => '<div class="card tight row top"><span class="tile-ic sm leaf" style="font:800 16px var(--f-display)">' + (i + 1) + '</span><span class="grow"><b>' + a + '</b><br><span class="t-small">' + b + '</span></span></div>').join('') + '</div>' +
+    '<div class="stack"' + mk(2) + '>' + [['Sample before manure', 'Take samples after harvest or in early spring, before you add manure or fertilizer.'], ['Many spots, two depths', 'Under 8–10 trees across the block, at the outer edge of the canopy, dig to 0–30 cm and 30–60 cm.'], ['Mix and take half a kilo', 'Mix each depth separately in a clean bucket. Remove stones and roots.'], ['Dry, pack, label', 'Dry in shade. Pack in a cloth bag with your name, village, block and date.']].map(([a, b], i) => '<div class="card tight row top"><span class="tile-ic sm leaf" style="font:600 16px var(--f-body)">' + (i + 1) + '</span><span class="grow"><b>' + a + '</b><br><span class="t-small">' + b + '</span></span></div>').join('') + '</div>' +
     '<button class="btn block" data-go="services">' + ic('beaker', 's18') + ' Book soil test pickup</button>' +
     '<section class="card"' + mk(3) + '><p class="t-label">Quick check</p><p class="t-title" style="margin-top:4px">When should you take the sample?</p><div class="stack g6" style="margin-top:10px"><button class="opt"><span class="grow">Right after adding manure</span></button><button class="opt on"><span class="grow"><b>Before manure and fertilizer</b></span>' + ic('check', 'c-leaf') + '</button></div></section>' });
 
@@ -1389,7 +1474,7 @@ body { margin: 0; background: var(--page); color: var(--ink); font-family: var(-
     const max = Math.max(...D.sell.map(r => r[1]));
     return frame(st, { id: 'sell', back: true, title: 'Where should I sell?', sub: 'Money in hand per box, after costs', body:
       '<section class="card tight"' + mk(1) + '><div class="grid3">' + [['Load', '600 boxes'], ['Variety', 'Delicious A'], ['From', 'Wachi']].map(([a, b]) => '<div><p class="t-micro">' + a + '</p><b>' + b + '</b></div>').join('') + '</div></section>' +
-      '<section class="card"' + mk(2) + '><p class="t-label" style="margin-bottom:10px">Net ₹ per box · after freight, commission & unloading</p><div class="stack g6">' + D.sell.map(([m, v, note], i) => '<div class="hbar"><span style="font-weight:700;font-size:12.5px;line-height:1.2">' + m + '</span><span class="trk"><i class="' + (i === 0 ? 'best' : 'other') + '" style="width:' + Math.round((v - 1150) / (max - 1150) * 100) + '%"></i></span><span class="v">' + money(v) + '</span></div><div class="t-micro" style="margin:-4px 0 4px;padding-inline-start:100px">' + note + '</div>').join('') + '</div><p class="t-micro" style="margin-top:6px">Bars start at ₹1,150 to show the differences.</p></section>' +
+      '<section class="card"' + mk(2) + '><p class="t-label" style="margin-bottom:10px">Net ₹ per box · after freight, commission & unloading</p><div class="stack g6">' + D.sell.map(([m, v, note], i) => '<div class="hbar"><span style="font-weight:600;font-size:12.5px;line-height:1.2">' + m + '</span><span class="trk"><i class="' + (i === 0 ? 'best' : 'other') + '" style="width:' + Math.round((v - 1150) / (max - 1150) * 100) + '%"></i></span><span class="v">' + money(v) + '</span></div><div class="t-micro" style="margin:-4px 0 4px;padding-inline-start:100px">' + note + '</div>').join('') + '</div><p class="t-micro" style="margin-top:6px">Bars start at ₹1,150 to show the differences.</p></section>' +
       '<div class="banner good"' + mk(3) + '>' + ic('trendUp', 's18') + '<span><b>Azadpur pays about ₹175 more per box</b> than Sopore today, even after ₹95 freight. Prices can move in the 2 days on the road.</span></div>' +
       '<div class="grid2"><button class="btn" data-go="truck">' + ic('truck', 's18') + ' Book a truck</button><button class="btn ghost" data-go="roads">' + ic('road', 's18') + ' Check highway</button></div>' });
   };
@@ -1424,7 +1509,7 @@ body { margin: 0; background: var(--page); color: var(--ink); font-family: var(-
   S.labour = (st) => frame(st, { id: 'labour', back: true, title: 'Book a team', sub: 'Shopian · within 10 km', body:
     '<div class="chips scroll"' + mk(1) + '>' + ['Spraying', 'Pruning', 'Thinning', 'Harvest', 'Grading & packing'].map((x, i) => '<span class="chip ' + (i === 0 ? 'on' : '') + '">' + x + '</span>').join('') + '</div>' +
     '<section class="card tight"' + mk(2) + '><div class="grid3"><div><p class="t-micro">Date</p><b>Today</b></div><div><p class="t-micro">Start</p><b>4:00 PM</b></div><div><p class="t-micro">People</p><b>4</b></div></div><div class="divider" style="margin:10px 0"></div><div class="row t-small" style="gap:8px">' + ic('coin', 's18 c-leaf') + '<span>Recent rate in Shopian: <b>₹900–1,200 a day</b> per person; legal minimum ₹311</span></div></section>' +
-    '<div class="stack"' + mk(3) + '>' + D.teams.map((tm, i) => '<section class="card tight"><div class="row top"><span class="tile-ic ' + (i === 0 ? 'leaf' : 'plain') + '" style="font:800 15px var(--f-display)">' + tm.name.split(' ').map(w => w[0]).slice(0, 2).join('') + '</span><span class="grow"><b>' + tm.name + '</b><br><span class="t-small">' + tm.size + ' people · ' + tm.dist + ' · ' + tm.langs + '</span><br><span class="t-micro">' + stars(tm.rating) + ' ' + tm.rating + ' · ' + tm.jobs + ' jobs</span></span><span style="text-align:end"><b class="num">' + money(tm.rate) + '</b><br><span class="t-micro">per person / day</span></span></div><div class="row between" style="margin-top:10px"><span class="tagrow" style="margin:0">' + tm.tags.map(x => '<span class="tag ok">' + x + '</span>').join('') + '</span><button class="btn xs" data-go="booking">Book</button></div></section>').join('') + '</div>' });
+    '<div class="stack"' + mk(3) + '>' + D.teams.map((tm, i) => '<section class="card tight"><div class="row top"><span class="tile-ic ' + (i === 0 ? 'leaf' : 'plain') + '" style="font:600 15px var(--f-body)">' + tm.name.split(' ').map(w => w[0]).slice(0, 2).join('') + '</span><span class="grow"><b>' + tm.name + '</b><br><span class="t-small">' + tm.size + ' people · ' + tm.dist + ' · ' + tm.langs + '</span><br><span class="t-micro">' + stars(tm.rating) + ' ' + tm.rating + ' · ' + tm.jobs + ' jobs</span></span><span style="text-align:end"><b class="num">' + money(tm.rate) + '</b><br><span class="t-micro">per person / day</span></span></div><div class="row between" style="margin-top:10px"><span class="tagrow" style="margin:0">' + tm.tags.map(x => '<span class="tag ok">' + x + '</span>').join('') + '</span><button class="btn xs" data-go="booking">Book</button></div></section>').join('') + '</div>' });
 
   S.truck = (st) => frame(st, { id: 'truck', back: true, title: 'Send apples', sub: 'Compare trucks and share loads', body:
     '<section class="card tight"' + mk(1) + '><div class="tl"><div class="it done"><span class="bul">' + ic('pin') + '</span><div><span class="t-micro">From</span><br><b>Wachi, Shopian</b></div></div><div class="it"><span class="bul">' + ic('target') + '</span><div><span class="t-micro">To</span><br><b>Azadpur mandi, Delhi</b></div></div></div><div class="divider" style="margin:6px 0 10px"></div><div class="grid3"><div><p class="t-micro">Load</p><b>600 boxes</b></div><div><p class="t-micro">Ready</p><b>Thu 14 May</b></div><div><p class="t-micro">Highway</p>' + pillFor('good', 'Open') + '</div></div></section>' +
@@ -1433,7 +1518,7 @@ body { margin: 0; background: var(--page); color: var(--ink); font-family: var(-
     '<button class="btn block" data-go="booking">Book shared truck · ' + money(82 * 600) + '</button>' });
 
   S.booking = (st) => frame(st, { id: 'booking', back: true, title: 'Truck booking', sub: 'Booking #A-2291', body:
-    '<section class="card"' + mk(1) + '><div class="row"><span class="tile-ic sky" style="font:800 15px var(--f-display)">BA</span><span class="grow"><b>Bilal Ahmad</b> · 10-wheeler<br><span class="t-small">JK-22 ●● 4417 · ' + stars(4.7) + ' 4.7 (210 trips)</span></span></div><div class="tagrow"><span class="tag ok">Licence checked</span><span class="tag ok">Truck papers checked</span><span class="tag ok">Load photos at pickup</span></div><div class="grid2" style="margin-top:12px"><button class="btn sm ghost">' + ic('phone', 's18') + ' Call</button><button class="btn sm ghost" data-go="chat">' + ic('chat', 's18') + ' Message</button></div></section>' +
+    '<section class="card"' + mk(1) + '><div class="row"><span class="tile-ic sky" style="font:600 15px var(--f-body)">BA</span><span class="grow"><b>Bilal Ahmad</b> · 10-wheeler<br><span class="t-small">JK-22 ●● 4417 · ' + stars(4.7) + ' 4.7 (210 trips)</span></span></div><div class="tagrow"><span class="tag ok">Licence checked</span><span class="tag ok">Truck papers checked</span><span class="tag ok">Load photos at pickup</span></div><div class="grid2" style="margin-top:12px"><button class="btn sm ghost">' + ic('phone', 's18') + ' Call</button><button class="btn sm ghost" data-go="chat">' + ic('chat', 's18') + ' Message</button></div></section>' +
     '<section class="card"' + mk(2) + '><p class="t-title" style="margin-bottom:10px">Trip status</p><div class="tl">' + [['Booked', 'Tue 10:02 AM', 'done'], ['Driver confirmed', 'Tue 10:15 AM · Bilal Ahmad', 'now'], ['Loading at your orchard', 'Thu 5 PM · 600 boxes', ''], ['On the highway', 'Leaves Thu 8 PM · alerts on', ''], ['At Azadpur mandi', 'Expected Sat early morning', ''], ['Paid', 'After unloading', '']].map(([a, b, s]) => '<div class="it ' + s + '"><span class="bul">' + (s === 'done' ? ic('check') : s === 'now' ? ic('clock') : '') + '</span><div><span class="tt">' + a + '</span><br><span class="st">' + b + '</span></div></div>').join('') + '</div></section>' +
     '<section class="card tight row"' + mk(3) + '><span class="tile-ic sm leaf">' + ic('wallet', 's18') + '</span><span class="grow"><b>' + money(38400) + '</b> · ₹64 per box<br><span class="t-small">Pay by UPI or cash after unloading</span></span></section>' +
     '<button class="btn block ghost">' + ic('send', 's18') + ' Share trip with my commission agent</button>' });
@@ -1481,7 +1566,7 @@ body { margin: 0; background: var(--page); color: var(--ink); font-family: var(-
   /* ---------- Expert console (desktop, for the showcase) ---------- */
   function consoleView() {
     const q = [['Scab or Alternaria? 2 photos', 'Shopian · 14 min ago', 'Scab 91%', 'risk'], ['Leaves turning yellow in HDP block', 'Pulwama · 32 min ago', 'Mites 64%', 'warn'], ['White cotton on pruning cuts', 'Kulgam · 1 h ago', 'Woolly aphid 96%', 'good'], ['Fruit dropping after bloom', 'Baramulla · 2 h ago', 'Pollination 58%', 'warn']];
-    return '<div class="desk"><aside class="nav"><div class="row" style="gap:8px;margin-bottom:14px">' + A.logo(30) + '<b style="font:800 17px var(--f-display)">Baghbaan <span class="t-micro">Expert desk</span></b></div>' +
+    return '<div class="desk"><aside class="nav"><div class="row" style="gap:8px;margin-bottom:14px">' + A.logo(30) + '<b style="font:600 17px var(--f-body)">Baghbaan <span class="t-micro">Expert desk</span></b></div>' +
       [['grid', 'Overview', 1], ['msgq', 'Questions · 12', 0], ['send', 'Advisories', 0], ['bug', 'Pest reports', 0], ['chart', 'Mandi data', 0], ['users', 'Providers', 0], ['book', 'Lessons', 0], ['bag', 'Orders', 0]].map(([i, n, on]) => '<a class="' + (on ? 'on' : '') + '">' + ic(i, 's18') + n + '</a>').join('') + '</aside>' +
       '<div class="main"><div style="grid-column:1/-1" class="row between"><div><p class="t-label">South Kashmir · Tue 12 May</p><h2 class="t-big" style="font-size:24px">Scab reports are rising after the rain</h2></div><div class="row" style="gap:10px">' + [['Scab reports today', '214', '▲ 3.1×'], ['Questions waiting', '12', 'avg reply 1 h 40 m'], ['Growers reached', '48,200', 'this week']].map(([a, b, c]) => '<div class="card tight" style="min-width:150px"><p class="t-micro">' + a + '</p><p class="t-huge num" style="font-size:24px">' + b + '</p><p class="t-micro">' + c + '</p></div>').join('') + '</div></div>' +
       '<div class="stack" style="min-width:0"><div class="map" style="height:290px">' + A.areaMap(600, 290, [[150, 100, 22, '#B3261E'], [190, 124, 16, '#B3261E'], [214, 84, 14, '#B3261E'], [120, 132, 12, '#A3560C'], [246, 150, 9, '#A3560C'], [96, 84, 12, '#B3261E'], [60, 60, 8, '#A3560C'], [280, 60, 7, '#1D7A4B']]) + '</div>' +
